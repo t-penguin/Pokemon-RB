@@ -217,6 +217,8 @@ public class PokemonMenu : Menu
         Opened?.Invoke(MENU_ID);
         Debug.Log("Opening the Pokemon Menu");
 
+        _arrow.anchoredPosition = new Vector2(0f, -8f - 16f * _currentSelection);
+
         HideTeam();
         _background.SetActive(true);
         _teamSize = _player.Team.Count;

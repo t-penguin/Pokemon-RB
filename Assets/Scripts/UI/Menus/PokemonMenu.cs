@@ -380,7 +380,12 @@ public class PokemonMenu : Menu
         MainMenu.Opened -= ListenFromMain;
     }
 
-    private void StopListeningFromMain() => MainMenu.OpenedSubMenu -= OpenFromMain;
+    private void StopListeningFromMain()
+    {
+        MainMenu.OpenedSubMenu -= OpenFromMain;
+        BattleStateManager.BattleStarted += ListenFromBattle;
+    }
+
     private void StopListeningFromBattle()
     {
         _currentSelection = 0;

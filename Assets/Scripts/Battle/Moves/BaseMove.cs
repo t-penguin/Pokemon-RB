@@ -48,22 +48,22 @@ public abstract class BaseMove
     // Displays a message after certain battle events
     protected IEnumerator OnUsed(BattlePokemon user)
     {
-        Battle.DisplayMessage($"{user.Name}\nused {Name}!", false);
+        yield return Battle.StartCoroutine(Battle.DisplayMessage($"{user.Name}\nused {Name}!", false));
         yield return new WaitForSeconds(4 / 60f);
     }
     protected IEnumerator OnMissed(BattlePokemon user)
     {
-        Battle.DisplayMessage($"{user.Name}<\nattack missed!", true);
+        yield return Battle.StartCoroutine(Battle.DisplayMessage($"{user.Name}<\nattack missed!", true));
         yield return new WaitForSeconds(4 / 60f);
     }
     protected IEnumerator OnFailed()
     {
-        Battle.DisplayMessage(FAILED, true);
+        yield return Battle.StartCoroutine(Battle.DisplayMessage(FAILED, true));
         yield return new WaitForSeconds(4 / 60f);
     }
     protected IEnumerator OnNoEffect()
     {
-        Battle.DisplayMessage(NO_EFFECT, true);
+        yield return Battle.StartCoroutine(Battle.DisplayMessage(NO_EFFECT, true));
         yield return new WaitForSeconds(4 / 60f);
     }
 }

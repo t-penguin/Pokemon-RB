@@ -51,7 +51,7 @@ public abstract class AttackMove : TransitiveMove
         else
             text = SUPER_EFFECTIVE;
 
-        Battle.DisplayMessage(text, true);
+        yield return Battle.StartCoroutine(Battle.DisplayMessage(text, true));
         yield return new WaitForSeconds(4 / 60f);
     }
 }

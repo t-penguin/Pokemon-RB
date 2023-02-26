@@ -1,0 +1,3946 @@
+fileFormatVersion: 2
+guid: 064029c09d658384a9156f881f02467d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2952487928796060299
+    second: 1_Bulbasaur_Back
+  - first:
+      213: 6706177305905446152
+    second: 2_Ivysaur_Back
+  - first:
+      213: 7437783423918241814
+    second: 3_Venusaur_Back
+  - first:
+      213: 5558824065391843979
+    second: 4_Charmander_Back
+  - first:
+      213: 6676341596588455106
+    second: 5_Charmeleon_Back
+  - first:
+      213: -2460563413895253952
+    second: 6_Charizard_Back
+  - first:
+      213: 9051644503894457550
+    second: 7_Squirtle_Back
+  - first:
+      213: 6866431151902229359
+    second: 8_Wartortle_Back
+  - first:
+      213: 5344776911564171293
+    second: 9_Blastoise_Back
+  - first:
+      213: -8634366932146417135
+    second: 10_Caterpie_Back
+  - first:
+      213: 5728581676669054807
+    second: 11_Metapod_Back
+  - first:
+      213: -688992088906974180
+    second: 12_Butterfree_Back
+  - first:
+      213: -4704646455450822391
+    second: 13_Weedle_Back
+  - first:
+      213: -4945739927629102814
+    second: 14_Kakuna_Back
+  - first:
+      213: -3238841856147688053
+    second: 15_Beedrill_Back
+  - first:
+      213: -7034632487292500165
+    second: 16_Pidgey_Back
+  - first:
+      213: -8007477588915256191
+    second: 17_Pidgeotto_Back
+  - first:
+      213: -643325943683203444
+    second: 18_Pidgeot_Back
+  - first:
+      213: 8926650931587933
+    second: 19_Rattata_Back
+  - first:
+      213: -7154764437158672076
+    second: 20_Raticate_Back
+  - first:
+      213: -503116717009214488
+    second: 21_Spearow_Back
+  - first:
+      213: -5982474884912647834
+    second: 22_Fearow_Back
+  - first:
+      213: -5846313840764784835
+    second: 23_Ekans_Back
+  - first:
+      213: -3335624228453106586
+    second: 24_Arbok_Back
+  - first:
+      213: 7223414051400102062
+    second: 25_Pikachu_Back
+  - first:
+      213: -3754132756596590667
+    second: 26_Raichu_Back
+  - first:
+      213: -7195338479504706950
+    second: 27_Sandshrew_Back
+  - first:
+      213: -3632562651056566000
+    second: 28_Sandslash_Back
+  - first:
+      213: -8077060621186671165
+    second: 29_NidoranF_Back
+  - first:
+      213: 1272823746086271963
+    second: 30_Nidorina_Back
+  - first:
+      213: -6099404396615632487
+    second: 31_Nidoqueen_Back
+  - first:
+      213: 6238516118529455844
+    second: 32_NidoranM_Back
+  - first:
+      213: -9026105027260977122
+    second: 33_Nidorino_Back
+  - first:
+      213: 9170959522012557238
+    second: 34_Nidoking_Back
+  - first:
+      213: -7543030302518575948
+    second: 35_Clefairy_Back
+  - first:
+      213: 5478896560840735640
+    second: 36_Clefable_Back
+  - first:
+      213: -8278732438599486977
+    second: 37_Vulpix_Back
+  - first:
+      213: -5864721205362865823
+    second: 38_Ninetales_Back
+  - first:
+      213: -6016622676994421194
+    second: 39_Jigglypuff_Back
+  - first:
+      213: 7238475249194652589
+    second: 40_Wigglytuff_Back
+  - first:
+      213: 693456668796464053
+    second: 41_Zubat_Back
+  - first:
+      213: 6685132766361376124
+    second: 42_Golbat_Back
+  - first:
+      213: -3542474956781656170
+    second: 43_Oddish_Back
+  - first:
+      213: 2300864328266784881
+    second: 44_Gloom_Back
+  - first:
+      213: -2401530400261566729
+    second: 45_Vileplume_Back
+  - first:
+      213: 8242487689589027502
+    second: 46_Paras_Back
+  - first:
+      213: 6772840835009121998
+    second: 47_Parasect_Back
+  - first:
+      213: -5552804709221467455
+    second: 48_Venonat_Back
+  - first:
+      213: -8767950066874191884
+    second: 49_Venomoth_Back
+  - first:
+      213: 585678505671780841
+    second: 50_Diglett_Back
+  - first:
+      213: 5602416436218578995
+    second: 51_Dugtrio_Back
+  - first:
+      213: 1922241629828756630
+    second: 52_Meowth_Back
+  - first:
+      213: -748707312832521763
+    second: 53_Persian_Back
+  - first:
+      213: -4355211200686519563
+    second: 54_Psyduck_Back
+  - first:
+      213: 277441608602069363
+    second: 55_Golduck_Back
+  - first:
+      213: 1433343922143586861
+    second: 56_Mankey_Back
+  - first:
+      213: 2364043320516051129
+    second: 57_Primeape_Back
+  - first:
+      213: -7278296084833768001
+    second: 58_Growlithe_Back
+  - first:
+      213: -1962981101784920923
+    second: 59_Arcanine_Back
+  - first:
+      213: -4807689876891598175
+    second: 60_Poliwag_Back
+  - first:
+      213: -6190430011383681494
+    second: 61_Poliwhirl_Back
+  - first:
+      213: 6127873958007457246
+    second: 62_Poliwrath_Back
+  - first:
+      213: 7016236000357439407
+    second: 63_Abra_Back
+  - first:
+      213: -7708250010218791384
+    second: 64_Kadabra_Back
+  - first:
+      213: 8779582864345572702
+    second: 65_Alakazam_Back
+  - first:
+      213: 6839914760276786493
+    second: 66_Machop_Back
+  - first:
+      213: 6920520636651705564
+    second: 67_Machoke_Back
+  - first:
+      213: -2653389564592963635
+    second: 68_Machamp_Back
+  - first:
+      213: 2507356658160726519
+    second: 69_Bellsprout_Back
+  - first:
+      213: -550787786301174317
+    second: 70_Weepinbell_Back
+  - first:
+      213: 8769416126376479578
+    second: 71_Victreebel_Back
+  - first:
+      213: -5083366188515810543
+    second: 72_Tentacool_Back
+  - first:
+      213: -8453295836184645966
+    second: 73_Tentacruel_Back
+  - first:
+      213: -8011321175595759691
+    second: 74_Geodude_Back
+  - first:
+      213: -8075516433114238223
+    second: 75_Graveler_Back
+  - first:
+      213: 6033155344497066151
+    second: 76_Golem_Back
+  - first:
+      213: 8135638465631764821
+    second: 77_Ponyta_Back
+  - first:
+      213: -2460327372381066589
+    second: 78_Rapidash_Back
+  - first:
+      213: -473617215901992600
+    second: 79_Slowpoke_Back
+  - first:
+      213: -7970087354823083993
+    second: 80_Slowbro_Back
+  - first:
+      213: 6158571852783142230
+    second: 81_Magnemite_Back
+  - first:
+      213: -8715715926174211096
+    second: 82_Magneton_Back
+  - first:
+      213: 8356985561533119185
+    second: 83_Farfetch'd_Back
+  - first:
+      213: 7110377101187475686
+    second: 84_Doduo_Back
+  - first:
+      213: -1147267511566165327
+    second: 85_Dodrio_Back
+  - first:
+      213: 4492161285877641202
+    second: 86_Seel_Back
+  - first:
+      213: -2796237704348277395
+    second: 87_Dewgong_Back
+  - first:
+      213: 4663093275758100140
+    second: 88_Grimer_Back
+  - first:
+      213: 7875438167620892749
+    second: 89_Muk_Back
+  - first:
+      213: -8711837579420977521
+    second: 90_Shellder_Back
+  - first:
+      213: -3111560933347977618
+    second: 91_Cloyster_Back
+  - first:
+      213: 5160502072696529271
+    second: 92_Gastly_Back
+  - first:
+      213: 8443623846345593297
+    second: 93_Haunter_Back
+  - first:
+      213: -5495893207987493839
+    second: 94_Gengar_Back
+  - first:
+      213: 5130685300057186320
+    second: 95_Onix_Back
+  - first:
+      213: 1412895039107739292
+    second: 96_Drowzee_Back
+  - first:
+      213: 2744587605963618554
+    second: 97_Hypno_Back
+  - first:
+      213: 6058512507699751954
+    second: 98_Krabby_Back
+  - first:
+      213: 5594623951650660477
+    second: 99_Kingler_Back
+  - first:
+      213: -8755240524978789659
+    second: 100_Voltorb_Back
+  - first:
+      213: 6003603721724118530
+    second: 101_Electrode_Back
+  - first:
+      213: 1589630146177762754
+    second: 102_Exeggcute_Back
+  - first:
+      213: 4893764640108173115
+    second: 103_Exeggutor_Back
+  - first:
+      213: -4603803165097390351
+    second: 104_Cubone_Back
+  - first:
+      213: -4073086417426755570
+    second: 105_Marowak_Back
+  - first:
+      213: 8639571228559196646
+    second: 106_Hitmonlee_Back
+  - first:
+      213: -6197572068179228981
+    second: 107_Hitmonchan_Back
+  - first:
+      213: 6913732676295903026
+    second: 108_Lickitung_Back
+  - first:
+      213: -7437361877771001295
+    second: 109_Koffing_Back
+  - first:
+      213: 8642421101571515585
+    second: 110_Weezing_Back
+  - first:
+      213: 6846713949439337776
+    second: 111_Rhyhorn_Back
+  - first:
+      213: -3510596261693937817
+    second: 112_Rhydon_Back
+  - first:
+      213: 6195892565709490375
+    second: 113_Chansey_Back
+  - first:
+      213: -4811458994499974076
+    second: 114_Tangela_Back
+  - first:
+      213: 3040336842255919963
+    second: 115_Kangaskhan_Back
+  - first:
+      213: 5260916593064274563
+    second: 116_Horsea_Back
+  - first:
+      213: 8565325571710863381
+    second: 117_Seadra_Back
+  - first:
+      213: -6585686669098022558
+    second: 118_Goldeen_Back
+  - first:
+      213: -7061765079983381711
+    second: 119_Seaking_Back
+  - first:
+      213: -208682333195031740
+    second: 120_Staryu_Back
+  - first:
+      213: 1988387802803952346
+    second: 121_Starmie_Back
+  - first:
+      213: -7452938134493748790
+    second: 122_Mr.Mime_Back
+  - first:
+      213: 7727518212817126304
+    second: 123_Scyther_Back
+  - first:
+      213: 6254373887974679819
+    second: 124_Jynx_Back
+  - first:
+      213: -5721134347721926567
+    second: 125_Electabuzz_Back
+  - first:
+      213: -7560676659011356152
+    second: 126_Magmar_Back
+  - first:
+      213: -8600486367446855106
+    second: 127_Pinsir_Back
+  - first:
+      213: 9196434668208570709
+    second: 128_Tauros_Back
+  - first:
+      213: -8171137837415223927
+    second: 129_Magikarp_Back
+  - first:
+      213: 2818924655410732890
+    second: 130_Gyarados_Back
+  - first:
+      213: 4675482053168200443
+    second: 131_Lapras_Back
+  - first:
+      213: -8799007818092530416
+    second: 132_Ditto_Back
+  - first:
+      213: -8706887435032051992
+    second: 133_Eevee_Back
+  - first:
+      213: 1699917559692723794
+    second: 134_Vaporeon_Back
+  - first:
+      213: -7440336830428039604
+    second: 135_Jolteon_Back
+  - first:
+      213: 9025088243445872414
+    second: 136_Flareon_Back
+  - first:
+      213: -4674378076714728300
+    second: 137_Porygon_Back
+  - first:
+      213: -8827043437141212070
+    second: 138_Omanyte_Back
+  - first:
+      213: 2035411026542488088
+    second: 139_Omastar_Back
+  - first:
+      213: 5361275966573034564
+    second: 140_Kabuto_Back
+  - first:
+      213: 7703488125087240947
+    second: 141_Kabutops_Back
+  - first:
+      213: -8373132067318301266
+    second: 142_Aerodactyl_Back
+  - first:
+      213: 7025330680404427806
+    second: 143_Snorlax_Back
+  - first:
+      213: 3978064954637659211
+    second: 144_Articuno_Back
+  - first:
+      213: 462078106834291176
+    second: 145_Zapdos_Back
+  - first:
+      213: 4240950821411149686
+    second: 146_Moltres_Back
+  - first:
+      213: 1340065747609047181
+    second: 147_Dratini_Back
+  - first:
+      213: -7322468722017614982
+    second: 148_Dragonair_Back
+  - first:
+      213: 11546432197040912
+    second: 149_Dragonite_Back
+  - first:
+      213: -5755052277752701683
+    second: 150_Mewtwo_Back
+  - first:
+      213: -2868400452207500424
+    second: 151_Mew_Back
+  - first:
+      213: 2965402687537082297
+    second: 0_Null_Back
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 2
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 0
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: 1_Bulbasaur_Back
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 252
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8a9487d02859f820800000000000000
+      internalID: 2952487928796060299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 2_Ivysaur_Back
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 252
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80db7479ab0211d50800000000000000
+      internalID: 6706177305905446152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_Venusaur_Back
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 252
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6187fe2fd90583760800000000000000
+      internalID: 7437783423918241814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4_Charmander_Back
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 252
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8ad29a1909e42d40800000000000000
+      internalID: 5558824065391843979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 5_Charmeleon_Back
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 252
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c4b1df2f4127ac50800000000000000
+      internalID: 6676341596588455106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 6_Charizard_Back
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 252
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04073779c925addd0800000000000000
+      internalID: -2460563413895253952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 7_Squirtle_Back
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 252
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eccfeb7f7b6ed9d70800000000000000
+      internalID: 9051644503894457550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 8_Wartortle_Back
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 252
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f630fc3b0c67a4f50800000000000000
+      internalID: 6866431151902229359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 9_Blastoise_Back
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 252
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d18ed7188467c2a40800000000000000
+      internalID: 5344776911564171293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 10_Caterpie_Back
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 252
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1129805a5019c2880800000000000000
+      internalID: -8634366932146417135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 11_Metapod_Back
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 252
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75faba00fa2008f40800000000000000
+      internalID: 5728581676669054807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 12_Butterfree_Back
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 252
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1c35a778553076f0800000000000000
+      internalID: -688992088906974180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 13_Weedle_Back
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 252
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9099d0d99fcb5beb0800000000000000
+      internalID: -4704646455450822391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 14_Kakuna_Back
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 252
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 221833e4db33d5bb0800000000000000
+      internalID: -4945739927629102814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 15_Beedrill_Back
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 252
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8576a0fd725d03d0800000000000000
+      internalID: -3238841856147688053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 16_Pidgey_Back
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 252
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b37028d1607ff5e90800000000000000
+      internalID: -7034632487292500165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 17_Pidgeotto_Back
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 224
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1840ecdee89bfd090800000000000000
+      internalID: -8007477588915256191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 18_Pidgeot_Back
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 224
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8e38f376727217f0800000000000000
+      internalID: -643325943683203444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 19_Rattata_Back
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 224
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5bafc1edb6bf1000800000000000000
+      internalID: 8926650931587933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 20_Raticate_Back
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 224
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4394f87e6ab25bc90800000000000000
+      internalID: -7154764437158672076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 21_Spearow_Back
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 224
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e3ea12f2029409f0800000000000000
+      internalID: -503116717009214488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 22_Fearow_Back
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 224
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 661f517e9caf9fca0800000000000000
+      internalID: -5982474884912647834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 23_Ekans_Back
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 224
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3fe3c37988bddea0800000000000000
+      internalID: -5846313840764784835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 24_Arbok_Back
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 224
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66cbdd6ef6b75b1d0800000000000000
+      internalID: -3335624228453106586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 25_Pikachu_Back
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 224
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea0b447fec8be3460800000000000000
+      internalID: 7223414051400102062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 26_Raichu_Back
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 224
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b7f66be524a6ebc0800000000000000
+      internalID: -3754132756596590667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 27_Sandshrew_Back
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 224
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a723c6286c5052c90800000000000000
+      internalID: -7195338479504706950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 28_Sandslash_Back
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 224
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0111c67d38b869dc0800000000000000
+      internalID: -3632562651056566000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 29_NidoranF_Back
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 224
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3cd5fdcb82488ef80800000000000000
+      internalID: -8077060621186671165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 30_Nidorina_Back
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 224
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdb772f047af9a110800000000000000
+      internalID: 1272823746086271963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 31_Nidoqueen_Back
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 224
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 999f44e64009a5ba0800000000000000
+      internalID: -6099404396615632487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 32_NidoranM_Back
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 224
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e63f725b59a39650800000000000000
+      internalID: 6238516118529455844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 33_Nidorino_Back
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 196
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e10fdb0dc45dcb280800000000000000
+      internalID: -9026105027260977122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 34_Nidoking_Back
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 196
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bf6b0f681bc54f70800000000000000
+      internalID: 9170959522012557238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 35_Clefairy_Back
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 196
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4bc7f5097e5c15790800000000000000
+      internalID: -7543030302518575948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 36_Clefable_Back
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 196
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89b7506c463f80c40800000000000000
+      internalID: 5478896560840735640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 37_Vulpix_Back
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 196
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff136cea5b80c1d80800000000000000
+      internalID: -8278732438599486977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 38_Ninetales_Back
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 196
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16945a7e2235c9ea0800000000000000
+      internalID: -5864721205362865823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 39_Jigglypuff_Back
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 196
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63e003e7d89a08ca0800000000000000
+      internalID: -6016622676994421194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 40_Wigglytuff_Back
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 196
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da354b753ea347460800000000000000
+      internalID: 7238475249194652589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 41_Zubat_Back
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 196
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5bb2dba8a27af9900800000000000000
+      internalID: 693456668796464053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 42_Golbat_Back
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 196
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c755b47e4dc56cc50800000000000000
+      internalID: 6685132766361376124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 43_Oddish_Back
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 196
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 697ef4fabc996dec0800000000000000
+      internalID: -3542474956781656170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 44_Gloom_Back
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 196
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 170a5b28aef4eef10800000000000000
+      internalID: 2300864328266784881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 45_Vileplume_Back
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 196
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7fe8b1723dc0caed0800000000000000
+      internalID: -2401530400261566729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 46_Paras_Back
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 196
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea2fb7312e2336270800000000000000
+      internalID: 8242487689589027502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 47_Parasect_Back
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 196
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ece8afafad6fdfd50800000000000000
+      internalID: 6772840835009121998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 48_Venonat_Back
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 196
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1cafcb7798970f2b0800000000000000
+      internalID: -5552804709221467455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 49_Venomoth_Back
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 168
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ffe9976edbf15680800000000000000
+      internalID: -8767950066874191884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 50_Diglett_Back
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 168
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e9e5237f7fb02800800000000000000
+      internalID: 585678505671780841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 51_Dugtrio_Back
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 168
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3384e9cd018cfbd40800000000000000
+      internalID: 5602416436218578995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 52_Meowth_Back
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 168
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 694396ee39c2daa10800000000000000
+      internalID: 1922241629828756630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 53_Persian_Back
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 168
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd951e17aae0c95f0800000000000000
+      internalID: -748707312832521763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 54_Psyduck_Back
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 168
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fa0745ec7e2f83c0800000000000000
+      internalID: -4355211200686519563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 55_Golduck_Back
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 168
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 379a3ae4caba9d300800000000000000
+      internalID: 277441608602069363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 56_Mankey_Back
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 168
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2a6558f3b244e310800000000000000
+      internalID: 1433343922143586861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 57_Primeape_Back
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 168
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b08ef0ffd4cec020800000000000000
+      internalID: 2364043320516051129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 58_Growlithe_Back
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 168
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbded5dd54c4efa90800000000000000
+      internalID: -7278296084833768001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 59_Arcanine_Back
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 168
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ac0e47961712c4e0800000000000000
+      internalID: -1962981101784920923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 60_Poliwag_Back
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 168
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a282a97787a74db0800000000000000
+      internalID: -4807689876891598175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 61_Poliwhirl_Back
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 168
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2eee84f3bc271aa0800000000000000
+      internalID: -6190430011383681494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 62_Poliwrath_Back
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 168
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed5c66fd5e49a0550800000000000000
+      internalID: 6127873958007457246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 63_Abra_Back
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 168
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa7dc9df77dae5160800000000000000
+      internalID: 7016236000357439407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 64_Kadabra_Back
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 168
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82ef10da47bc60590800000000000000
+      internalID: -7708250010218791384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 65_Alakazam_Back
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 140
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e55ac61591857d970800000000000000
+      internalID: 8779582864345572702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 66_Machop_Back
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 140
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3dbf3c2c324cee50800000000000000
+      internalID: 6839914760276786493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 67_Machoke_Back
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 140
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd492604ad0aa0060800000000000000
+      internalID: 6920520636651705564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 68_Machamp_Back
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 140
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dcf35bfcf344d2bd0800000000000000
+      internalID: -2653389564592963635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 69_Bellsprout_Back
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 140
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f171e6989bebc220800000000000000
+      internalID: 2507356658160726519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 70_Weepinbell_Back
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 140
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3dd05e23d653b58f0800000000000000
+      internalID: -550787786301174317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 71_Victreebel_Back
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 140
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5b804c218933b970800000000000000
+      internalID: 8769416126376479578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 72_Tentacool_Back
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 140
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 113a84662614479b0800000000000000
+      internalID: -5083366188515810543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 73_Tentacruel_Back
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 140
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2beece6793cdfaa80800000000000000
+      internalID: -8453295836184645966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 74_Geodude_Back
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 140
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b7cc0b26d112d090800000000000000
+      internalID: -8011321175595759691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 75_Graveler_Back
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 140
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f2756a07900eef80800000000000000
+      internalID: -8075516433114238223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 76_Golem_Back
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 140
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a04f7f12d21ab350800000000000000
+      internalID: 6033155344497066151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 77_Ponyta_Back
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 140
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5514cfc741897e070800000000000000
+      internalID: 8135638465631764821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 78_Rapidash_Back
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 140
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3aa6e0a4a492bddd0800000000000000
+      internalID: -2460327372381066589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 79_Slowpoke_Back
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 140
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 869f6a6c6af5d69f0800000000000000
+      internalID: -473617215901992600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 80_Slowbro_Back
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 140
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 728ffe237cf846190800000000000000
+      internalID: -7970087354823083993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 81_Magnemite_Back
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 112
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 655cbd87874a77550800000000000000
+      internalID: 6158571852783142230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 82_Magneton_Back
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 112
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e3eb210b8e8b0780800000000000000
+      internalID: -8715715926174211096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 83_Farfetch'd_Back
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 112
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1daff3c471af9f370800000000000000
+      internalID: 8356985561533119185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 84_Doduo_Back
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 112
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e8e9571d422da260800000000000000
+      internalID: 7110377101187475686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 85_Dodrio_Back
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 112
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ba90c6d6461410f0800000000000000
+      internalID: -1147267511566165327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 86_Seel_Back
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 112
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ffaf7693ec575e30800000000000000
+      internalID: 4492161285877641202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 87_Dewgong_Back
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 112
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6564cc7f94c139d0800000000000000
+      internalID: -2796237704348277395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 88_Grimer_Back
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 112
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: caef210d0a2a6b040800000000000000
+      internalID: 4663093275758100140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 89_Muk_Back
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 112
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d48b89f994d2b4d60800000000000000
+      internalID: 7875438167620892749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 90_Shellder_Back
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 112
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f86b6b9f0e5591780800000000000000
+      internalID: -8711837579420977521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 91_Cloyster_Back
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 112
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e669fce11d381d4d0800000000000000
+      internalID: -3111560933347977618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 92_Gastly_Back
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 112
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7716eb92b49cd9740800000000000000
+      internalID: 5160502072696529271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 93_Haunter_Back
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 112
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d1527ae627cd2570800000000000000
+      internalID: 8443623846345593297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 94_Gengar_Back
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 112
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1346c6eee3aaab3b0800000000000000
+      internalID: -5495893207987493839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 95_Onix_Back
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 112
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0102a3cc81bd33740800000000000000
+      internalID: 5130685300057186320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 96_Drowzee_Back
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 112
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9eadee5d8c9b9310800000000000000
+      internalID: 1412895039107739292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 97_Hypno_Back
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 84
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af8b66cd2ebb61620800000000000000
+      internalID: 2744587605963618554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 98_Krabby_Back
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 84
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21c64b0c609241450800000000000000
+      internalID: 6058512507699751954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 99_Kingler_Back
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 84
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d70a70aa7d814ad40800000000000000
+      internalID: 5594623951650660477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 100_Voltorb_Back
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 84
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e2e88931232f7680800000000000000
+      internalID: -8755240524978789659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 101_Electrode_Back
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 84
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2064495c6c5115350800000000000000
+      internalID: 6003603721724118530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 102_Exeggcute_Back
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 84
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c58d2b12308f0610800000000000000
+      internalID: 1589630146177762754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 103_Exeggutor_Back
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 84
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b37d30c03052ae340800000000000000
+      internalID: 4893764640108173115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 104_Cubone_Back
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 84
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fe0d80d9610c10c0800000000000000
+      internalID: -4603803165097390351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 105_Marowak_Back
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 84
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e005fc5cb7d7977c0800000000000000
+      internalID: -4073086417426755570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 106_Hitmonlee_Back
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 84
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e1c4f9024ce5e770800000000000000
+      internalID: 8639571228559196646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 107_Hitmonchan_Back
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 84
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc64b464a0dcdf9a0800000000000000
+      internalID: -6197572068179228981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 108_Lickitung_Back
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 84
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 237c0a21d3382ff50800000000000000
+      internalID: 6913732676295903026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 109_Koffing_Back
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 84
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1326d69e6ce29c890800000000000000
+      internalID: -7437361877771001295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 110_Weezing_Back
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 84
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c4a28ec33c00f770800000000000000
+      internalID: 8642421101571515585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 111_Rhyhorn_Back
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 84
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0352b03cf0a640f50800000000000000
+      internalID: 6846713949439337776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 112_Rhydon_Back
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 84
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7672be7cc4bd74fc0800000000000000
+      internalID: -3510596261693937817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 113_Chansey_Back
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 56
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c80995167b3cf550800000000000000
+      internalID: 6195892565709490375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 114_Tangela_Back
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 56
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44c887569834a3db0800000000000000
+      internalID: -4811458994499974076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 115_Kangaskhan_Back
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 56
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5b6238ef32713a20800000000000000
+      internalID: 3040336842255919963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 116_Horsea_Back
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 56
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38aed8294c7820940800000000000000
+      internalID: 5260916593064274563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 117_Seadra_Back
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 56
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5184567f9362ed670800000000000000
+      internalID: 8565325571710863381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 118_Goldeen_Back
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 56
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 269036eedd0fa94a0800000000000000
+      internalID: -6585686669098022558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 119_Seaking_Back
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 56
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 133255813129ffd90800000000000000
+      internalID: -7061765079983381711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 120_Staryu_Back
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 56
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44ba20b068c9a1df0800000000000000
+      internalID: -208682333195031740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 121_Starmie_Back
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 56
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ada59d5fb2c289b10800000000000000
+      internalID: 1988387802803952346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 122_Mr.Mime_Back
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 56
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac1a9880148d19890800000000000000
+      internalID: -7452938134493748790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 123_Scyther_Back
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 56
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a383565fd8ad3b60800000000000000
+      internalID: 7727518212817126304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 124_Jynx_Back
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 56
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b05a53df9effbc650800000000000000
+      internalID: 6254373887974679819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 125_Electabuzz_Back
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 56
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9589fb36f927a90b0800000000000000
+      internalID: -5721134347721926567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 126_Magmar_Back
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 56
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80a7a0603a4131790800000000000000
+      internalID: -7560676659011356152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 127_Pinsir_Back
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 56
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e329db4573fe4a880800000000000000
+      internalID: -8600486367446855106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 128_Tauros_Back
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 56
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 551c8ae1b9c40af70800000000000000
+      internalID: 9196434668208570709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 129_Magikarp_Back
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 28
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98dac1eed694a9e80800000000000000
+      internalID: -8171137837415223927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 130_Gyarados_Back
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 28
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5fd85ee905de1720800000000000000
+      internalID: 2818924655410732890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 131_Lapras_Back
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 28
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfafdc4d726a2e040800000000000000
+      internalID: 4675482053168200443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 132_Ditto_Back
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 28
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 015b5b23205a3e580800000000000000
+      internalID: -8799007818092530416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 133_Eevee_Back
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 28
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ee3a97420cea2780800000000000000
+      internalID: -8706887435032051992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 134_Vaporeon_Back
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 28
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2560fe49302579710800000000000000
+      internalID: 1699917559692723794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 135_Jolteon_Back
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 28
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c46b415c21d9eb890800000000000000
+      internalID: -7440336830428039604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 136_Flareon_Back
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 28
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e173521c0fd8f3d70800000000000000
+      internalID: 9025088243445872414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 137_Porygon_Back
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 28
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4948b87b7e5412fb0800000000000000
+      internalID: -4674378076714728300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 138_Omanyte_Back
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 28
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a544148f2ca008580800000000000000
+      internalID: -8827043437141212070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 139_Omastar_Back
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 28
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81a6af86b8b3f3c10800000000000000
+      internalID: 2035411026542488088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 140_Kabuto_Back
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 28
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44cbc6a1614176a40800000000000000
+      internalID: 5361275966573034564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 141_Kabutops_Back
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 28
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f2d34b82a948ea60800000000000000
+      internalID: 7703488125087240947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 142_Aerodactyl_Back
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 28
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ead7f0e5fb8accb80800000000000000
+      internalID: -8373132067318301266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 143_Snorlax_Back
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 28
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e14c823380dfe7160800000000000000
+      internalID: 7025330680404427806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 144_Articuno_Back
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 28
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4cab92effce43730800000000000000
+      internalID: 3978064954637659211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 145_Zapdos_Back
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e9c7580791a96600800000000000000
+      internalID: 462078106834291176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 146_Moltres_Back
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 0
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 677dc147d42eada30800000000000000
+      internalID: 4240950821411149686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 147_Dratini_Back
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 0
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d80d7ed82bed89210800000000000000
+      internalID: 1340065747609047181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 148_Dragonair_Back
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 0
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a734b315e7d516a90800000000000000
+      internalID: -7322468722017614982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 149_Dragonite_Back
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 0
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01b178d3b65092000800000000000000
+      internalID: 11546432197040912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 150_Mewtwo_Back
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 0
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0d5fb8e172f120b0800000000000000
+      internalID: -5755052277752701683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 151_Mew_Back
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 0
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8732a947cf46138d0800000000000000
+      internalID: -2868400452207500424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 0_Null_Back
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 0
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bfe2ae680a372920800000000000000
+      internalID: 2965402687537082297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: debdbb55e24bb59478312a105d3f1ddb
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      129_Magikarp_Back: -8171137837415223927
+      141_Kabutops_Back: 7703488125087240947
+      123_Scyther_Back: 7727518212817126304
+      105_Marowak_Back: -4073086417426755570
+      39_Jigglypuff_Back: -6016622676994421194
+      132_Ditto_Back: -8799007818092530416
+      144_Articuno_Back: 3978064954637659211
+      40_Wigglytuff_Back: 7238475249194652589
+      137_Porygon_Back: -4674378076714728300
+      26_Raichu_Back: -3754132756596590667
+      2_Ivysaur_Back: 6706177305905446152
+      76_Golem_Back: 6033155344497066151
+      28_Sandslash_Back: -3632562651056566000
+      124_Jynx_Back: 6254373887974679819
+      33_Nidorino_Back: -9026105027260977122
+      114_Tangela_Back: -4811458994499974076
+      142_Aerodactyl_Back: -8373132067318301266
+      127_Pinsir_Back: -8600486367446855106
+      61_Poliwhirl_Back: -6190430011383681494
+      104_Cubone_Back: -4603803165097390351
+      4_Charmander_Back: 5558824065391843979
+      91_Cloyster_Back: -3111560933347977618
+      103_Exeggutor_Back: 4893764640108173115
+      12_Butterfree_Back: -688992088906974180
+      15_Beedrill_Back: -3238841856147688053
+      32_NidoranM_Back: 6238516118529455844
+      21_Spearow_Back: -503116717009214488
+      31_Nidoqueen_Back: -6099404396615632487
+      97_Hypno_Back: 2744587605963618554
+      8_Wartortle_Back: 6866431151902229359
+      45_Vileplume_Back: -2401530400261566729
+      35_Clefairy_Back: -7543030302518575948
+      3_Venusaur_Back: 7437783423918241814
+      146_Moltres_Back: 4240950821411149686
+      30_Nidorina_Back: 1272823746086271963
+      52_Meowth_Back: 1922241629828756630
+      94_Gengar_Back: -5495893207987493839
+      107_Hitmonchan_Back: -6197572068179228981
+      27_Sandshrew_Back: -7195338479504706950
+      73_Tentacruel_Back: -8453295836184645966
+      51_Dugtrio_Back: 5602416436218578995
+      109_Koffing_Back: -7437361877771001295
+      139_Omastar_Back: 2035411026542488088
+      118_Goldeen_Back: -6585686669098022558
+      54_Psyduck_Back: -4355211200686519563
+      11_Metapod_Back: 5728581676669054807
+      95_Onix_Back: 5130685300057186320
+      150_Mewtwo_Back: -5755052277752701683
+      14_Kakuna_Back: -4945739927629102814
+      34_Nidoking_Back: 9170959522012557238
+      47_Parasect_Back: 6772840835009121998
+      77_Ponyta_Back: 8135638465631764821
+      126_Magmar_Back: -7560676659011356152
+      49_Venomoth_Back: -8767950066874191884
+      122_Mr.Mime_Back: -7452938134493748790
+      90_Shellder_Back: -8711837579420977521
+      37_Vulpix_Back: -8278732438599486977
+      125_Electabuzz_Back: -5721134347721926567
+      116_Horsea_Back: 5260916593064274563
+      1_Bulbasaur_Back: 2952487928796060299
+      131_Lapras_Back: 4675482053168200443
+      0_Null_Back: 2965402687537082297
+      136_Flareon_Back: 9025088243445872414
+      148_Dragonair_Back: -7322468722017614982
+      5_Charmeleon_Back: 6676341596588455106
+      111_Rhyhorn_Back: 6846713949439337776
+      62_Poliwrath_Back: 6127873958007457246
+      18_Pidgeot_Back: -643325943683203444
+      13_Weedle_Back: -4704646455450822391
+      42_Golbat_Back: 6685132766361376124
+      149_Dragonite_Back: 11546432197040912
+      70_Weepinbell_Back: -550787786301174317
+      110_Weezing_Back: 8642421101571515585
+      130_Gyarados_Back: 2818924655410732890
+      74_Geodude_Back: -8011321175595759691
+      65_Alakazam_Back: 8779582864345572702
+      106_Hitmonlee_Back: 8639571228559196646
+      86_Seel_Back: 4492161285877641202
+      135_Jolteon_Back: -7440336830428039604
+      6_Charizard_Back: -2460563413895253952
+      7_Squirtle_Back: 9051644503894457550
+      67_Machoke_Back: 6920520636651705564
+      93_Haunter_Back: 8443623846345593297
+      66_Machop_Back: 6839914760276786493
+      82_Magneton_Back: -8715715926174211096
+      68_Machamp_Back: -2653389564592963635
+      92_Gastly_Back: 5160502072696529271
+      99_Kingler_Back: 5594623951650660477
+      17_Pidgeotto_Back: -8007477588915256191
+      151_Mew_Back: -2868400452207500424
+      143_Snorlax_Back: 7025330680404427806
+      75_Graveler_Back: -8075516433114238223
+      10_Caterpie_Back: -8634366932146417135
+      36_Clefable_Back: 5478896560840735640
+      58_Growlithe_Back: -7278296084833768001
+      38_Ninetales_Back: -5864721205362865823
+      19_Rattata_Back: 8926650931587933
+      115_Kangaskhan_Back: 3040336842255919963
+      81_Magnemite_Back: 6158571852783142230
+      119_Seaking_Back: -7061765079983381711
+      29_NidoranF_Back: -8077060621186671165
+      78_Rapidash_Back: -2460327372381066589
+      72_Tentacool_Back: -5083366188515810543
+      140_Kabuto_Back: 5361275966573034564
+      101_Electrode_Back: 6003603721724118530
+      43_Oddish_Back: -3542474956781656170
+      113_Chansey_Back: 6195892565709490375
+      84_Doduo_Back: 7110377101187475686
+      98_Krabby_Back: 6058512507699751954
+      100_Voltorb_Back: -8755240524978789659
+      121_Starmie_Back: 1988387802803952346
+      41_Zubat_Back: 693456668796464053
+      112_Rhydon_Back: -3510596261693937817
+      63_Abra_Back: 7016236000357439407
+      96_Drowzee_Back: 1412895039107739292
+      57_Primeape_Back: 2364043320516051129
+      147_Dratini_Back: 1340065747609047181
+      108_Lickitung_Back: 6913732676295903026
+      48_Venonat_Back: -5552804709221467455
+      44_Gloom_Back: 2300864328266784881
+      59_Arcanine_Back: -1962981101784920923
+      102_Exeggcute_Back: 1589630146177762754
+      9_Blastoise_Back: 5344776911564171293
+      69_Bellsprout_Back: 2507356658160726519
+      24_Arbok_Back: -3335624228453106586
+      25_Pikachu_Back: 7223414051400102062
+      56_Mankey_Back: 1433343922143586861
+      138_Omanyte_Back: -8827043437141212070
+      55_Golduck_Back: 277441608602069363
+      80_Slowbro_Back: -7970087354823083993
+      134_Vaporeon_Back: 1699917559692723794
+      22_Fearow_Back: -5982474884912647834
+      64_Kadabra_Back: -7708250010218791384
+      20_Raticate_Back: -7154764437158672076
+      145_Zapdos_Back: 462078106834291176
+      117_Seadra_Back: 8565325571710863381
+      16_Pidgey_Back: -7034632487292500165
+      133_Eevee_Back: -8706887435032051992
+      83_Farfetch'd_Back: 8356985561533119185
+      53_Persian_Back: -748707312832521763
+      60_Poliwag_Back: -4807689876891598175
+      23_Ekans_Back: -5846313840764784835
+      85_Dodrio_Back: -1147267511566165327
+      79_Slowpoke_Back: -473617215901992600
+      120_Staryu_Back: -208682333195031740
+      88_Grimer_Back: 4663093275758100140
+      128_Tauros_Back: 9196434668208570709
+      46_Paras_Back: 8242487689589027502
+      50_Diglett_Back: 585678505671780841
+      71_Victreebel_Back: 8769416126376479578
+      87_Dewgong_Back: -2796237704348277395
+      89_Muk_Back: 7875438167620892749
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -205,16 +205,10 @@ public class BattlePokemon
         Status = StatusEffect.FNT;
         ReferencePokemon.Status = Status;
         string text;
-        if (TrainerIsPlayer)
-        {
-            text = $"{Name}\nfainted!";
-            _battle.PlayerInfoFrame.SetActive(false);
-        }
-        else
-            text = $"Enemy {Name}\nfainted!";
+        text = TrainerIsPlayer ? $"{Name}\nfainted!" : $"Enemy {Name}\nfainted!";
 
         yield return _battle.StartCoroutine(_battle.FaintAnimation(TrainerIsPlayer));
-        yield return new WaitForSeconds(20 / 60f);
+        yield return new WaitForSeconds(10 / 60f);
         yield return _battle.StartCoroutine(_battle.DisplayMessage(text, true));
     }
     public void Burn()

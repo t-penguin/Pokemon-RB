@@ -47,13 +47,14 @@ public class StartState : BattleBaseState
 
         // Show Player team icons
         battle.SetIcons(battle.PlayerTeamIcons, battle.Player.Team);
+        battle.PlayerInfoBackground.SetActive(true);
         battle.PlayerIconsFrame.SetActive(true);
 
         yield return null;
 
         battle.SetOpponentActivePokemon(battle.Opponent.GetFirstPokemon());
         string opponentName = battle.Opponent.Name;
-        string text = "";
+        string text = string.Empty;
 
         if(battle.BattleType == BattleType.TRAINER_BATTLE)
         {

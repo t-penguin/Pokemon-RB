@@ -56,6 +56,7 @@ public class BattleStateManager : StateManager, IGameState
     [field: SerializeField] public Image[] PlayerTeamIcons { get; private set; }
     [field: SerializeField] public GameObject PlayerIconsFrame { get; private set; }
     [field: SerializeField] public GameObject PlayerInfoFrame { get; private set; }
+    [field: SerializeField] public GameObject PlayerInfoBackground { get; private set; }
     [field: SerializeField] public TextMeshProUGUI PlayerName { get; private set; }
     [field: SerializeField] public TextMeshProUGUI PlayerLevel { get; private set; }
     [field: SerializeField] public RectTransform PlayerHPBar { get; private set; }
@@ -150,6 +151,7 @@ public class BattleStateManager : StateManager, IGameState
         yield return new WaitForSeconds(2 / 60f);
 
         Background.SetActive(false);
+        PlayerInfoBackground.SetActive(false);
         PlayerImage.gameObject.SetActive(false);
         OpponentImage.gameObject.SetActive(false);
         PlayerIconsFrame.SetActive(false);
@@ -321,8 +323,18 @@ public class BattleStateManager : StateManager, IGameState
 
     public IEnumerator FaintAnimation(bool playerSide)
     {
+        PlayerInfoFrame.SetActive(!playerSide);
+        RectTransform imageTransform = playerSide ? PlayerImage.rectTransform : OpponentImage.rectTransform;
+        Vector3 position = imageTransform.localPosition;
 
-        yield break;
+        for (int i = 0; i <= 56; i += 4)
+        {
+            position.y -= 4;
+            imageTransform.localPosition = position;
+            yield return new WaitForSeconds(1 / 60f);
+        }
+
+        OpponentInfoFrame.SetActive(playerSide);
     }
 
     public IEnumerator SwapPlayerPokemon()

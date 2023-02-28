@@ -392,6 +392,7 @@ public class BattleStateManager : StateManager, IGameState
 
                 string text = $"{p.Nickname} gained\n{expGained} EXP. Points!";
                 yield return StartCoroutine(DisplayMessage(text, true));
+                p.GainExperience(expGained);
             }
         }
     }

@@ -168,13 +168,11 @@ public class BattlePokemon
                 BattleStats.Special = Mathf.Clamp((int)(BaseStats.Attack * StatModifiers.GetStageMultiplier(StatType.Special)), 1, 999);
                 break;
             case StatType.Speed:
-                BattleStats.Speed = Mathf.Clamp((int)(BaseStats.Defense * StatModifiers.GetStageMultiplier(StatType.Speed)), 1, 999);
+                BattleStats.Speed = Mathf.Clamp((int)(BaseStats.Speed * StatModifiers.GetStageMultiplier(StatType.Speed)), 1, 999);
                 break;
         }
 
         ApplyBadgeBoosts();
-
-        // 
     }
 
     private void ApplyBadgeBoosts()
@@ -183,16 +181,16 @@ public class BattlePokemon
 
         // Boulder Badge Boost
         if (PlayerData.BadgesObtained[0])
-            BattleStats.Attack = BattleStats.Attack * 9 / 8;
+            BattleStats.Attack = Mathf.Clamp(BattleStats.Attack * 9 / 8, 1, 999);
         // Thunder Badge Boost
         if (PlayerData.BadgesObtained[2])
-            BattleStats.Defense = BattleStats.Defense * 9 / 8;
+            BattleStats.Defense = Mathf.Clamp(BattleStats.Defense * 9 / 8, 1, 999);
         // Soul Badge Boost
         if (PlayerData.BadgesObtained[4])
-            BattleStats.Speed = BattleStats.Speed * 9 / 8;
+            BattleStats.Speed = Mathf.Clamp(BattleStats.Speed * 9 / 8, 1, 999);
         // Volcano Badge Boost
         if (PlayerData.BadgesObtained[6])
-            BattleStats.Special = BattleStats.Special * 9 / 8;
+            BattleStats.Special = Mathf.Clamp(BattleStats.Special * 9 / 8, 1, 999);
     }
 
     #endregion

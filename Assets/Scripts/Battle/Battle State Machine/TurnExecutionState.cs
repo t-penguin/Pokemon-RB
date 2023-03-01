@@ -14,6 +14,8 @@ public class TurnExecutionState : BattleBaseState
     private bool _executeSecondTurn;
     private bool _battleEnded;
 
+    private Vector2 _answerBoxPosition = new Vector2(104, -72);
+
     #region Battle State Callbacks
 
     public override void EnterState(BattleStateManager battle)
@@ -95,34 +97,7 @@ public class TurnExecutionState : BattleBaseState
                 if (thisSide == battle.OpponentSide)
                     yield break;
 
-                int playerBaseSpeed = thisSide.ActivePokemon.BaseStats.Speed;
-                int opponentBaseSpeed = (otherSide.ActivePokemon.BaseStats.Speed / 4) % 256;
-                int threshold = 0;
-                int runCheck = 0;
-                battle.RunCounter++;
-
-                if (opponentBaseSpeed != 0)
-                {
-                    runCheck = (playerBaseSpeed * 32 / opponentBaseSpeed) + 30 * battle.RunCounter;
-                    threshold = Random.Range(0, 256);
-                    Debug.Log($"Threshold: {threshold}, Check: {runCheck}");
-                    if (runCheck < threshold)
-                    {
-                        yield return battle.StartCoroutine(battle.DisplayMessage(COULDNT_ESCAPE, false));
-                        yield return new WaitForSeconds(60 / 60f);
-                        yield break;
-                    }
-                }
-
-                if (opponentBaseSpeed == 0 || runCheck >= threshold)
-                {
-                    battle.SuccessfulRun = true;
-                    yield return battle.StartCoroutine(battle.DisplayMessage(GOT_AWAY_SAFELY, true));
-
-                    // battle.EndBattle();
-                    yield return battle.StartCoroutine(battle.CloseBattle());
-                    yield break;
-                }
+                yield return battle.StartCoroutine(AttemptEscape(battle, thisSide.ActivePokemon, otherSide.ActivePokemon));
                 yield break;
         }
     }
@@ -152,13 +127,23 @@ public class TurnExecutionState : BattleBaseState
             if (battle.BattleType == BattleType.WILD_BATTLE)
             {
                 yield return battle.StartCoroutine(battle.DisplayMessage(USE_NEXT_POKEMON, false));
-                Debug.Log("That's not a question at the moment...");
-                yield return new WaitForSeconds(20 / 60f);
 
-                // Open yes/no box
-                // Wait for input
+                AnswerBox.Open(true, _answerBoxPosition);
+                while (!AnswerBox.Continue)
+                    yield return null;
+                
                 // If NO, attempt to run
-                // If Run Success, end battle
+                if (!AnswerBox.Answer)
+                {
+                    yield return battle.StartCoroutine(AttemptEscape(battle, playerPokemon, battle.OpponentSide.ActivePokemon));
+                    if (battle.SuccessfulRun)
+                    {
+                        // battle.EndBattle();
+                        yield return battle.StartCoroutine(battle.CloseBattle());
+                        _battleEnded = true;
+                        yield break;
+                    }
+                }
             }
             // RUN FAILURE
             // CHOSE YES
@@ -216,6 +201,37 @@ public class TurnExecutionState : BattleBaseState
         //      set text over time "{trainer} "
         //      wait for input
         //      set text over time "Will {player}\nchange POKeMON?"
+    }
+
+    private IEnumerator AttemptEscape(BattleStateManager battle, BattlePokemon playerPokemon, BattlePokemon opponentPokemon)
+    {
+        int playerSpeed = playerPokemon.BattleStats.Speed;
+        int opponentSpeed = opponentPokemon.BattleStats.Speed / 4 % 256;
+        int threshold = 0;
+        int runCheck = 0;
+        battle.RunCounter++;
+
+        if(opponentSpeed != 0)
+        {
+            runCheck = playerSpeed * 32 / opponentSpeed + 30 * battle.RunCounter;
+            threshold = Random.Range(0, 256);
+            if(runCheck < threshold)
+            {
+                yield return battle.StartCoroutine(battle.DisplayMessage(COULDNT_ESCAPE, false));
+                yield return new WaitForSeconds(60 / 60f);
+                yield break;
+            }
+        }
+
+        if (opponentSpeed == 0 || runCheck >= threshold)
+        {
+            battle.SuccessfulRun = true;
+            yield return battle.StartCoroutine(battle.DisplayMessage(GOT_AWAY_SAFELY, true));
+
+            // battle.EndBattle();
+            yield return battle.StartCoroutine(battle.CloseBattle());
+            yield break;
+        }
     }
 
     private void OnClosedPokemonMenu(BattleStateManager battle)

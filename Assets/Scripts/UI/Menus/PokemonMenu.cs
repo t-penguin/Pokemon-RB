@@ -81,6 +81,12 @@ public class PokemonMenu : Menu
     {
         if(InBattle)
         {
+            if (battle.ForcedSwap)
+            {
+                StartCoroutine(Blink());
+                return;
+            }
+
             StartCoroutine(CloseFromBattle());
             return;
         }
@@ -174,6 +180,21 @@ public class PokemonMenu : Menu
         ListenForInput();
     }
 
+    public IEnumerator Blink()
+    {
+        StopListeningForInput();
+        _arrow.gameObject.SetActive(false);
+        MessageBox.Clear();
+
+        yield return new WaitForSeconds(4 / 60f);
+        MessageBox.Set(_messageText);
+        yield return new WaitForSeconds(4 / 60f);
+        _arrow.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(6 / 60f);
+        ListenForInput();
+    }
+
     public IEnumerator AskForSwitch()
     {
         yield return new WaitForSeconds(4 / 60);
@@ -228,7 +249,7 @@ public class PokemonMenu : Menu
         ShowTeam();
         _animateIcons = true;
         MessageBox.Open();
-        MessageBox.Set(CHOOSE_A_POKEMON);
+        MessageBox.Set(_messageText);
         ListenForInput();
     }
 

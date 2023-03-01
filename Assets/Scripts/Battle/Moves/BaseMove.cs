@@ -10,12 +10,13 @@ public abstract class BaseMove
     public Category Category { get; }
     public int Priority { get; }
     public int BasePP { get; }
-    public int CurrentPP { get; private set; }
-    public int CurrentMaxPP { get; private set; }
+    public int CurrentPP { get; protected set; }
+    public int CurrentMaxPP { get; protected set; }
     public int MaxPP { get; }
 
     private const string FAILED = "But it failed!";
-    private const string NO_EFFECT = "It had no\neffect";
+    private const string NO_EFFECT = "It had no\neffect!";
+    private const string NOTHING_HAPPENED = "Nothing happened!";
 
     /// <summary>
     /// Base class for a Pokemon's move.
@@ -64,6 +65,28 @@ public abstract class BaseMove
     protected IEnumerator OnNoEffect()
     {
         yield return Battle.StartCoroutine(Battle.DisplayMessage(NO_EFFECT, true));
+        yield return new WaitForSeconds(4 / 60f);
+    }
+
+    protected IEnumerator OnNothingHappened()
+    {
+        yield return Battle.StartCoroutine(Battle.DisplayMessage(NOTHING_HAPPENED, true));
+        yield return new WaitForSeconds(4 / 60f);
+    }
+
+    protected IEnumerator OnLoweredStat(BattlePokemon target, StatType stat)
+    {
+        string targetName = target == Battle.PlayerSide.ActivePokemon ? target.Name : $"Enemy {target.Name}";
+        string statName = stat.ToString().ToUpper();
+        yield return Battle.StartCoroutine(Battle.DisplayMessage($"{targetName}<\n{statName} fell!", true));
+        yield return new WaitForSeconds(4 / 60f);
+    }
+
+    protected IEnumerator OnRaisedStat(BattlePokemon target, StatType stat)
+    {
+        string targetName = target == Battle.PlayerSide.ActivePokemon ? target.Name : $"Enemy {target.Name}";
+        string statName = stat.ToString().ToUpper();
+        yield return Battle.StartCoroutine(Battle.DisplayMessage($"{targetName}<\n{statName} rose!", true));
         yield return new WaitForSeconds(4 / 60f);
     }
 }

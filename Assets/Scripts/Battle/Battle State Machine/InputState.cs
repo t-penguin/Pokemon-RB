@@ -89,6 +89,7 @@ public class InputState : BattleBaseState
                 battle.MoveSelection += selectionChange;
                 position.y = battle.MoveSelection * (-8) - 8;
                 battle.MoveArrow.localPosition = position;
+                battle.SetMoveInfo(battle.PlayerSide.ActivePokemon.Moves[battle.MoveSelection]);
                 break;
         }
     }

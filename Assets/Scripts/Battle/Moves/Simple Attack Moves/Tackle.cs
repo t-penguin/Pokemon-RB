@@ -28,5 +28,6 @@ public class Tackle : SimpleAttackMove
 
         SetLastMoveUsed(user);
         SetMirrorMove(opponent);
+        CurrentPP--;
     }
 }

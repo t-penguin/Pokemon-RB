@@ -28,5 +28,6 @@ public class Scratch : SimpleAttackMove
 
         SetLastMoveUsed(user);
         SetMirrorMove(opponent);
+        CurrentPP--;
     }
 }

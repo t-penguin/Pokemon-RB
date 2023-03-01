@@ -10,21 +10,29 @@ public class Growl : TransitiveStatusMove
     {
         yield return Battle.StartCoroutine(OnUsed(user));
         yield return new WaitForSeconds(2 / 60f);
-        if(!AccuracyCheck(user, opponent))
+
+        bool failed;
+        if (!AccuracyCheck(user, opponent, out failed))
         {
-            yield return Battle.StartCoroutine(OnMissed(user));
+            if (failed)
+                yield return Battle.StartCoroutine(OnFailed());
+            else
+                yield return Battle.StartCoroutine(OnMissed(user));
         }
-        else if(opponent.CanStatBeLowered(StatType.Attack))
+        else if (opponent.CanStatBeLowered(StatType.Attack))
         {
             // ANIMATION OFF
             // MOVE SCREEN TO THE RIGHT BY 4 AND BACK TWICE
+            opponent.ModifyStatAsPrimary(StatType.Attack, -1);
+            yield return Battle.StartCoroutine(OnLoweredStat(opponent, StatType.Attack));
         }
         else
         {
-            yield return Battle.StartCoroutine(OnFailed());
+            yield return Battle.StartCoroutine(OnNothingHappened());
         }
 
         SetLastMoveUsed(user);
         SetMirrorMove(opponent);
+        CurrentPP--;
     }
 }

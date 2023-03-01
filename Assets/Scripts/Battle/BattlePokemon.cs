@@ -139,6 +139,7 @@ public class BattlePokemon
             return;
 
         StatModifiers.ModifyStatStage(stat, change);
+        UpdateBattleStat(stat);
     }
 
     // Modifies a stat as a move's secondary effect
@@ -148,9 +149,8 @@ public class BattlePokemon
             return;
 
         StatModifiers.ModifyStatStage(stat, change);
+        UpdateBattleStat(stat);
     }
-
-
 
     private void UpdateBattleStat(StatType stat)
     {

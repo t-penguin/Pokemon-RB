@@ -29,8 +29,8 @@ public abstract class TransitiveMove : BaseMove
         int check = Random.Range(0, 256);
 
         // The threshold of which to compare the accuracy check to
-        // ADD HERE: Include the bright powder modifier (-20 if held, -0 otherwise)
-        int threshold = (int)((Accuracy / 100 * 255) * user.Accuracy * defender.Evasion);
+        int threshold = (int)(Accuracy / 100f * 255);
+        threshold = (int)(threshold * user.Accuracy * defender.Evasion);
         // Clamps threshold between 1 and 255
         threshold = Mathf.Clamp(threshold, 1, 255);
 

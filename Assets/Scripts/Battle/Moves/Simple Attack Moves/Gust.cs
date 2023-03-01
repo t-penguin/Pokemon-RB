@@ -26,5 +26,6 @@ public class Gust : SimpleAttackMove
 
         SetLastMoveUsed(user);
         SetMirrorMove(opponent);
+        CurrentPP--;
     }
 }

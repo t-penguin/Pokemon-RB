@@ -307,6 +307,7 @@ public class Pokemon
 }
 
 //Class to hold a set of stats
+[System.Serializable]
 public class Stats
 {
 	public int HP;

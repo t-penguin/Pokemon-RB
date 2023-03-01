@@ -262,8 +262,8 @@ public static class MoveData
     {
 		bool isPhysicalMove = move.Category == Category.Physical;
 		// Use corresponding stats depending on the move category
-		int userAttack = isPhysicalMove ? user.BaseStats.Attack : user.BaseStats.Special;
-		int targetDefense = isPhysicalMove ? target.BaseStats.Defense : target.BaseStats.Special;
+		int userAttack = isPhysicalMove ? user.Stats.Attack : user.Stats.Special;
+		int targetDefense = isPhysicalMove ? target.Stats.Defense : target.Stats.Special;
 
 		int userLevel = user.Level;
 		float stab = STABMultiplier(move, user);
@@ -293,7 +293,7 @@ public static class MoveData
 	public static bool IsCrit(AttackMove move, BattlePokemon user)
     {
 		int check = Random.Range(0, 256);
-		int threshold = user.BaseStats.Speed / 2;
+		int threshold = user.Stats.Speed / 2;
 
 		// ADD HERE: Focus Energy or Dire Hit => t/= 4
 

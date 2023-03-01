@@ -72,6 +72,7 @@ public class TurnOrderState : BattleBaseState
         // Speed checks
         int playerSpeed = CalculateModifiedSpeed(battle.PlayerSide.ActivePokemon);
         int opponentSpeed = CalculateModifiedSpeed(battle.OpponentSide.ActivePokemon);
+        Debug.Log($"Player Speed: {playerSpeed}\nOpponent Speed: {opponentSpeed}");
 
         if (playerSpeed > opponentSpeed)
         {
@@ -107,6 +108,6 @@ public class TurnOrderState : BattleBaseState
     private int CalculateModifiedSpeed(BattlePokemon pokemon)
     {
         int speed = pokemon.BattleStats.Speed;
-        return pokemon.Status == StatusEffect.PAR ? speed : Mathf.Max(speed / 4, 1);
+        return pokemon.Status == StatusEffect.PAR ? Mathf.Max(speed / 4, 1) : speed;
     }
 }

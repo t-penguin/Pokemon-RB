@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+[System.Serializable]
 public class BattlePokemon
 {
     #region Properties
@@ -10,27 +11,27 @@ public class BattlePokemon
     // General Info
     public bool TrainerIsPlayer;
     public Pokemon ReferencePokemon { get; }
-    public string Name { get; }
-    public int PokedexNumber { get; }
-    public Type Primary { get; }
-    public Type Secondary { get; }
-    public StatusEffect Status { get; private set; }
-    public BaseMove[] Moves { get; private set; }
+    [field: SerializeField] public string Name { get; }
+    [field: SerializeField] public int PokedexNumber { get; }
+    [field: SerializeField] public Type Primary { get; }
+    [field: SerializeField] public Type Secondary { get; }
+    [field: SerializeField] public StatusEffect Status { get; private set; }
+    [field: SerializeField] public BaseMove[] Moves { get; private set; }
 
     // Stat Info
-    public int Level { get; }
-    public Stats BaseStats { get; }
-    public StatStageModifiers StatModifiers { get; }
-    public Stats BattleStats { get; private set; }
-    public int CurrentHP { get; private set; }
-    public float Accuracy { get; private set; }
-    public float Evasion { get; private set; }
+    [field: SerializeField] public int Level { get; }
+    [field: SerializeField] public Stats Stats { get; }
+    [field: SerializeField] public StatStageModifiers StatModifiers { get; }
+    [field: SerializeField] public Stats BattleStats { get; private set; }
+    [field: SerializeField] public int CurrentHP { get; private set; }
+    [field: SerializeField] public float Accuracy { get; private set; }
+    [field: SerializeField] public float Evasion { get; private set; }
 
     // Battle Info
-    public BaseMove LastMoveUsed { get; private set; }
-    public TransitiveMove MirrorMove { get; private set; }
-    public bool HasSubstitute { get; private set; }
-    public bool IsMistActive { get; private set; }
+    [field: SerializeField] public BaseMove LastMoveUsed { get; private set; }
+    [field: SerializeField] public TransitiveMove MirrorMove { get; private set; }
+    [field: SerializeField] public bool HasSubstitute { get; private set; }
+    [field: SerializeField] public bool IsMistActive { get; private set; }
 
     #endregion
 
@@ -55,9 +56,9 @@ public class BattlePokemon
             Moves[i] = MoveCreator.CreateMove(battle, pokemon.MoveIndexes[i]);
 
         Level = pokemon.Level;
-        BaseStats = pokemon.Stats;
+        Stats = pokemon.Stats;
         StatModifiers = new StatStageModifiers();
-        BattleStats = new Stats(BaseStats);
+        BattleStats = new Stats(Stats);
         CurrentHP = pokemon.CurrentHP;
         Accuracy = 1f;
         Evasion = 1f;
@@ -88,9 +89,9 @@ public class BattlePokemon
                 damageDone += 0.25f;
                 remainingHP -= 0.25f;
                 CurrentHP = (int)remainingHP;
-                scale.x = remainingHP / BaseStats.HP;
+                scale.x = remainingHP / Stats.HP;
                 _battle.PlayerHPBar.localScale = scale;
-                _battle.PlayerHPText.text = $"{CurrentHP,3}/{BaseStats.HP,3}";
+                _battle.PlayerHPText.text = $"{CurrentHP,3}/{Stats.HP,3}";
                 yield return new WaitForSeconds(2 / 60f);
             }
         }
@@ -104,7 +105,7 @@ public class BattlePokemon
                 damageDone += 0.25f;
                 remainingHP -= 0.25f;
                 CurrentHP = (int)remainingHP;
-                scale.x = -remainingHP / BaseStats.HP;
+                scale.x = -remainingHP / Stats.HP;
                 _battle.OpponentHPBar.localScale = scale;
                 yield return new WaitForSeconds(2 / 60f);
             }
@@ -159,16 +160,16 @@ public class BattlePokemon
             default:
                 return;
             case StatType.Attack:
-                BattleStats.Attack = Mathf.Clamp((int)(BaseStats.Attack * StatModifiers.GetStageMultiplier(StatType.Attack)), 1, 999);
+                BattleStats.Attack = Mathf.Clamp((int)(Stats.Attack * StatModifiers.GetStageMultiplier(StatType.Attack)), 1, 999);
                 break;
             case StatType.Defense:
-                BattleStats.Defense = Mathf.Clamp((int)(BaseStats.Defense * StatModifiers.GetStageMultiplier(StatType.Defense)), 1, 999);
+                BattleStats.Defense = Mathf.Clamp((int)(Stats.Defense * StatModifiers.GetStageMultiplier(StatType.Defense)), 1, 999);
                 break;
             case StatType.Special:
-                BattleStats.Special = Mathf.Clamp((int)(BaseStats.Attack * StatModifiers.GetStageMultiplier(StatType.Special)), 1, 999);
+                BattleStats.Special = Mathf.Clamp((int)(Stats.Attack * StatModifiers.GetStageMultiplier(StatType.Special)), 1, 999);
                 break;
             case StatType.Speed:
-                BattleStats.Speed = Mathf.Clamp((int)(BaseStats.Speed * StatModifiers.GetStageMultiplier(StatType.Speed)), 1, 999);
+                BattleStats.Speed = Mathf.Clamp((int)(Stats.Speed * StatModifiers.GetStageMultiplier(StatType.Speed)), 1, 999);
                 break;
         }
 

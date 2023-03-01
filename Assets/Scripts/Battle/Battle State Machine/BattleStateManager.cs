@@ -70,16 +70,6 @@ public class BattleStateManager : StateManager, IGameState
     [field: SerializeField] public TextMeshProUGUI OpponentLevel { get; private set; }
     [field: SerializeField] public RectTransform OpponentHPBar { get; private set; }
 
-    public BattleSide PlayerSide { get; private set; }
-    public BattleSide OpponentSide { get; private set; }
-    public BattleSide FirstSide { get; set; }
-    public BattleSide SecondSide { get; set; }
-    public List<Pokemon> Participants { get; private set; }
-    public int RunCounter { get; set; }
-    public bool SuccessfulRun { get; set; }
-    public bool Swap { get; set; }
-    public bool ForcedSwap { get; set; }
-
     [field: SerializeField] public GameObject SelectionBox { get; private set; }
     [field: SerializeField] public RectTransform SelectionArrow { get; private set; }
 
@@ -91,13 +81,22 @@ public class BattleStateManager : StateManager, IGameState
     [field: SerializeField] public TextMeshProUGUI[] MoveNames { get; private set; }
     [field: SerializeField] public int MoveSelection { get; set; }
 
+    [field: SerializeField] public BattleSide PlayerSide { get; private set; }
+    [field: SerializeField] public BattleSide OpponentSide { get; private set; }
+    [field: SerializeField] public List<Pokemon> Participants { get; private set; }
+    public BattleSide FirstSide { get; set; }
+    public BattleSide SecondSide { get; set; }
+    public int RunCounter { get; set; }
+    public bool SuccessfulRun { get; set; }
+    public bool Swap { get; set; }
+    public bool ForcedSwap { get; set; }
+
     [Space(10)]
     [Header("Pokeball Icons")]
     public Sprite EmptyPokeball;
     public Sprite NormalPokeball;
     public Sprite StatusPokeball;
     public Sprite FaintedPokeball;
-
 
     #region Monobehaviour Callbacks
 
@@ -187,7 +186,7 @@ public class BattleStateManager : StateManager, IGameState
     {
         OpponentName.text = pokemon.Name;
         OpponentLevel.text = $"@{pokemon.Level}";
-        float healthPercent = (float)pokemon.CurrentHP / pokemon.BaseStats.HP;
+        float healthPercent = (float)pokemon.CurrentHP / pokemon.Stats.HP;
         OpponentHPBar.localScale = new Vector3(-healthPercent, 1, 1);
     }
 
@@ -203,9 +202,9 @@ public class BattleStateManager : StateManager, IGameState
     {
         PlayerName.text = pokemon.Name;
         PlayerLevel.text = $"@{pokemon.Level}";
-        float healthPercent = (float)pokemon.CurrentHP / pokemon.BaseStats.HP;
+        float healthPercent = (float)pokemon.CurrentHP / pokemon.Stats.HP;
         PlayerHPBar.localScale = new Vector3(healthPercent, 1, 1);
-        PlayerHPText.text = $"{pokemon.CurrentHP, 3}/{pokemon.BaseStats.HP, 3}";
+        PlayerHPText.text = $"{pokemon.CurrentHP, 3}/{pokemon.Stats.HP, 3}";
     }
 
     public void SetPlayerActivePokemon(Pokemon pokemon)
@@ -451,15 +450,16 @@ public class BattleStateManager : StateManager, IGameState
     #endregion
 }
 
+[System.Serializable]
 public class BattleSide
 {
+    public bool IsPlayerSide;
     public BattleAction Action;
     public BattlePokemon ActivePokemon;
-    public int ActiveIndex;
     public Pokemon SwitchTarget;
     public BaseMove Move;
     public Item Item;
-    public bool IsPlayerSide;
+    
     public List<Pokemon> Team;
     public Bag Bag;
 

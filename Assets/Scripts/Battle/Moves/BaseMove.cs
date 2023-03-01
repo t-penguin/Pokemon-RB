@@ -34,6 +34,7 @@ public abstract class BaseMove
         Name = name;
         Type = type;
         Category = category;
+        Priority = priority;
         BasePP = basePP;
         CurrentPP = BasePP;
         CurrentMaxPP = BasePP;

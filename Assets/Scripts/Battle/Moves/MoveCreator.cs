@@ -12,6 +12,7 @@ public static class MoveCreator
             case 53: return new Growl(battle);
             case 56: return new Gust(battle);
             case 144: return new Tackle(battle);
+            case 111: return new SandAttack(battle);
             case 112: return new Scratch(battle);
             case 145: return new TailWhip(battle);
         }

@@ -171,6 +171,12 @@ public class BattlePokemon
             case StatType.Speed:
                 BattleStats.Speed = Mathf.Clamp((int)(Stats.Speed * StatModifiers.GetStageMultiplier(StatType.Speed)), 1, 999);
                 break;
+            case StatType.Accuracy:
+                Accuracy = StatModifiers.GetStageMultiplier(StatType.Accuracy);
+                break;
+            case StatType.Evasion:
+                Evasion = StatModifiers.GetStageMultiplier(StatType.Evasion);
+                break;
         }
 
         ApplyBadgeBoosts();

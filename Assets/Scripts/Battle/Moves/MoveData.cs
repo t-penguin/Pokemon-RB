@@ -258,8 +258,10 @@ public static class MoveData
 	/// <param name="user">The attacking Pokemon.</param>
 	/// <param name="target">The defending Pokemon.</param>
 	/// <returns></returns>
-	public static int CalculateDamage(AttackMove move, BattlePokemon user, BattlePokemon target)
+	public static int CalculateDamage(AttackMove move, BattlePokemon user, BattlePokemon target, out bool isCrit)
     {
+		isCrit = false;
+
 		bool isPhysicalMove = move.Category == Category.Physical;
 		// Use corresponding stats depending on the move category
 		int userAttack = isPhysicalMove ? user.Stats.Attack : user.Stats.Special;
@@ -270,16 +272,19 @@ public static class MoveData
 		float typeMultiplier = GetMatchupMultiplier(move, target);
 
 		// Critical hit moves ignore stat modifications
-		if(IsCrit(move, user))
+		if (IsCrit(move, user))
+		{
+			isCrit = true;
 			userLevel *= 2;
+		}
 		// Non-critical hit moves take into account stat modifications
 		else
-        {
+		{
 			userAttack = isPhysicalMove ? user.BattleStats.Attack : user.BattleStats.Special;
 			targetDefense = isPhysicalMove ? user.BattleStats.Defense : user.BattleStats.Special;
 
 			//ADD HERE?: Check for light screen and reflect to modify stats
-        }
+		}
 
 		return DamageFormula(userLevel, userAttack, targetDefense, move.Power, stab, typeMultiplier);
     }

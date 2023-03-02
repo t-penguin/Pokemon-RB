@@ -9,6 +9,7 @@ public abstract class AttackMove : TransitiveMove
 
     private const string SUPER_EFFECTIVE = "It was\nsuper effective!";
     private const string NOT_EFFECTIVE = "It was not\nvery effective...";
+    private const string CRITICAL_HIT = "Critical hit!";
 
     /// <summary>
     /// Creates a damaging move that affects the target.
@@ -30,11 +31,13 @@ public abstract class AttackMove : TransitiveMove
     }
 
     // Calculates the amount of damage to deal to the target and then deals it
-    protected IEnumerator DealDamage(BattlePokemon user, BattlePokemon target)
+    protected virtual IEnumerator DealDamage(BattlePokemon user, BattlePokemon target)
     {
         float effectiveness = MoveData.GetMatchupMultiplier(this, target);
-        int damage = MoveData.CalculateDamage(this, user, target);
+        int damage = MoveData.CalculateDamage(this, user, target, out bool isCrit);
         yield return Battle.StartCoroutine(target.RecieveDamge(damage, Type));
+        if (isCrit)
+            yield return Battle.StartCoroutine(OnCriticalHit());
         yield return Battle.StartCoroutine(OnEffective(effectiveness));
         yield return new WaitForSeconds(60 / 60f);
     }
@@ -52,6 +55,12 @@ public abstract class AttackMove : TransitiveMove
             text = SUPER_EFFECTIVE;
 
         yield return Battle.StartCoroutine(Battle.DisplayMessage(text, true));
+        yield return new WaitForSeconds(4 / 60f);
+    }
+
+    protected IEnumerator OnCriticalHit()
+    {
+        yield return Battle.StartCoroutine(Battle.DisplayMessage(CRITICAL_HIT, true));
         yield return new WaitForSeconds(4 / 60f);
     }
 }

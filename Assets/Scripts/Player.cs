@@ -14,6 +14,7 @@ public class Player : Trainer
         AddToTeam(new Pokemon(7, 5));
 
         Team[0].TeachMove(50, 2);
+        Team[0].TeachMove(48, 3);
         Team[2].TeachMove(141, 2);
 
         Bag.Add(new Pokeball(), 10);

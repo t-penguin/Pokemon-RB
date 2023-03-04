@@ -9,10 +9,9 @@ public class Growl : TransitiveStatusMove
     public sealed override IEnumerator Execute(BattlePokemon user, BattlePokemon opponent)
     {
         yield return Battle.StartCoroutine(OnUsed(user));
-        yield return new WaitForSeconds(2 / 60f);
 
-        bool failed;
-        if (!AccuracyCheck(user, opponent, out failed))
+        bool failed = false;
+        if (opponent.IsSemiInvulnerable || !AccuracyCheck(user, opponent, out failed))
         {
             if (failed)
                 yield return Battle.StartCoroutine(OnFailed());

@@ -51,28 +51,28 @@ public abstract class BaseMove
     protected IEnumerator OnUsed(BattlePokemon user)
     {
         yield return Battle.StartCoroutine(Battle.DisplayMessage($"{user.Name}\nused {Name}!", false));
-        yield return new WaitForSeconds(4 / 60f);
+        yield return new WaitForSeconds(6 / 60f);
     }
     protected IEnumerator OnMissed(BattlePokemon user)
     {
         yield return Battle.StartCoroutine(Battle.DisplayMessage($"{user.Name}<\nattack missed!", true));
-        yield return new WaitForSeconds(4 / 60f);
+        yield return new WaitForSeconds(6 / 60f);
     }
     protected IEnumerator OnFailed()
     {
         yield return Battle.StartCoroutine(Battle.DisplayMessage(FAILED, true));
-        yield return new WaitForSeconds(4 / 60f);
+        yield return new WaitForSeconds(6 / 60f);
     }
     protected IEnumerator OnNoEffect()
     {
         yield return Battle.StartCoroutine(Battle.DisplayMessage(NO_EFFECT, true));
-        yield return new WaitForSeconds(4 / 60f);
+        yield return new WaitForSeconds(6 / 60f);
     }
 
     protected IEnumerator OnNothingHappened()
     {
         yield return Battle.StartCoroutine(Battle.DisplayMessage(NOTHING_HAPPENED, true));
-        yield return new WaitForSeconds(4 / 60f);
+        yield return new WaitForSeconds(6 / 60f);
     }
 
     protected IEnumerator OnLoweredStat(BattlePokemon target, StatType stat)
@@ -80,7 +80,7 @@ public abstract class BaseMove
         string targetName = target == Battle.PlayerSide.ActivePokemon ? target.Name : $"Enemy {target.Name}";
         string statName = stat.ToString().ToUpper();
         yield return Battle.StartCoroutine(Battle.DisplayMessage($"{targetName}<\n{statName} fell!", true));
-        yield return new WaitForSeconds(4 / 60f);
+        yield return new WaitForSeconds(6 / 60f);
     }
 
     protected IEnumerator OnRaisedStat(BattlePokemon target, StatType stat)
@@ -88,6 +88,6 @@ public abstract class BaseMove
         string targetName = target == Battle.PlayerSide.ActivePokemon ? target.Name : $"Enemy {target.Name}";
         string statName = stat.ToString().ToUpper();
         yield return Battle.StartCoroutine(Battle.DisplayMessage($"{targetName}<\n{statName} rose!", true));
-        yield return new WaitForSeconds(4 / 60f);
+        yield return new WaitForSeconds(6 / 60f);
     }
 }

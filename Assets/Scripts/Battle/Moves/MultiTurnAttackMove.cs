@@ -4,8 +4,8 @@ using UnityEngine;
 
 public abstract class MultiTurnAttackMove : AttackMove
 {
-    protected int Damage { get; private set; }
-    protected int TurnsLeft { get; private set; }
+    public int Damage { get; protected set; }
+    public int TurnsLeft { get; protected set; }
 
     /// <summary>
     /// Creates an attack move that damages the opponent multiple times in one turn.

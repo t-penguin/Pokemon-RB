@@ -9,9 +9,8 @@ public class Tackle : SimpleAttackMove
     public sealed override IEnumerator Execute(BattlePokemon user, BattlePokemon opponent)
     {
         yield return Battle.StartCoroutine(OnUsed(user));
-        yield return new WaitForSeconds(2 / 60f);
 
-        if(!AccuracyCheck(user, opponent))
+        if(opponent.IsSemiInvulnerable || !AccuracyCheck(user, opponent))
         {
             yield return Battle.StartCoroutine(OnMissed(user));
         }

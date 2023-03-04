@@ -9,10 +9,9 @@ public class TurnExecutionState : BattleBaseState
     private const string GOT_AWAY_SAFELY = "Got away safely!";
     private const string USE_NEXT_POKEMON = "Use next\nPOKÈMON?";
 
-    private bool _playerFainted;
-    private bool _enemyFainted;
     private bool _executeSecondTurn;
     private bool _battleEnded;
+    private bool _checkMultiTurn;
 
     private Vector2 _answerBoxPosition = new Vector2(104, -72);
 
@@ -40,6 +39,7 @@ public class TurnExecutionState : BattleBaseState
     {
         _executeSecondTurn = true;
         _battleEnded = false;
+        _checkMultiTurn = true;
 
         yield return battle.StartCoroutine(ExecuteFirstTurn(battle));
 
@@ -67,9 +67,11 @@ public class TurnExecutionState : BattleBaseState
                 yield break;
         }
 
-        battle.SwitchState(battle.InputState);
-        yield return null;
-    }
+        if (IsMultiTurnMoveActive(battle.PlayerSide.Move))
+            battle.SwitchState(battle.TurnOrderState);
+        else
+            battle.SwitchState(battle.InputState);
+        }
 
     private IEnumerator ExecuteTurn(BattleStateManager battle, BattleSide thisSide, BattleSide otherSide)
     {
@@ -119,6 +121,7 @@ public class TurnExecutionState : BattleBaseState
         if (playerPokemon.Status != StatusEffect.FNT)
             yield break;
 
+        _checkMultiTurn = false;
         // PLAYER FAINTED
         // MORE POKEMON AVAILABLE
         if (battle.PlayerSide.IsAbleToFight())
@@ -241,5 +244,20 @@ public class TurnExecutionState : BattleBaseState
         MessageBox.Clear();
 
         PokemonMenu.ClosedFromBattle -= OnClosedPokemonMenu;
+    }
+
+    private bool IsMultiTurnMoveActive(BaseMove move)
+    {
+        if (!_checkMultiTurn)
+            return false;
+
+        if (move.GetType().BaseType != typeof(MultiTurnAttackMove))
+            return false;
+
+        MultiTurnAttackMove multiMove = (MultiTurnAttackMove)move;
+        if (multiMove.TurnsLeft == 0)
+            return false;
+
+        return true;
     }
 }

@@ -32,6 +32,7 @@ public class BattlePokemon
     [field: SerializeField] public TransitiveMove MirrorMove { get; private set; }
     [field: SerializeField] public bool HasSubstitute { get; private set; }
     [field: SerializeField] public bool IsMistActive { get; private set; }
+    [field: SerializeField] public bool IsSemiInvulnerable { get; set; }
 
     #endregion
 

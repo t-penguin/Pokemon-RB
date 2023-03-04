@@ -28,11 +28,26 @@ public class TurnOrderState : BattleBaseState
 
     private BattleAction DetermineOpponentAction(BattleStateManager battle)
     {
-        BattlePokemon pokemon = battle.OpponentSide.ActivePokemon;
-        int r = Random.Range(0, pokemon.ReferencePokemon.GetNumberOfMoves());
-        battle.OpponentSide.Move = pokemon.Moves[r];
+        BaseMove move = battle.OpponentSide.Move;
+        if (move == null)
+            SetRandomMove(battle.OpponentSide);
+        else if (move.GetType() == typeof(MultiTurnAttackMove))
+        {
+            MultiTurnAttackMove multiMove = (MultiTurnAttackMove)move;
+            if (multiMove.TurnsLeft == 0)
+                SetRandomMove(battle.OpponentSide);
+        }
+        else
+            SetRandomMove(battle.OpponentSide);
 
         return BattleAction.UseMove;
+    }
+
+    private void SetRandomMove(BattleSide side)
+    {
+        BattlePokemon pokemon = side.ActivePokemon;
+        int r = Random.Range(0, pokemon.ReferencePokemon.GetNumberOfMoves());
+        side.Move = pokemon.Moves[r];
     }
 
     private void SetTurnOrder(BattleStateManager battle)

@@ -9,6 +9,7 @@ public static class MoveCreator
         switch(index)
         {
             default: return null;
+            case 48: return new Fly(battle);
             case 50: return new FuryAttack(battle);
             case 53: return new Growl(battle);
             case 56: return new Gust(battle);

@@ -27,9 +27,9 @@ public abstract class SimpleAttackMove : AttackMove
         int remainingHP = target.CurrentHP;
         float effectiveness = MoveData.GetMatchupMultiplier(this, target);
         int damage = MoveData.CalculateDamage(this, user, target, out bool isCrit);
+        yield return Battle.StartCoroutine(target.RecieveDamge(damage, Type));
         if (isCrit)
             yield return Battle.StartCoroutine(OnCriticalHit());
-        yield return Battle.StartCoroutine(target.RecieveDamge(damage, Type));
         yield return Battle.StartCoroutine(OnEffective(effectiveness));
 
         // ADD HERE: Check for substitute break. Do NOT regain health if substitute breaks

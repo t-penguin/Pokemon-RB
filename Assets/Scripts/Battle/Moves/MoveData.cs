@@ -336,7 +336,7 @@ public static class MoveData
 	public static int DamageFormula(int level, int attack, int defense, int power, float stab, float typeMultiplier)
     {
 		int rawDamage = (2 * level / 5 + 2) * power * (attack / defense) / 50 + 2;
-		return (int)(rawDamage * stab * typeMultiplier * Random.Range(217, 256) / 255);
+		return Mathf.Min(1, (int)(rawDamage * stab * typeMultiplier * Random.Range(217, 256) / 255));
     }
 }
 

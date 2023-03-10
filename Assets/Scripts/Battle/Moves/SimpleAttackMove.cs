@@ -37,4 +37,16 @@ public abstract class SimpleAttackMove : AttackMove
         int sappedHealth = Mathf.CeilToInt(Mathf.Min(damage, remainingHP) / 2f);
         yield return Battle.StartCoroutine(user.RestoreHealth(sappedHealth));
     }
+
+    protected IEnumerator OnHealthSapped(BattlePokemon opponent)
+    {
+        string text;
+        if (opponent.TrainerIsPlayer)
+            text = $"Sucked health from\n{opponent.Name}!";
+        else
+            text = $"Sucked health from\nEnemy {opponent.Name}!";
+
+        yield return Battle.StartCoroutine(Battle.DisplayMessage(text, true));
+        yield return new WaitForSeconds(4 / 60f);
+    }
 }

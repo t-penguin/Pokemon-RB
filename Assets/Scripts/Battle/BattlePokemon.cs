@@ -80,36 +80,27 @@ public class BattlePokemon
 
         ReferencePokemon.CurrentHP -= damage;
 
-        if(TrainerIsPlayer)
+        float damageDone = 0;
+        float remainingHP = CurrentHP;
+        Vector3 scale = TrainerIsPlayer ? _battle.PlayerHPBar.localScale : _battle.OpponentHPBar.localScale;
+
+        while (damageDone < damage)
         {
-            float damageDone = 0;
-            float remainingHP = CurrentHP;
-            Vector3 scale = _battle.PlayerHPBar.localScale;
-            while (damageDone < damage)
+            damageDone += 0.25f;
+            remainingHP -= 0.25f;
+            CurrentHP = (int)remainingHP;
+            scale.x = remainingHP / Stats.HP;
+            if (TrainerIsPlayer)
             {
-                damageDone += 0.25f;
-                remainingHP -= 0.25f;
-                CurrentHP = (int)remainingHP;
-                scale.x = remainingHP / Stats.HP;
                 _battle.PlayerHPBar.localScale = scale;
                 _battle.PlayerHPText.text = $"{CurrentHP,3}/{Stats.HP,3}";
-                yield return new WaitForSeconds(2 / 60f);
             }
-        }
-        else
-        {
-            float damageDone = 0;
-            float remainingHP = CurrentHP;
-            Vector3 scale = _battle.OpponentHPBar.localScale;
-            while (damageDone < damage)
+            else
             {
-                damageDone += 0.25f;
-                remainingHP -= 0.25f;
-                CurrentHP = (int)remainingHP;
-                scale.x = -remainingHP / Stats.HP;
+                scale.x *= -1;
                 _battle.OpponentHPBar.localScale = scale;
-                yield return new WaitForSeconds(2 / 60f);
             }
+            yield return new WaitForSeconds(2 / 60f);
         }
 
         if (CurrentHP <= 0)
@@ -119,12 +110,44 @@ public class BattlePokemon
         }
 
         // If damage type is FIRE and pokemon is FROZEN, defrost
-        yield return null;
     }
 
     public IEnumerator RestoreHealth(int health)
     {
-        yield return null;
+        if(CurrentHP >= Stats.HP)
+        {
+            CurrentHP = Stats.HP;
+            yield break;
+        }
+
+        int missingHealth = Stats.HP - CurrentHP;
+        if (health > missingHealth)
+            health = missingHealth;
+
+        ReferencePokemon.CurrentHP += health;
+
+        float healthRestored = 0;
+        float remainingHP = CurrentHP;
+        Vector3 scale = TrainerIsPlayer ? _battle.PlayerHPBar.localScale : _battle.OpponentHPBar.localScale;
+
+        while (healthRestored < health)
+        {
+            healthRestored += 0.25f;
+            remainingHP += 0.25f;
+            CurrentHP = (int)remainingHP;
+            scale.x = remainingHP / Stats.HP;
+            if(TrainerIsPlayer)
+            {
+                _battle.PlayerHPBar.localScale = scale;
+                _battle.PlayerHPText.text = $"{CurrentHP,3}/{Stats.HP,3}";
+            }
+            else
+            {
+                scale.x *= -1;
+                _battle.OpponentHPBar.localScale = scale;
+            }
+            yield return new WaitForSeconds(2 / 60f);
+        }
     }
 
     #region Stat Methods

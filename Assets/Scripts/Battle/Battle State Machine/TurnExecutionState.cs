@@ -123,6 +123,8 @@ public class TurnExecutionState : BattleBaseState
 
         _checkMultiTurn = false;
         // PLAYER FAINTED
+        yield return battle.StartCoroutine(battle.DisplayMessage($"{playerPokemon.Name}\nfainted!", true));
+
         // MORE POKEMON AVAILABLE
         if (battle.PlayerSide.IsAbleToFight())
         {
@@ -189,6 +191,7 @@ public class TurnExecutionState : BattleBaseState
             yield break;
 
         // ENEMY FAINTED
+        yield return battle.StartCoroutine(battle.DisplayMessage($"Enemy {opponentPokemon.Name}\nfainted!", true));
         yield return battle.ApplyExperience(opponentPokemon.ReferencePokemon);
         battle.Participants.Clear();
         // WILD BATTLE

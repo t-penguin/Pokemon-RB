@@ -233,12 +233,9 @@ public class BattlePokemon
         yield return new WaitForSeconds(10 / 60f);
         Status = StatusEffect.FNT;
         ReferencePokemon.Status = Status;
-        string text;
-        text = TrainerIsPlayer ? $"{Name}\nfainted!" : $"Enemy {Name}\nfainted!";
 
         yield return _battle.StartCoroutine(_battle.FaintAnimation(TrainerIsPlayer));
         yield return new WaitForSeconds(10 / 60f);
-        yield return _battle.StartCoroutine(_battle.DisplayMessage(text, true));
     }
     public void Burn()
     {

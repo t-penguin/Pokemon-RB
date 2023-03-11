@@ -17,8 +17,9 @@ public class Acid : SimpleAttackMove
         else
         {
             yield return Battle.StartCoroutine(DealDamage(user, opponent));
-            bool secondaryEffect = Random.Range(0, 3) == 0;
-            if (secondaryEffect)
+            bool opponentAlive = opponent.Status != StatusEffect.FNT;
+            bool secondaryEffect = opponent.CanStatBeLowered(StatType.Defense) && Random.Range(0, 3) == 0;
+            if (opponentAlive && secondaryEffect)
             {
                 opponent.ModifyStatAsSecondary(StatType.Defense, -1);
                 yield return Battle.StartCoroutine(OnLoweredStat(opponent, StatType.Defense, false));

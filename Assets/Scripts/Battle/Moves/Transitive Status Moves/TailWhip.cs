@@ -23,7 +23,7 @@ public class TailWhip : TransitiveStatusMove
             // ANIMATION OFF
             // MOVE SCREEN TO THE RIGHT BY 4 AND BACK TWICE
             opponent.ModifyStatAsPrimary(StatType.Defense, -1);
-            yield return Battle.StartCoroutine(OnLoweredStat(opponent, StatType.Defense));
+            yield return Battle.StartCoroutine(OnLoweredStat(opponent, StatType.Defense, false));
         }
         else
         {

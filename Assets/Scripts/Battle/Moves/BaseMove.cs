@@ -75,19 +75,21 @@ public abstract class BaseMove
         yield return new WaitForSeconds(6 / 60f);
     }
 
-    protected IEnumerator OnLoweredStat(BattlePokemon target, StatType stat)
+    protected IEnumerator OnLoweredStat(BattlePokemon target, StatType stat, bool greatlyLowered)
     {
         string targetName = target == Battle.PlayerSide.ActivePokemon ? target.Name : $"Enemy {target.Name}";
         string statName = stat.ToString().ToUpper();
-        yield return Battle.StartCoroutine(Battle.DisplayMessage($"{targetName}<\n{statName} fell!", true));
+        string greatlyText = greatlyLowered ? "\ngreatly" : string.Empty;
+        yield return Battle.StartCoroutine(Battle.DisplayMessage($"{targetName}<\n{statName}{greatlyText} fell!", true));
         yield return new WaitForSeconds(6 / 60f);
     }
 
-    protected IEnumerator OnRaisedStat(BattlePokemon target, StatType stat)
+    protected IEnumerator OnRaisedStat(BattlePokemon target, StatType stat, bool greatlyRaised)
     {
         string targetName = target == Battle.PlayerSide.ActivePokemon ? target.Name : $"Enemy {target.Name}";
         string statName = stat.ToString().ToUpper();
-        yield return Battle.StartCoroutine(Battle.DisplayMessage($"{targetName}<\n{statName} rose!", true));
+        string greatlyText = greatlyRaised ? "\ngreatly" : string.Empty;
+        yield return Battle.StartCoroutine(Battle.DisplayMessage($"{targetName}<\n{statName}{greatlyText} rose!", true));
         yield return new WaitForSeconds(6 / 60f);
     }
 }

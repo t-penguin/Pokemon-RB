@@ -10,6 +10,10 @@ public static class MoveCreator
         {
             default: return null;
             case 1: return new Absorb(battle);
+            case 2: return new Acid(battle);
+            case 3: return new AcidArmor(battle);
+            case 4: return new Agility(battle);
+            case 5: return new Amnesia(battle);
             case 36: return new DreamEater(battle);
             case 48: return new Fly(battle);
             case 50: return new FuryAttack(battle);

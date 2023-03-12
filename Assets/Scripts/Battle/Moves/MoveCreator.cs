@@ -14,6 +14,10 @@ public static class MoveCreator
             case 3: return new AcidArmor(battle);
             case 4: return new Agility(battle);
             case 5: return new Amnesia(battle);
+            case 6: return new AuroraBeam(battle);
+            case 7: return new Barrage(battle);
+            case 8: return new Barrier(battle);
+            case 11: return new Bite(battle);
             case 36: return new DreamEater(battle);
             case 48: return new Fly(battle);
             case 50: return new FuryAttack(battle);

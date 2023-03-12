@@ -75,12 +75,22 @@ public class TurnExecutionState : BattleBaseState
 
     private IEnumerator ExecuteTurn(BattleStateManager battle, BattleSide thisSide, BattleSide otherSide)
     {
+        BattlePokemon user = thisSide.ActivePokemon;
+        if (user.Flinched)
+        {
+            string name = user.TrainerIsPlayer ? user.Name : $"Enemy {user.Name}";
+            yield return battle.StartCoroutine(battle.DisplayMessage($"{name}\nflinched!", true));
+            yield return new WaitForSeconds(6 / 60f);
+
+            user.Flinched = false;
+            yield break;
+        }
+
         switch(thisSide.Action)
         {
             default:
                 yield break;
             case BattleAction.UseMove:
-                BattlePokemon user = thisSide.ActivePokemon;
                 BattlePokemon opponent = otherSide.ActivePokemon;
                 Debug.Log($"{user.Name} used {thisSide.Move.Name}!");
                 yield return battle.StartCoroutine(thisSide.Move.Execute(user, opponent));

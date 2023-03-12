@@ -33,6 +33,7 @@ public class BattlePokemon
     [field: SerializeField] public bool HasSubstitute { get; private set; }
     [field: SerializeField] public bool IsMistActive { get; private set; }
     [field: SerializeField] public bool IsSemiInvulnerable { get; set; }
+    [field: SerializeField] public bool Flinched { get; set; }
 
     #endregion
 
@@ -237,6 +238,9 @@ public class BattlePokemon
         yield return _battle.StartCoroutine(_battle.FaintAnimation(TrainerIsPlayer));
         yield return new WaitForSeconds(10 / 60f);
     }
+
+    public void Flinch() => Flinched = true;
+
     public void Burn()
     {
         if (HasSubstitute)

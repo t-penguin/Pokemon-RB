@@ -24,6 +24,8 @@ public class TailWhip : TransitiveStatusMove
             // MOVE SCREEN TO THE RIGHT BY 4 AND BACK TWICE
             opponent.ModifyStatAsPrimary(StatType.Defense, -1);
             yield return Battle.StartCoroutine(OnLoweredStat(opponent, StatType.Defense, false));
+            if (opponent.IsBideActive)
+                opponent.BideDamage += 2 * opponent.LastDamageRecieved;
         }
         else
         {

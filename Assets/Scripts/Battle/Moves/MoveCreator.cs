@@ -17,6 +17,7 @@ public static class MoveCreator
             case 6: return new AuroraBeam(battle);
             case 7: return new Barrage(battle);
             case 8: return new Barrier(battle);
+            case 9: return new Bide(battle);
             case 11: return new Bite(battle);
             case 36: return new DreamEater(battle);
             case 48: return new Fly(battle);
@@ -25,9 +26,9 @@ public static class MoveCreator
             case 56: return new Gust(battle);
             case 72: return new LeechLife(battle);
             case 80: return new MegaDrain(battle);
-            case 144: return new Tackle(battle);
             case 111: return new SandAttack(battle);
             case 112: return new Scratch(battle);
+            case 144: return new Tackle(battle);
             case 145: return new TailWhip(battle);
         }
     }

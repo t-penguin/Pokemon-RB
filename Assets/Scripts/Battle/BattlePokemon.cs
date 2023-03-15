@@ -30,6 +30,9 @@ public class BattlePokemon
     // Battle Info
     [field: SerializeField] public BaseMove LastMoveUsed { get; private set; }
     [field: SerializeField] public TransitiveMove MirrorMove { get; private set; }
+    [field: SerializeField] public bool IsBideActive { get; set; }
+    [field: SerializeField] public int BideDamage { get; set; }
+    [field: SerializeField] public int LastDamageRecieved { get; set; }
     [field: SerializeField] public bool HasSubstitute { get; private set; }
     [field: SerializeField] public bool IsMistActive { get; private set; }
     [field: SerializeField] public bool IsSemiInvulnerable { get; set; }

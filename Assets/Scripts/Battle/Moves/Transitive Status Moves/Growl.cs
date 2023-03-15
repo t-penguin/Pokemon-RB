@@ -24,6 +24,8 @@ public class Growl : TransitiveStatusMove
             // MOVE SCREEN TO THE RIGHT BY 4 AND BACK TWICE
             opponent.ModifyStatAsPrimary(StatType.Attack, -1);
             yield return Battle.StartCoroutine(OnLoweredStat(opponent, StatType.Attack, false));
+            if (opponent.IsBideActive)
+                opponent.BideDamage += 2 * opponent.LastDamageRecieved;
         }
         else
         {

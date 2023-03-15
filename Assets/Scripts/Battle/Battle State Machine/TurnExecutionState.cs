@@ -11,7 +11,6 @@ public class TurnExecutionState : BattleBaseState
 
     private bool _executeSecondTurn;
     private bool _battleEnded;
-    private bool _checkMultiTurn;
 
     private Vector2 _answerBoxPosition = new Vector2(104, -72);
 
@@ -39,7 +38,6 @@ public class TurnExecutionState : BattleBaseState
     {
         _executeSecondTurn = true;
         _battleEnded = false;
-        _checkMultiTurn = true;
 
         yield return battle.StartCoroutine(ExecuteFirstTurn(battle));
 
@@ -67,11 +65,11 @@ public class TurnExecutionState : BattleBaseState
                 yield break;
         }
 
-        if (IsMultiTurnMoveActive(battle.PlayerSide.Move))
+        if (battle.PlayerSide.LockedIntoAction)
             battle.SwitchState(battle.TurnOrderState);
         else
             battle.SwitchState(battle.InputState);
-        }
+    }
 
     private IEnumerator ExecuteTurn(BattleStateManager battle, BattleSide thisSide, BattleSide otherSide)
     {
@@ -131,7 +129,8 @@ public class TurnExecutionState : BattleBaseState
         if (playerPokemon.Status != StatusEffect.FNT)
             yield break;
 
-        _checkMultiTurn = false;
+        battle.PlayerSide.LockedIntoAction = false;
+        battle.PlayerSide.LockedIntoMove = false;
         // PLAYER FAINTED
         yield return battle.StartCoroutine(battle.DisplayMessage($"{playerPokemon.Name}\nfainted!", true));
 
@@ -200,6 +199,8 @@ public class TurnExecutionState : BattleBaseState
         if (opponentPokemon.Status != StatusEffect.FNT)
             yield break;
 
+        battle.OpponentSide.LockedIntoAction = false;
+        battle.OpponentSide.LockedIntoMove = false;
         // ENEMY FAINTED
         yield return battle.StartCoroutine(battle.DisplayMessage($"Enemy {opponentPokemon.Name}\nfainted!", true));
         yield return battle.ApplyExperience(opponentPokemon.ReferencePokemon);
@@ -257,20 +258,5 @@ public class TurnExecutionState : BattleBaseState
         MessageBox.Clear();
 
         PokemonMenu.ClosedFromBattle -= OnClosedPokemonMenu;
-    }
-
-    private bool IsMultiTurnMoveActive(BaseMove move)
-    {
-        if (!_checkMultiTurn)
-            return false;
-
-        if (move.GetType().BaseType != typeof(MultiTurnAttackMove))
-            return false;
-
-        MultiTurnAttackMove multiMove = (MultiTurnAttackMove)move;
-        if (multiMove.TurnsLeft == 0)
-            return false;
-
-        return true;
     }
 }

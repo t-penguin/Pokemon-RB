@@ -463,6 +463,9 @@ public class BattleSide
     public List<Pokemon> Team;
     public Bag Bag;
 
+    public bool LockedIntoAction;
+    public bool LockedIntoMove;
+
     public void SetMove(BaseMove move)
     {
         Action = BattleAction.UseMove;

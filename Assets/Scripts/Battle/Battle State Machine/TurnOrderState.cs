@@ -28,16 +28,10 @@ public class TurnOrderState : BattleBaseState
 
     private BattleAction DetermineOpponentAction(BattleStateManager battle)
     {
-        BaseMove move = battle.OpponentSide.Move;
-        if (move == null)
-            SetRandomMove(battle.OpponentSide);
-        else if (move.GetType() == typeof(MultiTurnAttackMove))
-        {
-            MultiTurnAttackMove multiMove = (MultiTurnAttackMove)move;
-            if (multiMove.TurnsLeft == 0)
-                SetRandomMove(battle.OpponentSide);
-        }
-        else
+        bool moveIsNull = battle.OpponentSide.Move == null;
+        bool lockedIntoAction = battle.OpponentSide.LockedIntoAction;
+        bool lockedIntoMove = battle.OpponentSide.LockedIntoMove;
+        if (moveIsNull || !lockedIntoAction || !lockedIntoMove)
             SetRandomMove(battle.OpponentSide);
 
         return BattleAction.UseMove;

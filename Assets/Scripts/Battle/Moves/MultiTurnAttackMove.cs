@@ -42,4 +42,20 @@ public abstract class MultiTurnAttackMove : AttackMove
     {
         TurnsLeft = 0;
     }
+
+    protected void SetActionLock(BattlePokemon user, bool locked)
+    {
+        if (user == Battle.PlayerSide.ActivePokemon)
+            Battle.PlayerSide.LockedIntoAction = locked;
+        else
+            Battle.OpponentSide.LockedIntoAction = locked;
+    }
+
+    protected void SetMoveLock(BattlePokemon user, bool locked)
+    {
+        if (user == Battle.PlayerSide.ActivePokemon)
+            Battle.PlayerSide.LockedIntoMove = locked;
+        else
+            Battle.OpponentSide.LockedIntoMove = locked;
+    }
 }

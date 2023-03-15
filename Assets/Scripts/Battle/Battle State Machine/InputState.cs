@@ -108,7 +108,10 @@ public class InputState : BattleBaseState
                 switch (_selection)
                 {
                     case 0: // FIGHT
-                        battle.StartCoroutine(OpenMovesMenu(battle));
+                        if(battle.PlayerSide.LockedIntoMove)
+                            battle.SwitchState(battle.TurnOrderState);
+                        else
+                            battle.StartCoroutine(OpenMovesMenu(battle));
                         break;
                     case 1: // POKEMON
                         BattleStateManager.SwappedPokemon += OnSwapPokemon;

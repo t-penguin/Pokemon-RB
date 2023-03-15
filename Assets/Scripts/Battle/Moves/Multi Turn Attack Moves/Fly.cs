@@ -21,6 +21,8 @@ public class Fly : MultiTurnAttackMove
     {
         TurnsLeft = 1;
         user.IsSemiInvulnerable = true;
+        SetActionLock(user, true);
+
         yield return Battle.StartCoroutine(Battle.DisplayMessage($"{user.Name}\nflew up high!", true));
         yield return new WaitForSeconds(6 / 60f);
     }
@@ -29,6 +31,8 @@ public class Fly : MultiTurnAttackMove
     {
         TurnsLeft = 0;
         user.IsSemiInvulnerable = false;
+        SetActionLock(user, false);
+
         yield return Battle.StartCoroutine(OnUsed(user));
         if (opponent.IsSemiInvulnerable || !AccuracyCheck(user, opponent))
         {

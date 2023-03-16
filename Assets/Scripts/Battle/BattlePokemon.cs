@@ -244,13 +244,11 @@ public class BattlePokemon
 
     public void Flinch() => Flinched = true;
 
-    public void Burn()
-    {
-        if (HasSubstitute)
-            return;
+    public void Freeze() => ReferencePokemon.Status = StatusEffect.FRZ;
+    public bool IsFrozen() => ReferencePokemon.Status == StatusEffect.FRZ;
 
-
-    }
+    public void Burn() => ReferencePokemon.Status = StatusEffect.BRN;
+    public bool IsBurned() => ReferencePokemon.Status == StatusEffect.BRN;
 
     #endregion
 }

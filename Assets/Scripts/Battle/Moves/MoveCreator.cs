@@ -19,6 +19,7 @@ public static class MoveCreator
             case 8: return new Barrier(battle);
             case 9: return new Bide(battle);
             case 11: return new Bite(battle);
+            case 12: return new Blizzard(battle);
             case 36: return new DreamEater(battle);
             case 48: return new Fly(battle);
             case 50: return new FuryAttack(battle);

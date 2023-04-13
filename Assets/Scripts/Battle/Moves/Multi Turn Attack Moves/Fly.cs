@@ -4,7 +4,16 @@ using UnityEngine;
 
 public class Fly : MultiTurnAttackMove
 {
-    public Fly(BattleStateManager battle) : base("FLY", Type.FLYING, Category.Physical, 15, 95, 70, battle) { }
+    public Fly(BattleStateManager battle)
+        : base(
+            name: "FLY",
+            type: Type.FLYING,
+            category: Category.Physical,
+            basePP: 15,
+            accuracy: 95,
+            power: 70,
+            battle: battle )
+    { }
 
     public override IEnumerator Execute(BattlePokemon user, BattlePokemon opponent)
     {

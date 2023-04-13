@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class TailWhip : TransitiveStatusMove
 {
-    public TailWhip(BattleStateManager battle) : base("TAIL WHIP", Type.NORMAL, 30, 100, battle) { }
+    public TailWhip(BattleStateManager battle)
+        : base (
+            name: "TAIL WHIP",
+            type: Type.NORMAL,
+            basePP: 30,
+            accuracy: 100,
+            battle: battle )
+    { }
 
     public sealed override IEnumerator Execute(BattlePokemon user, BattlePokemon opponent)
     {

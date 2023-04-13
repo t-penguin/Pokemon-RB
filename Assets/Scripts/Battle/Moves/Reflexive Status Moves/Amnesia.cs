@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class Amnesia : ReflexiveStatusMove
 {
-    public Amnesia(BattleStateManager battle) : base("AMNESIA", Type.PSYCHIC, 30, battle) { }
+    public Amnesia(BattleStateManager battle)
+        : base (
+            name: "AMNESIA",
+            type: Type.PSYCHIC,
+            basePP: 30, 
+            battle: battle )
+    { }
 
     protected override IEnumerator Execute(BattlePokemon user)
     {

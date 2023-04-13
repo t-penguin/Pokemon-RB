@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class Barrier : ReflexiveStatusMove
 {
-    public Barrier(BattleStateManager battle) : base("BARRIER", Type.PSYCHIC, 30, battle) { }
+    public Barrier(BattleStateManager battle)
+        : base (
+            name: "BARRIER",
+            type: Type.PSYCHIC,
+            basePP: 30,
+            battle: battle )
+    { }
 
     protected override IEnumerator Execute(BattlePokemon user)
     {

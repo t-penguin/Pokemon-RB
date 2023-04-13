@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class AcidArmor : ReflexiveStatusMove
 {
-    public AcidArmor(BattleStateManager battle) : base("ACID ARMOR", Type.POISON, 40, battle) { }
+    public AcidArmor(BattleStateManager battle)
+        : base (
+            name: "ACID ARMOR",
+            type: Type.POISON, 
+            basePP: 40,
+            battle: battle )
+    { }
 
     protected override IEnumerator Execute(BattlePokemon user)
     {

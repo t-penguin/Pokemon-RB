@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class Agility : ReflexiveStatusMove
 {
-    public Agility(BattleStateManager battle) : base("AGILITY", Type.PSYCHIC, 30, battle) { }
+    public Agility(BattleStateManager battle)
+        : base (
+            name: "AGILITY",
+            type: Type.PSYCHIC,
+            basePP: 30,
+            battle: battle )
+    { }
 
     protected override IEnumerator Execute(BattlePokemon user)
     {

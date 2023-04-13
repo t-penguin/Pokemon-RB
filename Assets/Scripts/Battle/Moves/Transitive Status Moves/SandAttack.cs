@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class SandAttack : TransitiveStatusMove
 {
-    public SandAttack(BattleStateManager battle) : base("SAND-ATTACK", Type.NORMAL, 15, 100, battle) { }
+    public SandAttack(BattleStateManager battle)
+        : base (
+            name: "SAND-ATTACK",
+            type: Type.NORMAL,
+            basePP: 15,
+            accuracy: 100,
+            battle: battle )
+    { }
 
     public sealed override IEnumerator Execute(BattlePokemon user, BattlePokemon opponent)
     {

@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class Growl : TransitiveStatusMove
 {
-    public Growl(BattleStateManager battle) : base("GROWL", Type.NORMAL, 40, 100, battle) { }
+    public Growl(BattleStateManager battle)
+        : base (
+            name: "GROWL",
+            type: Type.NORMAL,
+            basePP: 40,
+            accuracy: 100,
+            battle: battle )
+    { }
 
     public sealed override IEnumerator Execute(BattlePokemon user, BattlePokemon opponent)
     {

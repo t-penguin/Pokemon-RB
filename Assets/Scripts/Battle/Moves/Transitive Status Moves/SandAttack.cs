@@ -23,7 +23,7 @@ public class SandAttack : TransitiveStatusMove
             // ANIMATION OFF
             // MOVE SCREEN TO THE RIGHT BY 4 AND BACK TWICE
             opponent.ModifyStatAsPrimary(StatType.Accuracy, -1);
-            yield return Battle.StartCoroutine(OnLoweredStat(opponent, StatType.Accuracy, false));
+            yield return Battle.StartCoroutine(OnLoweredStat(opponent, StatType.Accuracy));
             if (opponent.IsBideActive)
                 opponent.BideDamage += 2 * opponent.LastDamageRecieved;
         }

@@ -18,14 +18,14 @@ public abstract class MultiTurnAttackMove : AttackMove
     /// <param name="power"></param>
     /// <param name="battle"></param>
     protected MultiTurnAttackMove(string name, Type type, Category category, int basePP, int accuracy, int power, BattleStateManager battle)
-        : base(name, type, category, 0, basePP, accuracy, power, false, battle)
+        : base(name, type, category, basePP, accuracy, power, battle)
     {
         Damage = 0;
         TurnsLeft = 0;
     }
 
     // Sets the max amount of turns this move last
-    private void SetMaxTurns()
+    protected void SetMaxTurns()
     {
         int random = Random.Range(0, 256);
 

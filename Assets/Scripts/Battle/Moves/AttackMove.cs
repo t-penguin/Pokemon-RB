@@ -23,8 +23,8 @@ public abstract class AttackMove : TransitiveMove
     /// <param name="power">The power of this move. Increment: 5</param>
     /// <param name="highCrit">Whether or not this move has a high critical hit ratio</param>
     /// <param name="battle">A reference to the current battle this move is in.</param>
-    protected AttackMove(string name, Type type, Category category, int priority, int basePP, int accuracy, int power, 
-        bool highCrit, BattleStateManager battle) : base (name, type, category, priority, basePP, accuracy, battle)
+    protected AttackMove(string name, Type type, Category category, int basePP, int accuracy, int power, BattleStateManager battle,
+        int priority = 0, bool highCrit = false) : base (name, type, category, priority, basePP, accuracy, battle)
     {
         Power = power;
         HasHighCritRatio = highCrit;

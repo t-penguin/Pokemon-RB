@@ -4,7 +4,16 @@ using UnityEngine;
 
 public class Bide : MultiTurnAttackMove
 {
-    public Bide(BattleStateManager battle) : base("BIDE", Type.NORMAL, Category.Physical, 10, 0, 0, battle) { }
+    public Bide(BattleStateManager battle)
+        : base (
+            name: "BIDE",
+            type: Type.NORMAL, 
+            category: Category.Physical, 
+            basePP: 10,
+            accuracy: 0,
+            power: 0,
+            battle: battle )
+    { }
 
     public override IEnumerator Execute(BattlePokemon user, BattlePokemon opponent)
     {

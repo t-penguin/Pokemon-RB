@@ -75,7 +75,7 @@ public abstract class BaseMove
         yield return new WaitForSeconds(6 / 60f);
     }
 
-    protected IEnumerator OnLoweredStat(BattlePokemon target, StatType stat, bool greatlyLowered)
+    protected IEnumerator OnLoweredStat(BattlePokemon target, StatType stat, bool greatlyLowered = false)
     {
         string targetName = target == Battle.PlayerSide.ActivePokemon ? target.Name : $"Enemy {target.Name}";
         string statName = stat.ToString().ToUpper();
@@ -84,7 +84,7 @@ public abstract class BaseMove
         yield return new WaitForSeconds(6 / 60f);
     }
 
-    protected IEnumerator OnRaisedStat(BattlePokemon target, StatType stat, bool greatlyRaised)
+    protected IEnumerator OnRaisedStat(BattlePokemon target, StatType stat, bool greatlyRaised = false)
     {
         string targetName = target == Battle.PlayerSide.ActivePokemon ? target.Name : $"Enemy {target.Name}";
         string statName = stat.ToString().ToUpper();

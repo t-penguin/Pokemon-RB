@@ -4,26 +4,16 @@ using UnityEngine;
 
 public class Absorb : SimpleAttackMove
 {
-    public Absorb(BattleStateManager battle) : base("ABSORB", Type.GRASS, Category.Special, 0, 20, 100, 20, false, battle) { }
-
-    public override IEnumerator Execute(BattlePokemon user, BattlePokemon opponent)
+    public Absorb(BattleStateManager battle)
+        : base (
+            name: "ABSORB",
+            type: Type.GRASS,
+            category: Category.Special,
+            basePP: 20,
+            accuracy: 100,
+            power: 20,
+            battle: battle )
     {
-        yield return Battle.StartCoroutine(OnUsed(user));
-
-        if (opponent.IsSemiInvulnerable || !AccuracyCheck(user, opponent))
-        {
-            yield return Battle.StartCoroutine(OnMissed(user));
-        }
-        else
-        {
-            // ANIMATION OFF
-            // ???
-            yield return Battle.StartCoroutine(DealDamageAndRegainHealth(user, opponent));
-            yield return Battle.StartCoroutine(OnHealthSapped(opponent));
-        }
-
-        SetLastMoveUsed(user);
-        SetMirrorMove(opponent);
-        CurrentPP--;
+        sapsHealth = true;
     }
 }

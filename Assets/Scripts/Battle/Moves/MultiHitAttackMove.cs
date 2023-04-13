@@ -18,7 +18,30 @@ public abstract class MultiHitAttackMove : AttackMove
     /// <param name="power"></param>
     /// <param name="battle"></param>
     protected MultiHitAttackMove(string name, Type type, Category category, int basePP, int accuracy, int power, BattleStateManager battle)
-        : base(name, type, category, 0, basePP, accuracy, power, false, battle) => NumberOfHits = 0;
+        : base(name, type, category, basePP, accuracy, power, battle) => NumberOfHits = 0;
+
+    public override IEnumerator Execute(BattlePokemon user, BattlePokemon opponent)
+    {
+        yield return Battle.StartCoroutine(OnUsed(user));
+
+        if (opponent.IsSemiInvulnerable || !AccuracyCheck(user, opponent))
+        {
+            yield return Battle.StartCoroutine(OnMissed(user));
+        }
+        else if (MoveData.HasNoEffect(this, opponent))
+        {
+            yield return Battle.StartCoroutine(OnNoEffect());
+        }
+        else
+        {
+            SetNumberOfHits();
+            yield return Battle.StartCoroutine(DealDamage(user, opponent));
+        }
+
+        SetLastMoveUsed(user);
+        SetMirrorMove(opponent);
+        CurrentPP--;
+    }
 
     // Randomly sets the number of hits
     protected void SetNumberOfHits()

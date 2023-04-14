@@ -13,6 +13,8 @@ public abstract class SimpleAttackMove : AttackMove
     protected SecondaryEffects secondaryEffect = SecondaryEffects.None;
     protected int secondaryEffectChance = 0;
 
+    protected bool hasRecoil = false;
+
     /// <summary>
     /// Creates an attack move that only hits the target once.
     /// </summary>
@@ -76,6 +78,27 @@ public abstract class SimpleAttackMove : AttackMove
             bool effectHits = random < secondaryEffectChance;
             if(isOpponentAlive && effectHits)
                 yield return Battle.StartCoroutine(ApplySecondaryEffect(secondaryEffect, opponent));
+        }
+
+        EndMove(user, opponent);
+    }
+
+    /* One-Hit KO moves automatically fail if the user's speed stat is lower than the target
+     * These moves always deal 65535 damage */
+    protected IEnumerator ExecuteOneHitKO(BattlePokemon user, BattlePokemon opponent)
+    {
+        yield return Battle.StartCoroutine(OnUsed(user));
+
+        if (opponent.IsSemiInvulnerable || !AccuracyCheck(user, opponent))
+            yield return Battle.StartCoroutine(OnMissed(user));
+        else if (opponent.Stats.Speed > user.Stats.Speed)
+            yield return Battle.StartCoroutine(OnFailed());
+        else if (MoveData.HasNoEffect(this, opponent))
+            yield return Battle.StartCoroutine(OnNoEffect());
+        else
+        {
+            yield return Battle.StartCoroutine(opponent.RecieveDamge(65535, Type));
+            yield return new WaitForSeconds(60 / 60f);
         }
 
         EndMove(user, opponent);

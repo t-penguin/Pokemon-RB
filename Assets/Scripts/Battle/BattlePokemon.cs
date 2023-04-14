@@ -250,5 +250,8 @@ public class BattlePokemon
     public void Burn() => ReferencePokemon.Status = StatusEffect.BRN;
     public bool IsBurned() => ReferencePokemon.Status == StatusEffect.BRN;
 
+    public void Paralyze() => ReferencePokemon.Status = StatusEffect.PAR;
+    public bool IsParalyzed => ReferencePokemon.Status == StatusEffect.PAR;
+
     #endregion
 }

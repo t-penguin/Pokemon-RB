@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class MultiHitAttackMove : AttackMove
 {
     protected int NumberOfHits { get; private set; }
+    protected bool RandomHits { get; set; }
     protected int Damage { get; private set; }
 
     /// <summary>
@@ -34,7 +35,8 @@ public abstract class MultiHitAttackMove : AttackMove
         }
         else
         {
-            SetNumberOfHits();
+            if(RandomHits)
+                SetNumberOfHits();
             yield return Battle.StartCoroutine(DealDamage(user, opponent));
         }
 
@@ -42,6 +44,8 @@ public abstract class MultiHitAttackMove : AttackMove
         SetMirrorMove(opponent);
         CurrentPP--;
     }
+
+    protected void SetNumberOfHits(int hits) => NumberOfHits = hits;
 
     // Randomly sets the number of hits
     protected void SetNumberOfHits()

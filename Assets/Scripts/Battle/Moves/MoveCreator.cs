@@ -109,11 +109,71 @@ public static class MoveCreator
             case 98: return new Psychic(battle);
             case 99: return new Psywave(battle);
             case 100: return new QuickAttack(battle);
-
+                // RAGE
+            case 102: return new RazorLeaf(battle);
+                // RAZOR WIND
+                // RECOVER
+                // REFLECT
+                // REST
+                // ROAR
+            case 108: return new RockSlide(battle);
+            case 109: return new RockThrow(battle);
+            case 110: return new RollingKick(battle);
             case 111: return new SandAttack(battle);
             case 112: return new Scratch(battle);
+                // SCREECH
+            case 114: return new SeismicToss(battle);
+                // SELF-DESTRUCT
+                // SHARPEN
+                // SING
+                // SKULL BASH
+                // SKY ATTACK
+            case 120: return new Slam(battle);
+            case 121: return new Slash(battle);
+                // SLEEP POWDER
+            case 123: return new Sludge(battle);
+            case 124: return new Smog(battle);
+                // SMOKESCREEN
+                // SOFT-BOILED
+                // SOLAR BEAM
+            case 128: return new SonicBoom(battle);
+            case 129: return new SpikeCannon(battle);
+                // SPLASH
+                // SPORE
+            case 132: return new Stomp(battle);
+            case 133: return new Strength(battle);
+                // STRING SHOT
+                // STRUGGLE
+                // STUN SPORE
+            case 137: return new Submission(battle);
+                // SUBSTITUTE
+            case 139: return new SuperFang(battle);
+                // SUPERSONIC
+            case 141: return new Surf(battle);
+            case 142: return new Swift(battle);
+                // SWORDS DANCE
             case 144: return new Tackle(battle);
             case 145: return new TailWhip(battle);
+            case 146: return new TakeDown(battle);
+                // TELEPORT
+                // THRASH
+            case 149: return new Thunder(battle);
+            case 150: return new ThunderPunch(battle);
+            case 151: return new ThunderShock(battle);
+                // THUNDER WAVE
+            case 153: return new Thunderbolt(battle);
+                // TOXIC
+                // TRANSFORM
+            case 156: return new TriAttack(battle);
+            case 157: return new Twineedle(battle);
+            case 158: return new ViceGrip(battle);
+            case 159: return new VineWhip(battle);
+            case 160: return new WaterGun(battle);
+            case 161: return new Waterfall(battle);
+                // WHIRLWIND
+            case 163: return new WingAttack(battle);
+                // WITHDRAW
+                // WRAP
         }
     }
 }

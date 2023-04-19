@@ -92,4 +92,10 @@ public abstract class BaseMove
         yield return Battle.StartCoroutine(Battle.DisplayMessage($"{targetName}<\n{statName}{greatlyText} rose!", true));
         yield return new WaitForSeconds(6 / 60f);
     }
+
+    protected IEnumerator OnBadlyPoisoned(BattlePokemon target)
+    {
+        string targetName = target == Battle.PlayerSide.ActivePokemon ? target.Name : $"Enemy {target.Name}";
+        yield return Battle.StartCoroutine(Battle.DisplayMessage($"{targetName}<\nbadly poisoned!", true));
+    }
 }

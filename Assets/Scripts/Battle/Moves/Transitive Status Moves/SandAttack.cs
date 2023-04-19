@@ -10,37 +10,8 @@ public class SandAttack : TransitiveStatusMove
             type: Type.NORMAL,
             basePP: 15,
             accuracy: 100,
-            battle: battle )
-    { }
-
-    public sealed override IEnumerator Execute(BattlePokemon user, BattlePokemon opponent)
+            battle: battle)
     {
-        yield return Battle.StartCoroutine(OnUsed(user));
-
-        bool failed = false;
-        if (opponent.IsSemiInvulnerable || !AccuracyCheck(user, opponent, out failed))
-        {
-            if (failed)
-                yield return Battle.StartCoroutine(OnFailed());
-            else
-                yield return Battle.StartCoroutine(OnMissed(user));
-        }
-        else if (opponent.CanStatBeLowered(StatType.Accuracy))
-        {
-            // ANIMATION OFF
-            // MOVE SCREEN TO THE RIGHT BY 4 AND BACK TWICE
-            opponent.ModifyStatAsPrimary(StatType.Accuracy, -1);
-            yield return Battle.StartCoroutine(OnLoweredStat(opponent, StatType.Accuracy));
-            if (opponent.IsBideActive)
-                opponent.BideDamage += 2 * opponent.LastDamageRecieved;
-        }
-        else
-        {
-            yield return Battle.StartCoroutine(OnNothingHappened());
-        }
-
-        SetLastMoveUsed(user);
-        SetMirrorMove(opponent);
-        CurrentPP--;
+        Effect = TransitiveStatusEffect.LowerAccuracy;
     }
 }

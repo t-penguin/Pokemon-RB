@@ -36,7 +36,11 @@ public class BattlePokemon
     [field: SerializeField] public bool HasSubstitute { get; private set; }
     [field: SerializeField] public bool IsMistActive { get; private set; }
     [field: SerializeField] public bool IsSemiInvulnerable { get; set; }
+    [field: SerializeField] public bool Confused { get; set; }
+    [field: SerializeField] public int ConfusionTimer { get; private set; }
     [field: SerializeField] public bool Flinched { get; set; }
+    [field: SerializeField] public bool BadlyPoisoned { get; private set; }
+    [field: SerializeField] public int RecurrentDamageCounter { get; private set; }
 
     #endregion
 
@@ -243,6 +247,11 @@ public class BattlePokemon
     }
 
     public void Flinch() => Flinched = true;
+    public void Confuse()
+    {
+        Confused = true;
+        ConfusionTimer = Random.Range(1, 5);
+    }
 
     public void Freeze() => ReferencePokemon.Status = StatusEffect.FRZ;
     public bool IsFrozen() => ReferencePokemon.Status == StatusEffect.FRZ;
@@ -251,7 +260,22 @@ public class BattlePokemon
     public bool IsBurned() => ReferencePokemon.Status == StatusEffect.BRN;
 
     public void Paralyze() => ReferencePokemon.Status = StatusEffect.PAR;
-    public bool IsParalyzed => ReferencePokemon.Status == StatusEffect.PAR;
+    public bool IsParalyzed() => ReferencePokemon.Status == StatusEffect.PAR;
+
+    public void Sleep() => ReferencePokemon.Status = StatusEffect.SLP;
+    public bool IsSleeping() => ReferencePokemon.Status == StatusEffect.SLP;
+
+    public void Poison() => ReferencePokemon.Status = StatusEffect.PSN;
+    public void BadlyPoison()
+    {
+        Poison();
+        BadlyPoisoned = true;
+        RecurrentDamageCounter = 1;
+    }
+    public bool Poisoned() => ReferencePokemon.Status == StatusEffect.PSN;
+
+    public bool HasNonVolatileStatus() 
+        => ReferencePokemon.Status != StatusEffect.OK && ReferencePokemon.Status != StatusEffect.FNT;
 
     #endregion
 }

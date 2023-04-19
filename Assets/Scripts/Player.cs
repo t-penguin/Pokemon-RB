@@ -13,10 +13,10 @@ public class Player : Trainer
         AddToTeam(new Pokemon(4, 5));
         AddToTeam(new Pokemon(7, 5));
 
-        Team[0].TeachMove(1, 0);
-        Team[0].TeachMove(36, 1);
-        Team[0].TeachMove(72, 2);
-        Team[0].TeachMove(80, 3);
+        Team[0].TeachMove(144, 0);
+        Team[0].TeachMove(2, 1);
+        Team[0].TeachMove(8, 2);
+        Team[0].TeachMove(11, 3);
         Team[2].TeachMove(141, 2);
 
         Bag.Add(new Pokeball(), 10);

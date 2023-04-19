@@ -122,8 +122,8 @@ public abstract class TransitiveStatusMove : TransitiveMove
             yield return Battle.StartCoroutine(OnFailed());
             yield break;
         }
-        
-        switch(effect)
+
+        switch (effect)
         {
             default: yield break;
             case StatusEffect.PAR:
@@ -139,6 +139,7 @@ public abstract class TransitiveStatusMove : TransitiveMove
                 yield return Battle.StartCoroutine(OnSlept(target));
                 yield break;
         }
+    }
 }
 
 public enum TransitiveStatusEffect

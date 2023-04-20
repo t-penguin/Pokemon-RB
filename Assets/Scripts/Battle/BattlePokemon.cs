@@ -13,8 +13,8 @@ public class BattlePokemon
     public Pokemon ReferencePokemon { get; }
     [field: SerializeField] public string Name { get; }
     [field: SerializeField] public int PokedexNumber { get; }
-    [field: SerializeField] public Type Primary { get; }
-    [field: SerializeField] public Type Secondary { get; }
+    [field: SerializeField] public Type Primary { get; set; }
+    [field: SerializeField] public Type Secondary { get; set; }
     [field: SerializeField] public StatusEffect Status { get; private set; }
     [field: SerializeField] public BaseMove[] Moves { get; private set; }
 

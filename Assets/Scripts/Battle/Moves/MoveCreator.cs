@@ -31,11 +31,11 @@ public static class MoveCreator
             case 20: return new ConfuseRay(battle);
             case 21: return new Confusion(battle);
             case 22: return new Constrict(battle);
-                // CONVERSION
+            case 23: return new Conversion(battle);
                 // COUNTER
             case 25: return new Crabhammer(battle);
             case 26: return new Cut(battle);
-                // DEFENSE CURL
+            case 27: return new DefenseCurl(battle);
                 // DIG
                 // DISABLE
             case 30: return new DizzyPunch(battle);
@@ -62,10 +62,10 @@ public static class MoveCreator
             case 51: return new FurySwipes(battle);
             case 52: return new Glare(battle);
             case 53: return new Growl(battle);
-                // GROWTH
+            case 54: return new Growth(battle);
             case 55: return new Guillotine(battle);
             case 56: return new Gust(battle);
-                // HARDEN
+            case 57: return new Harden(battle);
                 // HAZE
             case 59: return new Headbutt(battle);
             case 60: return new HiJumpKick(battle);
@@ -87,13 +87,13 @@ public static class MoveCreator
                 // LIGHT SCREEN
             case 77: return new LovelyKiss(battle);
             case 78: return new LowKick(battle);
-                // MEDITATE
+            case 79: return new Meditate(battle);
             case 80: return new MegaDrain(battle);
             case 81: return new MegaKick(battle);
             case 82: return new MegaPunch(battle);
                 // METRONOME
                 // MIMIC
-                // MINIMIZE
+            case 85: return new Minimize(battle);
                 // MIRROR MOVE
                 // MIST
             case 88: return new NightShade(battle);
@@ -124,7 +124,7 @@ public static class MoveCreator
             case 113: return new Screech(battle);
             case 114: return new SeismicToss(battle);
                 // SELF-DESTRUCT
-                // SHARPEN
+            case 116: return new Sharpen(battle);
             case 117: return new Sing(battle);
                 // SKULL BASH
                 // SKY ATTACK
@@ -138,7 +138,7 @@ public static class MoveCreator
                 // SOLAR BEAM
             case 128: return new SonicBoom(battle);
             case 129: return new SpikeCannon(battle);
-                // SPLASH
+            case 130: return new Splash(battle);
             case 131: return new Spore(battle);
             case 132: return new Stomp(battle);
             case 133: return new Strength(battle);
@@ -172,7 +172,7 @@ public static class MoveCreator
             case 161: return new Waterfall(battle);
                 // WHIRLWIND
             case 163: return new WingAttack(battle);
-                // WITHDRAW
+            case 164: return new Withdraw(battle);
                 // WRAP
         }
     }

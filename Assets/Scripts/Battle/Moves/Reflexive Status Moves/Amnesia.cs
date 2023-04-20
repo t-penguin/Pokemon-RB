@@ -10,21 +10,8 @@ public class Amnesia : ReflexiveStatusMove
             type: Type.PSYCHIC,
             basePP: 30, 
             battle: battle )
-    { }
-
-    protected override IEnumerator Execute(BattlePokemon user)
     {
-        yield return Battle.StartCoroutine(OnUsed(user));
-
-        if (user.CanStatBeRaised(StatType.Special))
-        {
-            user.ModifyStatAsPrimary(StatType.Special, 2);
-            yield return Battle.StartCoroutine(OnRaisedStat(user, StatType.Special, true));
-        }
-        else
-            yield return Battle.StartCoroutine(OnFailed());
-
-        SetLastMoveUsed(user);
-        CurrentPP--;
+        Effect = ReflexiveStatusEffect.RaiseSpecial;
+        greatlyRaiseStat = true;
     }
 }

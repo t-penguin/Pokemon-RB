@@ -41,7 +41,7 @@ public static class MoveCreator
             case 30: return new DizzyPunch(battle);
             case 31: return new DoubleKick(battle);
             case 32: return new DoubleSlap(battle);
-                // DOUBLE TEAM
+            case 33: return new DoubleTeam(battle);
             case 34: return new DoubleEdge(battle);
             case 35: return new DragonRage(battle);
             case 36: return new DreamEater(battle);

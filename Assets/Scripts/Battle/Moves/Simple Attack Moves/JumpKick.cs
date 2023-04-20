@@ -12,7 +12,7 @@ public class JumpKick : SimpleAttackMove
             basePP: 25,
             accuracy: 95,
             power: 70,
-            battle: battle)
+            battle: battle )
     { }
 
     /* If the user misses this move, they take 1 HP of crash damage

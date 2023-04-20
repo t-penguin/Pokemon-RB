@@ -10,7 +10,7 @@ public class Spore : TransitiveStatusMove
             type: Type.GRASS,
             basePP: 15,
             accuracy: 100,
-            battle: battle)
+            battle: battle )
     {
         Effect = TransitiveStatusEffect.Sleep;
     }

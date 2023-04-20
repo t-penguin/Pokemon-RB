@@ -12,7 +12,7 @@ public class Barrage : MultiHitAttackMove
             basePP: 20,
             accuracy: 85,
             power: 15,
-            battle: battle)
+            battle: battle )
     {
         RandomHits = true;
     }

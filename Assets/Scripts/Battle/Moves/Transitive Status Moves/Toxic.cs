@@ -10,7 +10,7 @@ public class Toxic : TransitiveStatusMove
             type: Type.POISON,
             basePP: 10,
             accuracy: 85,
-            battle: battle)
+            battle: battle )
     { }
 
     /* This move badly poisons the target.

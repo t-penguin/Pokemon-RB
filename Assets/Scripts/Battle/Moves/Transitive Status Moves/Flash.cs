@@ -10,7 +10,7 @@ public class Flash : TransitiveStatusMove
             type: Type.NORMAL,
             basePP: 20,
             accuracy: 70,
-            battle: battle)
+            battle: battle )
     {
         Effect = TransitiveStatusEffect.LowerAccuracy;
     }

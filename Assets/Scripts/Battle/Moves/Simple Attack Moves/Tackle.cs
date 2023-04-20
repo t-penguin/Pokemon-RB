@@ -12,6 +12,6 @@ public class Tackle : SimpleAttackMove
             basePP: 35,
             accuracy: 100,
             power: 40,
-            battle: battle) 
+            battle: battle ) 
     { }
 }

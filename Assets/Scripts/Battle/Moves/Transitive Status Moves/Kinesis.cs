@@ -10,7 +10,7 @@ public class Kinesis : TransitiveStatusMove
             type: Type.PSYCHIC,
             basePP: 15,
             accuracy: 80,
-            battle: battle)
+            battle: battle )
     {
         Effect = TransitiveStatusEffect.LowerAccuracy;
     }

@@ -10,7 +10,7 @@ public class Leer : TransitiveStatusMove
             type: Type.NORMAL,
             basePP: 30,
             accuracy: 100,
-            battle: battle)
+            battle: battle )
     {
         Effect = TransitiveStatusEffect.LowerDefense;
     }

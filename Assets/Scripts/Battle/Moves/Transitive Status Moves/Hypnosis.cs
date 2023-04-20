@@ -10,7 +10,7 @@ public class Hypnosis : TransitiveStatusMove
             type: Type.PSYCHIC,
             basePP: 20,
             accuracy: 60,
-            battle: battle)
+            battle: battle )
     {
         Effect = TransitiveStatusEffect.Sleep;
     }

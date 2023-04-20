@@ -10,7 +10,7 @@ public class SandAttack : TransitiveStatusMove
             type: Type.NORMAL,
             basePP: 15,
             accuracy: 100,
-            battle: battle)
+            battle: battle )
     {
         Effect = TransitiveStatusEffect.LowerAccuracy;
     }

@@ -10,7 +10,7 @@ public class SmokeScreen : TransitiveStatusMove
             type: Type.NORMAL,
             basePP: 20,
             accuracy: 100,
-            battle: battle)
+            battle: battle )
     {
         Effect = TransitiveStatusEffect.LowerAccuracy;
     }

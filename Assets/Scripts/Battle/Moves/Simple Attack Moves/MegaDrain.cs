@@ -12,7 +12,7 @@ public class MegaDrain : SimpleAttackMove
             basePP: 10,
             accuracy: 100,
             power: 40,
-            battle: battle) 
+            battle: battle ) 
     {
         sapsHealth = true;
     }

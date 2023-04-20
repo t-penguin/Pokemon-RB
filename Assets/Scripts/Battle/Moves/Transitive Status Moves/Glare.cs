@@ -10,7 +10,7 @@ public class Glare : TransitiveStatusMove
             type: Type.NORMAL,
             basePP: 30,
             accuracy: 75,
-            battle: battle)
+            battle: battle )
     {
         Effect = TransitiveStatusEffect.Paralyze;
     }

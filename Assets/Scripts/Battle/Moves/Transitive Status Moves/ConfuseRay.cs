@@ -10,7 +10,7 @@ public class ConfuseRay : TransitiveStatusMove
             type: Type.GHOST,
             basePP: 10, 
             accuracy: 100,
-            battle: battle)
+            battle: battle )
     {
         Effect = TransitiveStatusEffect.Confuse;
     }

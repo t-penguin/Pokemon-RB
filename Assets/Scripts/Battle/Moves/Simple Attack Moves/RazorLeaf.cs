@@ -13,6 +13,6 @@ public class RazorLeaf : SimpleAttackMove
             accuracy: 95,
             power: 55,
             battle: battle,
-            highCrit: true)
+            highCrit: true )
     { }
 }

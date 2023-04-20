@@ -12,7 +12,7 @@ public class Twineedle : MultiHitAttackMove
             basePP: 20,
             accuracy: 100,
             power: 25,
-            battle: battle)
+            battle: battle )
     {
         RandomHits = false;
         SetNumberOfHits(2);

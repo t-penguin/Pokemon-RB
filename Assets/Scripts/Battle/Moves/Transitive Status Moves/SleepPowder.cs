@@ -10,7 +10,7 @@ public class SleepPowder : TransitiveStatusMove
             type: Type.GRASS,
             basePP: 15,
             accuracy: 75,
-            battle: battle)
+            battle: battle )
     {
         Effect = TransitiveStatusEffect.Sleep;
     }

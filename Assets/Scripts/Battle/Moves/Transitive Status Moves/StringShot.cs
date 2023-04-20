@@ -10,7 +10,7 @@ public class StringShot : TransitiveStatusMove
             type: Type.BUG,
             basePP: 40,
             accuracy: 95,
-            battle: battle)
+            battle: battle )
     {
         Effect = TransitiveStatusEffect.LowerSpeed;
     }

@@ -10,7 +10,7 @@ public class Sing : TransitiveStatusMove
             type: Type.NORMAL,
             basePP: 15,
             accuracy: 55,
-            battle: battle)
+            battle: battle )
     {
         Effect = TransitiveStatusEffect.Sleep;
     }

@@ -10,7 +10,7 @@ public class LovelyKiss : TransitiveStatusMove
             type: Type.NORMAL,
             basePP: 10,
             accuracy: 75,
-            battle: battle)
+            battle: battle )
     {
         Effect = TransitiveStatusEffect.Sleep;
     }

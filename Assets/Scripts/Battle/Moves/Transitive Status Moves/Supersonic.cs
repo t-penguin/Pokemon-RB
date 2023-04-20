@@ -10,7 +10,7 @@ public class Supersonic : TransitiveStatusMove
             type: Type.NORMAL,
             basePP: 20,
             accuracy: 55,
-            battle: battle)
+            battle: battle )
     {
         Effect = TransitiveStatusEffect.Confuse;
     }

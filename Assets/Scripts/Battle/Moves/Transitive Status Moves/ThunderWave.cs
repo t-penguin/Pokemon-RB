@@ -10,7 +10,7 @@ public class ThunderWave : TransitiveStatusMove
             type: Type.ELECTRIC,
             basePP: 20,
             accuracy: 100,
-            battle: battle)
+            battle: battle )
     {
         Effect = TransitiveStatusEffect.Paralyze;
     }

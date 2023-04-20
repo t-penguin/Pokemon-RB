@@ -10,7 +10,7 @@ public class PoisonPowder : TransitiveStatusMove
             type: Type.POISON,
             basePP: 35,
             accuracy: 75,
-            battle: battle)
+            battle: battle )
     {
         Effect = TransitiveStatusEffect.Poison;
     }

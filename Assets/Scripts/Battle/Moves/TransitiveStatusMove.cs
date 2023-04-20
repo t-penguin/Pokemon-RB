@@ -112,7 +112,7 @@ public abstract class TransitiveStatusMove : TransitiveMove
                 target.BideDamage += 2 * target.LastDamageRecieved;
         }
         else
-            yield return Battle.StartCoroutine(OnNothingHappened());
+            yield return Battle.StartCoroutine(OnFailed());
     }
 
     private IEnumerator ApplyNonVolatileStatus(BattlePokemon target, StatusEffect effect)

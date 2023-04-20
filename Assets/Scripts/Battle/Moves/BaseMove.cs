@@ -97,29 +97,34 @@ public abstract class BaseMove
     {
         string targetName = target == Battle.PlayerSide.ActivePokemon ? target.Name : $"Enemy {target.Name}";
         yield return Battle.StartCoroutine(Battle.DisplayMessage($"{targetName}<\nparalyzed! It may\nnot attack!", true));
+        yield return new WaitForSeconds(6 / 60f);
     }
 
     protected IEnumerator OnSlept(BattlePokemon target)
     {
         string targetName = target == Battle.PlayerSide.ActivePokemon ? target.Name : $"Enemy {target.Name}";
         yield return Battle.StartCoroutine(Battle.DisplayMessage($"{targetName}\nfell asleep!", true));
+        yield return new WaitForSeconds(6 / 60f);
     }
 
     protected IEnumerator OnPoisoned(BattlePokemon target)
     {
         string targetName = target == Battle.PlayerSide.ActivePokemon ? target.Name : $"Enemy {target.Name}";
         yield return Battle.StartCoroutine(Battle.DisplayMessage($"{targetName}\nwas poisoned!", true));
+        yield return new WaitForSeconds(6 / 60f);
     }
 
     protected IEnumerator OnBadlyPoisoned(BattlePokemon target)
     {
         string targetName = target == Battle.PlayerSide.ActivePokemon ? target.Name : $"Enemy {target.Name}";
         yield return Battle.StartCoroutine(Battle.DisplayMessage($"{targetName}<\nbadly poisoned!", true));
+        yield return new WaitForSeconds(6 / 60f);
     }
 
     protected IEnumerator OnConfused(BattlePokemon target)
     {
         string targetName = target == Battle.PlayerSide.ActivePokemon ? target.Name : $"Enemy {target.Name}";
         yield return Battle.StartCoroutine(Battle.DisplayMessage($"{targetName}\nbecame confused!", true));
+        yield return new WaitForSeconds(6 / 60f);
     }
 }

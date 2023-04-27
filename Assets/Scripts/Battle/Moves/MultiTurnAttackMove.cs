@@ -92,7 +92,10 @@ public abstract class MultiTurnAttackMove : AttackMove
         if (TurnsLeft == 0)
         {
             if (ShowUseAndChargeText)
+            {
                 yield return Battle.StartCoroutine(OnUsed(user));
+                yield return new WaitForSeconds(30 / 60f);
+            }
 
             yield return Battle.StartCoroutine(OnCharging(user));
             user.IsSemiInvulnerable = SemiInvulnerability;
@@ -133,6 +136,10 @@ public abstract class MultiTurnAttackMove : AttackMove
                 TurnsLeft = 1;
                 SetActionLock(user, true);
             }
+
+            SetLastMoveUsed(user);
+            SetMirrorMove(opponent);
+            CurrentPP--;
             yield break;
         }
 
@@ -169,6 +176,7 @@ public abstract class MultiTurnAttackMove : AttackMove
         // The final turn of a thrashing move leaves the user confused
         if (TurnsLeft == 1)
         {
+            SetActionLock(user, false);
             user.Confuse();
             yield return Battle.StartCoroutine(OnFatigued(user));
         }

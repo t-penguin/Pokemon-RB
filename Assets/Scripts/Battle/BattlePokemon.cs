@@ -36,11 +36,16 @@ public class BattlePokemon
     [field: SerializeField] public bool HasSubstitute { get; private set; }
     [field: SerializeField] public bool IsMistActive { get; private set; }
     [field: SerializeField] public bool IsSemiInvulnerable { get; set; }
+    [field: SerializeField] public bool BadlyPoisoned { get; private set; }
+    [field: SerializeField] public int ToxicCounter { get; private set; }
+
+    // Volatile Status Conditions
+    [field: SerializeField] public bool Bound { get; set; }
     [field: SerializeField] public bool Confused { get; set; }
     [field: SerializeField] public int ConfusionTimer { get; private set; }
     [field: SerializeField] public bool Flinched { get; set; }
-    [field: SerializeField] public bool BadlyPoisoned { get; private set; }
-    [field: SerializeField] public int RecurrentDamageCounter { get; private set; }
+    [field: SerializeField] public bool Seeded { get; set; }
+    [field: SerializeField] public int LeechSeedCounter { get; private set; }
 
     #endregion
 
@@ -270,7 +275,7 @@ public class BattlePokemon
     {
         Poison();
         BadlyPoisoned = true;
-        RecurrentDamageCounter = 1;
+        ToxicCounter = 1;
     }
     public bool Poisoned() => ReferencePokemon.Status == StatusEffect.PSN;
 

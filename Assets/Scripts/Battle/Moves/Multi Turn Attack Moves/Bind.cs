@@ -13,19 +13,7 @@ public class Bind : MultiTurnAttackMove
             accuracy: 75,
             power: 15,
             battle: battle )
-    { }
-
-    public override IEnumerator Execute(BattlePokemon user, BattlePokemon opponent)
     {
-        // First Turn
-        if (TurnsLeft == 0)
-        {
-            SetMaxTurns();
-            SetActionLock(user, true);
-            yield return Battle.StartCoroutine(OnUsed(user));
-        }
-
-        yield return Battle.StartCoroutine(DealDamage(user, opponent));
-        TurnsLeft--;
+        AttackType = MultiTurnAttackType.Binding;
     }
 }

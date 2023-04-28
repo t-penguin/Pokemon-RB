@@ -13,7 +13,10 @@ public class DragonRage : SimpleAttackMove
             accuracy: 100,
             power: 0,
             battle: battle )
-    { }
+    {
+        dealsFixedDamage = true;
+        fixedDamage = 40;
+    }
 
     /* This move deals 40 damage no matter what
      * It does not take into account resistances and weaknesses */

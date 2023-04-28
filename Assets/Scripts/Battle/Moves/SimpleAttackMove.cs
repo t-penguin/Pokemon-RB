@@ -6,9 +6,11 @@ public abstract class SimpleAttackMove : AttackMove
 {
     protected bool requiresInvulnerabilityCheck = true;
     protected bool requiresAccuracyCheck = true;
-    protected bool requiresFailureCheck = false;
 
     protected bool sapsHealth = false;
+
+    protected bool dealsFixedDamage = false;
+    protected int fixedDamage = 0;
 
     protected SecondaryEffects secondaryEffect = SecondaryEffects.None;
     protected int secondaryEffectChance = 0;
@@ -34,6 +36,7 @@ public abstract class SimpleAttackMove : AttackMove
     public override IEnumerator Execute(BattlePokemon user, BattlePokemon opponent)
     {
         yield return Battle.StartCoroutine(OnUsed(user));
+        opponent.LastDamageRecieved = 0;
 
         // Invulnerability and Accuracy Checks
         bool missed = requiresInvulnerabilityCheck && opponent.IsSemiInvulnerable;
@@ -53,18 +56,11 @@ public abstract class SimpleAttackMove : AttackMove
             EndMove(user, opponent);
         }
 
-        // Failure Check
-        if(requiresFailureCheck)
-        {
-            
-        }
-
         // Hit
-        if (sapsHealth)
-        {
+        if(dealsFixedDamage)
+            yield return Battle.StartCoroutine(DealFixedDamage(user, opponent));
+        else if (sapsHealth)
             yield return Battle.StartCoroutine(DealDamageAndRegainHealth(user, opponent));
-            yield return Battle.StartCoroutine(OnHealthSapped(opponent));
-        }
         else
             yield return Battle.StartCoroutine(DealDamage(user, opponent));
 
@@ -84,10 +80,12 @@ public abstract class SimpleAttackMove : AttackMove
     }
 
     /* One-Hit KO moves automatically fail if the user's speed stat is lower than the target
-     * These moves always deal 65535 damage */
+     * These moves always deal damage equal to the opponent's remaining health */
     protected IEnumerator ExecuteOneHitKO(BattlePokemon user, BattlePokemon opponent)
     {
         yield return Battle.StartCoroutine(OnUsed(user));
+
+        opponent.LastDamageRecieved = 0;
 
         if (opponent.IsSemiInvulnerable || !AccuracyCheck(user, opponent))
             yield return Battle.StartCoroutine(OnMissed(user));
@@ -97,7 +95,9 @@ public abstract class SimpleAttackMove : AttackMove
             yield return Battle.StartCoroutine(OnNoEffect());
         else
         {
-            yield return Battle.StartCoroutine(opponent.RecieveDamge(65535, Type));
+            int damage = opponent.CurrentHP;
+            yield return Battle.StartCoroutine(opponent.RecieveDamge(damage, Type));
+            opponent.LastDamageRecieved = damage;
             yield return new WaitForSeconds(60 / 60f);
         }
 
@@ -112,11 +112,8 @@ public abstract class SimpleAttackMove : AttackMove
         int remainingHP = target.CurrentHP;
         float effectiveness = MoveData.GetMatchupMultiplier(this, target);
         int damage = MoveData.CalculateDamage(this, user, target, out bool isCrit);
-        if (target.IsBideActive)
-        {
-            target.LastDamageRecieved = damage;
-            target.BideDamage += 2 * damage;
-        }
+        target.LastDamageRecieved = damage;
+
         yield return Battle.StartCoroutine(target.RecieveDamge(damage, Type));
         if (isCrit)
             yield return Battle.StartCoroutine(OnCriticalHit());
@@ -126,6 +123,18 @@ public abstract class SimpleAttackMove : AttackMove
 
         int sappedHealth = Mathf.CeilToInt(Mathf.Min(damage, remainingHP) / 2f);
         yield return Battle.StartCoroutine(user.RestoreHealth(sappedHealth));
+        yield return new WaitForSeconds(20 / 60f);
+        yield return Battle.StartCoroutine(OnHealthSapped(target));
+    }
+
+    protected IEnumerator DealFixedDamage(BattlePokemon user, BattlePokemon target)
+    {
+        // -1 fixedDamage means the damage should equal the user's level
+        int damage = fixedDamage == -1 ? user.Level : fixedDamage;
+        target.LastDamageRecieved = damage;
+
+        yield return Battle.StartCoroutine(target.RecieveDamge(damage, Type));
+        yield return new WaitForSeconds(60 / 60f);
     }
 
     protected IEnumerator OnHealthSapped(BattlePokemon opponent)

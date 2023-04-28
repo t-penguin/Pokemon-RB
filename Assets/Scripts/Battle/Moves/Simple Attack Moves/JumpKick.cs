@@ -26,7 +26,6 @@ public class JumpKick : SimpleAttackMove
         {
             yield return Battle.StartCoroutine(OnMissed(user));
             yield return Battle.StartCoroutine(user.RecieveDamge(1, Type.NONE));
-            user.LastDamageRecieved = 1;
         }
         else
             yield return Battle.StartCoroutine(DealDamage(user, opponent));

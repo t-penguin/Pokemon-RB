@@ -26,7 +26,6 @@ public class HiJumpKick : SimpleAttackMove
         {
             yield return Battle.StartCoroutine(OnMissed(user));
             yield return Battle.StartCoroutine(user.RecieveDamge(1, Type.NONE));
-            user.LastDamageRecieved = 1;
         }
         else if (MoveData.HasNoEffect(this, opponent))
             yield return Battle.StartCoroutine(OnNoEffect());

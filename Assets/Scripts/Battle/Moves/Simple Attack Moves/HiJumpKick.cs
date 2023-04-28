@@ -20,11 +20,13 @@ public class HiJumpKick : SimpleAttackMove
     public override IEnumerator Execute(BattlePokemon user, BattlePokemon opponent)
     {
         yield return Battle.StartCoroutine(OnUsed(user));
+        opponent.LastDamageRecieved = 0;
 
         if (opponent.IsSemiInvulnerable || !AccuracyCheck(user, opponent))
         {
             yield return Battle.StartCoroutine(OnMissed(user));
             yield return Battle.StartCoroutine(user.RecieveDamge(1, Type.NONE));
+            user.LastDamageRecieved = 1;
         }
         else if (MoveData.HasNoEffect(this, opponent))
             yield return Battle.StartCoroutine(OnNoEffect());

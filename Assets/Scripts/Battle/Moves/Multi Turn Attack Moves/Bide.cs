@@ -22,6 +22,7 @@ public class Bide : MultiTurnAttackMove
         {
             user.IsBideActive = true;
             user.BideDamage = 0;
+            opponent.LastDamageRecieved = 0;
             SetMoveLock(user, true);
             yield return Battle.StartCoroutine(OnUsed(user));
             TurnsLeft = Random.Range(2, 4);
@@ -46,11 +47,8 @@ public class Bide : MultiTurnAttackMove
     protected override IEnumerator DealDamage(BattlePokemon user, BattlePokemon target)
     {
         int damage = user.BideDamage;
-        if (target.IsBideActive)
-        {
-            target.LastDamageRecieved = damage;
-            target.BideDamage += 2 * damage;
-        }
+        target.LastDamageRecieved = damage;
+
         yield return Battle.StartCoroutine(target.RecieveDamge(damage, Type.NONE));
         yield return new WaitForSeconds(60 / 60f);
     }

@@ -108,8 +108,6 @@ public abstract class TransitiveStatusMove : TransitiveMove
             int statChange = greatlyLowerStat ? -2 : -1;
             target.ModifyStatAsPrimary(stat, statChange);
             yield return Battle.StartCoroutine(OnLoweredStat(target, stat, greatlyLowerStat));
-            if (target.IsBideActive)
-                target.BideDamage += 2 * target.LastDamageRecieved;
         }
         else
             yield return Battle.StartCoroutine(OnFailed());

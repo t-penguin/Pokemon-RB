@@ -20,17 +20,15 @@ public class Psywave : SimpleAttackMove
     public override IEnumerator Execute(BattlePokemon user, BattlePokemon opponent)
     {
         yield return Battle.StartCoroutine(OnUsed(user));
+        opponent.LastDamageRecieved = 0;
 
-        if(opponent.IsSemiInvulnerable || !AccuracyCheck(user, opponent))
+        if (opponent.IsSemiInvulnerable || !AccuracyCheck(user, opponent))
             yield return Battle.StartCoroutine(OnMissed(user));
         else
         {
             int damage = Random.Range(1, (int)(1.5f * user.Level + 1));
-            if (opponent.IsBideActive)
-            {
-                opponent.LastDamageRecieved = damage;
-                opponent.BideDamage += 2 * damage;
-            }
+            opponent.LastDamageRecieved = damage;
+            
             yield return Battle.StartCoroutine(opponent.RecieveDamge(damage, Type));
             yield return new WaitForSeconds(60 / 60f);
         }

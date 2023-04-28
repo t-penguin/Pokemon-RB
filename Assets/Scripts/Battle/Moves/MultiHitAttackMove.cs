@@ -24,15 +24,12 @@ public abstract class MultiHitAttackMove : AttackMove
     public override IEnumerator Execute(BattlePokemon user, BattlePokemon opponent)
     {
         yield return Battle.StartCoroutine(OnUsed(user));
+        opponent.LastDamageRecieved = 0;
 
         if (opponent.IsSemiInvulnerable || !AccuracyCheck(user, opponent))
-        {
             yield return Battle.StartCoroutine(OnMissed(user));
-        }
         else if (MoveData.HasNoEffect(this, opponent))
-        {
             yield return Battle.StartCoroutine(OnNoEffect());
-        }
         else
         {
             if(RandomHits)
@@ -84,7 +81,8 @@ public abstract class MultiHitAttackMove : AttackMove
 
             // ADD HERE: End immediately if substitute breaks
         }
-        
+
+        target.LastDamageRecieved = Damage;
         yield return Battle.StartCoroutine(OnEffective(effectiveness));
         yield return Battle.StartCoroutine(Battle.DisplayMessage($"Hit the enemy\n{totalHits} times!", true));
         yield return new WaitForSeconds(60 / 60f);

@@ -35,11 +35,7 @@ public abstract class AttackMove : TransitiveMove
     {
         float effectiveness = MoveData.GetMatchupMultiplier(this, target);
         int damage = MoveData.CalculateDamage(this, user, target, out bool isCrit);
-        if (target.IsBideActive)
-        {
-            target.LastDamageRecieved = damage;
-            target.BideDamage += 2 * damage;
-        }
+        target.LastDamageRecieved = damage;
         yield return Battle.StartCoroutine(target.RecieveDamge(damage, Type));
         if (isCrit)
             yield return Battle.StartCoroutine(OnCriticalHit());

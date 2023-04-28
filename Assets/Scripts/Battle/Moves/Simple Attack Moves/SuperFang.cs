@@ -18,17 +18,15 @@ public class SuperFang : SimpleAttackMove
     public override IEnumerator Execute(BattlePokemon user, BattlePokemon opponent)
     {
         yield return Battle.StartCoroutine(OnUsed(user));
+        opponent.LastDamageRecieved = 0;
 
         if (opponent.IsSemiInvulnerable || !AccuracyCheck(user, opponent))
             yield return Battle.StartCoroutine(OnMissed(user));
         else
         {
             int damage = Mathf.Max(1, opponent.CurrentHP / 2);
-            if (opponent.IsBideActive)
-            {
-                opponent.LastDamageRecieved = damage;
-                opponent.BideDamage += 2 * damage;
-            }
+            opponent.LastDamageRecieved = damage;
+            
             yield return Battle.StartCoroutine(opponent.RecieveDamge(damage, Type));
             yield return new WaitForSeconds(60 / 60f);
         }

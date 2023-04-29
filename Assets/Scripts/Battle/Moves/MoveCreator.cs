@@ -32,7 +32,7 @@ public static class MoveCreator
             case 21: return new Confusion(battle);
             case 22: return new Constrict(battle);
             case 23: return new Conversion(battle);
-                // COUNTER
+            case 24: return new Counter(battle);
             case 25: return new Crabhammer(battle);
             case 26: return new Cut(battle);
             case 27: return new DefenseCurl(battle);
@@ -49,7 +49,7 @@ public static class MoveCreator
             case 38: return new Earthquake(battle);
             case 39: return new EggBomb(battle);
             case 40: return new Ember(battle);
-                // EXPLOSION
+            case 41: return new Explosion(battle);
             case 42: return new FireBlast(battle);
             case 43: return new FirePunch(battle);
             case 44: return new FireSpin(battle);
@@ -84,7 +84,7 @@ public static class MoveCreator
                 // LEECH SEED
             case 74: return new Leer(battle);
             case 75: return new Lick(battle);
-                // LIGHT SCREEN
+            case 76: return new LightScreen(battle);
             case 77: return new LovelyKiss(battle);
             case 78: return new LowKick(battle);
             case 79: return new Meditate(battle);
@@ -113,7 +113,7 @@ public static class MoveCreator
             case 102: return new RazorLeaf(battle);
             case 103: return new RazorWind(battle);
                 // RECOVER
-                // REFLECT
+            case 105: return new Reflect(battle);
                 // REST
                 // ROAR
             case 108: return new RockSlide(battle);
@@ -123,7 +123,7 @@ public static class MoveCreator
             case 112: return new Scratch(battle);
             case 113: return new Screech(battle);
             case 114: return new SeismicToss(battle);
-                // SELF-DESTRUCT
+            case 115: return new Selfdestruct(battle);
             case 116: return new Sharpen(battle);
             case 117: return new Sing(battle);
             case 118: return new SkullBash(battle);

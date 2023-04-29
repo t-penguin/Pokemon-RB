@@ -6,6 +6,7 @@ public abstract class AttackMove : TransitiveMove
 {
     public int Power { get; }
     public bool HasHighCritRatio { get; }
+    public bool HalvesTargetDefense = false;
 
     private const string SUPER_EFFECTIVE = "It was\nsuper effective!";
     private const string NOT_EFFECTIVE = "It was not\nvery effective...";

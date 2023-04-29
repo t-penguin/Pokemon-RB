@@ -35,6 +35,8 @@ public class BattlePokemon
     [field: SerializeField] public int LastDamageRecieved { get; set; }
     [field: SerializeField] public bool HasSubstitute { get; private set; }
     [field: SerializeField] public bool IsMistActive { get; private set; }
+    [field: SerializeField] public bool IsReflectActive { get; set; }
+    [field: SerializeField] public bool IsLightScreenActive { get; set; }
     [field: SerializeField] public bool IsSemiInvulnerable { get; set; }
     [field: SerializeField] public bool BadlyPoisoned { get; private set; }
     [field: SerializeField] public int ToxicCounter { get; private set; }

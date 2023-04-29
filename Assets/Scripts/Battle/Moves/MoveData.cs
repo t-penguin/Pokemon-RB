@@ -4,12 +4,12 @@ using UnityEngine;
 
 public static class MoveData
 {
-	/* An array of all move names sorted alphabetically
+    /* An array of all move names sorted alphabetically
 	 * This array gives each move its corresponding index
 	 * An empty or unassigned move will have index 0 */
-	public static readonly string[] Names = new string[]
-	{
-		"EMPTY", "ABSORB", "ACID", "ACID ARMOR", "AGILITY", "AMNESIA",				//0 - 5
+    public static readonly string[] Names = new string[]
+    {
+        "EMPTY", "ABSORB", "ACID", "ACID ARMOR", "AGILITY", "AMNESIA",				//0 - 5
 		"AURORA BEAM", "BARRAGE", "BARRIER", "BIDE", "BIND",						//6 - 10
 		"BITE", "BLIZZARD", "BODY SLAM", "BONE CLUB", "BONEMERANG",					//11 - 15
 		"BUBBLE", "BUBBLEBEAM", "CLAMP", "COMET PUNCH", "CONFUSE RAY",				//16 - 20
@@ -44,10 +44,10 @@ public static class MoveData
 		"WATERFALL", "WHIRLWIND", "WING ATTACK", "WITHDRAW", "WRAP"					//161 - 165
 	};
 
-	// An array of each move's type
-	public static readonly Type[] Types = new Type[]
-	{
-		Type.NONE, Type.GRASS, Type.POISON, Type.POISON, Type.PSYCHIC, Type.PSYCHIC,	//0 - 5
+    // An array of each move's type
+    public static readonly Type[] Types = new Type[]
+    {
+        Type.NONE, Type.GRASS, Type.POISON, Type.POISON, Type.PSYCHIC, Type.PSYCHIC,	//0 - 5
 		Type.ICE, Type.NORMAL, Type.PSYCHIC, Type.NORMAL, Type.NORMAL,			//6 - 10
 		Type.NORMAL, Type.ICE, Type.NORMAL, Type.GROUND, Type.GROUND,			//11 - 15
 		Type.WATER, Type.WATER, Type.WATER, Type.NORMAL, Type.GHOST,			//16 - 20
@@ -82,10 +82,10 @@ public static class MoveData
 		Type.WATER, Type.NORMAL, Type.FLYING, Type.WATER, Type.NORMAL			//161 - 165
 	};
 
-	// An array of each move's category
-	public static readonly Category[] Categories = new Category[]
-	{
-		Category.Status, Category.Special, Category.Physical, Category.Status, Category.Status, Category.Status,	//0 - 5
+    // An array of each move's category
+    public static readonly Category[] Categories = new Category[]
+    {
+        Category.Status, Category.Special, Category.Physical, Category.Status, Category.Status, Category.Status,	//0 - 5
 		Category.Special, Category.Physical, Category.Status, Category.Physical, Category.Physical,		//6 - 10
 		Category.Physical, Category.Special, Category.Physical, Category.Physical, Category.Physical,	//11 - 15
 		Category.Special, Category.Special, Category.Special, Category.Physical, Category.Status,		//16 - 20
@@ -120,10 +120,10 @@ public static class MoveData
 		Category.Special, Category.Status, Category.Physical, Category.Status, Category.Physical		//161 - 165
 	};
 
-	// An array of each move's standard Max PP
-	public static readonly int[] MaxPPs = new int[]
-	{
-		0, 20, 30, 40, 30, 20, 20, 20, 30, 10, 20,	//0 - 10
+    // An array of each move's standard Max PP
+    public static readonly int[] MaxPPs = new int[]
+    {
+        0, 20, 30, 40, 30, 20, 20, 20, 30, 10, 20,	//0 - 10
 		25, 5, 15, 20, 10, 30, 20, 10, 15, 10,		//11 - 20
 		25, 35, 30, 20, 10, 30, 40, 10, 20, 10,		//21 - 30
 		30, 10, 15, 15, 10, 15, 20, 10, 10, 25,		//31 - 40
@@ -142,10 +142,10 @@ public static class MoveData
 		15, 20, 35, 40, 20							//161 - 165
 	};
 
-	// An array of each move's power
-	public static readonly int[] Powers = new int[]
-	{
-		0, 20, 40, 0, 0, 0, 65, 15, 0, 0, 15,		//0 - 10
+    // An array of each move's power
+    public static readonly int[] Powers = new int[]
+    {
+        0, 20, 40, 0, 0, 0, 65, 15, 0, 0, 15,		//0 - 10
 		60, 110, 85, 65, 50, 20, 65, 35, 18, 0,		//11 - 20
 		50, 10, 0, 0, 90, 50, 0, 100, 0, 70,		//21 - 30
 		30, 15, 0, 100, 0, 100, 80, 100, 100, 40,	//31 - 40
@@ -164,10 +164,10 @@ public static class MoveData
 		80, 0, 35, 0, 15							//161 - 165
 	};
 
-	// An array of each move's accuracy
-	public static readonly int[] Accuracies = new int[]
-	{
-		0, 100, 100, 0, 0, 0, 100, 85, 0, 0, 75,		//0 - 10
+    // An array of each move's accuracy
+    public static readonly int[] Accuracies = new int[]
+    {
+        0, 100, 100, 0, 0, 0, 100, 85, 0, 0, 75,		//0 - 10
 		100, 90, 100, 85, 90, 100, 100, 85, 85, 100,	//11 - 20
 		100, 100, 0, 100, 85, 95, 0, 100, 55, 100,		//21 - 30
 		100, 85, 0, 100, 100, 100, 100, 100, 75, 100,	//31 - 40
@@ -186,11 +186,11 @@ public static class MoveData
 		100, 0, 100, 0, 90								//161 - 165
 	};
 
-	/* An array of type matchups
+    /* An array of type matchups
 	 * Access as [AttackType][DefenderType]
 	 * Types are ordered the same horizontally as they are vertically */
-	private static readonly float[][] TypeEffectiveness = new float[][]
-	{
+    private static readonly float[][] TypeEffectiveness = new float[][]
+    {
 		//None
 		new float[] {1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f},
 		//Bug
@@ -223,127 +223,139 @@ public static class MoveData
 		new float[] {1.0f, 2.0f, 1.0f, 1.0f, 0.5f, 2.0f, 2.0f, 1.0f, 1.0f, 0.5f, 2.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f},
 		//Water
 		new float[] {1.0f, 1.0f, 0.5f, 1.0f, 1.0f, 2.0f, 1.0f, 1.0f, 0.5f, 2.0f, 1.0f, 1.0f, 1.0f, 1.0f, 2.0f, 0.5f}
-	};
+    };
 
 
 
-	/// <summary>
-	/// Returns the type matchup multiplier between an attacking type and a defending type.
-	/// </summary>
-	/// <param name="attackType">The attacking type.</param>
-	/// <param name="defenseType">The defending type.</param>
-	/// <returns></returns>
-	public static float GetMatchupMultiplier(Type attackType, Type defenseType)
-		=> TypeEffectiveness[(int)attackType][(int)defenseType];
+    /// <summary>
+    /// Returns the type matchup multiplier between an attacking type and a defending type.
+    /// </summary>
+    /// <param name="attackType">The attacking type.</param>
+    /// <param name="defenseType">The defending type.</param>
+    /// <returns></returns>
+    public static float GetMatchupMultiplier(Type attackType, Type defenseType)
+        => TypeEffectiveness[(int)attackType][(int)defenseType];
 
-	/// <summary>
-	/// Returns the type matchup multiplier between an attacking move and a defending pokemon.
-	/// </summary>
-	/// <param name="move">The attacking move.</param>
-	/// <param name="target">The defending Pokemon.</param>
-	public static float GetMatchupMultiplier(AttackMove move, BattlePokemon target)
-		=> GetMatchupMultiplier(move.Type, target.Primary) * GetMatchupMultiplier(move.Type, target.Secondary);
+    /// <summary>
+    /// Returns the type matchup multiplier between an attacking move and a defending pokemon.
+    /// </summary>
+    /// <param name="move">The attacking move.</param>
+    /// <param name="target">The defending Pokemon.</param>
+    public static float GetMatchupMultiplier(AttackMove move, BattlePokemon target)
+        => GetMatchupMultiplier(move.Type, target.Primary) * GetMatchupMultiplier(move.Type, target.Secondary);
 
-	/// <summary>
-	/// Returns whether the given move has no effect on the target.
-	/// </summary>
-	/// <param name="move">The attacking move.</param>
-	/// <param name="target">The defending Pokemon.</param>
-	public static bool HasNoEffect(AttackMove move, BattlePokemon target) => GetMatchupMultiplier(move, target) == 0f;
+    /// <summary>
+    /// Returns whether the given move has no effect on the target.
+    /// </summary>
+    /// <param name="move">The attacking move.</param>
+    /// <param name="target">The defending Pokemon.</param>
+    public static bool HasNoEffect(AttackMove move, BattlePokemon target) => GetMatchupMultiplier(move, target) == 0f;
 
-	/// <summary>
-	/// Calculates the amount of damage the user's move will do to the target
-	/// </summary>
-	/// <param name="move">The move that the user is using.</param>
-	/// <param name="user">The attacking Pokemon.</param>
-	/// <param name="target">The defending Pokemon.</param>
-	/// <returns></returns>
-	public static int CalculateDamage(AttackMove move, BattlePokemon user, BattlePokemon target, out bool isCrit)
+    /// <summary>
+    /// Calculates the amount of damage the user's move will do to the target
+    /// </summary>
+    /// <param name="move">The move that the user is using.</param>
+    /// <param name="user">The attacking Pokemon.</param>
+    /// <param name="target">The defending Pokemon.</param>
+    /// <returns></returns>
+    public static int CalculateDamage(AttackMove move, BattlePokemon user, BattlePokemon target, out bool isCrit)
     {
-		isCrit = false;
+        isCrit = false;
 
-		bool isPhysicalMove = move.Category == Category.Physical;
-		// Use corresponding stats depending on the move category
-		int userAttack = isPhysicalMove ? user.Stats.Attack : user.Stats.Special;
-		int targetDefense = isPhysicalMove ? target.Stats.Defense : target.Stats.Special;
+        bool isPhysicalMove = move.Category == Category.Physical;
+        // Use corresponding stats depending on the move category
+        int userAttack = isPhysicalMove ? user.Stats.Attack : user.Stats.Special;
+        int targetDefense = isPhysicalMove ? target.Stats.Defense : target.Stats.Special;
 
-		int userLevel = user.Level;
-		float stab = STABMultiplier(move, user);
-		float typeMultiplier = GetMatchupMultiplier(move, target);
+        int userLevel = user.Level;
+        float stab = STABMultiplier(move, user);
+        float typeMultiplier = GetMatchupMultiplier(move, target);
 
-		// Critical hit moves ignore stat modifications
-		if (IsCrit(move, user))
-		{
-			isCrit = true;
-			userLevel *= 2;
-		}
-		// Non-critical hit moves take into account stat modifications
-		else
-		{
-			userAttack = isPhysicalMove ? user.BattleStats.Attack : user.BattleStats.Special;
-			targetDefense = isPhysicalMove ? user.BattleStats.Defense : user.BattleStats.Special;
+        // Critical hit moves ignore stat modifications
+        if (IsCrit(move, user))
+        {
+            isCrit = true;
+            userLevel *= 2;
+        }
+        // Non-critical hit moves take into account stat modifications
+        else
+        {
+            userAttack = isPhysicalMove ? user.BattleStats.Attack : user.BattleStats.Special;
+            targetDefense = isPhysicalMove ? user.BattleStats.Defense : user.BattleStats.Special;
 
-			//ADD HERE?: Check for light screen and reflect to modify stats
-		}
+            // Reflect doubles the target's defense when a physical move is used against it
+            bool reflect = isPhysicalMove && target.IsReflectActive;
+            // Light Screen doubles the target's special when a special move is used against it
+            bool lightScreen = !isPhysicalMove && target.IsLightScreenActive;
 
-		return DamageFormula(userLevel, userAttack, targetDefense, move.Power, stab, typeMultiplier);
+			/* Reflect and Light Screen double their respective stats with a mod 1024 in the games
+			 * That seems unintentional, maxing it out at 1024 here instead */
+			if(reflect || lightScreen)
+	            targetDefense = Mathf.Min(1024, 2 * targetDefense);
+        }
+
+		// Explosion and Self-Destruct halve the target's defense in damage calculation
+		if (move.HalvesTargetDefense)
+			targetDefense = Mathf.Max(1, targetDefense / 2);
+
+        return DamageFormula(userLevel, userAttack, targetDefense, move.Power, stab, typeMultiplier);
     }
 
-	/// <summary>
-	/// Determines whether or not the use of the given move resulted in a critical hit.
-	/// </summary>
-	/// <param name="move">The move that the user is using.</param>
-	/// <param name="user">The attacking Pokemon.</param>
-	/// <returns></returns>
-	public static bool IsCrit(AttackMove move, BattlePokemon user)
+    /// <summary>
+    /// Determines whether or not the use of the given move resulted in a critical hit.
+    /// </summary>
+    /// <param name="move">The move that the user is using.</param>
+    /// <param name="user">The attacking Pokemon.</param>
+    /// <returns></returns>
+    public static bool IsCrit(AttackMove move, BattlePokemon user)
     {
-		int check = Random.Range(0, 256);
-		int threshold = user.Stats.Speed / 2;
+        int check = Random.Range(0, 256);
+        int threshold = user.Stats.Speed / 2;
 
-		// ADD HERE: Focus Energy or Dire Hit => t/= 4
+        // ADD HERE: Focus Energy or Dire Hit => t/= 4
 
-		// Multiply the threshold by 8 if the move has a high critical hit ratio
-		if (move.HasHighCritRatio)
-			threshold *= 8;
+        // Multiply the threshold by 8 if the move has a high critical hit ratio
+        if (move.HasHighCritRatio)
+            threshold *= 8;
 
-		// Clamp the threshold between 1 and 255
-		threshold = Mathf.Clamp(threshold, 1, 255);
+        // Clamp the threshold between 1 and 255
+        threshold = Mathf.Clamp(threshold, 1, 255);
 
-		return check < threshold;
+        return check < threshold;
     }
 
-	/// <summary>
-	/// Returns the Same Type Attack Bonus (STAB) multiplier for the given move and user. 
-	/// Returns 1.5 if there is a bonus, 1 otherwise.
-	/// </summary>
-	/// <param name="move">The move that the user is using.</param>
-	/// <param name="user">The attacking Pokemon.</param>
-	/// <returns></returns>
-	public static float STABMultiplier(AttackMove move, BattlePokemon user)
-		=> (user.Primary == move.Type || user.Secondary == move.Type) ? 1.5f : 1.0f;
+    /// <summary>
+    /// Returns the Same Type Attack Bonus (STAB) multiplier for the given move and user. 
+    /// Returns 1.5 if there is a bonus, 1 otherwise.
+    /// </summary>
+    /// <param name="move">The move that the user is using.</param>
+    /// <param name="user">The attacking Pokemon.</param>
+    /// <returns></returns>
+    public static float STABMultiplier(AttackMove move, BattlePokemon user)
+    => (user.Primary == move.Type || user.Secondary == move.Type) ? 1.5f : 1.0f;
 
 
-	/// <summary>
-	/// The damage formula given stats from the attacker and the target.
-	/// </summary>
-	/// <param name="level">The level of the attacking Pokemon.</param>
-	/// <param name="attack">The attacking stat of the attacking Pokemon.</param>
-	/// <param name="defense">The defending stat of the target Pokemon.</param>
-	/// <param name="power">The power of the move being used.</param>
-	/// <param name="stab">The STAB multiplier of the attacking move.</param>
-	/// <param name="typeMultiplier">The type matchup multiplier.</param>
-	/// <returns></returns>
-	public static int DamageFormula(int level, int attack, int defense, int power, float stab, float typeMultiplier)
+    /// <summary>
+    /// The damage formula given stats from the attacker and the target.
+    /// </summary>
+    /// <param name="level">The level of the attacking Pokemon.</param>
+    /// <param name="attack">The attacking stat of the attacking Pokemon.</param>
+    /// <param name="defense">The defending stat of the target Pokemon.</param>
+    /// <param name="power">The power of the move being used.</param>
+    /// <param name="stab">The STAB multiplier of the attacking move.</param>
+    /// <param name="typeMultiplier">The type matchup multiplier.</param>
+    /// <returns></returns>
+    public static int DamageFormula(int level, int attack, int defense, int power, float stab, float typeMultiplier)
     {
-		int rawDamage = (2 * level / 5 + 2) * power * (attack / defense) / 50 + 2;
-		return Mathf.Min(1, (int)(rawDamage * stab * typeMultiplier * Random.Range(217, 256) / 255));
+        int rawDamage = (2 * level / 5 + 2) * power * (attack / defense) / 50 + 2;
+        return Mathf.Min(1, (int)(rawDamage * stab * typeMultiplier * Random.Range(217, 256) / 255));
     }
 }
 
 // Possible move categories
 public enum Category
 {
-	Physical,
-	Special,
-	Status
+    Physical,
+    Special,
+    Status
 }

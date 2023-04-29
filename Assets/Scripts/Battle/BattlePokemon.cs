@@ -165,6 +165,25 @@ public class BattlePokemon
         }
     }
 
+    public IEnumerator Explode()
+    {
+        CurrentHP = 0;
+        ReferencePokemon.CurrentHP = 0;
+        RectTransform healthBar = TrainerIsPlayer ? _battle.PlayerHPBar : _battle.OpponentHPBar;
+        Vector3 scale = healthBar.localScale;
+        scale.x = 0;
+        healthBar.localScale = scale;
+
+        if(TrainerIsPlayer)
+        {
+            _battle.PlayerHPText.text = $"{CurrentHP,3}/{Stats.HP,3}";
+        }
+
+        yield return new WaitForSeconds(10 / 60f);
+
+        yield return _battle.StartCoroutine(Faint());
+    }
+
     #region Stat Methods
 
     public bool CanStatBeLowered(StatType stat) => StatModifiers.CanGoLower(stat);

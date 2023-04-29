@@ -84,7 +84,6 @@ public abstract class SimpleAttackMove : AttackMove
     protected IEnumerator ExecuteOneHitKO(BattlePokemon user, BattlePokemon opponent)
     {
         yield return Battle.StartCoroutine(OnUsed(user));
-
         opponent.LastDamageRecieved = 0;
 
         if (opponent.IsSemiInvulnerable || !AccuracyCheck(user, opponent))
@@ -101,6 +100,22 @@ public abstract class SimpleAttackMove : AttackMove
             yield return new WaitForSeconds(60 / 60f);
         }
 
+        EndMove(user, opponent);
+    }
+
+    protected IEnumerator ExecuteExplosiveMove(BattlePokemon user, BattlePokemon opponent)
+    {
+        yield return Battle.StartCoroutine(OnUsed(user));
+        opponent.LastDamageRecieved = 0;
+
+        if (opponent.IsSemiInvulnerable || !AccuracyCheck(user, opponent))
+            yield return Battle.StartCoroutine(OnMissed(user));
+        else if (MoveData.HasNoEffect(this, opponent))
+            yield return Battle.StartCoroutine(OnNoEffect());
+        else
+            yield return Battle.StartCoroutine(DealDamage(user, opponent));
+
+        yield return Battle.StartCoroutine(user.Explode());
         EndMove(user, opponent);
     }
 

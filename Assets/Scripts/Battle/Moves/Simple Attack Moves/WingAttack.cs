@@ -6,7 +6,7 @@ public class WingAttack : SimpleAttackMove
 {
     public WingAttack(BattleStateManager battle)
         : base (
-            name: "WIGN ATTACK",
+            name: "WING ATTACK",
             type: Type.FLYING,
             category: Category.Physical,
             basePP: 35,

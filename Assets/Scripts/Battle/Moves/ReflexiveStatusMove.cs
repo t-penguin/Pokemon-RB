@@ -54,6 +54,14 @@ public abstract class ReflexiveStatusMove : BaseMove
             case ReflexiveStatusEffect.RaiseEvasion:
                 yield return Battle.StartCoroutine(RaiseStatAttempt(user, StatType.Evasion));
                 yield break;
+            case ReflexiveStatusEffect.Reflect:
+                user.IsReflectActive = true;
+                yield return Battle.StartCoroutine(OnReflect(user));
+                yield break;
+            case ReflexiveStatusEffect.LightScreen:
+                user.IsLightScreenActive = true;
+                yield return Battle.StartCoroutine(OnLightScreen(user));
+                yield break;
         }
     }
 
@@ -68,6 +76,20 @@ public abstract class ReflexiveStatusMove : BaseMove
         else
             yield return Battle.StartCoroutine(OnFailed());
     }
+
+    private IEnumerator OnReflect(BattlePokemon user)
+    {
+        string userName = user == Battle.PlayerSide.ActivePokemon ? user.Name : $"Enemy {user.Name}";
+        yield return Battle.StartCoroutine(Battle.DisplayMessage($"{userName}\ngained armor!", false));
+        yield return new WaitForSeconds(6 / 60f);
+    }
+
+    private IEnumerator OnLightScreen(BattlePokemon user)
+    {
+        string userName = user == Battle.PlayerSide.ActivePokemon ? user.Name : $"Enemy {user.Name}";
+        yield return Battle.StartCoroutine(Battle.DisplayMessage($"{userName}<\nprotected against\nspecial attacks!", false));
+        yield return new WaitForSeconds(6 / 60f);
+    }
 }
 
 public enum ReflexiveStatusEffect
@@ -77,5 +99,7 @@ public enum ReflexiveStatusEffect
     RaiseDefense,
     RaiseSpecial,
     RaiseSpeed,
-    RaiseEvasion
+    RaiseEvasion,
+    Reflect,
+    LightScreen
 }

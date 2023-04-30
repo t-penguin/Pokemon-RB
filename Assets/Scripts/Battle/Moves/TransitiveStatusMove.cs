@@ -72,32 +72,36 @@ public abstract class TransitiveStatusMove : TransitiveMove
             default: yield break;
             case TransitiveStatusEffect.LowerAttack:
                 yield return Battle.StartCoroutine(LowerStatAttempt(target, StatType.Attack));
-                break;
+                yield break;
             case TransitiveStatusEffect.LowerDefense:
                 yield return Battle.StartCoroutine(LowerStatAttempt(target, StatType.Defense));
-                break;
+                yield break;
             case TransitiveStatusEffect.LowerSpecial:
                 yield return Battle.StartCoroutine(LowerStatAttempt(target, StatType.Special));
-                break;
+                yield break;
             case TransitiveStatusEffect.LowerSpeed:
                 yield return Battle.StartCoroutine(LowerStatAttempt(target, StatType.Speed));
-                break;
+                yield break;
             case TransitiveStatusEffect.LowerAccuracy:
                 yield return Battle.StartCoroutine(LowerStatAttempt(target, StatType.Accuracy));
-                break;
+                yield break;
             case TransitiveStatusEffect.Paralyze:
                 yield return Battle.StartCoroutine(ApplyNonVolatileStatus(target, StatusEffect.PAR));
-                break;
+                yield break;
             case TransitiveStatusEffect.Poison:
                 yield return Battle.StartCoroutine(ApplyNonVolatileStatus(target, StatusEffect.PSN));
-                break;
+                yield break;
             case TransitiveStatusEffect.Sleep:
                 yield return Battle.StartCoroutine(ApplyNonVolatileStatus(target, StatusEffect.SLP));
-                break;
+                yield break;
             case TransitiveStatusEffect.Confuse:
                 target.Confuse();
                 yield return Battle.StartCoroutine(OnConfused(target));
-                break;
+                yield break;
+            case TransitiveStatusEffect.Seed:
+                target.Seeded = true;
+                yield return Battle.StartCoroutine(OnSeeded(target));
+                yield break;
         }
     }
 
@@ -138,6 +142,13 @@ public abstract class TransitiveStatusMove : TransitiveMove
                 yield break;
         }
     }
+
+    private IEnumerator OnSeeded(BattlePokemon target)
+    {
+        string targetName = target == Battle.PlayerSide.ActivePokemon ? target.Name : $"Enemy {target.Name}";
+        yield return Battle.StartCoroutine(Battle.DisplayMessage($"{targetName}\nwas seeded!", true));
+        yield return new WaitForSeconds(6 / 60f);
+    }
 }
 
 public enum TransitiveStatusEffect
@@ -151,5 +162,6 @@ public enum TransitiveStatusEffect
     Paralyze,
     Poison,
     Sleep,
-    Confuse
+    Confuse,
+    Seed
 }

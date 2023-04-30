@@ -57,7 +57,7 @@ public static class MoveCreator
             case 46: return new Flamethrower(battle);
             case 47: return new Flash(battle);
             case 48: return new Fly(battle);
-                // FOCUS ENERGY
+            case 49: return new FocusEnergy(battle);
             case 50: return new FuryAttack(battle);
             case 51: return new FurySwipes(battle);
             case 52: return new Glare(battle);
@@ -81,7 +81,7 @@ public static class MoveCreator
             case 70: return new KarateChop(battle);
             case 71: return new Kinesis(battle);
             case 72: return new LeechLife(battle);
-                // LEECH SEED
+            case 73: return new LeechSeed(battle);
             case 74: return new Leer(battle);
             case 75: return new Lick(battle);
             case 76: return new LightScreen(battle);
@@ -112,9 +112,9 @@ public static class MoveCreator
                 // RAGE
             case 102: return new RazorLeaf(battle);
             case 103: return new RazorWind(battle);
-                // RECOVER
+            case 104: return new Recover(battle);
             case 105: return new Reflect(battle);
-                // REST
+            case 106: return new Rest(battle);
                 // ROAR
             case 108: return new RockSlide(battle);
             case 109: return new RockThrow(battle);
@@ -134,7 +134,7 @@ public static class MoveCreator
             case 123: return new Sludge(battle);
             case 124: return new Smog(battle);
             case 125: return new SmokeScreen(battle);
-                // SOFT-BOILED
+            case 126: return new Softboiled(battle);
             case 127: return new SolarBeam(battle);
             case 128: return new SonicBoom(battle);
             case 129: return new SpikeCannon(battle);
@@ -151,7 +151,7 @@ public static class MoveCreator
             case 140: return new Supersonic(battle);
             case 141: return new Surf(battle);
             case 142: return new Swift(battle);
-                // SWORDS DANCE
+            case 143: return new SwordsDance(battle);
             case 144: return new Tackle(battle);
             case 145: return new TailWhip(battle);
             case 146: return new TakeDown(battle);

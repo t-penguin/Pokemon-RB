@@ -62,6 +62,30 @@ public abstract class ReflexiveStatusMove : BaseMove
                 user.IsLightScreenActive = true;
                 yield return Battle.StartCoroutine(OnLightScreen(user));
                 yield break;
+            case ReflexiveStatusEffect.Rest:
+                if (user.CurrentHP == user.Stats.HP)
+                    yield return Battle.StartCoroutine(OnFailed());
+                else
+                {
+                    yield return Battle.StartCoroutine(OnRest(user));
+                    yield return Battle.StartCoroutine(user.RestoreHealth(user.Stats.HP));
+                    user.Sleep();
+                    yield return Battle.StartCoroutine(OnRegainedHealth(user));
+                }
+                yield break;
+            case ReflexiveStatusEffect.RestoreHealth:
+                if (user.CurrentHP == user.Stats.HP)
+                    yield return Battle.StartCoroutine(OnFailed());
+                else
+                {
+                    yield return Battle.StartCoroutine(user.RestoreHealth(user.Stats.HP / 2));
+                    yield return Battle.StartCoroutine(OnRegainedHealth(user));
+                }
+                yield break;
+            case ReflexiveStatusEffect.Focus:
+                user.Focused = true;
+                yield return Battle.StartCoroutine(OnFocused(user));
+                yield break;
         }
     }
 
@@ -90,6 +114,27 @@ public abstract class ReflexiveStatusMove : BaseMove
         yield return Battle.StartCoroutine(Battle.DisplayMessage($"{userName}<\nprotected against\nspecial attacks!", false));
         yield return new WaitForSeconds(6 / 60f);
     }
+
+    private IEnumerator OnRegainedHealth(BattlePokemon user)
+    {
+        string userName = user == Battle.PlayerSide.ActivePokemon ? user.Name : $"Enemy {user.Name}";
+        yield return Battle.StartCoroutine(Battle.DisplayMessage($"{userName}\nregained health!", false));
+        yield return new WaitForSeconds(6 / 60f);
+    }
+
+    private IEnumerator OnRest(BattlePokemon user)
+    {
+        string userName = user == Battle.PlayerSide.ActivePokemon ? user.Name : $"Enemy {user.Name}";
+        yield return Battle.StartCoroutine(Battle.DisplayMessage($"{userName}\nstarted sleeping!", false));
+        yield return new WaitForSeconds(6 / 60f);
+    }
+
+    private IEnumerator OnFocused(BattlePokemon user)
+    {
+        string userName = user == Battle.PlayerSide.ActivePokemon ? user.Name : $"Enemy {user.Name}";
+        yield return Battle.StartCoroutine(Battle.DisplayMessage($"{userName}<\ngetting pumped!", false));
+        yield return new WaitForSeconds(6 / 60f);
+    }
 }
 
 public enum ReflexiveStatusEffect
@@ -101,5 +146,8 @@ public enum ReflexiveStatusEffect
     RaiseSpeed,
     RaiseEvasion,
     Reflect,
-    LightScreen
+    LightScreen,
+    Rest,
+    RestoreHealth,
+    Focus
 }

@@ -34,7 +34,7 @@ public static class MoveData
 		"SAND-ATTACK", "SCRATCH", "SCREECH", "SEISMIC TOSS", "SELFDESTRUCT",		//111 - 115
 		"SHARPEN", "SING", "SKULL BASH", "SKY ATTACK", "SLAM",						//116 - 120
 		"SLASH", "SLEEP POWDER", "SLUDGE", "SMOG", "SMOKESCREEN",					//121 - 125
-		"SOFT-BOILED", "SOLARBEAM", "SONICBOOM", "SPIKE CANNON", "SPLASH",			//126 - 130
+		"SOFTBOILED", "SOLARBEAM", "SONICBOOM", "SPIKE CANNON", "SPLASH",			//126 - 130
 		"SPORE", "STOMP", "STRENGTH", "STRING SHOT", "STRUGGLE",					//131 - 135
 		"STUN SPORE", "SUBMISSION", "SUBSTITUTE", "SUPER FANG", "SUPERSONIC",		//136 - 140
 		"SURF", "SWIFT", "SWORDS DANCE", "TACKLE", "TAIL WHIP",						//141 - 145
@@ -312,7 +312,11 @@ public static class MoveData
         int check = Random.Range(0, 256);
         int threshold = user.Stats.Speed / 2;
 
-        // ADD HERE: Focus Energy or Dire Hit => t/= 4
+		/* Due to a bug, the move Focus Energy and the item Dire Hit
+		 * lower the threshold by a factor of 4. This is fixed here to
+		 * be the intended behaviour of raising it by a factor of 4. */
+		if (user.Focused)
+			threshold *= 4;
 
         // Multiply the threshold by 8 if the move has a high critical hit ratio
         if (move.HasHighCritRatio)

@@ -40,6 +40,7 @@ public class BattlePokemon
     [field: SerializeField] public bool IsSemiInvulnerable { get; set; }
     [field: SerializeField] public bool BadlyPoisoned { get; private set; }
     [field: SerializeField] public int ToxicCounter { get; private set; }
+    [field: SerializeField] public bool Focused { get; set; }
 
     // Volatile Status Conditions
     [field: SerializeField] public bool Bound { get; set; }

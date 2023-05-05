@@ -115,7 +115,7 @@ public static class MoveCreator
             case 104: return new Recover(battle);
             case 105: return new Reflect(battle);
             case 106: return new Rest(battle);
-                // ROAR
+            case 107: return new Roar(battle);
             case 108: return new RockSlide(battle);
             case 109: return new RockThrow(battle);
             case 110: return new RollingKick(battle);
@@ -155,7 +155,7 @@ public static class MoveCreator
             case 144: return new Tackle(battle);
             case 145: return new TailWhip(battle);
             case 146: return new TakeDown(battle);
-                // TELEPORT
+            case 147: return new Teleport(battle);
             case 148: return new Thrash(battle);
             case 149: return new Thunder(battle);
             case 150: return new ThunderPunch(battle);
@@ -170,7 +170,7 @@ public static class MoveCreator
             case 159: return new VineWhip(battle);
             case 160: return new WaterGun(battle);
             case 161: return new Waterfall(battle);
-                // WHIRLWIND
+            case 162: return new Whirlwind(battle);
             case 163: return new WingAttack(battle);
             case 164: return new Withdraw(battle);
             case 165: return new Wrap(battle);

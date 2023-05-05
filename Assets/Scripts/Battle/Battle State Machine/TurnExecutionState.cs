@@ -73,25 +73,12 @@ public class TurnExecutionState : BattleBaseState
 
     private IEnumerator ExecuteTurn(BattleStateManager battle, BattleSide thisSide, BattleSide otherSide)
     {
-        BattlePokemon user = thisSide.ActivePokemon;
-        if (user.Flinched)
-        {
-            string name = user.TrainerIsPlayer ? user.Name : $"Enemy {user.Name}";
-            yield return battle.StartCoroutine(battle.DisplayMessage($"{name}\nflinched!", true));
-            yield return new WaitForSeconds(6 / 60f);
-
-            user.Flinched = false;
-            yield break;
-        }
-
         switch(thisSide.Action)
         {
             default:
                 yield break;
             case BattleAction.UseMove:
-                BattlePokemon opponent = otherSide.ActivePokemon;
-                Debug.Log($"{user.Name} used {thisSide.Move.Name}!");
-                yield return battle.StartCoroutine(thisSide.Move.Execute(user, opponent));
+                yield return battle.StartCoroutine(AttemptMoveExecution(battle, thisSide, otherSide));
                 yield break;
             case BattleAction.SwitchPokemon:
                 if (thisSide == battle.PlayerSide)
@@ -110,6 +97,39 @@ public class TurnExecutionState : BattleBaseState
                 yield return battle.StartCoroutine(AttemptEscape(battle, thisSide.ActivePokemon, otherSide.ActivePokemon));
                 yield break;
         }
+    }
+
+    private IEnumerator AttemptMoveExecution(BattleStateManager battle, BattleSide thisSide, BattleSide otherSide)
+    {
+        BattlePokemon user = thisSide.ActivePokemon;
+
+        // The user is unable to move if it flinches
+        if (user.Flinched)
+        {
+            string name = user.TrainerIsPlayer ? user.Name : $"Enemy {user.Name}";
+            yield return battle.StartCoroutine(battle.DisplayMessage($"{name}\nflinched!", true));
+            yield return new WaitForSeconds(6 / 60f);
+
+            user.Flinched = false;
+            yield break;
+        }
+
+        // Reduce the disable counter if the user is disabled
+        if (user.Disabled)
+            user.ReduceDisableCounter();
+
+        /* If the user is STILL disabled, check to see if the move being used is disabled
+         * If so, the user does NOT use the move */
+        if (user.Disabled && thisSide.Move == user.Moves[user.DisableIndex])
+        {
+            string moveName = thisSide.Move.Name;
+            yield return battle.StartCoroutine(OnMoveDisabled(battle, moveName));
+            yield break;
+        }
+
+        BattlePokemon opponent = otherSide.ActivePokemon;
+        Debug.Log($"{user.Name} used {thisSide.Move.Name}!");
+        yield return battle.StartCoroutine(thisSide.Move.Execute(user, opponent));
     }
 
     private IEnumerator ExecuteFirstTurn(BattleStateManager battle)
@@ -258,5 +278,11 @@ public class TurnExecutionState : BattleBaseState
         MessageBox.Clear();
 
         PokemonMenu.ClosedFromBattle -= OnClosedPokemonMenu;
+    }
+
+    private IEnumerator OnMoveDisabled(BattleStateManager battle, string moveName)
+    {
+        yield return battle.StartCoroutine(battle.DisplayMessage($"{moveName} is\ndisabled!", true));
+        yield return new WaitForSeconds(6 / 60f);
     }
 }

@@ -6,6 +6,7 @@ public abstract class TransitiveStatusMove : TransitiveMove
 {
     protected TransitiveStatusEffect Effect = TransitiveStatusEffect.None;
     protected bool greatlyLowerStat = false;
+    protected string battleEndingMessage = string.Empty;
 
     /// <summary>
     /// Creates a status move that affects the target.
@@ -49,6 +50,12 @@ public abstract class TransitiveStatusMove : TransitiveMove
     {
         yield return Battle.StartCoroutine(OnUsed(user));
 
+        if(Effect == TransitiveStatusEffect.BattleEnding)
+        {
+            yield return Battle.StartCoroutine(ExecuteBattleEndingMove(user, opponent));
+            yield break;
+        }
+
         bool failed = false;
         if (opponent.IsSemiInvulnerable || !AccuracyCheck(user, opponent, out failed))
         {
@@ -63,6 +70,56 @@ public abstract class TransitiveStatusMove : TransitiveMove
         SetLastMoveUsed(user);
         SetMirrorMove(opponent);
         CurrentPP--;
+    }
+
+    private IEnumerator ExecuteBattleEndingMove(BattlePokemon user, BattlePokemon opponent)
+    {
+        // Battle ending moves can only succeed in wild battles
+        if(Battle.BattleType != BattleType.WILD_BATTLE)
+        {
+            yield return Battle.StartCoroutine(OnFailed());
+            SetLastMoveUsed(user);
+            SetMirrorMove(opponent);
+            CurrentPP--;
+            yield break;
+        }
+
+        bool success = false;
+
+        if (AccuracyCheck(user, opponent, out bool failed))
+        {
+            if (failed)
+                yield return Battle.StartCoroutine(OnFailed());
+            else
+                yield return Battle.StartCoroutine(OnMissed(user));
+        }
+        else
+        {
+            /* These moves have a chance to fail
+             * if the user is at a lower level than the opponent */
+            if (user.Level < opponent.Level)
+            {
+                int numerator = opponent.Level / 4;
+                float denominator = opponent.Level + user.Level + 1;
+                float failureChance = numerator / denominator;
+                float check = Random.Range(0f, 1f);
+                if (check < failureChance)
+                    yield return Battle.StartCoroutine(OnFailed());
+            }
+            else
+            {
+                success = true;
+                yield return Battle.StartCoroutine(OnEndedBattle(opponent));
+            }
+
+        }
+
+        SetLastMoveUsed(user);
+        SetMirrorMove(opponent);
+        CurrentPP--;
+
+        if (success)
+            yield return Battle.StartCoroutine(Battle.CloseBattle());
     }
 
     private IEnumerator ApplyStatusEffect(BattlePokemon target)
@@ -175,6 +232,13 @@ public abstract class TransitiveStatusMove : TransitiveMove
         yield return Battle.StartCoroutine(Battle.DisplayMessage($"{targetName}<\n{moveName} was\ndisabled!", true));
         yield return new WaitForSeconds(6 / 60f);
     }
+
+    private IEnumerator OnEndedBattle(BattlePokemon target)
+    {
+        string targetName = target == Battle.PlayerSide.ActivePokemon ? target.Name : $"Enemy {target.Name}";
+        yield return Battle.StartCoroutine(Battle.DisplayMessage($"{targetName}\n{battleEndingMessage}", false));
+        yield return new WaitForSeconds(6 / 60f);
+    }
 }
 
 public enum TransitiveStatusEffect
@@ -190,5 +254,6 @@ public enum TransitiveStatusEffect
     Sleep,
     Confuse,
     Seed,
-    Disable
+    Disable,
+    BattleEnding
 }

@@ -32,7 +32,46 @@ public abstract class ReflexiveStatusMove : BaseMove
      * as most reflexive moves only need a reference to the user.*/
     public override IEnumerator Execute(BattlePokemon user, BattlePokemon opponent)
     {
-        yield return Battle.StartCoroutine(Execute(user));
+        if (Effect == ReflexiveStatusEffect.Teleport)
+            yield return Battle.StartCoroutine(Teleport(user, opponent));
+        else
+            yield return Battle.StartCoroutine(Execute(user));
+    }
+
+    public IEnumerator Teleport(BattlePokemon user, BattlePokemon opponent)
+    {
+        // Battle ending moves can only succeed in wild battles
+        if (Battle.BattleType != BattleType.WILD_BATTLE)
+        {
+            yield return Battle.StartCoroutine(OnFailed());
+            SetLastMoveUsed(user);
+            CurrentPP--;
+            yield break;
+        }
+
+        bool success = false;
+        /* These moves have a chance to fail
+         * if the user is at a lower level than the opponent */
+        if (user.Level < opponent.Level)
+        {
+            int numerator = opponent.Level / 4;
+            float denominator = opponent.Level + user.Level + 1;
+            float failureChance = numerator / denominator;
+            float check = Random.Range(0f, 1f);
+            if (check < failureChance)
+                yield return Battle.StartCoroutine(OnFailed());
+        }
+        else
+        {
+            success = true;
+            yield return Battle.StartCoroutine(OnTeleported(opponent));
+        }
+
+        SetLastMoveUsed(user);
+        CurrentPP--;
+
+        if (success)
+            yield return Battle.StartCoroutine(Battle.CloseBattle());
     }
 
     private IEnumerator ApplyReflexiveEffect(BattlePokemon user)
@@ -151,6 +190,13 @@ public abstract class ReflexiveStatusMove : BaseMove
         yield return Battle.StartCoroutine(Battle.DisplayMessage($"{userName}<\nshrouded in mist!", false));
         yield return new WaitForSeconds(6 / 60f);
     }
+
+    private IEnumerator OnTeleported(BattlePokemon user)
+    {
+        string userName = user == Battle.PlayerSide.ActivePokemon ? user.Name : $"Enemy {user.Name}";
+        yield return Battle.StartCoroutine(Battle.DisplayMessage($"{userName}\nran from battle!", false));
+        yield return new WaitForSeconds(6 / 60f);
+    }
 }
 
 public enum ReflexiveStatusEffect
@@ -166,5 +212,6 @@ public enum ReflexiveStatusEffect
     Rest,
     RestoreHealth,
     Focus,
-    Mist
+    Mist,
+    Teleport
 }

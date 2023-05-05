@@ -102,6 +102,25 @@ public abstract class TransitiveStatusMove : TransitiveMove
                 target.Seeded = true;
                 yield return Battle.StartCoroutine(OnSeeded(target));
                 yield break;
+            case TransitiveStatusEffect.Disable:
+                yield return Battle.StartCoroutine(Disable(target));
+                yield break;
+        }
+    }
+
+    private IEnumerator Disable(BattlePokemon target)
+    {
+        List<int> MovesWithPP = target.GetMovesWithPP();
+        bool failed = target.Disabled || MovesWithPP.Count == 0;
+
+        if (failed)
+            yield return Battle.StartCoroutine(OnFailed());
+        else
+        {
+            int index = Random.Range(0, MovesWithPP.Count);
+            target.DisableMove(MovesWithPP[index]);
+            string moveName = target.Moves[MovesWithPP[index]].Name;
+            yield return Battle.StartCoroutine(OnDisabled(target, moveName));
         }
     }
 
@@ -149,6 +168,13 @@ public abstract class TransitiveStatusMove : TransitiveMove
         yield return Battle.StartCoroutine(Battle.DisplayMessage($"{targetName}\nwas seeded!", true));
         yield return new WaitForSeconds(6 / 60f);
     }
+
+    private IEnumerator OnDisabled(BattlePokemon target, string moveName)
+    {
+        string targetName = target == Battle.PlayerSide.ActivePokemon ? target.Name : $"Enemy {target.Name}";
+        yield return Battle.StartCoroutine(Battle.DisplayMessage($"{targetName}<\n{moveName} was\ndisabled!", true));
+        yield return new WaitForSeconds(6 / 60f);
+    }
 }
 
 public enum TransitiveStatusEffect
@@ -163,5 +189,6 @@ public enum TransitiveStatusEffect
     Poison,
     Sleep,
     Confuse,
-    Seed
+    Seed,
+    Disable
 }

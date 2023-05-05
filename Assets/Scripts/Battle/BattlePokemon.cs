@@ -48,7 +48,9 @@ public class BattlePokemon
     [field: SerializeField] public int ConfusionTimer { get; private set; }
     [field: SerializeField] public bool Flinched { get; set; }
     [field: SerializeField] public bool Seeded { get; set; }
-    [field: SerializeField] public int LeechSeedCounter { get; private set; }
+    [field: SerializeField] public bool Disabled { get; private set; }
+    [field: SerializeField] public int DisableIndex { get; private set; }
+    [field: SerializeField] public int DisableCounter { get; private set; }
 
     #endregion
 
@@ -185,6 +187,18 @@ public class BattlePokemon
         yield return _battle.StartCoroutine(Faint());
     }
 
+    public List<int> GetMovesWithPP()
+    {
+        List<int> indexes = new List<int>(4);
+        for (int i = 0; i < 4; i++)
+        {
+            if (Moves[i] != null && Moves[i].CurrentPP > 0)
+                indexes.Add(i);
+        }
+
+        return indexes;
+    }
+
     #region Stat Methods
 
     public bool CanStatBeLowered(StatType stat) => StatModifiers.CanGoLower(stat);
@@ -278,6 +292,27 @@ public class BattlePokemon
     {
         Confused = true;
         ConfusionTimer = Random.Range(1, 5);
+    }
+
+    public void DisableMove(int index)
+    {
+        Disabled = true;
+        DisableIndex = index;
+        DisableCounter = Random.Range(1, 9);
+    }
+
+    public void ReduceDisableCounter()
+    {
+        DisableCounter--;
+        if (DisableCounter == 0)
+            ClearDisable();
+    }
+
+    public void ClearDisable()
+    {
+        Disabled = false;
+        DisableIndex = -1;
+        DisableCounter = 0;
     }
 
     public void Freeze() => ReferencePokemon.Status = StatusEffect.FRZ;

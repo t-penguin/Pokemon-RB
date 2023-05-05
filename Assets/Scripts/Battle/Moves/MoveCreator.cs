@@ -37,7 +37,7 @@ public static class MoveCreator
             case 26: return new Cut(battle);
             case 27: return new DefenseCurl(battle);
             case 28: return new Dig(battle);
-                // DISABLE
+            case 29: return new Disable(battle);
             case 30: return new DizzyPunch(battle);
             case 31: return new DoubleKick(battle);
             case 32: return new DoubleSlap(battle);

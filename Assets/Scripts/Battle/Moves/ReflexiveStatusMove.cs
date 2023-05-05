@@ -86,6 +86,15 @@ public abstract class ReflexiveStatusMove : BaseMove
                 user.Focused = true;
                 yield return Battle.StartCoroutine(OnFocused(user));
                 yield break;
+            case ReflexiveStatusEffect.Mist:
+                if (user.IsMistActive)
+                    yield return Battle.StartCoroutine(OnFailed());
+                else
+                {
+                    user.IsMistActive = true;
+                    yield return Battle.StartCoroutine(OnMist(user));
+                }
+                yield break;
         }
     }
 
@@ -135,6 +144,13 @@ public abstract class ReflexiveStatusMove : BaseMove
         yield return Battle.StartCoroutine(Battle.DisplayMessage($"{userName}<\ngetting pumped!", false));
         yield return new WaitForSeconds(6 / 60f);
     }
+
+    private IEnumerator OnMist(BattlePokemon user)
+    {
+        string userName = user == Battle.PlayerSide.ActivePokemon ? user.Name : $"Enemy {user.Name}";
+        yield return Battle.StartCoroutine(Battle.DisplayMessage($"{userName}<\nshrouded in mist!", false));
+        yield return new WaitForSeconds(6 / 60f);
+    }
 }
 
 public enum ReflexiveStatusEffect
@@ -149,5 +165,6 @@ public enum ReflexiveStatusEffect
     LightScreen,
     Rest,
     RestoreHealth,
-    Focus
+    Focus,
+    Mist
 }

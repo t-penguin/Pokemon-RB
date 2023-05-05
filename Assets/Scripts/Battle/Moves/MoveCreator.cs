@@ -66,7 +66,7 @@ public static class MoveCreator
             case 55: return new Guillotine(battle);
             case 56: return new Gust(battle);
             case 57: return new Harden(battle);
-                // HAZE
+            case 58: return new Haze(battle);
             case 59: return new Headbutt(battle);
             case 60: return new HiJumpKick(battle);
             case 61: return new HornAttack(battle);
@@ -95,7 +95,7 @@ public static class MoveCreator
                 // MIMIC
             case 85: return new Minimize(battle);
                 // MIRROR MOVE
-                // MIST
+            case 87: return new Mist(battle);
             case 88: return new NightShade(battle);
             case 89: return new PayDay(battle);
             case 90: return new Peck(battle);

@@ -90,6 +90,7 @@ public class BattlePokemon
 
     public void SetLastMoveUsed(BaseMove move) => LastMoveUsed = move;
     public void SetMirrorMove(TransitiveMove move) => MirrorMove = move;
+    public void ClearMirrorMove() => MirrorMove = null;
 
     public IEnumerator RecieveDamge(int damage, Type type)
     {

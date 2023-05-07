@@ -91,10 +91,10 @@ public static class MoveCreator
             case 80: return new MegaDrain(battle);
             case 81: return new MegaKick(battle);
             case 82: return new MegaPunch(battle);
-                // METRONOME
+            case 83: return new Metronome(battle);
                 // MIMIC
             case 85: return new Minimize(battle);
-                // MIRROR MOVE
+            case 86: return new MirrorMove(battle);
             case 87: return new Mist(battle);
             case 88: return new NightShade(battle);
             case 89: return new PayDay(battle);
@@ -143,7 +143,7 @@ public static class MoveCreator
             case 132: return new Stomp(battle);
             case 133: return new Strength(battle);
             case 134: return new StringShot(battle);
-                // STRUGGLE
+            case 135: return new Struggle(battle);
             case 136: return new StunSpore(battle);
             case 137: return new Submission(battle);
                 // SUBSTITUTE

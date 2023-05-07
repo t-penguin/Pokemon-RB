@@ -57,12 +57,21 @@ public abstract class SimpleAttackMove : AttackMove
         }
 
         // Hit
-        if(dealsFixedDamage)
+        if (dealsFixedDamage)
             yield return Battle.StartCoroutine(DealFixedDamage(user, opponent));
         else if (sapsHealth)
             yield return Battle.StartCoroutine(DealDamageAndRegainHealth(user, opponent));
         else
+        {
             yield return Battle.StartCoroutine(DealDamage(user, opponent));
+            // Recoil Damage Check
+            if(hasRecoil)
+            {
+                int recoilDamage = Mathf.Max(1, opponent.LastDamageRecieved / 4);
+                yield return Battle.StartCoroutine(user.RecieveDamge(recoilDamage, Type));
+                yield return Battle.StartCoroutine(OnRecoil(user));
+            }
+        }
 
         // Secondary Effect Check
         bool hasSecondaryEffect = secondaryEffect != SecondaryEffects.None;
@@ -227,6 +236,14 @@ public abstract class SimpleAttackMove : AttackMove
         SetMirrorMove(opponent);
         CurrentPP--;
         Battle.StopCoroutine(Execute(user, opponent));
+    }
+
+    protected IEnumerator OnRecoil(BattlePokemon user)
+    {
+        string userName = user.TrainerIsPlayer ? user.Name : $"Enemy {user.Name}";
+        string recoilMessage = $"{userName}<\n hit with recoil!";
+        yield return Battle.StartCoroutine(Battle.DisplayMessage(recoilMessage, false));
+        yield return new WaitForSeconds(10 / 60f);
     }
 }
 

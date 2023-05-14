@@ -40,7 +40,7 @@ public class Toxic : TransitiveStatusMove
         else
         {
             opponent.BadlyPoison();
-            Battle.StartCoroutine(OnBadlyPoisoned(opponent));
+            yield return Battle.StartCoroutine(OnBadlyPoisoned(opponent));
         }
 
         SetLastMoveUsed(user);

@@ -109,7 +109,7 @@ public abstract class TransitiveStatusMove : TransitiveMove
             else
             {
                 success = true;
-                yield return Battle.StartCoroutine(OnEndedBattle(opponent));
+                yield return Battle.StartCoroutine(OnBattleForceEnded(opponent, battleEndingMessage));
             }
 
         }
@@ -128,19 +128,19 @@ public abstract class TransitiveStatusMove : TransitiveMove
         {
             default: yield break;
             case TransitiveStatusEffect.LowerAttack:
-                yield return Battle.StartCoroutine(LowerStatAttempt(target, StatType.Attack));
+                yield return Battle.StartCoroutine(LowerStatAttempt(target, StatType.ATTACK));
                 yield break;
             case TransitiveStatusEffect.LowerDefense:
-                yield return Battle.StartCoroutine(LowerStatAttempt(target, StatType.Defense));
+                yield return Battle.StartCoroutine(LowerStatAttempt(target, StatType.DEFENSE));
                 yield break;
             case TransitiveStatusEffect.LowerSpecial:
-                yield return Battle.StartCoroutine(LowerStatAttempt(target, StatType.Special));
+                yield return Battle.StartCoroutine(LowerStatAttempt(target, StatType.SPECIAL));
                 yield break;
             case TransitiveStatusEffect.LowerSpeed:
-                yield return Battle.StartCoroutine(LowerStatAttempt(target, StatType.Speed));
+                yield return Battle.StartCoroutine(LowerStatAttempt(target, StatType.SPEED));
                 yield break;
             case TransitiveStatusEffect.LowerAccuracy:
-                yield return Battle.StartCoroutine(LowerStatAttempt(target, StatType.Accuracy));
+                yield return Battle.StartCoroutine(LowerStatAttempt(target, StatType.ACCURACY));
                 yield break;
             case TransitiveStatusEffect.Paralyze:
                 yield return Battle.StartCoroutine(ApplyNonVolatileStatus(target, StatusEffect.PAR));
@@ -176,8 +176,8 @@ public abstract class TransitiveStatusMove : TransitiveMove
         {
             int index = Random.Range(0, MovesWithPP.Count);
             target.DisableMove(MovesWithPP[index]);
-            string moveName = target.Moves[MovesWithPP[index]].Name;
-            yield return Battle.StartCoroutine(OnDisabled(target, moveName));
+            BaseMove move = target.Moves[MovesWithPP[index]];
+            yield return Battle.StartCoroutine(OnDisabled(target, move));
         }
     }
 
@@ -190,7 +190,7 @@ public abstract class TransitiveStatusMove : TransitiveMove
             yield return Battle.StartCoroutine(OnLoweredStat(target, stat, greatlyLowerStat));
         }
         else
-            yield return Battle.StartCoroutine(OnFailed());
+            yield return Battle.StartCoroutine(OnNothingHappened());
     }
 
     private IEnumerator ApplyNonVolatileStatus(BattlePokemon target, StatusEffect effect)
@@ -217,27 +217,6 @@ public abstract class TransitiveStatusMove : TransitiveMove
                 yield return Battle.StartCoroutine(OnSlept(target));
                 yield break;
         }
-    }
-
-    private IEnumerator OnSeeded(BattlePokemon target)
-    {
-        string targetName = target == Battle.PlayerSide.ActivePokemon ? target.Name : $"Enemy {target.Name}";
-        yield return Battle.StartCoroutine(Battle.DisplayMessage($"{targetName}\nwas seeded!", true));
-        yield return new WaitForSeconds(6 / 60f);
-    }
-
-    private IEnumerator OnDisabled(BattlePokemon target, string moveName)
-    {
-        string targetName = target == Battle.PlayerSide.ActivePokemon ? target.Name : $"Enemy {target.Name}";
-        yield return Battle.StartCoroutine(Battle.DisplayMessage($"{targetName}<\n{moveName} was\ndisabled!", true));
-        yield return new WaitForSeconds(6 / 60f);
-    }
-
-    private IEnumerator OnEndedBattle(BattlePokemon target)
-    {
-        string targetName = target == Battle.PlayerSide.ActivePokemon ? target.Name : $"Enemy {target.Name}";
-        yield return Battle.StartCoroutine(Battle.DisplayMessage($"{targetName}\n{battleEndingMessage}", false));
-        yield return new WaitForSeconds(6 / 60f);
     }
 }
 

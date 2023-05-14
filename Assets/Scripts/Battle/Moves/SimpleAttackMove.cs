@@ -52,7 +52,7 @@ public abstract class SimpleAttackMove : AttackMove
         // No Effect Check
         if(MoveData.HasNoEffect(this, opponent))
         {
-            yield return Battle.StartCoroutine(OnNoEffect());
+            yield return Battle.StartCoroutine(OnDoesNotAffect());
             EndMove(user, opponent);
         }
 
@@ -100,7 +100,7 @@ public abstract class SimpleAttackMove : AttackMove
         else if (opponent.Stats.Speed > user.Stats.Speed)
             yield return Battle.StartCoroutine(OnFailed());
         else if (MoveData.HasNoEffect(this, opponent))
-            yield return Battle.StartCoroutine(OnNoEffect());
+            yield return Battle.StartCoroutine(OnDoesNotAffect());
         else
         {
             int damage = opponent.CurrentHP;
@@ -120,7 +120,7 @@ public abstract class SimpleAttackMove : AttackMove
         if (opponent.IsSemiInvulnerable || !AccuracyCheck(user, opponent))
             yield return Battle.StartCoroutine(OnMissed(user));
         else if (MoveData.HasNoEffect(this, opponent))
-            yield return Battle.StartCoroutine(OnNoEffect());
+            yield return Battle.StartCoroutine(OnDoesNotAffect());
         else
             yield return Battle.StartCoroutine(DealDamage(user, opponent));
 
@@ -141,7 +141,7 @@ public abstract class SimpleAttackMove : AttackMove
         yield return Battle.StartCoroutine(target.RecieveDamge(damage, Type));
         if (isCrit)
             yield return Battle.StartCoroutine(OnCriticalHit());
-        yield return Battle.StartCoroutine(OnEffective(effectiveness));
+        yield return Battle.StartCoroutine(OnEffectiveness(effectiveness));
 
         // ADD HERE: Check for substitute break. Do NOT regain health if substitute breaks
 
@@ -161,71 +161,65 @@ public abstract class SimpleAttackMove : AttackMove
         yield return new WaitForSeconds(60 / 60f);
     }
 
-    protected IEnumerator OnHealthSapped(BattlePokemon opponent)
-    {
-        string text;
-        if (opponent.TrainerIsPlayer)
-            text = $"Sucked health from\n{opponent.Name}!";
-        else
-            text = $"Sucked health from\nEnemy {opponent.Name}!";
-
-        yield return Battle.StartCoroutine(Battle.DisplayMessage(text, true));
-        yield return new WaitForSeconds(4 / 60f);
-    }
-
     protected IEnumerator ApplySecondaryEffect(SecondaryEffects effect, BattlePokemon opponent)
     {
         switch(effect)
         {
             default: yield break;
             case SecondaryEffects.LowerAttack:
-                if (opponent.CanStatBeLowered(StatType.Attack))
+                if (opponent.CanStatBeLowered(StatType.ATTACK))
                 {
-                    opponent.ModifyStatAsSecondary(StatType.Attack, -1);
-                    yield return Battle.StartCoroutine(OnLoweredStat(opponent, StatType.Attack));
+                    opponent.ModifyStatAsSecondary(StatType.ATTACK, -1);
+                    yield return Battle.StartCoroutine(OnLoweredStat(opponent, StatType.ATTACK));
                 }
                 yield break;
             case SecondaryEffects.LowerDefense:
-                if (opponent.CanStatBeLowered(StatType.Defense))
+                if (opponent.CanStatBeLowered(StatType.DEFENSE))
                 {
-                    opponent.ModifyStatAsSecondary(StatType.Defense, -1);
-                    yield return Battle.StartCoroutine(OnLoweredStat(opponent, StatType.Defense));
+                    opponent.ModifyStatAsSecondary(StatType.DEFENSE, -1);
+                    yield return Battle.StartCoroutine(OnLoweredStat(opponent, StatType.DEFENSE));
                 }
                 yield break;
             case SecondaryEffects.LowerSpecial:
-                if (opponent.CanStatBeLowered(StatType.Special))
+                if (opponent.CanStatBeLowered(StatType.SPECIAL))
                 {
-                    opponent.ModifyStatAsSecondary(StatType.Special, -1);
-                    yield return Battle.StartCoroutine(OnLoweredStat(opponent, StatType.Special));
+                    opponent.ModifyStatAsSecondary(StatType.SPECIAL, -1);
+                    yield return Battle.StartCoroutine(OnLoweredStat(opponent, StatType.SPECIAL));
                 }
                 yield break;
             case SecondaryEffects.LowerSpeed:
-                if (opponent.CanStatBeLowered(StatType.Speed))
+                if (opponent.CanStatBeLowered(StatType.SPEED))
                 {
-                    opponent.ModifyStatAsSecondary(StatType.Speed, -1);
-                    yield return Battle.StartCoroutine(OnLoweredStat(opponent, StatType.Speed));
+                    opponent.ModifyStatAsSecondary(StatType.SPEED, -1);
+                    yield return Battle.StartCoroutine(OnLoweredStat(opponent, StatType.SPEED));
                 }
                 yield break;
             case SecondaryEffects.Flinch:
                 opponent.Flinch();
                 yield break;
             case SecondaryEffects.Confusion:
-
+                opponent.Confuse();
+                yield return Battle.StartCoroutine(OnConfused(opponent));
                 yield break;
             case SecondaryEffects.Freeze:
                 opponent.Freeze();
+                yield return Battle.StartCoroutine(OnFrozen(opponent));
                 yield break;
             case SecondaryEffects.Burn:
                 opponent.Burn();
+                yield return Battle.StartCoroutine(OnBurned(opponent));
                 yield break;
             case SecondaryEffects.Poison:
-
+                opponent.Poison();
+                yield return Battle.StartCoroutine(OnPoisoned(opponent));
                 yield break;
             case SecondaryEffects.Paralysis:
-                
+                opponent.Paralyze();
+                yield return Battle.StartCoroutine(OnParalyzed(opponent));
                 yield break;
             case SecondaryEffects.Sleep:
-
+                opponent.Sleep();
+                yield return Battle.StartCoroutine(OnSlept(opponent));
                 yield break;
         }
     }
@@ -236,14 +230,6 @@ public abstract class SimpleAttackMove : AttackMove
         SetMirrorMove(opponent);
         CurrentPP--;
         Battle.StopCoroutine(Execute(user, opponent));
-    }
-
-    protected IEnumerator OnRecoil(BattlePokemon user)
-    {
-        string userName = user.TrainerIsPlayer ? user.Name : $"Enemy {user.Name}";
-        string recoilMessage = $"{userName}<\n hit with recoil!";
-        yield return Battle.StartCoroutine(Battle.DisplayMessage(recoilMessage, false));
-        yield return new WaitForSeconds(10 / 60f);
     }
 }
 

@@ -19,18 +19,13 @@ public class Struggle : SimpleAttackMove
 
     public override IEnumerator Execute(BattlePokemon user, BattlePokemon opponent)
     {
-        string userName = user.TrainerIsPlayer ? user.Name : $"Enemy {user.Name}";
-        string noMovesMessage = $"{userName} has no\nmoves left!";
-        yield return Battle.StartCoroutine(Battle.DisplayMessage(noMovesMessage, false));
-        yield return new WaitForSeconds(30 / 60f);
-
         yield return Battle.StartCoroutine(OnUsed(user));
 
         bool missed = opponent.IsSemiInvulnerable || !AccuracyCheck(user, opponent);
         if (missed)
             yield return Battle.StartCoroutine(OnMissed(user));
         else if (MoveData.HasNoEffect(this, opponent))
-            yield return Battle.StartCoroutine(OnNoEffect());
+            yield return Battle.StartCoroutine(OnDoesNotAffect());
         else
         {
             yield return Battle.StartCoroutine(DealDamage(user, opponent));

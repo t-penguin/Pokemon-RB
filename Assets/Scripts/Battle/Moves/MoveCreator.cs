@@ -4,6 +4,8 @@ using UnityEngine;
 
 public static class MoveCreator
 {
+    public static int TotalMoves = 165;
+
     public static BaseMove CreateMove(BattleStateManager battle, int index)
     {
         switch(index)

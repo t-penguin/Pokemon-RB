@@ -15,12 +15,14 @@ public class Metronome : ReflexiveStatusMove
     public override IEnumerator Execute(BattlePokemon user, BattlePokemon opponent)
     {
         yield return Battle.StartCoroutine(OnUsed(user));
-        yield return new WaitForSeconds(6 / 60f);
 
-        int moveIndex = 83;
+        int metronome_index = 83;
+        int struggle_index = 135;
+        int moveIndex = metronome_index;
+
         // Metronome cannot call itself (83) or Struggle (135)
-        while (moveIndex == 83 || moveIndex == 135)
-            moveIndex = Random.Range(1, 166);
+        while (moveIndex == metronome_index || moveIndex == struggle_index)
+            moveIndex = Random.Range(1, MoveCreator.TotalMoves + 1);
 
         BaseMove Move = MoveCreator.CreateMove(Battle, moveIndex);
 

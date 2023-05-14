@@ -43,7 +43,7 @@ public sealed class StatStageModifiers
         float stage = GetStage(type);
 
         // Negate the evasion stage for intended effects
-        if (type == StatType.Evasion) stage = -stage;
+        if (type == StatType.EVASION) stage = -stage;
 
         return (stage >= 0) ? (2 + stage) / 2 : 2 / (2 - stage);
     }
@@ -65,12 +65,12 @@ public sealed class StatStageModifiers
         switch (stat)
         {
             default: return 0;
-            case StatType.Attack:   return Attack;
-            case StatType.Defense:  return Defense;
-            case StatType.Special:  return Special;
-            case StatType.Speed:    return Speed;
-            case StatType.Accuracy: return Accuracy;
-            case StatType.Evasion:  return Evasion;
+            case StatType.ATTACK:   return Attack;
+            case StatType.DEFENSE:  return Defense;
+            case StatType.SPECIAL:  return Special;
+            case StatType.SPEED:    return Speed;
+            case StatType.ACCURACY: return Accuracy;
+            case StatType.EVASION:  return Evasion;
         }
     }
 
@@ -81,22 +81,22 @@ public sealed class StatStageModifiers
 
         switch (stat)
         {
-            case StatType.Attack:
+            case StatType.ATTACK:
                 Attack = value;
                 break;
-            case StatType.Defense:
+            case StatType.DEFENSE:
                 Defense = value;
                 break;
-            case StatType.Special:
+            case StatType.SPECIAL:
                 Special = value;
                 break;
-            case StatType.Speed:
+            case StatType.SPEED:
                 Speed = value;
                 break;
-            case StatType.Accuracy:
+            case StatType.ACCURACY:
                 Accuracy = value;
                 break;
-            case StatType.Evasion:
+            case StatType.EVASION:
                 Evasion = value;
                 break;
         }
@@ -105,10 +105,11 @@ public sealed class StatStageModifiers
 
 public enum StatType
 {
-    Attack,
-    Defense,
-    Special,
-    Speed,
-    Accuracy,
-    Evasion
+    NONE,
+    ATTACK,
+    DEFENSE,
+    SPECIAL,
+    SPEED,
+    ACCURACY,
+    EVASION
 }

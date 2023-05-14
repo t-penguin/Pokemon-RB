@@ -233,23 +233,23 @@ public class BattlePokemon
         {
             default:
                 return;
-            case StatType.Attack:
-                BattleStats.Attack = Mathf.Clamp((int)(Stats.Attack * StatModifiers.GetStageMultiplier(StatType.Attack)), 1, 999);
+            case StatType.ATTACK:
+                BattleStats.Attack = Mathf.Clamp((int)(Stats.Attack * StatModifiers.GetStageMultiplier(StatType.ATTACK)), 1, 999);
                 break;
-            case StatType.Defense:
-                BattleStats.Defense = Mathf.Clamp((int)(Stats.Defense * StatModifiers.GetStageMultiplier(StatType.Defense)), 1, 999);
+            case StatType.DEFENSE:
+                BattleStats.Defense = Mathf.Clamp((int)(Stats.Defense * StatModifiers.GetStageMultiplier(StatType.DEFENSE)), 1, 999);
                 break;
-            case StatType.Special:
-                BattleStats.Special = Mathf.Clamp((int)(Stats.Attack * StatModifiers.GetStageMultiplier(StatType.Special)), 1, 999);
+            case StatType.SPECIAL:
+                BattleStats.Special = Mathf.Clamp((int)(Stats.Attack * StatModifiers.GetStageMultiplier(StatType.SPECIAL)), 1, 999);
                 break;
-            case StatType.Speed:
-                BattleStats.Speed = Mathf.Clamp((int)(Stats.Speed * StatModifiers.GetStageMultiplier(StatType.Speed)), 1, 999);
+            case StatType.SPEED:
+                BattleStats.Speed = Mathf.Clamp((int)(Stats.Speed * StatModifiers.GetStageMultiplier(StatType.SPEED)), 1, 999);
                 break;
-            case StatType.Accuracy:
-                Accuracy = StatModifiers.GetStageMultiplier(StatType.Accuracy);
+            case StatType.ACCURACY:
+                Accuracy = StatModifiers.GetStageMultiplier(StatType.ACCURACY);
                 break;
-            case StatType.Evasion:
-                Evasion = StatModifiers.GetStageMultiplier(StatType.Evasion);
+            case StatType.EVASION:
+                Evasion = StatModifiers.GetStageMultiplier(StatType.EVASION);
                 break;
         }
 

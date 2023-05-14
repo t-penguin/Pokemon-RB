@@ -335,9 +335,7 @@ public static class MoveData
     /// <param name="move">The move that the user is using.</param>
     /// <param name="user">The attacking Pokemon.</param>
     /// <returns></returns>
-    public static float STABMultiplier(AttackMove move, BattlePokemon user)
-    => (user.Primary == move.Type || user.Secondary == move.Type) ? 1.5f : 1.0f;
-
+    public static float STABMultiplier(AttackMove move, BattlePokemon user) => user.IsType(move.Type) ? 1.5f : 1.0f;
 
     /// <summary>
     /// The damage formula given stats from the attacker and the target.

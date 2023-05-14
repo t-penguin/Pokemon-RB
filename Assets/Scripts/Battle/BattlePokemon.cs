@@ -88,6 +88,8 @@ public class BattlePokemon
 
     #endregion
 
+    public bool IsType(Type type) => Primary == type || Secondary == type;
+
     public void SetLastMoveUsed(BaseMove move) => LastMoveUsed = move;
     public void SetMirrorMove(TransitiveMove move) => MirrorMove = move;
     public void ClearMirrorMove() => MirrorMove = null;

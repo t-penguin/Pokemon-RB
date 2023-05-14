@@ -45,10 +45,9 @@ public class Twineedle : MultiHitAttackMove
         yield return Battle.StartCoroutine(OnEffectiveness(effectiveness));
         yield return Battle.StartCoroutine(OnMultiHit(totalHits));
 
-        bool targetIsPoisonType = target.Primary == Type.POISON || target.Secondary == Type.POISON;
         bool targetIsAlive = target.Status != StatusEffect.FNT;
         bool poisonHits = Random.Range(0, 10) < 2;
-        if(targetIsAlive && !targetIsPoisonType && poisonHits)
+        if(targetIsAlive && !target.IsType(Type.POISON) && poisonHits)
         {
             target.Poison();
             yield return Battle.StartCoroutine(OnPoisoned(target));

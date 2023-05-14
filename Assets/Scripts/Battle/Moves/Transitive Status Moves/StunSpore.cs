@@ -10,7 +10,7 @@ public class StunSpore : TransitiveStatusMove
             type: Type.GRASS,
             basePP: 30,
             accuracy: 75,
-            battle: battle)
+            battle: battle )
     {
         Effect = TransitiveStatusEffect.Paralyze;
     }

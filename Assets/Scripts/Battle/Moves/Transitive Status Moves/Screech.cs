@@ -10,7 +10,7 @@ public class Screech : TransitiveStatusMove
             type: Type.NORMAL,
             basePP: 40,
             accuracy: 85,
-            battle: battle)
+            battle: battle )
     {
         Effect = TransitiveStatusEffect.LowerDefense;
         greatlyLowerStat = true;

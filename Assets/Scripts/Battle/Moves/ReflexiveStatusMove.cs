@@ -64,7 +64,7 @@ public abstract class ReflexiveStatusMove : BaseMove
         else
         {
             success = true;
-            yield return Battle.StartCoroutine(OnTeleported(opponent));
+            yield return Battle.StartCoroutine(OnTeleport(opponent));
         }
 
         SetLastMoveUsed(user);
@@ -79,37 +79,47 @@ public abstract class ReflexiveStatusMove : BaseMove
         switch (Effect)
         {
             case ReflexiveStatusEffect.RaiseAttack:
-                yield return Battle.StartCoroutine(RaiseStatAttempt(user, StatType.Attack));
+                yield return Battle.StartCoroutine(RaiseStatAttempt(user, StatType.ATTACK));
                 yield break;
             case ReflexiveStatusEffect.RaiseDefense:
-                yield return Battle.StartCoroutine(RaiseStatAttempt(user, StatType.Defense));
+                yield return Battle.StartCoroutine(RaiseStatAttempt(user, StatType.DEFENSE));
                 yield break;
             case ReflexiveStatusEffect.RaiseSpecial:
-                yield return Battle.StartCoroutine(RaiseStatAttempt(user, StatType.Special));
+                yield return Battle.StartCoroutine(RaiseStatAttempt(user, StatType.SPECIAL));
                 yield break;
             case ReflexiveStatusEffect.RaiseSpeed:
-                yield return Battle.StartCoroutine(RaiseStatAttempt(user, StatType.Speed));
+                yield return Battle.StartCoroutine(RaiseStatAttempt(user, StatType.SPEED));
                 yield break;
             case ReflexiveStatusEffect.RaiseEvasion:
-                yield return Battle.StartCoroutine(RaiseStatAttempt(user, StatType.Evasion));
+                yield return Battle.StartCoroutine(RaiseStatAttempt(user, StatType.EVASION));
                 yield break;
             case ReflexiveStatusEffect.Reflect:
-                user.IsReflectActive = true;
-                yield return Battle.StartCoroutine(OnReflect(user));
+                if (user.IsReflectActive)
+                    yield return Battle.StartCoroutine(OnFailed());
+                else
+                {
+                    user.IsReflectActive = true;
+                    yield return Battle.StartCoroutine(OnReflect(user));
+                }
                 yield break;
             case ReflexiveStatusEffect.LightScreen:
-                user.IsLightScreenActive = true;
-                yield return Battle.StartCoroutine(OnLightScreen(user));
+                if (user.IsLightScreenActive)
+                    yield return Battle.StartCoroutine(OnFailed());
+                else
+                {
+                    user.IsLightScreenActive = true;
+                    yield return Battle.StartCoroutine(OnLightScreen(user));
+                }
                 yield break;
             case ReflexiveStatusEffect.Rest:
                 if (user.CurrentHP == user.Stats.HP)
                     yield return Battle.StartCoroutine(OnFailed());
                 else
                 {
-                    yield return Battle.StartCoroutine(OnRest(user));
+                    yield return Battle.StartCoroutine(OnRested(user));
                     yield return Battle.StartCoroutine(user.RestoreHealth(user.Stats.HP));
                     user.Sleep();
-                    yield return Battle.StartCoroutine(OnRegainedHealth(user));
+                    yield return Battle.StartCoroutine(OnHealthRegained(user));
                 }
                 yield break;
             case ReflexiveStatusEffect.RestoreHealth:
@@ -118,12 +128,17 @@ public abstract class ReflexiveStatusMove : BaseMove
                 else
                 {
                     yield return Battle.StartCoroutine(user.RestoreHealth(user.Stats.HP / 2));
-                    yield return Battle.StartCoroutine(OnRegainedHealth(user));
+                    yield return Battle.StartCoroutine(OnHealthRegained(user));
                 }
                 yield break;
             case ReflexiveStatusEffect.Focus:
-                user.Focused = true;
-                yield return Battle.StartCoroutine(OnFocused(user));
+                if (user.Focused)
+                    yield return Battle.StartCoroutine(OnFailed());
+                else
+                {
+                    user.Focused = true;
+                    yield return Battle.StartCoroutine(OnFocused(user));
+                }
                 yield break;
             case ReflexiveStatusEffect.Mist:
                 if (user.IsMistActive)
@@ -146,56 +161,7 @@ public abstract class ReflexiveStatusMove : BaseMove
             yield return Battle.StartCoroutine(OnRaisedStat(user, stat, greatlyRaiseStat));
         }
         else
-            yield return Battle.StartCoroutine(OnFailed());
-    }
-
-    private IEnumerator OnReflect(BattlePokemon user)
-    {
-        string userName = user == Battle.PlayerSide.ActivePokemon ? user.Name : $"Enemy {user.Name}";
-        yield return Battle.StartCoroutine(Battle.DisplayMessage($"{userName}\ngained armor!", false));
-        yield return new WaitForSeconds(6 / 60f);
-    }
-
-    private IEnumerator OnLightScreen(BattlePokemon user)
-    {
-        string userName = user == Battle.PlayerSide.ActivePokemon ? user.Name : $"Enemy {user.Name}";
-        yield return Battle.StartCoroutine(Battle.DisplayMessage($"{userName}<\nprotected against\nspecial attacks!", false));
-        yield return new WaitForSeconds(6 / 60f);
-    }
-
-    private IEnumerator OnRegainedHealth(BattlePokemon user)
-    {
-        string userName = user == Battle.PlayerSide.ActivePokemon ? user.Name : $"Enemy {user.Name}";
-        yield return Battle.StartCoroutine(Battle.DisplayMessage($"{userName}\nregained health!", false));
-        yield return new WaitForSeconds(6 / 60f);
-    }
-
-    private IEnumerator OnRest(BattlePokemon user)
-    {
-        string userName = user == Battle.PlayerSide.ActivePokemon ? user.Name : $"Enemy {user.Name}";
-        yield return Battle.StartCoroutine(Battle.DisplayMessage($"{userName}\nstarted sleeping!", false));
-        yield return new WaitForSeconds(6 / 60f);
-    }
-
-    private IEnumerator OnFocused(BattlePokemon user)
-    {
-        string userName = user == Battle.PlayerSide.ActivePokemon ? user.Name : $"Enemy {user.Name}";
-        yield return Battle.StartCoroutine(Battle.DisplayMessage($"{userName}<\ngetting pumped!", false));
-        yield return new WaitForSeconds(6 / 60f);
-    }
-
-    private IEnumerator OnMist(BattlePokemon user)
-    {
-        string userName = user == Battle.PlayerSide.ActivePokemon ? user.Name : $"Enemy {user.Name}";
-        yield return Battle.StartCoroutine(Battle.DisplayMessage($"{userName}<\nshrouded in mist!", false));
-        yield return new WaitForSeconds(6 / 60f);
-    }
-
-    private IEnumerator OnTeleported(BattlePokemon user)
-    {
-        string userName = user == Battle.PlayerSide.ActivePokemon ? user.Name : $"Enemy {user.Name}";
-        yield return Battle.StartCoroutine(Battle.DisplayMessage($"{userName}\nran from battle!", false));
-        yield return new WaitForSeconds(6 / 60f);
+            yield return Battle.StartCoroutine(OnNothingHappened());
     }
 }
 

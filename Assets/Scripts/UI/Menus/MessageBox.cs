@@ -126,7 +126,7 @@ public class MessageBox : MonoBehaviour
         _size.y = 24;
         _messageText.rectTransform.sizeDelta = _size;
         _messageText.rectTransform.localPosition = Vector2.zero;
-        _messageText.text = text;
+        _messageText.text = text.FontFormat();
         _canBlink = false;
         _arrow.gameObject.SetActive(false);
     }

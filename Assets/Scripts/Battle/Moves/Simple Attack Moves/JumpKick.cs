@@ -25,6 +25,7 @@ public class JumpKick : SimpleAttackMove
         if (opponent.IsSemiInvulnerable || !AccuracyCheck(user, opponent) || MoveData.HasNoEffect(this, opponent))
         {
             yield return Battle.StartCoroutine(OnMissed(user));
+            yield return Battle.StartCoroutine(OnCrashed(user));
             yield return Battle.StartCoroutine(user.RecieveDamge(1, Type.NONE));
         }
         else

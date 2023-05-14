@@ -25,10 +25,11 @@ public class HiJumpKick : SimpleAttackMove
         if (opponent.IsSemiInvulnerable || !AccuracyCheck(user, opponent))
         {
             yield return Battle.StartCoroutine(OnMissed(user));
+            yield return Battle.StartCoroutine(OnCrashed(user));
             yield return Battle.StartCoroutine(user.RecieveDamge(1, Type.NONE));
         }
         else if (MoveData.HasNoEffect(this, opponent))
-            yield return Battle.StartCoroutine(OnNoEffect());
+            yield return Battle.StartCoroutine(OnDoesNotAffect());
         else
             yield return Battle.StartCoroutine(DealDamage(user, opponent));
 

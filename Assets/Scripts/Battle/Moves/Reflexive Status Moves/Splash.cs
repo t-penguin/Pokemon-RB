@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Splash : ReflexiveStatusMove
 {
-    private const string NO_EFFECT = "No effect!";
-
     public Splash(BattleStateManager battle)
         : base (
             name: "SPLASH",
@@ -17,8 +15,7 @@ public class Splash : ReflexiveStatusMove
     protected override IEnumerator Execute(BattlePokemon user)
     {
         yield return Battle.StartCoroutine(OnUsed(user));
-        yield return Battle.StartCoroutine(Battle.DisplayMessage(NO_EFFECT, false));
-        yield return new WaitForSeconds(60 / 60f);
+        yield return Battle.StartCoroutine(OnNoEffect());
 
         SetLastMoveUsed(user);
         CurrentPP--;

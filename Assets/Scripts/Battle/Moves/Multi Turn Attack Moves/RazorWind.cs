@@ -15,6 +15,6 @@ public class RazorWind : MultiTurnAttackMove
             battle: battle )
     {
         AttackType = MultiTurnAttackType.Charging;
-        ChargingText = "made a whirlwind!";
+        ChargingText = BattleMessages.CHARGING_RAZOR_WIND;
     }
 }

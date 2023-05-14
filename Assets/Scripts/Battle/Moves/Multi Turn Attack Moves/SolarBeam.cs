@@ -15,6 +15,6 @@ public class SolarBeam : MultiTurnAttackMove
             battle: battle )
     {
         AttackType = MultiTurnAttackType.Charging;
-        ChargingText = "took in sunlight!";
+        ChargingText = BattleMessages.CHARGING_SOLARBEAM;
     }
 }

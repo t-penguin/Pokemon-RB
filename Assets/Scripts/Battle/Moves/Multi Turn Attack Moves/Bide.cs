@@ -32,8 +32,7 @@ public class Bide : MultiTurnAttackMove
         // Final Turn
         if(TurnsLeft == 1)
         {
-            string name = user.TrainerIsPlayer ? user.Name : $"Enemy {user.Name}";
-            yield return Battle.StartCoroutine(Battle.DisplayMessage($"{name}\nunleashed energy!", true));
+            yield return Battle.StartCoroutine(OnUnleashedEnergy(user));
             yield return DealDamage(user, opponent);
             TurnsLeft = 0;
             user.IsBideActive = false;

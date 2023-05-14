@@ -15,7 +15,7 @@ public class Dig : MultiTurnAttackMove
             battle: battle )
     {
         AttackType = MultiTurnAttackType.Charging;
-        ChargingText = "dug a hole!";
+        ChargingText = BattleMessages.CHARGING_DIG;
         ShowUseAndChargeText = true;
         SemiInvulnerability = true;
     }

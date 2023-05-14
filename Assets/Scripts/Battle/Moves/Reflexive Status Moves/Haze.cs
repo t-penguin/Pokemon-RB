@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Haze : ReflexiveStatusMove
 {
-    private const string STATUS_CHANGES_ELIMINATED = "All STATUS changes\nare eliminated!";
-
     public Haze(BattleStateManager battle)
         : base (
             name: "HAZE",
@@ -54,8 +52,7 @@ public class Haze : ReflexiveStatusMove
         // Removes non-volatile status conditions from the opponent
         opponent.ClearNonVolatileStatus();
 
-        yield return Battle.StartCoroutine(Battle.DisplayMessage(STATUS_CHANGES_ELIMINATED, true));
-        yield return new WaitForSeconds(6 / 60f);
+        yield return Battle.StartCoroutine(OnHaze());
 
         user.SetLastMoveUsed(this);
         CurrentPP--;

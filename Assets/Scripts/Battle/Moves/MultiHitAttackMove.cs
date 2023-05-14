@@ -29,7 +29,7 @@ public abstract class MultiHitAttackMove : AttackMove
         if (opponent.IsSemiInvulnerable || !AccuracyCheck(user, opponent))
             yield return Battle.StartCoroutine(OnMissed(user));
         else if (MoveData.HasNoEffect(this, opponent))
-            yield return Battle.StartCoroutine(OnNoEffect());
+            yield return Battle.StartCoroutine(OnDoesNotAffect());
         else
         {
             if(RandomHits)
@@ -83,8 +83,8 @@ public abstract class MultiHitAttackMove : AttackMove
         }
 
         target.LastDamageRecieved = Damage;
-        yield return Battle.StartCoroutine(OnEffective(effectiveness));
-        yield return Battle.StartCoroutine(Battle.DisplayMessage($"Hit the enemy\n{totalHits} times!", true));
+        yield return Battle.StartCoroutine(OnEffectiveness(effectiveness));
+        yield return Battle.StartCoroutine(OnMultiHit(totalHits));
         yield return new WaitForSeconds(60 / 60f);
     }
 }

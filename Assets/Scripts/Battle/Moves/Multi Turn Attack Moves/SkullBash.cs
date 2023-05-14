@@ -15,6 +15,6 @@ public class SkullBash : MultiTurnAttackMove
             battle: battle )
     {
         AttackType = MultiTurnAttackType.Charging;
-        ChargingText = "lowered its head!";
+        ChargingText = BattleMessages.CHARGING_SKULL_BASH;
     }
 }

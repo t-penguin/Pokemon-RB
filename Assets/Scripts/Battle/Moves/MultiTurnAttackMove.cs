@@ -55,7 +55,7 @@ public abstract class MultiTurnAttackMove : AttackMove
             if (opponent.IsSemiInvulnerable || !AccuracyCheck(user, opponent))
                 yield return Battle.StartCoroutine(OnMissed(user));
             else if (MoveData.HasNoEffect(this, opponent))
-                yield return Battle.StartCoroutine(OnNoEffect());
+                yield return Battle.StartCoroutine(OnDoesNotAffect());
             else
             {
                 SetMoveLock(user, true);
@@ -97,7 +97,7 @@ public abstract class MultiTurnAttackMove : AttackMove
                 yield return new WaitForSeconds(30 / 60f);
             }
 
-            yield return Battle.StartCoroutine(OnCharging(user));
+            yield return Battle.StartCoroutine(OnCharging(user, ChargingText));
             user.IsSemiInvulnerable = SemiInvulnerability;
             SetActionLock(user, true);
             TurnsLeft = 1;
@@ -109,7 +109,7 @@ public abstract class MultiTurnAttackMove : AttackMove
         if (opponent.IsSemiInvulnerable || !AccuracyCheck(user, opponent))
             yield return Battle.StartCoroutine(OnMissed(user));
         else if (MoveData.HasNoEffect(this, opponent))
-            yield return Battle.StartCoroutine(OnNoEffect());
+            yield return Battle.StartCoroutine(OnDoesNotAffect());
         else
             yield return Battle.StartCoroutine(DealDamage(user, opponent));
 
@@ -129,7 +129,7 @@ public abstract class MultiTurnAttackMove : AttackMove
             if (opponent.IsSemiInvulnerable || !AccuracyCheck(user, opponent))
                 yield return Battle.StartCoroutine(OnMissed(user));
             else if (MoveData.HasNoEffect(this, opponent))
-                yield return Battle.StartCoroutine(OnNoEffect());
+                yield return Battle.StartCoroutine(OnDoesNotAffect());
             else
             {
                 yield return Battle.StartCoroutine(DealDamage(user, opponent));
@@ -163,13 +163,13 @@ public abstract class MultiTurnAttackMove : AttackMove
         }
         // Subsequent turns of a thrashing move
         else
-            yield return Battle.StartCoroutine(OnThrashingAbout(user));
+            yield return Battle.StartCoroutine(OnThrashing(user));
 
         // Every turn of a thrashing move performs these checks
         if (opponent.IsSemiInvulnerable || !AccuracyCheck(user, opponent))
             yield return Battle.StartCoroutine(OnMissed(user));
         else if (MoveData.HasNoEffect(this, opponent))
-            yield return Battle.StartCoroutine(OnNoEffect());
+            yield return Battle.StartCoroutine(OnDoesNotAffect());
         else
             yield return Battle.StartCoroutine(DealDamage(user, opponent));
 
@@ -229,41 +229,6 @@ public abstract class MultiTurnAttackMove : AttackMove
             Battle.PlayerSide.LockedIntoMove = locked;
         else
             Battle.OpponentSide.LockedIntoMove = locked;
-    }
-
-    private IEnumerator OnAttackContinues(BattlePokemon user)
-    {
-        string userName = user == Battle.PlayerSide.ActivePokemon ? user.Name : $"Enemy {user.Name}";
-        yield return Battle.StartCoroutine(Battle.DisplayMessage($"{userName}<\nattack continues!", false));
-        yield return new WaitForSeconds(6 / 60f);
-    }
-
-    private IEnumerator OnThrashingAbout(BattlePokemon user)
-    {
-        string userName = user == Battle.PlayerSide.ActivePokemon ? user.Name : $"Enemy {user.Name}";
-        yield return Battle.StartCoroutine(Battle.DisplayMessage($"{userName}<\nthrashing about!", false));
-        yield return new WaitForSeconds(6 / 60f);
-    }
-
-    private IEnumerator OnFatigued(BattlePokemon user)
-    {
-        string userName = user == Battle.PlayerSide.ActivePokemon ? user.Name : $"Enemy {user.Name}";
-        yield return Battle.StartCoroutine(Battle.DisplayMessage($"{userName}\nbecame confused\ndue to fatigue!", true));
-        yield return new WaitForSeconds(6 / 60f);
-    }
-
-    private IEnumerator OnCharging(BattlePokemon user)
-    {
-        string userName = user == Battle.PlayerSide.ActivePokemon ? user.Name : $"Enemy {user.Name}";
-        yield return Battle.StartCoroutine(Battle.DisplayMessage($"{userName}\n{ChargingText}", true));
-        yield return new WaitForSeconds(6 / 60f);
-    }
-
-    private IEnumerator OnRecharging(BattlePokemon user)
-    {
-        string userName = user == Battle.PlayerSide.ActivePokemon ? user.Name : $"Enemy {user.Name}";
-        yield return Battle.StartCoroutine(Battle.DisplayMessage($"{userName}\nmust recharge!", true));
-        yield return new WaitForSeconds(6 / 60f);
     }
 }
 

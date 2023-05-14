@@ -31,8 +31,6 @@ public class DreamEater : SimpleAttackMove
         }
         else
         {
-            // ANIMATION OFF
-            // ???
             yield return Battle.StartCoroutine(DealDamageAndRegainHealth(user, opponent));
             yield return Battle.StartCoroutine(OnDreamEaten(opponent));
         }
@@ -40,17 +38,5 @@ public class DreamEater : SimpleAttackMove
         SetLastMoveUsed(user);
         SetMirrorMove(opponent);
         CurrentPP--;
-    }
-
-    private IEnumerator OnDreamEaten(BattlePokemon opponent)
-    {
-        string text;
-        if (opponent.TrainerIsPlayer)
-            text = $"{opponent.Name}<\ndream was eaten!";
-        else
-            text = $"Enemy {opponent.Name}<\ndream was eaten!";
-
-        yield return Battle.StartCoroutine(Battle.DisplayMessage(text, true));
-        yield return new WaitForSeconds(4 / 60f);
     }
 }

@@ -8,10 +8,6 @@ public abstract class AttackMove : TransitiveMove
     public bool HasHighCritRatio { get; }
     public bool HalvesTargetDefense = false;
 
-    private const string SUPER_EFFECTIVE = "It was\nsuper effective!";
-    private const string NOT_EFFECTIVE = "It was not\nvery effective...";
-    private const string CRITICAL_HIT = "Critical hit!";
-
     /// <summary>
     /// Creates a damaging move that affects the target.
     /// </summary>
@@ -40,29 +36,7 @@ public abstract class AttackMove : TransitiveMove
         yield return Battle.StartCoroutine(target.RecieveDamge(damage, Type));
         if (isCrit)
             yield return Battle.StartCoroutine(OnCriticalHit());
-        yield return Battle.StartCoroutine(OnEffective(effectiveness));
+        yield return Battle.StartCoroutine(OnEffectiveness(effectiveness));
         yield return new WaitForSeconds(60 / 60f);
-    }
-
-    // Displays a message depending on the effectiveness of the move
-    protected IEnumerator OnEffective(float effectiveness)
-    {
-        if (effectiveness == 1)
-            yield break;
-
-        string text;
-        if (effectiveness < 1)
-            text = NOT_EFFECTIVE;
-        else
-            text = SUPER_EFFECTIVE;
-
-        yield return Battle.StartCoroutine(Battle.DisplayMessage(text, true));
-        yield return new WaitForSeconds(4 / 60f);
-    }
-
-    protected IEnumerator OnCriticalHit()
-    {
-        yield return Battle.StartCoroutine(Battle.DisplayMessage(CRITICAL_HIT, true));
-        yield return new WaitForSeconds(4 / 60f);
     }
 }

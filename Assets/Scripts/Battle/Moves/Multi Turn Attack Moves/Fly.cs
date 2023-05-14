@@ -15,7 +15,7 @@ public class Fly : MultiTurnAttackMove
             battle: battle )
     {
         AttackType = MultiTurnAttackType.Charging;
-        ChargingText = "flew up high!";
+        ChargingText = BattleMessages.CHARGING_FLY;
         SemiInvulnerability = true;
     }
 }

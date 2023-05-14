@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Roar : TransitiveStatusMove
 {
-    private const string RAN_AWAY_SCARED = "ran away scared!";
-
     public Roar(BattleStateManager battle)
         : base (
             name: "ROAR",
@@ -15,6 +13,6 @@ public class Roar : TransitiveStatusMove
             battle: battle )
     {
         Effect = TransitiveStatusEffect.BattleEnding;
-        battleEndingMessage = RAN_AWAY_SCARED;
+        battleEndingMessage = BattleMessages.EFFECT_ROAR;
     }
 }

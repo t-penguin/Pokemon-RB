@@ -19,9 +19,7 @@ public class Conversion : ReflexiveStatusMove
         user.Primary = opponent.Primary;
         user.Secondary = opponent.Secondary;
 
-        string targetName = opponent == Battle.PlayerSide.ActivePokemon ? opponent.Name : $"Enemy {opponent.Name}";
-        yield return Battle.StartCoroutine(Battle.DisplayMessage($"Converted type to\n{targetName}<!", true));
-        yield return new WaitForSeconds(6 / 60f);
+        yield return Battle.StartCoroutine(OnConversion(opponent));
 
         SetLastMoveUsed(user);
         CurrentPP--;

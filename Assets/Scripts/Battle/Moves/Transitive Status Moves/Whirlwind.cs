@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Whirlwind : TransitiveStatusMove
 {
-    private const string BLOWN_AWAY = "was blown away!";
     public Whirlwind(BattleStateManager battle)
         : base (
             name: "WHIRLWIND",
@@ -14,6 +13,6 @@ public class Whirlwind : TransitiveStatusMove
             battle: battle )
     {
         Effect = TransitiveStatusEffect.BattleEnding;
-        battleEndingMessage = BLOWN_AWAY;
+        battleEndingMessage = BattleMessages.EFFECT_WHIRLWIND;
     }
 }

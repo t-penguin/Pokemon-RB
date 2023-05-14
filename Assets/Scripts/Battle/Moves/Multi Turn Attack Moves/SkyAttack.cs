@@ -15,6 +15,6 @@ public class SkyAttack : MultiTurnAttackMove
             battle: battle )
     {
         AttackType = MultiTurnAttackType.Charging;
-        ChargingText = "is glowing!";
+        ChargingText = BattleMessages.CHARGING_SKY_ATTACK;
     }
 }

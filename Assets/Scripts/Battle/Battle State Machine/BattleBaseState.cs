@@ -8,10 +8,8 @@ public abstract class BattleBaseState
     protected BattleStateManager _battle;
 
     public abstract void EnterState(BattleStateManager battle);
-    public abstract void UpdateState(BattleStateManager battle);
-    public abstract void ExitState(BattleStateManager battle);
 
-    public abstract void OnNavigate(BattleStateManager battle, InputAction.CallbackContext context);
-    public abstract void OnConfirm(BattleStateManager battle, InputAction.CallbackContext context);
-    public abstract void OnCancel(BattleStateManager battle, InputAction.CallbackContext context);
+    public abstract void OnNavigate(InputAction.CallbackContext context);
+    public abstract void OnConfirm(InputAction.CallbackContext context);
+    public abstract void OnCancel(InputAction.CallbackContext context);
 }

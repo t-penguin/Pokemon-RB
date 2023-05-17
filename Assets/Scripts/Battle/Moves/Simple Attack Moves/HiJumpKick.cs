@@ -29,7 +29,7 @@ public class HiJumpKick : SimpleAttackMove
             yield return Battle.StartCoroutine(user.RecieveDamge(1, Type.NONE));
         }
         else if (MoveData.HasNoEffect(this, opponent))
-            yield return Battle.StartCoroutine(OnDoesNotAffect());
+            yield return Battle.StartCoroutine(OnDoesNotAffect(opponent));
         else
             yield return Battle.StartCoroutine(DealDamage(user, opponent));
 

@@ -25,7 +25,7 @@ public class Struggle : SimpleAttackMove
         if (missed)
             yield return Battle.StartCoroutine(OnMissed(user));
         else if (MoveData.HasNoEffect(this, opponent))
-            yield return Battle.StartCoroutine(OnDoesNotAffect());
+            yield return Battle.StartCoroutine(OnDoesNotAffect(opponent));
         else
         {
             yield return Battle.StartCoroutine(DealDamage(user, opponent));

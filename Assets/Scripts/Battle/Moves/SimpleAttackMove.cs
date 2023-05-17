@@ -52,7 +52,7 @@ public abstract class SimpleAttackMove : AttackMove
         // No Effect Check
         if(MoveData.HasNoEffect(this, opponent))
         {
-            yield return Battle.StartCoroutine(OnDoesNotAffect());
+            yield return Battle.StartCoroutine(OnDoesNotAffect(opponent));
             EndMove(user, opponent);
         }
 
@@ -100,7 +100,7 @@ public abstract class SimpleAttackMove : AttackMove
         else if (opponent.Stats.Speed > user.Stats.Speed)
             yield return Battle.StartCoroutine(OnFailed());
         else if (MoveData.HasNoEffect(this, opponent))
-            yield return Battle.StartCoroutine(OnDoesNotAffect());
+            yield return Battle.StartCoroutine(OnDoesNotAffect(opponent));
         else
         {
             int damage = opponent.CurrentHP;
@@ -120,7 +120,7 @@ public abstract class SimpleAttackMove : AttackMove
         if (opponent.IsSemiInvulnerable || !AccuracyCheck(user, opponent))
             yield return Battle.StartCoroutine(OnMissed(user));
         else if (MoveData.HasNoEffect(this, opponent))
-            yield return Battle.StartCoroutine(OnDoesNotAffect());
+            yield return Battle.StartCoroutine(OnDoesNotAffect(opponent));
         else
             yield return Battle.StartCoroutine(DealDamage(user, opponent));
 
@@ -202,20 +202,32 @@ public abstract class SimpleAttackMove : AttackMove
                 yield return Battle.StartCoroutine(OnConfused(opponent));
                 yield break;
             case SecondaryEffects.Freeze:
-                opponent.Freeze();
-                yield return Battle.StartCoroutine(OnFrozen(opponent));
+                if (!opponent.IsType(Type))
+                {
+                    opponent.Freeze();
+                    yield return Battle.StartCoroutine(OnFrozen(opponent));
+                }
                 yield break;
             case SecondaryEffects.Burn:
-                opponent.Burn();
-                yield return Battle.StartCoroutine(OnBurned(opponent));
+                if (!opponent.IsType(Type))
+                {
+                    opponent.Burn();
+                    yield return Battle.StartCoroutine(OnBurned(opponent));
+                }
                 yield break;
             case SecondaryEffects.Poison:
-                opponent.Poison();
-                yield return Battle.StartCoroutine(OnPoisoned(opponent));
+                if (!opponent.IsType(Type))
+                {
+                    opponent.Poison();
+                    yield return Battle.StartCoroutine(OnPoisoned(opponent));
+                }
                 yield break;
             case SecondaryEffects.Paralysis:
-                opponent.Paralyze();
-                yield return Battle.StartCoroutine(OnParalyzed(opponent));
+                if (!opponent.IsType(Type))
+                {
+                    opponent.Paralyze();
+                    yield return Battle.StartCoroutine(OnParalyzed(opponent));
+                }
                 yield break;
             case SecondaryEffects.Sleep:
                 opponent.Sleep();

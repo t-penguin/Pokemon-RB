@@ -29,7 +29,7 @@ public abstract class MultiHitAttackMove : AttackMove
         if (opponent.IsSemiInvulnerable || !AccuracyCheck(user, opponent))
             yield return Battle.StartCoroutine(OnMissed(user));
         else if (MoveData.HasNoEffect(this, opponent))
-            yield return Battle.StartCoroutine(OnDoesNotAffect());
+            yield return Battle.StartCoroutine(OnDoesNotAffect(opponent));
         else
         {
             if(RandomHits)

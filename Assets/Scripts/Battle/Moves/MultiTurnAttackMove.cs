@@ -55,7 +55,7 @@ public abstract class MultiTurnAttackMove : AttackMove
             if (opponent.IsSemiInvulnerable || !AccuracyCheck(user, opponent))
                 yield return Battle.StartCoroutine(OnMissed(user));
             else if (MoveData.HasNoEffect(this, opponent))
-                yield return Battle.StartCoroutine(OnDoesNotAffect());
+                yield return Battle.StartCoroutine(OnDoesNotAffect(opponent));
             else
             {
                 SetMoveLock(user, true);
@@ -109,7 +109,7 @@ public abstract class MultiTurnAttackMove : AttackMove
         if (opponent.IsSemiInvulnerable || !AccuracyCheck(user, opponent))
             yield return Battle.StartCoroutine(OnMissed(user));
         else if (MoveData.HasNoEffect(this, opponent))
-            yield return Battle.StartCoroutine(OnDoesNotAffect());
+            yield return Battle.StartCoroutine(OnDoesNotAffect(opponent));
         else
             yield return Battle.StartCoroutine(DealDamage(user, opponent));
 
@@ -129,7 +129,7 @@ public abstract class MultiTurnAttackMove : AttackMove
             if (opponent.IsSemiInvulnerable || !AccuracyCheck(user, opponent))
                 yield return Battle.StartCoroutine(OnMissed(user));
             else if (MoveData.HasNoEffect(this, opponent))
-                yield return Battle.StartCoroutine(OnDoesNotAffect());
+                yield return Battle.StartCoroutine(OnDoesNotAffect(opponent));
             else
             {
                 yield return Battle.StartCoroutine(DealDamage(user, opponent));
@@ -169,7 +169,7 @@ public abstract class MultiTurnAttackMove : AttackMove
         if (opponent.IsSemiInvulnerable || !AccuracyCheck(user, opponent))
             yield return Battle.StartCoroutine(OnMissed(user));
         else if (MoveData.HasNoEffect(this, opponent))
-            yield return Battle.StartCoroutine(OnDoesNotAffect());
+            yield return Battle.StartCoroutine(OnDoesNotAffect(opponent));
         else
             yield return Battle.StartCoroutine(DealDamage(user, opponent));
 

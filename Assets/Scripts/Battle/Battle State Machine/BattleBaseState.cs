@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public abstract class BattleBaseState
 {
+    protected BattleStateManager _battle;
+
     public abstract void EnterState(BattleStateManager battle);
     public abstract void UpdateState(BattleStateManager battle);
     public abstract void ExitState(BattleStateManager battle);

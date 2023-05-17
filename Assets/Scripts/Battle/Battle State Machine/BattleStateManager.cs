@@ -18,7 +18,7 @@ public class BattleStateManager : StateManager, IGameState
     public static event Action BattleEnded;
 
     public static event Action<BattleStateManager> OpenedPokemon;
-    public static event Action<BattleStateManager, Pokemon> SwappedPokemon;
+    public static event Action<Pokemon> SwappedPokemon;
     public static event Action<BattleStateManager, Bag> OpenedBag;
 
     public static void StartWildBattle(WildArea area) => WildBattleStart?.Invoke(area);
@@ -27,7 +27,7 @@ public class BattleStateManager : StateManager, IGameState
     public static void StartBattle() => BattleStarted?.Invoke();
 
     public static void OpenPokemonMenu(BattleStateManager battle) => OpenedPokemon?.Invoke(battle);
-    public static void SwapPokemon(BattleStateManager battle, Pokemon pokemon) => SwappedPokemon?.Invoke(battle, pokemon);
+    public static void SwapPokemon(Pokemon pokemon) => SwappedPokemon?.Invoke(pokemon);
     public static void OpenItemMenu(BattleStateManager battle, Bag bag) => OpenedBag?.Invoke(battle, bag);
 
     #endregion
@@ -112,13 +112,6 @@ public class BattleStateManager : StateManager, IGameState
         Participants = new List<Pokemon>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(_currentState != null)
-            _currentState.UpdateState(this);
-    }
-
     private void OnEnable()
     {
         WildBattleStart += OnWildBattleStart;
@@ -164,22 +157,6 @@ public class BattleStateManager : StateManager, IGameState
         EndBattle();
         MainMenu.CanOpen = true;
         GameStateManager.SwitchState(GameStateManager.GameManager);
-    }
-
-    public IEnumerator DisplayMessage(string text, bool waitForInput)
-    {
-        MessageBox.Blink = waitForInput;
-        MessageBox.SetOverTime(text);
-        while (!MessageBox.FinishedMessage)
-            yield return null;
-
-        // Exit if not waiting for input
-        if (!waitForInput)
-            yield break;
-        
-        while (!MessageBox.Continue)
-            yield return null;
-        MessageBox.Blink = false;
     }
 
     public void SetOpponentInfo(BattlePokemon pokemon)
@@ -259,8 +236,7 @@ public class BattleStateManager : StateManager, IGameState
         MoveSelection = 0;
         SetPlayerActivePokemon(pokemon);
 
-        string text = $"GO! {pokemon.Nickname}!";
-        yield return StartCoroutine(DisplayMessage(text, false));
+        yield return StartCoroutine(OnPlayerSentOutPokemon(PlayerSide.ActivePokemon));
 
         // Display player pokemon info
         yield return new WaitForSeconds(4 / 60f);
@@ -338,8 +314,7 @@ public class BattleStateManager : StateManager, IGameState
 
     public IEnumerator SwapPlayerPokemon()
     {
-        string text = $"{PlayerSide.ActivePokemon.Name} enough!\nCome back!";
-        yield return StartCoroutine(DisplayMessage(text, false));
+        yield return StartCoroutine(OnPlayerReturnedPokemon(PlayerSide.ActivePokemon));
 
         yield return new WaitForSeconds(60 / 60f);
         yield return StartCoroutine(ReturnAnimation(true));
@@ -359,15 +334,14 @@ public class BattleStateManager : StateManager, IGameState
          * If the EXP All is in the bag, participants recieve half of what
          *  they would and the rest gain the same amount divided by the total 
          *  number of Pokemon in the party. This results in experience loss
-         *  if there are multiple participants or if the player has Pokemon that have fainted.
-         *  */
+         *  if there are multiple participants or if the player has Pokemon that have fainted. */
 
-        // b * L / 7 * 1/s * a * t
-        // b = exp yield of fainted pokemon
-        // L = level of the fainted pokemon
-        // s = non-fainted participants (x2 if EXP All is in bag)
-        // a = 1.5 if the fainted pokemon is owned by a trainer, 1 if it's wild
-        // t = 1 if the player is the original trainer, 1.5 otherwise (traded)
+        /* b * L / 7 * 1/s * a * t
+         * b = exp yield of fainted pokemon
+         * L = level of the fainted pokemon
+         * s = non-fainted participants (x2 if EXP All is in bag)
+         * a = 1.5 if the fainted pokemon is owned by a trainer, 1 if it's wild
+         * t = 1 if the player is the original trainer, 1.5 otherwise (traded) */
         int yield = PokemonData.ExpYield[faintedPokemon.PokedexNumber];
         int level = faintedPokemon.Level;
         int participants = 0;
@@ -389,8 +363,7 @@ public class BattleStateManager : StateManager, IGameState
                 float tradedMultiplier = PlayerData.ID == p.TrainerID ? 1 : 1.5f;
                 expGained = Mathf.FloorToInt(expGained * tradedMultiplier);
 
-                string text = $"{p.Nickname} gained\n{expGained} EXP. Points!";
-                yield return StartCoroutine(DisplayMessage(text, true));
+                yield return StartCoroutine(OnGainedEXP(p));
                 p.GainExperience(expGained);
             }
         }
@@ -441,11 +414,30 @@ public class BattleStateManager : StateManager, IGameState
 
     #region State Manager Callbacks
 
-    public override void OnNavigate(InputAction.CallbackContext context) => _currentState.OnNavigate(this, context);
+    public override void OnNavigate(InputAction.CallbackContext context) => _currentState.OnNavigate(context);
 
-    public override void OnConfirm(InputAction.CallbackContext context) => _currentState.OnConfirm(this, context);
+    public override void OnConfirm(InputAction.CallbackContext context) => _currentState.OnConfirm(context);
 
-    public override void OnCancel(InputAction.CallbackContext context) => _currentState.OnCancel(this, context);
+    public override void OnCancel(InputAction.CallbackContext context) => _currentState.OnCancel(context);
+
+    #endregion
+
+    #region Messages
+
+    private IEnumerator OnPlayerSentOutPokemon(BattlePokemon pokemon)
+    {
+        yield return StartCoroutine(BattleMessages.Display(BattleMessages.PLAYER_SEND_OUT_1, bPokemon: pokemon, waitForInput: false));
+    }
+
+    private IEnumerator OnPlayerReturnedPokemon(BattlePokemon pokemon)
+    {
+        yield return StartCoroutine(BattleMessages.Display(BattleMessages.PLAYER_RETURN, bPokemon: pokemon, waitForInput: false));
+    }
+
+    private IEnumerator OnGainedEXP(Pokemon pokemon)
+    {
+        yield return StartCoroutine(BattleMessages.Display(BattleMessages.GAINED_EXP, pokemon: pokemon));
+    }
 
     #endregion
 }

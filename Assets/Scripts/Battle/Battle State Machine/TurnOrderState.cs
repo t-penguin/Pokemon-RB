@@ -9,30 +9,29 @@ public class TurnOrderState : BattleBaseState
 
     public override void EnterState(BattleStateManager battle)
     {
-        battle.OpponentSide.Action = DetermineOpponentAction(battle);
-        SetTurnOrder(battle);
-        battle.SwitchState(battle.ExecutionState);
+        if (_battle == null)
+            _battle = battle;
+
+        _battle.OpponentSide.Action = DetermineOpponentAction();
+        SetTurnOrder();
+        _battle.SwitchState(_battle.ExecutionState);
     }
 
-    public override void UpdateState(BattleStateManager battle) { }
+    public override void OnNavigate(InputAction.CallbackContext context) { }
 
-    public override void ExitState(BattleStateManager battle) { }
+    public override void OnConfirm(InputAction.CallbackContext context) { }
 
-    public override void OnNavigate(BattleStateManager battle, InputAction.CallbackContext context) { }
-
-    public override void OnConfirm(BattleStateManager battle, InputAction.CallbackContext context) { }
-
-    public override void OnCancel(BattleStateManager battle, InputAction.CallbackContext context) { }
+    public override void OnCancel(InputAction.CallbackContext context) { }
 
     #endregion
 
-    private BattleAction DetermineOpponentAction(BattleStateManager battle)
+    private BattleAction DetermineOpponentAction()
     {
-        bool moveIsNull = battle.OpponentSide.Move == null;
-        bool lockedIntoAction = battle.OpponentSide.LockedIntoAction;
-        bool lockedIntoMove = battle.OpponentSide.LockedIntoMove;
+        bool moveIsNull = _battle.OpponentSide.Move == null;
+        bool lockedIntoAction = _battle.OpponentSide.LockedIntoAction;
+        bool lockedIntoMove = _battle.OpponentSide.LockedIntoMove;
         if (moveIsNull || !lockedIntoAction || !lockedIntoMove)
-            SetRandomMove(battle.OpponentSide);
+            SetRandomMove(_battle.OpponentSide);
 
         return BattleAction.UseMove;
     }
@@ -44,21 +43,21 @@ public class TurnOrderState : BattleBaseState
         side.Move = pokemon.Moves[r];
     }
 
-    private void SetTurnOrder(BattleStateManager battle)
+    private void SetTurnOrder()
     {
         int playerPriority;
         int opponentPriority;
 
         // Player is using a move
-        if (battle.PlayerSide.Action == BattleAction.UseMove)
-            playerPriority = battle.PlayerSide.Move == null ? 0 : battle.PlayerSide.Move.Priority;
+        if (_battle.PlayerSide.Action == BattleAction.UseMove)
+            playerPriority = _battle.PlayerSide.Move == null ? 0 : _battle.PlayerSide.Move.Priority;
         // Player is switching, using an item, or attempting to run
         else
             playerPriority = 3;
 
         // Opponent is using a move
-        if (battle.OpponentSide.Action == BattleAction.UseMove)
-            opponentPriority = battle.OpponentSide.Move == null ? 0 : battle.OpponentSide.Move.Priority;
+        if (_battle.OpponentSide.Action == BattleAction.UseMove)
+            opponentPriority = _battle.OpponentSide.Move == null ? 0 : _battle.OpponentSide.Move.Priority;
         // Opponent is switching or using an item
         else
             opponentPriority = 2;
@@ -66,35 +65,35 @@ public class TurnOrderState : BattleBaseState
         if (playerPriority > opponentPriority)
         {
             Debug.Log("Player has higher priority, going first.");
-            battle.FirstSide = battle.PlayerSide;
-            battle.SecondSide = battle.OpponentSide;
+            _battle.FirstSide = _battle.PlayerSide;
+            _battle.SecondSide = _battle.OpponentSide;
             return;
         }
         else if (playerPriority < opponentPriority)
         {
             Debug.Log("Opponent has higher priority, going second.");
-            battle.FirstSide = battle.OpponentSide;
-            battle.SecondSide = battle.PlayerSide;
+            _battle.FirstSide = _battle.OpponentSide;
+            _battle.SecondSide = _battle.PlayerSide;
             return;
         }
 
         // Speed checks
-        int playerSpeed = CalculateModifiedSpeed(battle.PlayerSide.ActivePokemon);
-        int opponentSpeed = CalculateModifiedSpeed(battle.OpponentSide.ActivePokemon);
+        int playerSpeed = CalculateModifiedSpeed(_battle.PlayerSide.ActivePokemon);
+        int opponentSpeed = CalculateModifiedSpeed(_battle.OpponentSide.ActivePokemon);
         Debug.Log($"Player Speed: {playerSpeed}\nOpponent Speed: {opponentSpeed}");
 
         if (playerSpeed > opponentSpeed)
         {
             Debug.Log("Player's pokemon is faster, going first.");
-            battle.FirstSide = battle.PlayerSide;
-            battle.SecondSide = battle.OpponentSide;
+            _battle.FirstSide = _battle.PlayerSide;
+            _battle.SecondSide = _battle.OpponentSide;
             return;
         }
         else if (playerSpeed < opponentSpeed)
         {
             Debug.Log("Player's pokemon is slower, going second.");
-            battle.FirstSide = battle.OpponentSide;
-            battle.SecondSide = battle.PlayerSide;
+            _battle.FirstSide = _battle.OpponentSide;
+            _battle.SecondSide = _battle.PlayerSide;
             return;
         }
 
@@ -103,14 +102,14 @@ public class TurnOrderState : BattleBaseState
         if (r == 0)
         {
             Debug.Log("Speed tie! Going first.");
-            battle.FirstSide = battle.PlayerSide;
-            battle.SecondSide = battle.OpponentSide;
+            _battle.FirstSide = _battle.PlayerSide;
+            _battle.SecondSide = _battle.OpponentSide;
         }
         else
         {
             Debug.Log("Speed tie! Going second.");
-            battle.FirstSide = battle.OpponentSide;
-            battle.SecondSide = battle.PlayerSide;
+            _battle.FirstSide = _battle.OpponentSide;
+            _battle.SecondSide = _battle.PlayerSide;
         }
     }
 

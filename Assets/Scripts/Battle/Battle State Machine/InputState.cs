@@ -5,9 +5,6 @@ using UnityEngine.InputSystem;
 
 public class InputState : BattleBaseState
 {
-    private const string NO_RUNNING = "No! There< no\nrunning from a\ntrainer battle!";
-    private const string NO_PP = "No PP left for\nthis move!";
-
     int _selection;
     InputMenu currentMenu;
 
@@ -15,6 +12,9 @@ public class InputState : BattleBaseState
 
     public override void EnterState(BattleStateManager battle)
     {
+        if (_battle == null)
+            _battle = battle;
+
         _selection = 0;
         battle.SelectionArrow.localPosition = new Vector3(8, -16);
         currentMenu = InputMenu.Selection;
@@ -22,17 +22,7 @@ public class InputState : BattleBaseState
         battle.SelectionBox.SetActive(true);
     }
 
-    public override void UpdateState(BattleStateManager battle)
-    {
-        
-    }
-
-    public override void ExitState(BattleStateManager battle)
-    {
-        
-    }
-
-    public override void OnNavigate(BattleStateManager battle, InputAction.CallbackContext context)
+    public override void OnNavigate(InputAction.CallbackContext context)
     {
         if (!context.performed)
             return;
@@ -48,53 +38,53 @@ public class InputState : BattleBaseState
                 if (direction == Vector2.zero)
                     return;
 
-                position = battle.SelectionArrow.localPosition;
+                position = _battle.SelectionArrow.localPosition;
                 if (direction.y > 0 && _selection > 1)
                 {
                     _selection -= 2;
                     position.y += 16;
-                    battle.SelectionArrow.localPosition = position;
+                    _battle.SelectionArrow.localPosition = position;
                 }
                 else if (direction.y < 0 && _selection < 2)
                 {
                     _selection += 2;
                     position.y -= 16;
-                    battle.SelectionArrow.localPosition = position;
+                    _battle.SelectionArrow.localPosition = position;
                 }
                 else if (direction.x > 0 && _selection % 2 == 0)
                 {
                     _selection++;
                     position.x += 48;
-                    battle.SelectionArrow.localPosition = position;
+                    _battle.SelectionArrow.localPosition = position;
                 }
                 else if (direction.x < 0 && _selection % 2 == 1)
                 {
                     _selection--;
                     position.x -= 48;
-                    battle.SelectionArrow.localPosition = position;
+                    _battle.SelectionArrow.localPosition = position;
                 }
                 break;
             case InputMenu.Moves:
                 if (direction.y == 0)
                     return;
 
-                int totalMoves = battle.PlayerSide.ActivePokemon.ReferencePokemon.GetNumberOfMoves();
+                int totalMoves = _battle.PlayerSide.ActivePokemon.ReferencePokemon.GetNumberOfMoves();
                 int selectionChange;
-                position = battle.MoveArrow.localPosition;
+                position = _battle.MoveArrow.localPosition;
                 if (direction.y > 0)
-                    selectionChange = battle.MoveSelection > 0 ? -1 : totalMoves - 1;
+                    selectionChange = _battle.MoveSelection > 0 ? -1 : totalMoves - 1;
                 else
-                    selectionChange = battle.MoveSelection < totalMoves - 1 ? 1 : 1 - totalMoves;
+                    selectionChange = _battle.MoveSelection < totalMoves - 1 ? 1 : 1 - totalMoves;
 
-                battle.MoveSelection += selectionChange;
-                position.y = battle.MoveSelection * (-8) - 8;
-                battle.MoveArrow.localPosition = position;
-                battle.SetMoveInfo(battle.PlayerSide.ActivePokemon.Moves[battle.MoveSelection]);
+                _battle.MoveSelection += selectionChange;
+                position.y = _battle.MoveSelection * (-8) - 8;
+                _battle.MoveArrow.localPosition = position;
+                _battle.SetMoveInfo(_battle.PlayerSide.ActivePokemon.Moves[_battle.MoveSelection]);
                 break;
         }
     }
 
-    public override void OnConfirm(BattleStateManager battle, InputAction.CallbackContext context)
+    public override void OnConfirm(InputAction.CallbackContext context)
     {
         if (!context.started)
             return;
@@ -105,54 +95,15 @@ public class InputState : BattleBaseState
         switch (currentMenu)
         {
             case InputMenu.Selection:
-                switch (_selection)
-                {
-                    case 0: // FIGHT
-                        if(battle.PlayerSide.LockedIntoMove)
-                            battle.SwitchState(battle.TurnOrderState);
-                        else
-                            battle.StartCoroutine(OpenMovesMenu(battle));
-                        break;
-                    case 1: // POKEMON
-                        BattleStateManager.SwappedPokemon += OnSwapPokemon;
-                        PokemonMenu.ClosedFromBattle += OnClosedPokemonMenu;
-                        BattleStateManager.OpenPokemonMenu(battle);
-                        battle.BattleUI.SetActive(false);
-                        MessageBox.Close();
-                        currentMenu = InputMenu.None;
-                        break;
-                    case 2: // ITEM
-
-                        break;
-                    case 3: // RUN
-                        if (battle.BattleType == BattleType.WILD_BATTLE)
-                        {
-                            battle.PlayerSide.Action = BattleAction.RunFromBattle;
-                            battle.SwitchState(battle.TurnOrderState);
-                        }
-                        else
-                            battle.StartCoroutine(AttemptRunFromTrainer(battle));
-                        break;
-                }
+                HandleActionSelection();
                 break;
             case InputMenu.Moves:
-                BattlePokemon pokemon = battle.PlayerSide.ActivePokemon;
-                int index = battle.MoveSelection;
-                if (pokemon.Moves[index].CurrentPP <= 0)
-                {
-                    battle.StartCoroutine(OnNoPPLeft(battle));
-                    return;
-                }
-
-                battle.PlayerSide.SetMove(pokemon.Moves[index]);
-                Debug.Log($"{pokemon.Name} will use {pokemon.Moves[index].Name}");
-                battle.StartCoroutine(CloseMovesMenu(battle));
-                battle.SwitchState(battle.TurnOrderState);
+                HandleMoveSelection();
                 break;
         }
     }
 
-    public override void OnCancel(BattleStateManager battle, InputAction.CallbackContext context) 
+    public override void OnCancel(InputAction.CallbackContext context) 
     {
         if (!context.started)
             return;
@@ -162,88 +113,151 @@ public class InputState : BattleBaseState
             default:
                 return;
             case InputMenu.Moves:
-                battle.StartCoroutine(CloseMovesMenu(battle));
+                _battle.StartCoroutine(CloseMovesMenu());
                 break;
         }
     }
 
     #endregion
 
-    private IEnumerator OpenMovesMenu(BattleStateManager battle)
+    private void HandleActionSelection()
+    {
+        switch (_selection)
+        {
+            case 0: // FIGHT
+                if (_battle.PlayerSide.LockedIntoMove)
+                    _battle.SwitchState(_battle.TurnOrderState);
+                else
+                    _battle.StartCoroutine(OpenMovesMenu());
+                break;
+            case 1: // POKEMON
+                BattleStateManager.SwappedPokemon += OnSwapPokemon;
+                PokemonMenu.ClosedFromBattle += OnClosedPokemonMenu;
+                BattleStateManager.OpenPokemonMenu(_battle);
+                _battle.BattleUI.SetActive(false);
+                MessageBox.Close();
+                currentMenu = InputMenu.None;
+                break;
+            case 2: // ITEM
+
+                break;
+            case 3: // RUN
+                if (_battle.BattleType == BattleType.WILD_BATTLE)
+                {
+                    _battle.PlayerSide.Action = BattleAction.RunFromBattle;
+                    _battle.SwitchState(_battle.TurnOrderState);
+                }
+                else
+                    _battle.StartCoroutine(AttemptRunFromTrainer());
+                break;
+        }
+    }
+
+    private void HandleMoveSelection()
+    {
+        BattlePokemon pokemon = _battle.PlayerSide.ActivePokemon;
+        int index = _battle.MoveSelection;
+        if (pokemon.Moves[index].CurrentPP <= 0)
+        {
+            _battle.StartCoroutine(MoveHasNoPP());
+            return;
+        }
+
+        _battle.PlayerSide.SetMove(pokemon.Moves[index]);
+        Debug.Log($"{pokemon.Name} will use {pokemon.Moves[index].Name}");
+        _battle.StartCoroutine(CloseMovesMenu());
+        _battle.SwitchState(_battle.TurnOrderState);
+    }
+
+    private IEnumerator OpenMovesMenu()
     {
         currentMenu = InputMenu.None;
         yield return new WaitForSeconds(2 / 60f);
-        BattlePokemon activePokemon = battle.PlayerSide.ActivePokemon;
-        battle.SetMoveNames(activePokemon);
-        battle.SetMoveInfo(activePokemon.Moves[battle.MoveSelection]);
-        Vector3 position = battle.MoveArrow.localPosition;
-        position.y = battle.MoveSelection * (-8) - 8;
-        battle.MoveArrow.localPosition = position;
-        battle.MovesBox.SetActive(true);
-        battle.MoveInfoBox.SetActive(true);
+        BattlePokemon activePokemon = _battle.PlayerSide.ActivePokemon;
+        _battle.SetMoveNames(activePokemon);
+        _battle.SetMoveInfo(activePokemon.Moves[_battle.MoveSelection]);
+        Vector3 position = _battle.MoveArrow.localPosition;
+        position.y = _battle.MoveSelection * (-8) - 8;
+        _battle.MoveArrow.localPosition = position;
+        _battle.MovesBox.SetActive(true);
+        _battle.MoveInfoBox.SetActive(true);
         yield return new WaitForSeconds(2 / 60f);
         currentMenu = InputMenu.Moves;
     }
 
-    private IEnumerator CloseMovesMenu(BattleStateManager battle)
+    private IEnumerator CloseMovesMenu()
     {
         currentMenu = InputMenu.None;
         yield return new WaitForSeconds(2 / 60f);
-        battle.MovesBox.SetActive(false);
-        battle.MoveInfoBox.SetActive(false);
+        _battle.MovesBox.SetActive(false);
+        _battle.MoveInfoBox.SetActive(false);
         yield return new WaitForSeconds(2 / 60f);
         currentMenu = InputMenu.Selection;
     }
 
-    private void OnClosedPokemonMenu(BattleStateManager battle)
+    private void OnClosedPokemonMenu()
     {
-        battle.BattleUI.SetActive(true);
+        _battle.BattleUI.SetActive(true);
         MessageBox.Open();
         MessageBox.Clear();
         currentMenu = InputMenu.Selection;
 
-        if (!battle.Swap)
+        if (!_battle.Swap)
             BattleStateManager.SwappedPokemon -= OnSwapPokemon;
         
         PokemonMenu.ClosedFromBattle -= OnClosedPokemonMenu;
     }
 
-    private void OnSwapPokemon(BattleStateManager battle, Pokemon pokemon)
+    private void OnSwapPokemon(Pokemon pokemon)
     {
         BattleStateManager.SwappedPokemon -= OnSwapPokemon;
-        battle.PlayerSide.SetSwitch(pokemon);
+        _battle.PlayerSide.SetSwitch(pokemon);
         Debug.Log($"Switching out to {pokemon.Nickname}");
-        battle.SelectionBox.SetActive(false);
-        battle.SwitchState(battle.TurnOrderState);
+        _battle.SelectionBox.SetActive(false);
+        _battle.SwitchState(_battle.TurnOrderState);
     }
 
-    private IEnumerator AttemptRunFromTrainer(BattleStateManager battle)
+    private IEnumerator AttemptRunFromTrainer()
     {
         currentMenu = InputMenu.None;
-        battle.SelectionBox.SetActive(false);
+        _battle.SelectionBox.SetActive(false);
         yield return new WaitForSeconds(2 / 60f);
 
-        yield return battle.StartCoroutine(battle.DisplayMessage(NO_RUNNING, true));
+        yield return _battle.StartCoroutine(OnNoRunning());
 
         MessageBox.Clear();
         yield return new WaitForSeconds(2 / 60f);
-        battle.SelectionBox.SetActive(true);
+        _battle.SelectionBox.SetActive(true);
         currentMenu = InputMenu.Selection;
     }
 
-    private IEnumerator OnNoPPLeft(BattleStateManager battle)
+    private IEnumerator MoveHasNoPP()
     {
         currentMenu = InputMenu.None;
         yield return new WaitForSeconds(2 / 60f);
         MessageBox.BringToFront();
 
-        yield return battle.StartCoroutine(battle.DisplayMessage(NO_PP, true));
+        yield return _battle.StartCoroutine(OnMoveNoPP());
 
         yield return new WaitForSeconds(2 / 60f);
         MessageBox.Clear();
         MessageBox.ResetSortOrder();
         currentMenu = InputMenu.Moves;
     }
+
+    #region Messages
+
+    private IEnumerator OnNoRunning()
+    {
+        yield return _battle.StartCoroutine(BattleMessages.Display(BattleMessages.NO_RUNNING));
+    }
+
+    private IEnumerator OnMoveNoPP()
+    {
+        yield return _battle.StartCoroutine(BattleMessages.Display(BattleMessages.NO_PP));
+    }
+
+    #endregion
 }
 
 public enum InputMenu

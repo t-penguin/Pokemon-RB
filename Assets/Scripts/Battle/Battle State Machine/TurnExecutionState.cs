@@ -5,10 +5,6 @@ using UnityEngine.InputSystem;
 
 public class TurnExecutionState : BattleBaseState
 {
-    private const string COULDNT_ESCAPE = "Couldn= escape!";
-    private const string GOT_AWAY_SAFELY = "Got away safely!";
-    private const string USE_NEXT_POKEMON = "Use next\nPOKÈMON?";
-
     private bool _executeSecondTurn;
     private bool _battleEnded;
 
@@ -18,98 +14,94 @@ public class TurnExecutionState : BattleBaseState
 
     public override void EnterState(BattleStateManager battle)
     {
-        battle.SelectionBox.SetActive(false);
-        battle.StartCoroutine(Execute(battle));
+        if (_battle == null)
+            _battle = battle;
+
+        _battle.SelectionBox.SetActive(false);
+        _battle.StartCoroutine(Execute());
     }
 
-    public override void UpdateState(BattleStateManager battle) { }
+    public override void OnNavigate(InputAction.CallbackContext context) { }
 
-    public override void ExitState(BattleStateManager battle) { }
+    public override void OnConfirm(InputAction.CallbackContext context) { }
 
-    public override void OnNavigate(BattleStateManager battle, InputAction.CallbackContext context) { }
-
-    public override void OnConfirm(BattleStateManager battle, InputAction.CallbackContext context) { }
-
-    public override void OnCancel(BattleStateManager battle, InputAction.CallbackContext context) { }
+    public override void OnCancel(InputAction.CallbackContext context) { }
 
     #endregion
 
-    private IEnumerator Execute(BattleStateManager battle)
+    private IEnumerator Execute()
     {
         _executeSecondTurn = true;
         _battleEnded = false;
 
-        yield return battle.StartCoroutine(ExecuteFirstTurn(battle));
+        yield return _battle.StartCoroutine(ExecuteFirstTurn());
 
-        if (battle.SuccessfulRun)
+        if (_battle.SuccessfulRun)
             yield break;
 
-        yield return battle.StartCoroutine(CheckForPlayerFaint(battle));
+        yield return _battle.StartCoroutine(CheckForPlayerFaint());
         if (_battleEnded)
             yield break;
 
-        yield return battle.StartCoroutine(CheckForOpponentFaint(battle));
+        yield return _battle.StartCoroutine(CheckForOpponentFaint());
         if (_battleEnded)
             yield break;
 
         if (_executeSecondTurn)
         {
-            yield return battle.StartCoroutine(ExecuteSecondTurn(battle));
+            yield return _battle.StartCoroutine(ExecuteSecondTurn());
 
-            yield return battle.StartCoroutine(CheckForPlayerFaint(battle));
+            yield return _battle.StartCoroutine(CheckForPlayerFaint());
             if (_battleEnded)
                 yield break;
 
-            yield return battle.StartCoroutine(CheckForOpponentFaint(battle));
+            yield return _battle.StartCoroutine(CheckForOpponentFaint());
             if (_battleEnded)
                 yield break;
         }
 
-        if (battle.PlayerSide.LockedIntoAction)
-            battle.SwitchState(battle.TurnOrderState);
+        if (_battle.PlayerSide.LockedIntoAction)
+            _battle.SwitchState(_battle.TurnOrderState);
         else
-            battle.SwitchState(battle.InputState);
+            _battle.SwitchState(_battle.InputState);
     }
 
-    private IEnumerator ExecuteTurn(BattleStateManager battle, BattleSide thisSide, BattleSide otherSide)
+    private IEnumerator ExecuteTurn(BattleSide thisSide, BattleSide otherSide)
     {
         switch(thisSide.Action)
         {
             default:
                 yield break;
             case BattleAction.UseMove:
-                yield return battle.StartCoroutine(AttemptMoveExecution(battle, thisSide, otherSide));
+                yield return _battle.StartCoroutine(AttemptMoveExecution(thisSide, otherSide));
                 yield break;
             case BattleAction.SwitchPokemon:
-                if (thisSide == battle.PlayerSide)
-                    yield return battle.StartCoroutine(battle.SwapPlayerPokemon());
+                if (thisSide == _battle.PlayerSide)
+                    yield return _battle.StartCoroutine(_battle.SwapPlayerPokemon());
                 else
-                    yield return battle.StartCoroutine(battle.SwapOpponentPokemon());
+                    yield return _battle.StartCoroutine(_battle.SwapOpponentPokemon());
 
                 yield break;
             case BattleAction.UseItem:
 
                 yield break;
             case BattleAction.RunFromBattle:
-                if (thisSide == battle.OpponentSide)
+                if (thisSide == _battle.OpponentSide)
                     yield break;
 
-                yield return battle.StartCoroutine(AttemptEscape(battle, thisSide.ActivePokemon, otherSide.ActivePokemon));
+                yield return _battle.StartCoroutine(AttemptEscape(thisSide.ActivePokemon, otherSide.ActivePokemon));
                 yield break;
         }
     }
 
-    private IEnumerator AttemptMoveExecution(BattleStateManager battle, BattleSide thisSide, BattleSide otherSide)
+    private IEnumerator AttemptMoveExecution(BattleSide thisSide, BattleSide otherSide)
     {
         BattlePokemon user = thisSide.ActivePokemon;
 
         // The user is unable to move if it flinches
         if (user.Flinched)
         {
-            string name = user.TrainerIsPlayer ? user.Name : $"Enemy {user.Name}";
-            yield return battle.StartCoroutine(battle.DisplayMessage($"{name}\nflinched!", true));
-            yield return new WaitForSeconds(6 / 60f);
-
+            yield return _battle.StartCoroutine(OnFlinched());
             user.Flinched = false;
             yield break;
         }
@@ -118,49 +110,49 @@ public class TurnExecutionState : BattleBaseState
         if (user.Disabled)
             user.ReduceDisableCounter();
 
+        BaseMove move = thisSide.Move;
         /* If the user is STILL disabled, check to see if the move being used is disabled
          * If so, the user does NOT use the move */
-        if (user.Disabled && thisSide.Move == user.Moves[user.DisableIndex])
+        if (user.Disabled && move == user.Moves[user.DisableIndex])
         {
-            string moveName = thisSide.Move.Name;
-            yield return battle.StartCoroutine(OnMoveDisabled(battle, moveName));
+            yield return _battle.StartCoroutine(OnMoveDisabled(move));
             yield break;
         }
 
         BattlePokemon opponent = otherSide.ActivePokemon;
-        Debug.Log($"{user.Name} used {thisSide.Move.Name}!");
-        yield return battle.StartCoroutine(thisSide.Move.Execute(user, opponent));
+        Debug.Log($"{user.Name} used {move.Name}!");
+        yield return _battle.StartCoroutine(thisSide.Move.Execute(user, opponent));
     }
 
-    private IEnumerator ExecuteFirstTurn(BattleStateManager battle)
+    private IEnumerator ExecuteFirstTurn()
     {
-        yield return battle.StartCoroutine(ExecuteTurn(battle, battle.FirstSide, battle.SecondSide));
+        yield return _battle.StartCoroutine(ExecuteTurn(_battle.FirstSide, _battle.SecondSide));
     }
 
-    private IEnumerator ExecuteSecondTurn(BattleStateManager battle)
+    private IEnumerator ExecuteSecondTurn()
     {
-        yield return battle.StartCoroutine(ExecuteTurn(battle, battle.SecondSide, battle.FirstSide));
+        yield return _battle.StartCoroutine(ExecuteTurn(_battle.SecondSide, _battle.FirstSide));
     }
 
-    private IEnumerator CheckForPlayerFaint(BattleStateManager battle)
+    private IEnumerator CheckForPlayerFaint()
     {
-        BattlePokemon playerPokemon = battle.PlayerSide.ActivePokemon;
+        BattlePokemon playerPokemon = _battle.PlayerSide.ActivePokemon;
 
         if (playerPokemon.Status != StatusEffect.FNT)
             yield break;
 
-        battle.PlayerSide.LockedIntoAction = false;
-        battle.PlayerSide.LockedIntoMove = false;
+        _battle.PlayerSide.LockedIntoAction = false;
+        _battle.PlayerSide.LockedIntoMove = false;
         // PLAYER FAINTED
-        yield return battle.StartCoroutine(battle.DisplayMessage($"{playerPokemon.Name}\nfainted!", true));
+        yield return _battle.StartCoroutine(OnFainted(playerPokemon));
 
         // MORE POKEMON AVAILABLE
-        if (battle.PlayerSide.IsAbleToFight())
+        if (_battle.PlayerSide.IsAbleToFight())
         {
             // WILD BATTLE
-            if (battle.BattleType == BattleType.WILD_BATTLE)
+            if (_battle.BattleType == BattleType.WILD_BATTLE)
             {
-                yield return battle.StartCoroutine(battle.DisplayMessage(USE_NEXT_POKEMON, false));
+                yield return _battle.StartCoroutine(OnUseNext());
 
                 AnswerBox.Open(true, _answerBoxPosition);
                 while (!AnswerBox.Continue)
@@ -169,11 +161,11 @@ public class TurnExecutionState : BattleBaseState
                 // If NO, attempt to run
                 if (!AnswerBox.Answer)
                 {
-                    yield return battle.StartCoroutine(AttemptEscape(battle, playerPokemon, battle.OpponentSide.ActivePokemon));
-                    if (battle.SuccessfulRun)
+                    yield return _battle.StartCoroutine(AttemptEscape(playerPokemon, _battle.OpponentSide.ActivePokemon));
+                    if (_battle.SuccessfulRun)
                     {
                         // battle.EndBattle();
-                        yield return battle.StartCoroutine(battle.CloseBattle());
+                        yield return _battle.StartCoroutine(_battle.CloseBattle());
                         _battleEnded = true;
                         yield break;
                     }
@@ -182,16 +174,16 @@ public class TurnExecutionState : BattleBaseState
             // RUN FAILURE
             // CHOSE YES
             // OR TRAINER BATTLE
-            battle.ForcedSwap = true;
-            battle.BattleUI.SetActive(false);
+            _battle.ForcedSwap = true;
+            _battle.BattleUI.SetActive(false);
             PokemonMenu.ClosedFromBattle += OnClosedPokemonMenu;
-            BattleStateManager.OpenPokemonMenu(battle);
+            BattleStateManager.OpenPokemonMenu(_battle);
             MessageBox.Close();
-            while (battle.ForcedSwap)
+            while (_battle.ForcedSwap)
                 yield return null;
 
             // Don't execute the next move if the player was supposed to go next
-            if (battle.SecondSide == battle.PlayerSide)
+            if (_battle.SecondSide == _battle.PlayerSide)
                 _executeSecondTurn = false;
             else
                 _executeSecondTurn = true;
@@ -199,38 +191,35 @@ public class TurnExecutionState : BattleBaseState
         // NO MORE POKEMON
         else
         {
-            string text = $"{PlayerData.Name} is out of\nuseable POKÈMON!";
-            yield return battle.StartCoroutine(battle.DisplayMessage(text, true));
-
-            text = $"{PlayerData.Name} blacked\nout!";
-            yield return battle.StartCoroutine(battle.DisplayMessage(text, true));
+            yield return _battle.StartCoroutine(OnNoPokemon());
+            yield return _battle.StartCoroutine(OnBlackedOut());
 
             // End battle as black out
             // battle.EndBattle();
-            yield return battle.StartCoroutine(battle.CloseBattle());
+            yield return _battle.StartCoroutine(_battle.CloseBattle());
             _battleEnded = true;
             yield break;
         }
     }
 
-    private IEnumerator CheckForOpponentFaint(BattleStateManager battle)
+    private IEnumerator CheckForOpponentFaint()
     {
-        BattlePokemon opponentPokemon = battle.OpponentSide.ActivePokemon;
+        BattlePokemon opponentPokemon = _battle.OpponentSide.ActivePokemon;
         if (opponentPokemon.Status != StatusEffect.FNT)
             yield break;
 
-        battle.OpponentSide.LockedIntoAction = false;
-        battle.OpponentSide.LockedIntoMove = false;
+        _battle.OpponentSide.LockedIntoAction = false;
+        _battle.OpponentSide.LockedIntoMove = false;
         // ENEMY FAINTED
-        yield return battle.StartCoroutine(battle.DisplayMessage($"Enemy {opponentPokemon.Name}\nfainted!", true));
-        yield return battle.ApplyExperience(opponentPokemon.ReferencePokemon);
-        battle.Participants.Clear();
+        yield return _battle.StartCoroutine(OnFainted(opponentPokemon));
+        yield return _battle.StartCoroutine(_battle.ApplyExperience(opponentPokemon.ReferencePokemon));
+        _battle.Participants.Clear();
         // WILD BATTLE
-        if (battle.BattleType == BattleType.WILD_BATTLE)
+        if (_battle.BattleType == BattleType.WILD_BATTLE)
         {
             _battleEnded = true;
             // battle.EndBattle();
-            yield return battle.StartCoroutine(battle.CloseBattle());
+            yield return _battle.StartCoroutine(_battle.CloseBattle());
             yield break;
         }
         // TRAINER BATTLE
@@ -240,49 +229,82 @@ public class TurnExecutionState : BattleBaseState
         //      set text over time "Will {player}\nchange POKeMON?"
     }
 
-    private IEnumerator AttemptEscape(BattleStateManager battle, BattlePokemon playerPokemon, BattlePokemon opponentPokemon)
+    private IEnumerator AttemptEscape(BattlePokemon playerPokemon, BattlePokemon opponentPokemon)
     {
         int playerSpeed = playerPokemon.BattleStats.Speed;
         int opponentSpeed = opponentPokemon.BattleStats.Speed / 4 % 256;
         int threshold = 0;
         int runCheck = 0;
-        battle.RunCounter++;
+        _battle.RunCounter++;
 
         if(opponentSpeed != 0)
         {
-            runCheck = playerSpeed * 32 / opponentSpeed + 30 * battle.RunCounter;
+            runCheck = playerSpeed * 32 / opponentSpeed + 30 * _battle.RunCounter;
             threshold = Random.Range(0, 256);
             if(runCheck < threshold)
             {
-                yield return battle.StartCoroutine(battle.DisplayMessage(COULDNT_ESCAPE, false));
-                yield return new WaitForSeconds(60 / 60f);
+                yield return _battle.StartCoroutine(OnCannotEscape());
                 yield break;
             }
         }
 
         if (opponentSpeed == 0 || runCheck >= threshold)
         {
-            battle.SuccessfulRun = true;
-            yield return battle.StartCoroutine(battle.DisplayMessage(GOT_AWAY_SAFELY, true));
+            _battle.SuccessfulRun = true;
+            yield return _battle.StartCoroutine(OnGotAway());
 
             // battle.EndBattle();
-            yield return battle.StartCoroutine(battle.CloseBattle());
+            yield return _battle.StartCoroutine(_battle.CloseBattle());
             yield break;
         }
     }
 
-    private void OnClosedPokemonMenu(BattleStateManager battle)
+    private void OnClosedPokemonMenu()
     {
-        battle.BattleUI.SetActive(true);
+        _battle.BattleUI.SetActive(true);
         MessageBox.Open();
         MessageBox.Clear();
 
         PokemonMenu.ClosedFromBattle -= OnClosedPokemonMenu;
     }
 
-    private IEnumerator OnMoveDisabled(BattleStateManager battle, string moveName)
+    private IEnumerator OnMoveDisabled(BaseMove move)
     {
-        yield return battle.StartCoroutine(battle.DisplayMessage($"{moveName} is\ndisabled!", true));
-        yield return new WaitForSeconds(6 / 60f);
+        yield return _battle.StartCoroutine(BattleMessages.Display(BattleMessages.MOVE_DISABLED, move: move));
+    }
+
+    private IEnumerator OnCannotEscape()
+    {
+        yield return _battle.StartCoroutine(BattleMessages.Display(BattleMessages.CANNOT_ESCAPE));
+    }
+
+    private IEnumerator OnGotAway()
+    {
+        yield return _battle.StartCoroutine(BattleMessages.Display(BattleMessages.GOT_AWAY_SAFELY));
+    }
+
+    private IEnumerator OnFlinched()
+    {
+        yield return _battle.StartCoroutine(BattleMessages.Display(BattleMessages.USER_FLINCHED));
+    }
+
+    private IEnumerator OnFainted(BattlePokemon pokemon)
+    {
+        yield return _battle.StartCoroutine(BattleMessages.Display(BattleMessages.POKEMON_FAINTED, bPokemon: pokemon));
+    }
+
+    private IEnumerator OnUseNext()
+    {
+        yield return _battle.StartCoroutine(BattleMessages.Display(BattleMessages.USE_NEXT_POKEMON, waitForInput: false));
+    }
+
+    private IEnumerator OnNoPokemon()
+    {
+        yield return _battle.StartCoroutine(BattleMessages.Display(BattleMessages.OUT_OF_POKEMON));
+    }
+
+    private IEnumerator OnBlackedOut()
+    {
+        yield return _battle.StartCoroutine(BattleMessages.Display(BattleMessages.BLACKED_OUT));
     }
 }

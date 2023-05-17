@@ -13,7 +13,6 @@ public class PokemonMenu : Menu
     private const string CHOOSE_A_POKEMON = "Choose a POKÈMON.";
     private const string MOVE_POKEMON_WHERE = "Move POKÈMON\nwhere?";
     private const string BRING_OUT_POKEMON = "Bring out which\nPOKÈMON?";
-    private const string NO_WILL_TO_FIGHT = "There< no will\nto fight!";
 
     [SerializeField] RectTransform _arrow;
     [SerializeField] RectTransform _secondArrow;
@@ -48,7 +47,7 @@ public class PokemonMenu : Menu
 
     public static event Action<int> Opened;
     public static event Action Closed;
-    public static event Action<BattleStateManager> ClosedFromBattle;
+    public static event Action ClosedFromBattle;
 
     #endregion
 
@@ -136,7 +135,7 @@ public class PokemonMenu : Menu
         {
             battle.Swap = true;
             yield return StartCoroutine(CloseFromBattle());
-            BattleStateManager.SwapPokemon(battle, _player.Team[_currentSelection]);
+            BattleStateManager.SwapPokemon(_player.Team[_currentSelection]);
             yield break;
         }
 
@@ -156,8 +155,7 @@ public class PokemonMenu : Menu
         _arrow.gameObject.SetActive(false);
         _secondArrow.gameObject.SetActive(true);
         _animateIcons = false;
-        yield return StartCoroutine(battle.DisplayMessage(NO_WILL_TO_FIGHT, true));
-
+        yield return StartCoroutine(OnNoWillToFight());
         yield return StartCoroutine(Refocus());
     }
 
@@ -272,7 +270,7 @@ public class PokemonMenu : Menu
     {
         yield return StartCoroutine(Close());
         Debug.Log("Closed the pokemon menu from battle");
-        ClosedFromBattle?.Invoke(battle);
+        ClosedFromBattle?.Invoke();
     }
 
     private void Navigate(Vector2 input)
@@ -413,4 +411,13 @@ public class PokemonMenu : Menu
         BattleStateManager.OpenedPokemon -= OpenFromBattle;
         MainMenu.Opened += ListenFromMain;
     }
+
+    #region Messages
+
+    private IEnumerator OnNoWillToFight()
+    {
+        yield return StartCoroutine(BattleMessages.Display(BattleMessages.NO_WILL_TO_FIGHT));
+    }
+
+    #endregion
 }

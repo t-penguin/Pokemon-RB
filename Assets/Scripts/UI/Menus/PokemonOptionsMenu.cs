@@ -166,14 +166,14 @@ public class PokemonOptionsMenu : Menu
 
         string text = "";
         if (alreadyOut)
-            text = $"{_pokemon.Nickname} is\nalready out!";
+            text = BattleMessages.ALREADY_OUT;
         if (!ableToFight)
-            text = NO_WILL_TO_FIGHT;
+            text = BattleMessages.NO_WILL_TO_FIGHT;
 
         StopListeningForInput();
 
         MessageBox.BringToFront();
-        yield return StartCoroutine(_pokemonMenu.battle.DisplayMessage(text, true));
+        yield return StartCoroutine(BattleMessages.Display(text));
         MessageBox.ResetSortOrder();
 
         HideOptions();

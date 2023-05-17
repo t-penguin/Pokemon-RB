@@ -52,7 +52,7 @@ public abstract class BaseMove
     protected IEnumerator OnUsed(BattlePokemon user)
     {
         yield return Battle.StartCoroutine(BattleMessages.Display
-            (BattleMessages.MOVE_USED, pokemon: user, move: this, waitForInput: false));
+            (BattleMessages.MOVE_USED, bPokemon: user, move: this, waitForInput: false));
     }
 
     /// <summary>
@@ -61,7 +61,7 @@ public abstract class BaseMove
     /// </summary>
     protected IEnumerator OnMissed(BattlePokemon user)
     {
-        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.MOVE_MISSED, pokemon: user));
+        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.MOVE_MISSED, bPokemon: user));
     }
 
     /// <summary>
@@ -79,7 +79,7 @@ public abstract class BaseMove
     /// </summary>
     protected IEnumerator OnDoesNotAffect(BattlePokemon target)
     {
-        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.MOVE_DOES_NOT_AFFECT, pokemon: target));
+        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.MOVE_DOES_NOT_AFFECT, bPokemon: target));
     }
 
     /// <summary>
@@ -114,7 +114,7 @@ public abstract class BaseMove
     /// </summary>
     protected IEnumerator OnMultiHit(int hits)
     {
-        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.MOVE_MULTI_HIT, numHits: hits));
+        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.MOVE_MULTI_HIT, value: hits));
     }
 
     #endregion
@@ -127,7 +127,7 @@ public abstract class BaseMove
     /// </summary>
     protected IEnumerator OnCharging(BattlePokemon user, string message)
     {
-        yield return Battle.StartCoroutine(BattleMessages.Display(message, pokemon: user));
+        yield return Battle.StartCoroutine(BattleMessages.Display(message, bPokemon: user));
     }
 
     /// <summary>
@@ -136,7 +136,7 @@ public abstract class BaseMove
     /// </summary>
     protected IEnumerator OnThrashing(BattlePokemon user)
     {
-        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.ATTACK_THRASHING, pokemon: user));
+        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.ATTACK_THRASHING, bPokemon: user));
     }
 
     /// <summary>
@@ -145,7 +145,7 @@ public abstract class BaseMove
     /// </summary>
     protected IEnumerator OnFatigued(BattlePokemon user)
     {
-        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.USER_FATIGUED, pokemon: user));
+        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.USER_FATIGUED, bPokemon: user));
     }
 
     /// <summary>
@@ -154,7 +154,7 @@ public abstract class BaseMove
     /// </summary>
     protected IEnumerator OnRecharging(BattlePokemon user)
     {
-        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.USER_RECHARGING, pokemon: user));
+        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.USER_RECHARGING, bPokemon: user));
     }
 
     /// <summary>
@@ -163,7 +163,7 @@ public abstract class BaseMove
     /// </summary>
     protected IEnumerator OnAttackContinues(BattlePokemon user)
     {
-        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.ATTACK_CONTINUES, pokemon: user));
+        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.ATTACK_CONTINUES, bPokemon: user));
     }
 
     /// <summary>
@@ -172,7 +172,7 @@ public abstract class BaseMove
     /// </summary>
     protected IEnumerator OnUnleashedEnergy(BattlePokemon user)
     {
-        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.ATTACK_UNLEASHED_ENERGY, pokemon: user));
+        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.ATTACK_UNLEASHED_ENERGY, bPokemon: user));
     }
 
     #endregion
@@ -191,7 +191,7 @@ public abstract class BaseMove
         else
             text = BattleMessages.TARGET_STAT_LOWERED;
 
-        yield return Battle.StartCoroutine(BattleMessages.Display(text, pokemon: target, stat: stat));
+        yield return Battle.StartCoroutine(BattleMessages.Display(text, bPokemon: target, stat: stat));
     }
 
     /// <summary>
@@ -206,7 +206,7 @@ public abstract class BaseMove
         else
             text = BattleMessages.USER_STAT_RAISED;
 
-        yield return Battle.StartCoroutine(BattleMessages.Display(text, pokemon: user, stat: stat));
+        yield return Battle.StartCoroutine(BattleMessages.Display(text, bPokemon: user, stat: stat));
     }
 
     /// <summary>
@@ -228,7 +228,7 @@ public abstract class BaseMove
     /// </summary>
     protected IEnumerator OnParalyzed(BattlePokemon target)
     {
-        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.TARGET_PARALYZED, pokemon: target));
+        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.TARGET_PARALYZED, bPokemon: target));
     }
 
     /// <summary>
@@ -237,7 +237,7 @@ public abstract class BaseMove
     /// </summary>
     protected IEnumerator OnFrozen(BattlePokemon target)
     {
-        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.TARGET_FROZEN, pokemon: target));
+        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.TARGET_FROZEN, bPokemon: target));
     }
 
     /// <summary>
@@ -246,7 +246,7 @@ public abstract class BaseMove
     /// </summary>
     protected IEnumerator OnSlept(BattlePokemon target)
     {
-        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.TARGET_SLEPT, pokemon: target));
+        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.TARGET_SLEPT, bPokemon: target));
     }
 
     /// <summary>
@@ -255,7 +255,7 @@ public abstract class BaseMove
     /// </summary>
     protected IEnumerator OnBurned(BattlePokemon target)
     {
-        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.TARGET_BURNED, pokemon: target));
+        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.TARGET_BURNED, bPokemon: target));
     }
 
     /// <summary>
@@ -264,7 +264,7 @@ public abstract class BaseMove
     /// </summary>
     protected IEnumerator OnPoisoned(BattlePokemon target)
     {
-        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.TARGET_POISONED, pokemon: target));
+        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.TARGET_POISONED, bPokemon: target));
     }
 
     /// <summary>
@@ -273,7 +273,7 @@ public abstract class BaseMove
     /// </summary>
     protected IEnumerator OnBadlyPoisoned(BattlePokemon target)
     {
-        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.TARGET_BADLY_POISONED, pokemon: target));
+        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.TARGET_BADLY_POISONED, bPokemon: target));
     }
 
     /// <summary>
@@ -282,7 +282,7 @@ public abstract class BaseMove
     /// </summary>
     protected IEnumerator OnConfused(BattlePokemon target)
     {
-        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.TARGET_CONFUSED, pokemon: target));
+        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.TARGET_CONFUSED, bPokemon: target));
     }
 
     /// <summary>
@@ -291,7 +291,7 @@ public abstract class BaseMove
     /// </summary>
     protected IEnumerator OnSeeded(BattlePokemon target)
     {
-        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.TARGET_SEEDED, pokemon: target));
+        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.TARGET_SEEDED, bPokemon: target));
     }
 
     /// <summary>
@@ -300,7 +300,7 @@ public abstract class BaseMove
     /// </summary>
     protected IEnumerator OnDisabled(BattlePokemon target, BaseMove move)
     {
-        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.TARGET_DISABLED, pokemon: target, move: move));
+        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.TARGET_DISABLED, bPokemon: target, move: move));
     }
 
     /// <summary>
@@ -309,7 +309,7 @@ public abstract class BaseMove
     /// </summary>
     protected IEnumerator OnFocused(BattlePokemon user)
     {
-        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.USER_FOCUSED, pokemon: user));
+        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.USER_FOCUSED, bPokemon: user));
     }
 
     /// <summary>
@@ -318,7 +318,7 @@ public abstract class BaseMove
     /// </summary>
     protected IEnumerator OnRested(BattlePokemon user)
     {
-        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.USER_RESTED, pokemon: user, waitForInput: false));
+        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.USER_RESTED, bPokemon: user, waitForInput: false));
     }
 
     #endregion
@@ -331,7 +331,7 @@ public abstract class BaseMove
     /// </summary>
     protected IEnumerator OnHealthSapped(BattlePokemon target)
     {
-        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.EFFECT_HEALTH_SAPPED, pokemon: target));
+        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.EFFECT_HEALTH_SAPPED, bPokemon: target));
     }
 
     /// <summary>
@@ -340,7 +340,7 @@ public abstract class BaseMove
     /// </summary>
     protected IEnumerator OnHealthRegained(BattlePokemon user)
     {
-        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.EFFECT_HEALTH_REGAINED, pokemon: user));
+        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.EFFECT_HEALTH_REGAINED, bPokemon: user));
     }
 
     /// <summary>
@@ -349,7 +349,7 @@ public abstract class BaseMove
     /// </summary>
     protected IEnumerator OnDreamEaten(BattlePokemon target)
     {
-        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.EFFECT_DREAM_EATER, pokemon: target));
+        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.EFFECT_DREAM_EATER, bPokemon: target));
     }
 
     /// <summary>
@@ -358,7 +358,7 @@ public abstract class BaseMove
     /// </summary>
     protected IEnumerator OnReflect(BattlePokemon user)
     {
-        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.EFFECT_REFLECT, pokemon: user));
+        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.EFFECT_REFLECT, bPokemon: user));
     }
 
     /// <summary>
@@ -367,7 +367,7 @@ public abstract class BaseMove
     /// </summary>
     protected IEnumerator OnLightScreen(BattlePokemon user)
     {
-        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.EFFECT_LIGHT_SCREEN, pokemon: user));
+        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.EFFECT_LIGHT_SCREEN, bPokemon: user));
     }
 
     /// <summary>
@@ -376,7 +376,7 @@ public abstract class BaseMove
     /// </summary>
     protected IEnumerator OnMist(BattlePokemon user)
     {
-        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.EFFECT_MIST, pokemon: user));
+        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.EFFECT_MIST, bPokemon: user));
     }
 
     /// <summary>
@@ -385,7 +385,7 @@ public abstract class BaseMove
     /// </summary>
     protected IEnumerator OnTeleport(BattlePokemon user)
     {
-        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.EFFECT_REFLECT, pokemon: user));
+        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.EFFECT_REFLECT, bPokemon: user));
     }
 
     /// <summary>
@@ -394,7 +394,7 @@ public abstract class BaseMove
     /// </summary>
     protected IEnumerator OnConversion(BattlePokemon target)
     {
-        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.EFFECT_CONVERSION, pokemon: target));
+        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.EFFECT_CONVERSION, bPokemon: target));
     }
 
     /// <summary>
@@ -421,7 +421,7 @@ public abstract class BaseMove
     /// </summary>
     protected IEnumerator OnRecoil(BattlePokemon user)
     {
-        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.EFFECT_RECOIL, pokemon: user));
+        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.EFFECT_RECOIL, bPokemon: user));
     }
 
     /// <summary>
@@ -430,7 +430,7 @@ public abstract class BaseMove
     /// </summary>
     protected IEnumerator OnCrashed(BattlePokemon user)
     {
-        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.EFFECT_CRASH, pokemon: user));
+        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.EFFECT_CRASH, bPokemon: user));
     }
 
     /// <summary>
@@ -439,7 +439,7 @@ public abstract class BaseMove
     /// </summary>
     protected IEnumerator OnBattleForceEnded(BattlePokemon user, string message)
     {
-        yield return Battle.StartCoroutine(BattleMessages.Display(message, pokemon: user));
+        yield return Battle.StartCoroutine(BattleMessages.Display(message, bPokemon: user));
     }
 
     #endregion

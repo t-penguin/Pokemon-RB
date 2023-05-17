@@ -7,9 +7,10 @@ public static class BattleMessages
     // Placeholders
     public const string POKEMON = "[POKEMON]";
     public const string MOVE = "[MOVE]";
-    public const string HITS = "[HITS]";
+    public const string VALUE = "[VALUE]";
     public const string STAT = "[STAT]";
     public const string PLAYER = "[PLAYER]";
+    public const string TRAINER = "[TRAINER]";
 
     // Move Messages
     public const string MOVE_USED = "[POKEMON]\nused [MOVE]!";
@@ -19,7 +20,7 @@ public static class BattleMessages
     public const string MOVE_SUPER_EFFECTIVE = "It's super\neffective!";
     public const string MOVE_NOT_EFFECTIVE = "It's not very\neffective...";
     public const string MOVE_CRITICAL_HIT = "Critical hit!";
-    public const string MOVE_MULTI_HIT = "Hit the enemy\n[HITS] times!";
+    public const string MOVE_MULTI_HIT = "Hit the enemy\n[VALUE] times!";
     public const string NO_MOVES_LEFT = "[POKEMON]\nhas no\nmoves left!";
 
     // Multi-turn attack messages
@@ -76,6 +77,18 @@ public static class BattleMessages
     public const string RECURRENT_BURN = "[POKEMON]'s\nhurt by the burn!";
     public const string RECURRENT_POISON = "[POKEMON]'s\nhurt by poison!";
 
+    public const string PLAYER_SEND_OUT_1 = "GO!\n[POKEMON]";
+    public const string PLAYER_RETURN = "[POKEMON] enough!\nCome back!";
+    public const string GAINED_EXP = "[POKEMON] gained\n[VALUE] EXP. Points!";
+
+    public const string BATTLE_START_WILD = "Wild [POKEMON]\nappeared!";
+    public const string BATTLE_START_TRAINER = "[TRAINER] wants\nto fight!";
+    public const string TRAINER_SENT_OUT_POKEMON = "[TRAINER] sent\nout [POKEMON]";
+
+    public const string NO_RUNNING = "No! There's no\nrunning from a\ntrainer battle!";
+    public const string NO_PP = "No PP left for\nthis move!";
+    public const string NO_WILL_TO_FIGHT = "There's no will\nto fight!";
+    public const string ALREADY_OUT = "[POKEMON] is\nalready out!";
 
     public const string MOVE_DISABLED = "[MOVE] is\ndisabled!";
     public const string CANNOT_ESCAPE = "Couldn't escape!";
@@ -86,26 +99,35 @@ public static class BattleMessages
     public const string OUT_OF_POKEMON = "[PLAYER] is out of\nuseable POKéMON!";
     public const string BLACKED_OUT = "[PLAYER] blacked\nout!";
 
-    public static IEnumerator Display(string text, BattlePokemon pokemon = null, BaseMove move = null,
-        int numHits = 0, StatType stat = StatType.NONE, bool waitForInput = true)
+    public static IEnumerator Display(string text, Trainer trainer = null, BattlePokemon bPokemon = null, Pokemon pokemon = null,
+        BaseMove move = null, int value = 0, StatType stat = StatType.NONE, bool replaceName = true, bool waitForInput = true)
     {
-        if (pokemon != null)
+        if (bPokemon != null)
         {
-            string pokemonName = pokemon.TrainerIsPlayer ? pokemon.Name : $"Enemy {pokemon.Name}";
+            string pokemonName = bPokemon.Name; 
+            if(replaceName && !bPokemon.TrainerIsPlayer)
+                pokemonName = $"Enemy {bPokemon.Name}";
+
             text = text.Replace(POKEMON, pokemonName);
         }
+
+        if (pokemon != null)
+            text = text.Replace(POKEMON, pokemon.Nickname);
 
         if (move != null)
             text = text.Replace(MOVE, move.Name);
 
-        if (numHits > 0)
-            text = text.Replace(HITS, numHits.ToString());
+        if (value > 0)
+            text = text.Replace(VALUE, value.ToString());
 
         if (stat != StatType.NONE)
         {
             string statName = stat.ToString();
             text = text.Replace(STAT, statName);
         }
+
+        if (trainer != null)
+            text = text.Replace(TRAINER, trainer.Name);
 
         text = text.Replace(PLAYER, PlayerData.Name);
 

@@ -29,8 +29,7 @@ public class Psywave : SimpleAttackMove
             int damage = Random.Range(1, (int)(1.5f * user.Level + 1));
             opponent.LastDamageRecieved = damage;
             
-            yield return Battle.StartCoroutine(opponent.RecieveDamge(damage, Type));
-            yield return new WaitForSeconds(60 / 60f);
+            yield return Battle.StartCoroutine(opponent.RecieveDamge(damage));
         }
 
         EndMove(user, opponent);

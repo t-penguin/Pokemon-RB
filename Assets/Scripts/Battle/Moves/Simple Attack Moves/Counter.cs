@@ -40,8 +40,7 @@ public class Counter : SimpleAttackMove
                 int damage = 2 * user.LastDamageRecieved;
                 opponent.LastDamageRecieved = damage;
 
-                yield return Battle.StartCoroutine(opponent.RecieveDamge(damage, Type));
-                yield return new WaitForSeconds(60 / 60f);
+                yield return Battle.StartCoroutine(opponent.RecieveDamge(damage));
             }
             else
                 yield return Battle.StartCoroutine(OnMissed(user));

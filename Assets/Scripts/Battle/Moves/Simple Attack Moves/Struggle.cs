@@ -30,7 +30,7 @@ public class Struggle : SimpleAttackMove
         {
             yield return Battle.StartCoroutine(DealDamage(user, opponent));
             int recoilDamage = Mathf.Max(1, opponent.LastDamageRecieved / 2);
-            yield return Battle.StartCoroutine(user.RecieveDamge(recoilDamage, Type));
+            yield return Battle.StartCoroutine(user.RecieveDamge(recoilDamage));
             yield return Battle.StartCoroutine(OnRecoil(user));
         }
 

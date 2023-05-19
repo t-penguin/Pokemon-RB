@@ -28,7 +28,7 @@ public class Twineedle : MultiHitAttackMove
         for (int i = 0; i < NumberOfHits; i++)
         {
             // ADD HERE: Animation
-            yield return Battle.StartCoroutine(target.RecieveDamge(Damage, Type));
+            yield return Battle.StartCoroutine(target.RecieveDamge(Damage));
             totalHits++;
             if (isCrit && i == 0)
                 yield return Battle.StartCoroutine(OnCriticalHit());
@@ -52,7 +52,5 @@ public class Twineedle : MultiHitAttackMove
             target.Poison();
             yield return Battle.StartCoroutine(OnPoisoned(target));
         }
-
-        yield return new WaitForSeconds(60 / 60f);
     }
 }

@@ -27,8 +27,7 @@ public class SuperFang : SimpleAttackMove
             int damage = Mathf.Max(1, opponent.CurrentHP / 2);
             opponent.LastDamageRecieved = damage;
             
-            yield return Battle.StartCoroutine(opponent.RecieveDamge(damage, Type));
-            yield return new WaitForSeconds(60 / 60f);
+            yield return Battle.StartCoroutine(opponent.RecieveDamge(damage));
         }
 
         EndMove(user, opponent);

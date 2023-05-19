@@ -48,7 +48,6 @@ public class Bide : MultiTurnAttackMove
         int damage = user.BideDamage;
         target.LastDamageRecieved = damage;
 
-        yield return Battle.StartCoroutine(target.RecieveDamge(damage, Type.NONE));
-        yield return new WaitForSeconds(60 / 60f);
+        yield return Battle.StartCoroutine(target.RecieveDamge(damage));
     }
 }

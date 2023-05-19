@@ -68,7 +68,7 @@ public abstract class SimpleAttackMove : AttackMove
             if(hasRecoil)
             {
                 int recoilDamage = Mathf.Max(1, opponent.LastDamageRecieved / 4);
-                yield return Battle.StartCoroutine(user.RecieveDamge(recoilDamage, Type));
+                yield return Battle.StartCoroutine(user.RecieveDamge(recoilDamage));
                 yield return Battle.StartCoroutine(OnRecoil(user));
             }
         }
@@ -106,7 +106,6 @@ public abstract class SimpleAttackMove : AttackMove
             int damage = opponent.CurrentHP;
             yield return Battle.StartCoroutine(opponent.RecieveDamge(damage, Type));
             opponent.LastDamageRecieved = damage;
-            yield return new WaitForSeconds(60 / 60f);
         }
 
         EndMove(user, opponent);
@@ -147,7 +146,6 @@ public abstract class SimpleAttackMove : AttackMove
 
         int sappedHealth = Mathf.CeilToInt(Mathf.Min(damage, remainingHP) / 2f);
         yield return Battle.StartCoroutine(user.RestoreHealth(sappedHealth));
-        yield return new WaitForSeconds(20 / 60f);
         yield return Battle.StartCoroutine(OnHealthSapped(target));
     }
 
@@ -158,7 +156,6 @@ public abstract class SimpleAttackMove : AttackMove
         target.LastDamageRecieved = damage;
 
         yield return Battle.StartCoroutine(target.RecieveDamge(damage, Type));
-        yield return new WaitForSeconds(60 / 60f);
     }
 
     protected IEnumerator ApplySecondaryEffect(SecondaryEffects effect, BattlePokemon opponent)
@@ -198,40 +195,46 @@ public abstract class SimpleAttackMove : AttackMove
                 opponent.Flinch();
                 yield break;
             case SecondaryEffects.Confusion:
-                opponent.Confuse();
-                yield return Battle.StartCoroutine(OnConfused(opponent));
+                if (!opponent.Confused)
+                {
+                    opponent.Confuse();
+                    yield return Battle.StartCoroutine(OnConfused(opponent));
+                }
                 yield break;
             case SecondaryEffects.Freeze:
-                if (!opponent.IsType(Type))
+                if (!opponent.IsType(Type) || !opponent.HasNonVolatileStatus())
                 {
                     opponent.Freeze();
                     yield return Battle.StartCoroutine(OnFrozen(opponent));
                 }
                 yield break;
             case SecondaryEffects.Burn:
-                if (!opponent.IsType(Type))
+                if (!opponent.IsType(Type) || !opponent.HasNonVolatileStatus())
                 {
                     opponent.Burn();
                     yield return Battle.StartCoroutine(OnBurned(opponent));
                 }
                 yield break;
             case SecondaryEffects.Poison:
-                if (!opponent.IsType(Type))
+                if (!opponent.IsType(Type) || !opponent.HasNonVolatileStatus())
                 {
                     opponent.Poison();
                     yield return Battle.StartCoroutine(OnPoisoned(opponent));
                 }
                 yield break;
             case SecondaryEffects.Paralysis:
-                if (!opponent.IsType(Type))
+                if (!opponent.IsType(Type) || !opponent.HasNonVolatileStatus())
                 {
                     opponent.Paralyze();
                     yield return Battle.StartCoroutine(OnParalyzed(opponent));
                 }
                 yield break;
             case SecondaryEffects.Sleep:
-                opponent.Sleep();
-                yield return Battle.StartCoroutine(OnSlept(opponent));
+                if (!opponent.HasNonVolatileStatus())
+                {
+                    opponent.Sleep();
+                    yield return Battle.StartCoroutine(OnSlept(opponent));
+                }
                 yield break;
         }
     }

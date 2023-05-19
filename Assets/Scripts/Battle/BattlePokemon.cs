@@ -94,7 +94,7 @@ public class BattlePokemon
     public void SetMirrorMove(TransitiveMove move) => MirrorMove = move;
     public void ClearMirrorMove() => MirrorMove = null;
 
-    public IEnumerator RecieveDamge(int damage, Type type)
+    public IEnumerator RecieveDamge(int damage, Type type = Type.NONE)
     {
         if (damage > CurrentHP)
             damage = CurrentHP;
@@ -336,6 +336,11 @@ public class BattlePokemon
         Poison();
         BadlyPoisoned = true;
         ToxicCounter = 1;
+    }
+    public void IncreaseToxicCounter()
+    {
+        if (ToxicCounter < 15)
+            ToxicCounter++;
     }
     public bool Poisoned() => ReferencePokemon.Status == StatusEffect.PSN;
 

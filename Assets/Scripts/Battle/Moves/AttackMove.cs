@@ -37,6 +37,5 @@ public abstract class AttackMove : TransitiveMove
         if (isCrit)
             yield return Battle.StartCoroutine(OnCriticalHit());
         yield return Battle.StartCoroutine(OnEffectiveness(effectiveness));
-        yield return new WaitForSeconds(60 / 60f);
     }
 }

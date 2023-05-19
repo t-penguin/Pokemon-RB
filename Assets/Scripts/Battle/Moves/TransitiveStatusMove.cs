@@ -152,15 +152,27 @@ public abstract class TransitiveStatusMove : TransitiveMove
                 yield return Battle.StartCoroutine(ApplyNonVolatileStatus(target, StatusEffect.SLP));
                 yield break;
             case TransitiveStatusEffect.Confuse:
-                target.Confuse();
-                yield return Battle.StartCoroutine(OnConfused(target));
+                if (target.Confused)
+                    yield return Battle.StartCoroutine(OnFailed());
+                {
+                    target.Confuse();
+                    yield return Battle.StartCoroutine(OnConfused(target));
+                }
                 yield break;
             case TransitiveStatusEffect.Seed:
-                target.Seeded = true;
-                yield return Battle.StartCoroutine(OnSeeded(target));
+                if (target.Seeded)
+                    yield return Battle.StartCoroutine(OnEvaded(target));
+                else
+                {
+                    target.Seeded = true;
+                    yield return Battle.StartCoroutine(OnSeeded(target));
+                }
                 yield break;
             case TransitiveStatusEffect.Disable:
-                yield return Battle.StartCoroutine(Disable(target));
+                if (target.Disabled)
+                    yield return Battle.StartCoroutine(OnFailed());
+                else
+                    yield return Battle.StartCoroutine(Disable(target));
                 yield break;
         }
     }
@@ -197,7 +209,7 @@ public abstract class TransitiveStatusMove : TransitiveMove
     {
         if (target.HasNonVolatileStatus())
         {
-            yield return Battle.StartCoroutine(OnFailed());
+            yield return Battle.StartCoroutine(OnStatusFailed(target));
             yield break;
         }
 

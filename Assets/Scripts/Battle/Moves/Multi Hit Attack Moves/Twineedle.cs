@@ -36,7 +36,7 @@ public class Twineedle : MultiHitAttackMove
             // REMOVE HERE when the animation has been added
             yield return new WaitForSeconds(40 / 60f);
 
-            if (target.Status == StatusEffect.FNT)
+            if (!target.Alive)
                 break;
 
             // ADD HERE: End immediately if substitute breaks
@@ -45,12 +45,14 @@ public class Twineedle : MultiHitAttackMove
         yield return Battle.StartCoroutine(OnEffectiveness(effectiveness));
         yield return Battle.StartCoroutine(OnMultiHit(totalHits));
 
-        bool targetIsAlive = target.Status != StatusEffect.FNT;
-        bool poisonHits = Random.Range(0, 10) < 2;
-        if(targetIsAlive && !target.IsType(Type.POISON) && poisonHits)
+        if(!target.AfflictedByStatus)
         {
-            target.Poison();
-            yield return Battle.StartCoroutine(OnPoisoned(target));
+            bool poisonHits = Random.Range(0, 10) < 2;
+            if(poisonHits && !target.IsType(Type.POISON))
+            {
+                yield return Battle.StartCoroutine(OnPoisoned(target));
+                target.Poison();
+            }
         }
     }
 }

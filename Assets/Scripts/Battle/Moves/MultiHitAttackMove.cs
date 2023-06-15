@@ -76,7 +76,7 @@ public abstract class MultiHitAttackMove : AttackMove
             // REMOVE HERE when the animation has been added
             yield return new WaitForSeconds(40 / 60f);
 
-            if (target.Status == StatusEffect.FNT)
+            if (!target.Alive)
                 break;
 
             // ADD HERE: End immediately if substitute breaks

@@ -116,6 +116,6 @@ public class TurnOrderState : BattleBaseState
     private int CalculateModifiedSpeed(BattlePokemon pokemon)
     {
         int speed = pokemon.BattleStats.Speed;
-        return pokemon.Status == StatusEffect.PAR ? Mathf.Max(speed / 4, 1) : speed;
+        return pokemon.Paralyzed ? Mathf.Max(speed / 4, 1) : speed;
     }
 }

@@ -118,7 +118,7 @@ public abstract class ReflexiveStatusMove : BaseMove
                 {
                     yield return Battle.StartCoroutine(OnRested(user));
                     yield return Battle.StartCoroutine(user.RestoreHealth(user.Stats.HP));
-                    user.Sleep();
+                    user.Sleep(2);
                     yield return Battle.StartCoroutine(OnHealthRegained(user));
                 }
                 yield break;

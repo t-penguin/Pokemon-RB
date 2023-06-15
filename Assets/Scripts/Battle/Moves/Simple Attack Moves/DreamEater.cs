@@ -25,7 +25,7 @@ public class DreamEater : SimpleAttackMove
         {
             yield return Battle.StartCoroutine(OnMissed(user));
         }
-        else if (opponent.Status != StatusEffect.SLP)
+        else if (!opponent.Asleep)
         {
             yield return Battle.StartCoroutine(OnFailed());
         }

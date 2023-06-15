@@ -207,7 +207,7 @@ public abstract class TransitiveStatusMove : TransitiveMove
 
     private IEnumerator AttemptPoison(BattlePokemon target)
     {
-        bool noEffect = target.IsType(Type.POISON) || target.HasNonVolatileStatus();
+        bool noEffect = target.IsType(Type.POISON) || target.AfflictedByStatus;
         if (noEffect)
             yield return Battle.StartCoroutine(OnStatusFailed(target));
         else
@@ -221,7 +221,7 @@ public abstract class TransitiveStatusMove : TransitiveMove
     {
         if (target.Asleep)
             yield return Battle.StartCoroutine(OnAlreadySleeping(target));
-        else if (target.HasNonVolatileStatus())
+        else if (target.AfflictedByStatus)
             yield return Battle.StartCoroutine(OnStatusFailed(target));
         else
         {
@@ -232,7 +232,7 @@ public abstract class TransitiveStatusMove : TransitiveMove
 
     private IEnumerator AttemptParalysis(BattlePokemon target)
     {
-        bool noEffect = target.IsType(Type.GROUND) || target.HasNonVolatileStatus();
+        bool noEffect = target.IsType(Type.GROUND) || target.AfflictedByStatus;
         if (noEffect)
             yield return Battle.StartCoroutine(OnStatusFailed(target));
         else

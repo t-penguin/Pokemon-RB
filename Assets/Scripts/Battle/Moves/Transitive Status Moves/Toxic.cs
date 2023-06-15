@@ -35,7 +35,7 @@ public class Toxic : TransitiveStatusMove
             else
                 yield return Battle.StartCoroutine(OnMissed(user));
         }
-        else if (opponent.IsType(Type.POISON) || opponent.HasNonVolatileStatus())
+        else if (opponent.IsType(Type.POISON) || opponent.AfflictedByStatus)
             yield return Battle.StartCoroutine(OnStatusFailed(opponent));
         else
         {

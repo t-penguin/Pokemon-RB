@@ -41,6 +41,17 @@ public class BattlePokemon
     [field: SerializeField] public bool BadlyPoisoned { get; set; }
     [field: SerializeField] public int ToxicCounter { get; private set; }
     [field: SerializeField] public bool Focused { get; set; }
+    [field: SerializeField] public int SleepCounter { get; set; }
+
+    // Non-Volatile Status Conditions
+    public bool AfflictedByStatus { get { return Alive && Status != StatusEffect.OK; } }
+    public bool Alive { get { return Status != StatusEffect.FNT; } }
+    public bool Asleep { get { return Status == StatusEffect.SLP; } }
+    public bool Burned { get { return Status == StatusEffect.BRN; } }
+    public bool Frozen { get { return Status == StatusEffect.FRZ; } }
+    public bool Paralyzed { get { return Status == StatusEffect.PAR; } }
+    public bool Poisoned { get { return Status == StatusEffect.PSN; } }
+
 
     // Volatile Status Conditions
     [field: SerializeField] public bool Bound { get; set; }
@@ -51,6 +62,7 @@ public class BattlePokemon
     [field: SerializeField] public bool Disabled { get; private set; }
     [field: SerializeField] public int DisableIndex { get; private set; }
     [field: SerializeField] public int DisableCounter { get; private set; }
+    [field: SerializeField] public bool Recharging { get; set; }
 
     #endregion
 
@@ -84,6 +96,8 @@ public class BattlePokemon
 
         LastMoveUsed = null;
         MirrorMove = null;
+
+        SleepCounter = pokemon.SleepCounter;
     }
 
     #endregion
@@ -130,7 +144,12 @@ public class BattlePokemon
             yield break;
         }
 
-        // If damage type is FIRE and pokemon is FROZEN, defrost
+        // Defrost the pokemon if it is frozen and a fire type move is used on it
+        if(type == Type.FIRE && Frozen)
+        {
+            yield return _battle.StartCoroutine(BattleMessages.Display(BattleMessages.POKEMON_DEFROSTED, bPokemon: this));
+            ClearNonVolatileStatus();
+        }
     }
 
     public IEnumerator RestoreHealth(int health)
@@ -318,19 +337,50 @@ public class BattlePokemon
         DisableCounter = 0;
     }
 
-    public void Freeze() => ReferencePokemon.Status = StatusEffect.FRZ;
-    public bool IsFrozen() => ReferencePokemon.Status == StatusEffect.FRZ;
+    public void Freeze()
+    {
+        Status = StatusEffect.FRZ;
+        ReferencePokemon.Status = StatusEffect.FRZ;
+        _battle.OnPokemonStatusChanged(this);
+    }
 
-    public void Burn() => ReferencePokemon.Status = StatusEffect.BRN;
-    public bool IsBurned() => ReferencePokemon.Status == StatusEffect.BRN;
+    public void Burn()
+    {
+        Status = StatusEffect.BRN;
+        ReferencePokemon.Status = StatusEffect.BRN;
+        _battle.OnPokemonStatusChanged(this);
+    }
 
-    public void Paralyze() => ReferencePokemon.Status = StatusEffect.PAR;
-    public bool IsParalyzed() => ReferencePokemon.Status == StatusEffect.PAR;
+    public void Paralyze()
+    {
+        Status = StatusEffect.PAR;
+        ReferencePokemon.Status = StatusEffect.PAR;
+        _battle.OnPokemonStatusChanged(this);
+    }
 
-    public void Sleep() => ReferencePokemon.Status = StatusEffect.SLP;
-    public bool IsSleeping() => ReferencePokemon.Status == StatusEffect.SLP;
+    public void Sleep(int turns)
+    {
+        SleepCounter = turns;
+        Status = StatusEffect.SLP;
+        ReferencePokemon.Status = StatusEffect.SLP;
+        _battle.OnPokemonStatusChanged(this);
+    }
+    public void DecreaseSleepCounter()
+    {
+        if (SleepCounter > 0)
+        {
+            SleepCounter--;
+            ReferencePokemon.SleepCounter--;
+        }
+    }
 
-    public void Poison() => ReferencePokemon.Status = StatusEffect.PSN;
+    public void Poison()
+    {
+        Status = StatusEffect.PSN;
+        ReferencePokemon.Status = StatusEffect.PSN;
+        _battle.OnPokemonStatusChanged(this);
+    }
+
     public void BadlyPoison()
     {
         Poison();
@@ -342,15 +392,15 @@ public class BattlePokemon
         if (ToxicCounter < 15)
             ToxicCounter++;
     }
-    public bool Poisoned() => ReferencePokemon.Status == StatusEffect.PSN;
-
-    public bool HasNonVolatileStatus() 
-        => ReferencePokemon.Status != StatusEffect.OK && ReferencePokemon.Status != StatusEffect.FNT;
 
     public void ClearNonVolatileStatus()
     {
-        if (HasNonVolatileStatus())
+        if (AfflictedByStatus)
+        {
+            Status = StatusEffect.OK;
             ReferencePokemon.Status = StatusEffect.OK;
+            _battle.OnPokemonStatusChanged(this);
+        }
     }
 
     #endregion

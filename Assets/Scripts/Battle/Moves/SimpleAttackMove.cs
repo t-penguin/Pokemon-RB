@@ -200,28 +200,28 @@ public abstract class SimpleAttackMove : AttackMove
                 }
                 yield break;
             case SecondaryEffects.Freeze:
-                if (!opponent.IsType(Type) || !opponent.HasNonVolatileStatus())
+                if (!opponent.IsType(Type) || !opponent.AfflictedByStatus)
                 {
                     yield return Battle.StartCoroutine(OnFrozen(opponent));
                     opponent.Freeze();
                 }
                 yield break;
             case SecondaryEffects.Burn:
-                if (!opponent.IsType(Type) || !opponent.HasNonVolatileStatus())
+                if (!opponent.IsType(Type) || !opponent.AfflictedByStatus)
                 {
                     yield return Battle.StartCoroutine(OnBurned(opponent));
                     opponent.Burn();
                 }
                 yield break;
             case SecondaryEffects.Poison:
-                if (!opponent.IsType(Type) || !opponent.HasNonVolatileStatus())
+                if (!opponent.IsType(Type) || !opponent.AfflictedByStatus)
                 {
                     yield return Battle.StartCoroutine(OnPoisoned(opponent));
                     opponent.Poison();
                 }
                 yield break;
             case SecondaryEffects.Paralysis:
-                if (!opponent.IsType(Type) || !opponent.HasNonVolatileStatus())
+                if (!opponent.IsType(Type) || !opponent.AfflictedByStatus)
                 {
                     yield return Battle.StartCoroutine(OnParalyzed(opponent));
                     opponent.Paralyze();

@@ -137,6 +137,7 @@ public abstract class MultiTurnAttackMove : AttackMove
                 SetActionLock(user, true);
             }
 
+            user.Recharging = true;
             SetLastMoveUsed(user);
             SetMirrorMove(opponent);
             CurrentPP--;
@@ -147,6 +148,7 @@ public abstract class MultiTurnAttackMove : AttackMove
         yield return Battle.StartCoroutine(OnRecharging(user));
         TurnsLeft = 0;
         SetActionLock(user, false);
+        user.Recharging = false;
     }
 
     private IEnumerator ExecuteThrashingMove(BattlePokemon user, BattlePokemon opponent)

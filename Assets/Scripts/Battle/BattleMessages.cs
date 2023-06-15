@@ -15,7 +15,7 @@ public static class BattleMessages
     // Move Messages
     public const string MOVE_USED = "[POKEMON]\nused [MOVE]!";
     public const string MOVE_MISSED = "[POKEMON]'s\nattack missed!";
-    public const string MOVE_FAILED = "But it failed!";
+    public const string MOVE_FAILED = "But, it failed!";
     public const string MOVE_DOES_NOT_AFFECT = "It doesn't affect\n[POKEMON]!";
     public const string MOVE_SUPER_EFFECTIVE = "It's super\neffective!";
     public const string MOVE_NOT_EFFECTIVE = "It's not very\neffective...";
@@ -45,16 +45,25 @@ public static class BattleMessages
 
     // Status condition messages
     public const string TARGET_PARALYZED = "[POKEMON]'s\nparalyzed! It may\nnot attack!";
+    public const string USER_FULLY_PARALYZED = "[POKEMON]'s\nfully paralyzed!";
     public const string TARGET_SLEPT = "[POKEMON]\nfell asleep!";
+    public const string TARGET_ALREADY_SLEEPING = "[POKEMON]'s\nalready asleep!";
+    public const string USER_SLEEPING = "[POKEMON]\nis fast asleep!";
+    public const string USER_WOKE_UP = "[POKEMON]\nwoke up!";
     public const string TARGET_BURNED = "[POKEMON]\nwas burned!";
     public const string TARGET_FROZEN = "[POKEMON]\nwas frozen solid!";
+    public const string USER_FROZEN = "[POKEMON]\nis frozen solid!";
+    public const string POKEMON_DEFROSTED = "Fire defrosted\n[POKEMON]!";
     public const string TARGET_POISONED = "[POKEMON]\nwas poisoned!";
     public const string TARGET_BADLY_POISONED = "[POKEMON]'s\nbadly poisoned!";
     public const string TARGET_CONFUSED = "[POKEMON]\nbecame confused!";
     public const string TARGET_SEEDED = "[POKEMON]\nwas seeded!";
     public const string TARGET_DISABLED = "[POKEMON]'s\n[MOVE] was\ndisabled!";
+    public const string USER_NO_LONGER_DISABLED = "[POKEMON]'s\ndisabled no more!";
     public const string USER_FOCUSED = "[POKEMON]'s\ngetting pumped!";
     public const string USER_RESTED = "[POKEMON]\nstarted sleeping!";
+    public const string TARGET_EVADED = "[POKEMON]\nevaded attack!";
+    public const string STATUS_DID_NOT_AFFECT = "It didn't affect\n[POKEMON]";
 
     // Move effect messages
     public const string EFFECT_HEALTH_SAPPED = "Sucked health from\n[POKEMON]!";

@@ -224,7 +224,7 @@ public abstract class BaseMove
 
     /// <summary>
     /// Message for when the target is given the paralyzed status.
-    /// Displayed after the condition is given to the target.
+    /// Displayed before the condition is given to the target.
     /// </summary>
     protected IEnumerator OnParalyzed(BattlePokemon target)
     {
@@ -233,7 +233,7 @@ public abstract class BaseMove
 
     /// <summary>
     /// Message for when the target is given the frozen status.
-    /// Displayed after the condition is given to the target.
+    /// Displayed before the condition is given to the target.
     /// </summary>
     protected IEnumerator OnFrozen(BattlePokemon target)
     {
@@ -242,7 +242,7 @@ public abstract class BaseMove
 
     /// <summary>
     /// Message for when the target is given the sleeping status.
-    /// Displayed after the condition is given to the target.
+    /// Displayed before the condition is given to the target.
     /// </summary>
     protected IEnumerator OnSlept(BattlePokemon target)
     {
@@ -250,8 +250,17 @@ public abstract class BaseMove
     }
 
     /// <summary>
+    /// Message for when trying to sleep an already sleeping target.
+    /// Displayed after the move is used.
+    /// </summary>
+    protected IEnumerator OnAlreadySleeping(BattlePokemon target)
+    {
+        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.TARGET_ALREADY_SLEEPING, bPokemon: target));
+    }
+
+    /// <summary>
     /// Message for when the target is given the burned status.
-    /// Displayed after the condition is given to the target.
+    /// Displayed before the condition is given to the target.
     /// </summary>
     protected IEnumerator OnBurned(BattlePokemon target)
     {
@@ -260,7 +269,7 @@ public abstract class BaseMove
 
     /// <summary>
     /// Message for when the target is given the poisoned status.
-    /// Displayed after the condition is given to the target.
+    /// Displayed before the condition is given to the target.
     /// </summary>
     protected IEnumerator OnPoisoned(BattlePokemon target)
     {
@@ -269,11 +278,20 @@ public abstract class BaseMove
 
     /// <summary>
     /// Message for when the target is given the badly poisoned status.
-    /// Displayed after the condition is given to the target.
+    /// Displayed before the condition is given to the target.
     /// </summary>
     protected IEnumerator OnBadlyPoisoned(BattlePokemon target)
     {
         yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.TARGET_BADLY_POISONED, bPokemon: target));
+    }
+
+    /// <summary>
+    /// Message for when the target already has a non-volatile status condition.
+    /// Displayed after the move is used.
+    /// </summary>
+    protected IEnumerator OnStatusFailed(BattlePokemon target)
+    {
+        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.STATUS_DID_NOT_AFFECT, bPokemon: target));
     }
 
     /// <summary>
@@ -292,6 +310,15 @@ public abstract class BaseMove
     protected IEnumerator OnSeeded(BattlePokemon target)
     {
         yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.TARGET_SEEDED, bPokemon: target));
+    }
+
+    /// <summary>
+    /// Message for when the attempting to seed a target that is already seeded.
+    /// Displayed after the move is used.
+    /// </summary>
+    protected IEnumerator OnEvaded(BattlePokemon target)
+    {
+        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.TARGET_EVADED, bPokemon: target));
     }
 
     /// <summary>

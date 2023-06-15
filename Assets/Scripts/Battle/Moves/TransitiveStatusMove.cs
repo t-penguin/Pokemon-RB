@@ -143,13 +143,13 @@ public abstract class TransitiveStatusMove : TransitiveMove
                 yield return Battle.StartCoroutine(LowerStatAttempt(target, StatType.ACCURACY));
                 yield break;
             case TransitiveStatusEffect.Paralyze:
-                yield return Battle.StartCoroutine(ApplyNonVolatileStatus(target, StatusEffect.PAR));
+                yield return Battle.StartCoroutine(AttemptParalysis(target));
                 yield break;
             case TransitiveStatusEffect.Poison:
-                yield return Battle.StartCoroutine(ApplyNonVolatileStatus(target, StatusEffect.PSN));
+                yield return Battle.StartCoroutine(AttemptPoison(target));
                 yield break;
             case TransitiveStatusEffect.Sleep:
-                yield return Battle.StartCoroutine(ApplyNonVolatileStatus(target, StatusEffect.SLP));
+                yield return Battle.StartCoroutine(AttemptSleep(target));
                 yield break;
             case TransitiveStatusEffect.Confuse:
                 if (target.Confused)
@@ -205,29 +205,40 @@ public abstract class TransitiveStatusMove : TransitiveMove
             yield return Battle.StartCoroutine(OnNothingHappened());
     }
 
-    private IEnumerator ApplyNonVolatileStatus(BattlePokemon target, StatusEffect effect)
+    private IEnumerator AttemptPoison(BattlePokemon target)
     {
-        if (target.HasNonVolatileStatus())
-        {
+        bool noEffect = target.IsType(Type.POISON) || target.HasNonVolatileStatus();
+        if (noEffect)
             yield return Battle.StartCoroutine(OnStatusFailed(target));
-            yield break;
-        }
-
-        switch (effect)
+        else
         {
-            default: yield break;
-            case StatusEffect.PAR:
-                target.Paralyze();
-                yield return Battle.StartCoroutine(OnParalyzed(target));
-                yield break;
-            case StatusEffect.PSN:
-                target.Poison();
-                yield return Battle.StartCoroutine(OnPoisoned(target));
-                yield break;
-            case StatusEffect.SLP:
-                target.Sleep();
-                yield return Battle.StartCoroutine(OnSlept(target));
-                yield break;
+            yield return Battle.StartCoroutine(OnPoisoned(target));
+            target.Poison();
+        }
+    }
+
+    private IEnumerator AttemptSleep(BattlePokemon target)
+    {
+        if (target.Asleep)
+            yield return Battle.StartCoroutine(OnAlreadySleeping(target));
+        else if (target.HasNonVolatileStatus())
+            yield return Battle.StartCoroutine(OnStatusFailed(target));
+        else
+        {
+            yield return Battle.StartCoroutine(OnSlept(target));
+            target.Sleep(Random.Range(1, 8));
+        }
+    }
+
+    private IEnumerator AttemptParalysis(BattlePokemon target)
+    {
+        bool noEffect = target.IsType(Type.GROUND) || target.HasNonVolatileStatus();
+        if (noEffect)
+            yield return Battle.StartCoroutine(OnStatusFailed(target));
+        else
+        {
+            yield return Battle.StartCoroutine(OnParalyzed(target));
+            target.Paralyze();
         }
     }
 }

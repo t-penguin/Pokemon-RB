@@ -374,7 +374,7 @@ public class BattleStateManager : StateManager, IGameState
                 float tradedMultiplier = PlayerData.ID == p.TrainerID ? 1 : 1.5f;
                 expGained = Mathf.FloorToInt(expGained * tradedMultiplier);
 
-                yield return StartCoroutine(OnGainedEXP(p));
+                yield return StartCoroutine(OnGainedEXP(p, expGained));
                 p.GainExperience(expGained);
             }
         }
@@ -445,9 +445,9 @@ public class BattleStateManager : StateManager, IGameState
         yield return StartCoroutine(BattleMessages.Display(BattleMessages.PLAYER_RETURN, bPokemon: pokemon, waitForInput: false));
     }
 
-    private IEnumerator OnGainedEXP(Pokemon pokemon)
+    private IEnumerator OnGainedEXP(Pokemon pokemon, int exp)
     {
-        yield return StartCoroutine(BattleMessages.Display(BattleMessages.GAINED_EXP, pokemon: pokemon));
+        yield return StartCoroutine(BattleMessages.Display(BattleMessages.GAINED_EXP, pokemon: pokemon, value: exp));
     }
 
     #endregion

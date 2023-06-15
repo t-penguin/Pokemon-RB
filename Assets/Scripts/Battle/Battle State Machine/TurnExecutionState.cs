@@ -68,35 +68,71 @@ public class TurnExecutionState : BattleBaseState
 
     private IEnumerator ExecuteTurn(BattleSide thisSide, BattleSide otherSide)
     {
+        BattlePokemon user = thisSide.ActivePokemon;
+        BattlePokemon opponent = otherSide.ActivePokemon;
+
         switch(thisSide.Action)
         {
             default:
                 yield break;
             case BattleAction.UseMove:
                 yield return _battle.StartCoroutine(AttemptMoveExecution(thisSide, otherSide));
-                yield break;
+                break;
             case BattleAction.SwitchPokemon:
                 if (thisSide == _battle.PlayerSide)
                     yield return _battle.StartCoroutine(_battle.SwapPlayerPokemon());
                 else
                     yield return _battle.StartCoroutine(_battle.SwapOpponentPokemon());
 
-                yield break;
+                break;
             case BattleAction.UseItem:
 
-                yield break;
+                break;
             case BattleAction.RunFromBattle:
-                if (thisSide == _battle.OpponentSide)
-                    yield break;
+                if (thisSide == _battle.PlayerSide)
+                {
+                    yield return _battle.StartCoroutine(AttemptEscape(user, opponent));
+                    if (_battle.SuccessfulRun)
+                        yield break;
+                }
+                break;
+        }
 
-                yield return _battle.StartCoroutine(AttemptEscape(thisSide.ActivePokemon, otherSide.ActivePokemon));
-                yield break;
+        if (user.Alive)
+        {
+            yield return _battle.StartCoroutine(ApplyRecurrentDamage(user, opponent));
+            yield return new WaitForSeconds(30 / 60f);
         }
     }
 
     private IEnumerator AttemptMoveExecution(BattleSide thisSide, BattleSide otherSide)
     {
         BattlePokemon user = thisSide.ActivePokemon;
+
+        /* The user is unable to move if it is sleeping.
+         * The sleep counter is reduced BEFORE checking for the final turn of sleep.
+         * The user wakes up on the final turn but is still unable to move. */
+        if(user.Asleep)
+        {
+            user.DecreaseSleepCounter();
+            if (user.SleepCounter > 0)
+                yield return _battle.StartCoroutine(OnSleeping(user));
+            else
+            {
+                yield return _battle.StartCoroutine(OnWokeUp(user));
+                user.ClearNonVolatileStatus();
+            }
+            
+            yield break;
+        }
+
+        /* The user is unable to move if it is frozen.
+         * This lasts until the user is hit with a fire type move. */
+        if(user.Frozen)
+        {
+            yield return _battle.StartCoroutine(OnStillFrozen(user));
+            yield break;
+        }
 
         // The user is unable to move if it flinches
         if (user.Flinched)
@@ -106,9 +142,41 @@ public class TurnExecutionState : BattleBaseState
             yield break;
         }
 
-        // Reduce the disable counter if the user is disabled
-        if (user.Disabled)
+        /* Reduce the disable counter if the user is disabled
+         * Skip this check if the user is recharging. */
+        if (user.Disabled && !user.Recharging)
+        {
             user.ReduceDisableCounter();
+
+            if (!user.Disabled)
+                yield return _battle.StartCoroutine(OnNoLongerDisabled(user));
+        }
+
+        /* Check if the user will hurt itself due to confusion
+         * There is a 50% chance the user hurts itself */
+        if (user.Confused)
+        {
+            int r = Random.Range(0, 2);
+            if (r == 1)
+            {
+                int confusionDamage = CalculateConfusionDamage(user);
+                yield return _battle.StartCoroutine(user.RecieveDamge(confusionDamage));
+                yield return _battle.StartCoroutine(OnHurtByConfusion(user));
+                yield break;
+            }
+        }
+
+        /* Check if the user is immobilized by paralysis
+         * There is a 25% chance the user cannot move */
+        if(user.Paralyzed)
+        {
+            int r = Random.Range(0, 4);
+            if (r == 0)
+            {
+                yield return _battle.StartCoroutine(OnFullyParalyzed(user));
+                yield break;
+            }
+        }
 
         BaseMove move = thisSide.Move;
         /* If the user is STILL disabled, check to see if the move being used is disabled
@@ -138,7 +206,7 @@ public class TurnExecutionState : BattleBaseState
     {
         BattlePokemon playerPokemon = _battle.PlayerSide.ActivePokemon;
 
-        if (playerPokemon.Status != StatusEffect.FNT)
+        if (playerPokemon.Alive)
             yield break;
 
         _battle.PlayerSide.LockedIntoAction = false;
@@ -205,7 +273,7 @@ public class TurnExecutionState : BattleBaseState
     private IEnumerator CheckForOpponentFaint()
     {
         BattlePokemon opponentPokemon = _battle.OpponentSide.ActivePokemon;
-        if (opponentPokemon.Status != StatusEffect.FNT)
+        if (opponentPokemon.Alive)
             yield break;
 
         _battle.OpponentSide.LockedIntoAction = false;
@@ -259,6 +327,36 @@ public class TurnExecutionState : BattleBaseState
         }
     }
 
+    private IEnumerator ApplyRecurrentDamage(BattlePokemon pokemon, BattlePokemon opponent)
+    {
+        int baseReccurentDamage = Mathf.Max(1, pokemon.Stats.HP / 16);
+
+        if(pokemon.Burned)
+        {
+            yield return _battle.StartCoroutine(pokemon.RecieveDamge(baseReccurentDamage));
+            yield return _battle.StartCoroutine(OnReccurentBurn(pokemon));
+        }
+        else if(pokemon.Poisoned)
+        {
+            int damage = baseReccurentDamage;
+            if (pokemon.BadlyPoisoned)
+            {
+                damage *= pokemon.ToxicCounter;
+                pokemon.IncreaseToxicCounter();
+            }
+
+            yield return _battle.StartCoroutine(pokemon.RecieveDamge(damage));
+            yield return _battle.StartCoroutine(OnReccurentPoison(pokemon));
+        }
+
+        if(pokemon.Seeded)
+        {
+            yield return _battle.StartCoroutine(pokemon.RecieveDamge(baseReccurentDamage));
+            yield return _battle.StartCoroutine(opponent.RestoreHealth(baseReccurentDamage));
+            yield return _battle.StartCoroutine(OnReccurentSap(pokemon));
+        }
+    }
+
     private void OnClosedPokemonMenu()
     {
         _battle.BattleUI.SetActive(true);
@@ -268,9 +366,65 @@ public class TurnExecutionState : BattleBaseState
         PokemonMenu.ClosedFromBattle -= OnClosedPokemonMenu;
     }
 
+    private int CalculateConfusionDamage(BattlePokemon user)
+    {
+        int userLevel = user.Level;
+        int userAttack = user.BattleStats.Attack;
+        int userDefense = user.BattleStats.Defense;
+
+        return MoveData.DamageFormula(userLevel, userAttack, userDefense, power: 40, stab: 1, typeMultiplier: 1);
+    }
+
+    #region Messages
+
+    private IEnumerator OnReccurentBurn(BattlePokemon pokemon)
+    {
+        yield return _battle.StartCoroutine(BattleMessages.Display(BattleMessages.RECURRENT_BURN, bPokemon: pokemon));
+    }
+
+    private IEnumerator OnReccurentPoison(BattlePokemon pokemon)
+    {
+        yield return _battle.StartCoroutine(BattleMessages.Display(BattleMessages.RECURRENT_POISON, bPokemon: pokemon));
+    }
+
+    private IEnumerator OnReccurentSap(BattlePokemon pokemon)
+    {
+        yield return _battle.StartCoroutine(BattleMessages.Display(BattleMessages.RECURRENT_SAP, bPokemon: pokemon));
+    }
+
+    private IEnumerator OnHurtByConfusion(BattlePokemon pokemon)
+    {
+        yield return _battle.StartCoroutine(BattleMessages.Display("", bPokemon: pokemon));
+    }
+
+    private IEnumerator OnSleeping(BattlePokemon pokemon)
+    {
+        yield return _battle.StartCoroutine(BattleMessages.Display(BattleMessages.USER_SLEEPING, bPokemon: pokemon));
+    }
+
+    private IEnumerator OnWokeUp(BattlePokemon pokemon)
+    {
+        yield return _battle.StartCoroutine(BattleMessages.Display(BattleMessages.USER_WOKE_UP, bPokemon: pokemon));
+    }
+
+    private IEnumerator OnStillFrozen(BattlePokemon pokemon)
+    {
+        yield return _battle.StartCoroutine(BattleMessages.Display(BattleMessages.USER_FROZEN, bPokemon: pokemon));
+    }
+
+    private IEnumerator OnFullyParalyzed(BattlePokemon pokemon)
+    {
+        yield return _battle.StartCoroutine(BattleMessages.Display(BattleMessages.USER_FULLY_PARALYZED, bPokemon: pokemon));
+    }
+
     private IEnumerator OnMoveDisabled(BaseMove move)
     {
         yield return _battle.StartCoroutine(BattleMessages.Display(BattleMessages.MOVE_DISABLED, move: move));
+    }
+
+    private IEnumerator OnNoLongerDisabled(BattlePokemon pokemon)
+    {
+        yield return _battle.StartCoroutine(BattleMessages.Display(BattleMessages.USER_NO_LONGER_DISABLED, bPokemon: pokemon));
     }
 
     private IEnumerator OnCannotEscape()
@@ -307,4 +461,6 @@ public class TurnExecutionState : BattleBaseState
     {
         yield return _battle.StartCoroutine(BattleMessages.Display(BattleMessages.BLACKED_OUT));
     }
+
+    #endregion
 }

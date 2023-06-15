@@ -30,6 +30,8 @@ public class Pokemon
 	[field: SerializeField] public int[] MovePPs { get; private set; }
 	public int[] MoveMaxPPs { get; private set; }
 
+
+	[field: SerializeField] public int SleepCounter { get; set; }
 	#endregion
 
 	#region Constructors

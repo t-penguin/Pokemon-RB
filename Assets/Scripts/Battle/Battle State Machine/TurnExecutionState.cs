@@ -98,6 +98,7 @@ public class TurnExecutionState : BattleBaseState
                 break;
         }
 
+        yield return new WaitForSeconds(30 / 60f);
         if (user.Alive)
         {
             yield return _battle.StartCoroutine(ApplyRecurrentDamage(user, opponent));

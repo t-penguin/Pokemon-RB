@@ -327,6 +327,17 @@ public class BattleStateManager : StateManager, IGameState
         yield break;
     }
 
+    public void OnPokemonStatusChanged(BattlePokemon pokemon)
+    {
+        TextMeshProUGUI text = pokemon.TrainerIsPlayer ? PlayerLevel : OpponentLevel;
+        StatusEffect status = pokemon.ReferencePokemon.Status;
+
+        if (status == StatusEffect.OK)
+            text.text = $"@{pokemon.Level}";
+        else
+            text.text = $" {status}";
+    }
+
     public IEnumerator ApplyExperience(Pokemon faintedPokemon)
     {
         /* If only one Pokemon participates it recieves full exp

@@ -77,11 +77,9 @@ public abstract class SimpleAttackMove : AttackMove
         bool hasSecondaryEffect = secondaryEffect != SecondaryEffects.None;
         if(hasSecondaryEffect)
         {
-            bool isOpponentAlive = opponent.Status != StatusEffect.FNT;
-            // Replace with actual check
             int random = Random.Range(0, 100);
             bool effectHits = random < secondaryEffectChance;
-            if(isOpponentAlive && effectHits)
+            if(opponent.Alive && effectHits)
                 yield return Battle.StartCoroutine(ApplySecondaryEffect(secondaryEffect, opponent));
         }
 
@@ -204,36 +202,29 @@ public abstract class SimpleAttackMove : AttackMove
             case SecondaryEffects.Freeze:
                 if (!opponent.IsType(Type) || !opponent.HasNonVolatileStatus())
                 {
-                    opponent.Freeze();
                     yield return Battle.StartCoroutine(OnFrozen(opponent));
+                    opponent.Freeze();
                 }
                 yield break;
             case SecondaryEffects.Burn:
                 if (!opponent.IsType(Type) || !opponent.HasNonVolatileStatus())
                 {
-                    opponent.Burn();
                     yield return Battle.StartCoroutine(OnBurned(opponent));
+                    opponent.Burn();
                 }
                 yield break;
             case SecondaryEffects.Poison:
                 if (!opponent.IsType(Type) || !opponent.HasNonVolatileStatus())
                 {
-                    opponent.Poison();
                     yield return Battle.StartCoroutine(OnPoisoned(opponent));
+                    opponent.Poison();
                 }
                 yield break;
             case SecondaryEffects.Paralysis:
                 if (!opponent.IsType(Type) || !opponent.HasNonVolatileStatus())
                 {
-                    opponent.Paralyze();
                     yield return Battle.StartCoroutine(OnParalyzed(opponent));
-                }
-                yield break;
-            case SecondaryEffects.Sleep:
-                if (!opponent.HasNonVolatileStatus())
-                {
-                    opponent.Sleep();
-                    yield return Battle.StartCoroutine(OnSlept(opponent));
+                    opponent.Paralyze();
                 }
                 yield break;
         }
@@ -260,6 +251,5 @@ public enum SecondaryEffects
     Freeze,
     Burn,
     Poison,
-    Paralysis,
-    Sleep
+    Paralysis
 }

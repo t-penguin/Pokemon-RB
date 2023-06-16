@@ -301,7 +301,7 @@ public class Pokemon
 	public void TeachMove(int moveIndex, int moveSlot)
     {
 		MoveIndexes[moveSlot] = moveIndex;
-		MoveMaxPPs[moveSlot] = MoveData.MaxPPs[moveSlot];
+		MoveMaxPPs[moveSlot] = MoveData.MaxPPs[moveIndex];
 		MovePPs[moveSlot] = MoveMaxPPs[moveSlot];
     }
 

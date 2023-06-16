@@ -83,8 +83,12 @@ public class BattlePokemon
         Status = pokemon.Status;
 
         Moves = new BaseMove[4];
-        for(int i = 0; i < 4; i++)
+        for (int i = 0; i < 4; i++)
+        {
             Moves[i] = MoveCreator.CreateMove(battle, pokemon.MoveIndexes[i]);
+            if(Moves[i] != null)
+                Moves[i].SetPP(pokemon.MovePPs[i], pokemon.MoveMaxPPs[i]);
+        }
 
         Level = pokemon.Level;
         Stats = pokemon.Stats;
@@ -219,6 +223,23 @@ public class BattlePokemon
         }
 
         return indexes;
+    }
+
+    public void SetReferencePP()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            if(Moves[i] == null)
+            {
+                ReferencePokemon.MovePPs[i] = 0;
+                ReferencePokemon.MoveMaxPPs[i] = 0;
+            }
+            else
+            {
+                ReferencePokemon.MovePPs[i] = Moves[i].CurrentPP;
+                ReferencePokemon.MoveMaxPPs[i] = Moves[i].CurrentMaxPP;
+            }
+        }
     }
 
     #region Stat Methods

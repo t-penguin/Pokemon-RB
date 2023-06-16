@@ -142,6 +142,9 @@ public class BattleStateManager : StateManager, IGameState
     {
         yield return new WaitForSeconds(2 / 60f);
 
+        // Set move PP to persist after battle
+        PlayerSide.ActivePokemon.SetReferencePP();
+
         Background.SetActive(false);
         PlayerInfoBackground.SetActive(false);
         PlayerImage.gameObject.SetActive(false);
@@ -315,8 +318,10 @@ public class BattleStateManager : StateManager, IGameState
 
     public IEnumerator SwapPlayerPokemon()
     {
+        // Set move PP to persist between switches
+        PlayerSide.ActivePokemon.SetReferencePP();
+        
         yield return StartCoroutine(OnPlayerReturnedPokemon(PlayerSide.ActivePokemon));
-
         yield return new WaitForSeconds(60 / 60f);
         yield return StartCoroutine(ReturnAnimation(true));
         yield return StartCoroutine(SendOutPokemon(PlayerSide.SwitchTarget));

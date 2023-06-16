@@ -12,7 +12,7 @@ public abstract class BaseMove
     public int BasePP { get; }
     public int CurrentPP { get; protected set; }
     public int CurrentMaxPP { get; protected set; }
-    public int MaxPP { get; }
+    public int MaxPossiblePP { get; }
 
     /// <summary>
     /// Base class for a Pokemon's move.
@@ -34,7 +34,7 @@ public abstract class BaseMove
         BasePP = basePP;
         CurrentPP = BasePP;
         CurrentMaxPP = BasePP;
-        MaxPP = (int)(BasePP * 1.6);
+        MaxPossiblePP = (int)(BasePP * 1.6);
     }
 
     // Executes the user's move, to be overriden by each move
@@ -42,6 +42,13 @@ public abstract class BaseMove
 
     // Sets the user's last used move to be this one
     protected void SetLastMoveUsed(BattlePokemon user) => user.SetLastMoveUsed(this);
+
+    // Sets this move's current and max PP
+    public void SetPP(int currentPP, int maxPP)
+    {
+        CurrentMaxPP = maxPP > MaxPossiblePP ? MaxPossiblePP : maxPP;
+        CurrentPP = currentPP > CurrentMaxPP ? CurrentMaxPP : currentPP;
+    }
 
 
     #region General Messages

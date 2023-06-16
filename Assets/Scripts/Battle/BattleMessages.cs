@@ -41,7 +41,7 @@ public static class BattleMessages
     public const string TARGET_STAT_GREATLY_LOWERED = "[POKEMON]'s\n[STAT]\ngreatly fell!";
     public const string USER_STAT_RAISED = "[POKEMON]'s\n[STAT] rose!";
     public const string USER_STAT_GREATLY_RAISED = "[POKEMON]'s\n[STAT]\ngreatly rose!";
-    public const string MOVE_NOTHING_HAPPENED = "Nothing happened!";
+    public const string STAT_CHANGE_FAILED = "Nothing happened!";
 
     // Status condition messages
     public const string TARGET_PARALYZED = "[POKEMON]'s\nparalyzed! It may\nnot attack!";
@@ -63,7 +63,7 @@ public static class BattleMessages
     public const string USER_FOCUSED = "[POKEMON]'s\ngetting pumped!";
     public const string USER_RESTED = "[POKEMON]\nstarted sleeping!";
     public const string TARGET_EVADED = "[POKEMON]\nevaded attack!";
-    public const string STATUS_DID_NOT_AFFECT = "It didn't affect\n[POKEMON]";
+    public const string STATUS_DID_NOT_AFFECT = "It didn't affect\n[POKEMON]!";
 
     // Move effect messages
     public const string EFFECT_HEALTH_SAPPED = "Sucked health from\n[POKEMON]!";
@@ -86,13 +86,13 @@ public static class BattleMessages
     public const string RECURRENT_BURN = "[POKEMON]'s\nhurt by the burn!";
     public const string RECURRENT_POISON = "[POKEMON]'s\nhurt by poison!";
 
-    public const string PLAYER_SEND_OUT_1 = "GO!\n[POKEMON]";
+    public const string PLAYER_SEND_OUT_1 = "GO!\n[POKEMON]!";
     public const string PLAYER_RETURN = "[POKEMON] enough!\nCome back!";
     public const string GAINED_EXP = "[POKEMON] gained\n[VALUE] EXP. Points!";
 
     public const string BATTLE_START_WILD = "Wild [POKEMON]\nappeared!";
     public const string BATTLE_START_TRAINER = "[TRAINER] wants\nto fight!";
-    public const string TRAINER_SENT_OUT_POKEMON = "[TRAINER] sent\nout [POKEMON]";
+    public const string TRAINER_SENT_OUT_POKEMON = "[TRAINER] sent\nout [POKEMON]!";
 
     public const string NO_RUNNING = "No! There's no\nrunning from a\ntrainer battle!";
     public const string NO_PP = "No PP left for\nthis move!";

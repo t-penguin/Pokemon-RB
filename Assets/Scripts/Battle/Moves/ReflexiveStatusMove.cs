@@ -161,7 +161,7 @@ public abstract class ReflexiveStatusMove : BaseMove
             yield return Battle.StartCoroutine(OnRaisedStat(user, stat, greatlyRaiseStat));
         }
         else
-            yield return Battle.StartCoroutine(OnNothingHappened());
+            yield return Battle.StartCoroutine(OnStatChangeFailed());
     }
 }
 

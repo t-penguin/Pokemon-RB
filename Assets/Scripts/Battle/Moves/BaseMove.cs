@@ -213,9 +213,9 @@ public abstract class BaseMove
     /// Message for when a stat stage is attempted to be raised/lowered past it's limit.
     /// Displayed after the move is used if the stat change fails.
     /// </summary>
-    protected IEnumerator OnNothingHappened()
+    protected IEnumerator OnStatChangeFailed()
     {
-        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.MOVE_NOTHING_HAPPENED));
+        yield return Battle.StartCoroutine(BattleMessages.Display(BattleMessages.STAT_CHANGE_FAILED));
     }
 
     #endregion

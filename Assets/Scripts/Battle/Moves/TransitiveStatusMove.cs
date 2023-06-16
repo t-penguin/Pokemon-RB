@@ -202,7 +202,7 @@ public abstract class TransitiveStatusMove : TransitiveMove
             yield return Battle.StartCoroutine(OnLoweredStat(target, stat, greatlyLowerStat));
         }
         else
-            yield return Battle.StartCoroutine(OnNothingHappened());
+            yield return Battle.StartCoroutine(OnStatChangeFailed());
     }
 
     private IEnumerator AttemptPoison(BattlePokemon target)

@@ -155,6 +155,7 @@ public class BattleStateManager : StateManager, IGameState
         MessageBox.Close();
 
         EndBattle();
+        StopAllCoroutines();
         MainMenu.CanOpen = true;
         GameStateManager.SwitchState(GameStateManager.GameManager);
     }

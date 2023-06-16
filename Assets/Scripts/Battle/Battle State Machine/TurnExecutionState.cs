@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 public class TurnExecutionState : BattleBaseState
 {
     private bool _executeSecondTurn;
-    private bool _battleEnded;
 
     private Vector2 _answerBoxPosition = new Vector2(104, -72);
 
@@ -32,33 +31,11 @@ public class TurnExecutionState : BattleBaseState
     private IEnumerator Execute()
     {
         _executeSecondTurn = true;
-        _battleEnded = false;
 
         yield return _battle.StartCoroutine(ExecuteFirstTurn());
 
-        if (_battle.SuccessfulRun)
-            yield break;
-
-        yield return _battle.StartCoroutine(CheckForPlayerFaint());
-        if (_battleEnded)
-            yield break;
-
-        yield return _battle.StartCoroutine(CheckForOpponentFaint());
-        if (_battleEnded)
-            yield break;
-
         if (_executeSecondTurn)
-        {
             yield return _battle.StartCoroutine(ExecuteSecondTurn());
-
-            yield return _battle.StartCoroutine(CheckForPlayerFaint());
-            if (_battleEnded)
-                yield break;
-
-            yield return _battle.StartCoroutine(CheckForOpponentFaint());
-            if (_battleEnded)
-                yield break;
-        }
 
         if (_battle.PlayerSide.LockedIntoAction)
             _battle.SwitchState(_battle.TurnOrderState);
@@ -83,27 +60,21 @@ public class TurnExecutionState : BattleBaseState
                     yield return _battle.StartCoroutine(_battle.SwapPlayerPokemon());
                 else
                     yield return _battle.StartCoroutine(_battle.SwapOpponentPokemon());
-
                 break;
             case BattleAction.UseItem:
 
                 break;
             case BattleAction.RunFromBattle:
                 if (thisSide == _battle.PlayerSide)
-                {
                     yield return _battle.StartCoroutine(AttemptEscape(user, opponent));
-                    if (_battle.SuccessfulRun)
-                        yield break;
-                }
                 break;
         }
 
         yield return new WaitForSeconds(30 / 60f);
+        yield return _battle.StartCoroutine(CheckForFaint());
+
         if (user.Alive)
-        {
-            yield return _battle.StartCoroutine(ApplyRecurrentDamage(user, opponent));
-            yield return new WaitForSeconds(30 / 60f);
-        }
+            yield return _battle.StartCoroutine(AttemptRecurrentDamage(user, opponent));
     }
 
     private IEnumerator AttemptMoveExecution(BattleSide thisSide, BattleSide otherSide)
@@ -203,6 +174,12 @@ public class TurnExecutionState : BattleBaseState
         yield return _battle.StartCoroutine(ExecuteTurn(_battle.SecondSide, _battle.FirstSide));
     }
 
+    private IEnumerator CheckForFaint()
+    {
+        yield return _battle.StartCoroutine(CheckForPlayerFaint());
+        yield return _battle.StartCoroutine(CheckForOpponentFaint());
+    }
+
     private IEnumerator CheckForPlayerFaint()
     {
         BattlePokemon playerPokemon = _battle.PlayerSide.ActivePokemon;
@@ -229,16 +206,7 @@ public class TurnExecutionState : BattleBaseState
                 
                 // If NO, attempt to run
                 if (!AnswerBox.Answer)
-                {
                     yield return _battle.StartCoroutine(AttemptEscape(playerPokemon, _battle.OpponentSide.ActivePokemon));
-                    if (_battle.SuccessfulRun)
-                    {
-                        // battle.EndBattle();
-                        yield return _battle.StartCoroutine(_battle.CloseBattle());
-                        _battleEnded = true;
-                        yield break;
-                    }
-                }
             }
             // RUN FAILURE
             // CHOSE YES
@@ -266,7 +234,6 @@ public class TurnExecutionState : BattleBaseState
             // End battle as black out
             // battle.EndBattle();
             yield return _battle.StartCoroutine(_battle.CloseBattle());
-            _battleEnded = true;
             yield break;
         }
     }
@@ -286,7 +253,6 @@ public class TurnExecutionState : BattleBaseState
         // WILD BATTLE
         if (_battle.BattleType == BattleType.WILD_BATTLE)
         {
-            _battleEnded = true;
             // battle.EndBattle();
             yield return _battle.StartCoroutine(_battle.CloseBattle());
             yield break;
@@ -328,8 +294,12 @@ public class TurnExecutionState : BattleBaseState
         }
     }
 
-    private IEnumerator ApplyRecurrentDamage(BattlePokemon pokemon, BattlePokemon opponent)
+    private IEnumerator AttemptRecurrentDamage(BattlePokemon pokemon, BattlePokemon opponent)
     {
+        bool afflicted = pokemon.Burned || pokemon.Poisoned || pokemon.Seeded;
+        if (!afflicted)
+            yield break;
+
         int baseReccurentDamage = Mathf.Max(1, pokemon.Stats.HP / 16);
 
         if(pokemon.Burned)
@@ -356,6 +326,9 @@ public class TurnExecutionState : BattleBaseState
             yield return _battle.StartCoroutine(opponent.RestoreHealth(baseReccurentDamage));
             yield return _battle.StartCoroutine(OnReccurentSap(pokemon));
         }
+
+        yield return new WaitForSeconds(30 / 60f);
+        yield return _battle.StartCoroutine(CheckForFaint());
     }
 
     private void OnClosedPokemonMenu()

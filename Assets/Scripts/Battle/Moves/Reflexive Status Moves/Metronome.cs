@@ -16,12 +16,12 @@ public class Metronome : ReflexiveStatusMove
     {
         yield return Battle.StartCoroutine(OnUsed(user));
 
-        int metronome_index = 83;
-        int struggle_index = 135;
-        int moveIndex = metronome_index;
+        int metronomeIndex = 83;
+        int struggleIndex = 135;
+        int moveIndex = metronomeIndex;
 
         // Metronome cannot call itself (83) or Struggle (135)
-        while (moveIndex == metronome_index || moveIndex == struggle_index)
+        while (moveIndex == metronomeIndex || moveIndex == struggleIndex)
             moveIndex = Random.Range(1, MoveCreator.TotalMoves + 1);
 
         BaseMove Move = MoveCreator.CreateMove(Battle, moveIndex);

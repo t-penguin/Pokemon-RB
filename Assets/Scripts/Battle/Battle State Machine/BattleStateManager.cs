@@ -74,8 +74,7 @@ public class BattleStateManager : StateManager, IGameState
     [field: SerializeField] public RectTransform SelectionArrow { get; private set; }
 
     [field: SerializeField] public GameObject MoveInfoBox { get; private set; }
-    [field: SerializeField] public TextMeshProUGUI MoveInfoType { get; private set; }
-    [field: SerializeField] public TextMeshProUGUI MoveInfoPP { get; private set; }
+    [field: SerializeField] public TextMeshProUGUI MoveInfoText { get; private set; }
     [field: SerializeField] public GameObject MovesBox { get; private set; }
     [field: SerializeField] public RectTransform MoveArrow { get; private set; }
     [field: SerializeField] public TextMeshProUGUI[] MoveNames { get; private set; }
@@ -226,10 +225,16 @@ public class BattleStateManager : StateManager, IGameState
         }
     }
 
-    public void SetMoveInfo(BaseMove move)
+    public void SetMoveInfo(BaseMove move, bool disabled)
     {
-        MoveInfoType.text = move.Type.ToString();
-        MoveInfoPP.text = $"{move.CurrentPP, 2}/{move.CurrentMaxPP, 2}";
+        if (disabled)
+            MoveInfoText.text = "\ndisabled!";
+        else
+        {
+            string moveType = move.Type.ToString();
+            string movePP = $"{move.CurrentPP,2}/{move.CurrentMaxPP,2}";
+            MoveInfoText.text = $"TYPE/\n {moveType}\n    {movePP}";
+        }
     }
 
     public IEnumerator SendOutPokemon(Pokemon pokemon)

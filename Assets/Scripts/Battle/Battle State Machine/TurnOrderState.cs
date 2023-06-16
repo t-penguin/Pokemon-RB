@@ -39,8 +39,26 @@ public class TurnOrderState : BattleBaseState
     private void SetRandomMove(BattleSide side)
     {
         BattlePokemon pokemon = side.ActivePokemon;
-        int r = Random.Range(0, pokemon.ReferencePokemon.GetNumberOfMoves());
-        side.Move = pokemon.Moves[r];
+
+        if(!pokemon.HasUsableMove())
+        {
+            int StruggleIndex = 135;
+            side.Move = MoveCreator.CreateMove(_battle, StruggleIndex);
+            return;
+        }
+
+        bool validMove = false;
+        int moveIndex = 0;
+        List<int> indexesWithPP = pokemon.GetMovesWithPP();
+
+        while (!validMove)
+        {
+            int r = Random.Range(0, indexesWithPP.Count);
+            moveIndex = indexesWithPP[r];
+            validMove = !(pokemon.Disabled && moveIndex == pokemon.DisableIndex);
+        }
+
+        side.Move = pokemon.Moves[moveIndex];
     }
 
     private void SetTurnOrder()

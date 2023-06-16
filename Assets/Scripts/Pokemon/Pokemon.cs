@@ -219,6 +219,8 @@ public class Pokemon
         {
 			if (m != 0)
 				moves++;
+			else
+				break;
         }
 
 		return moves;

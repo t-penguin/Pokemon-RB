@@ -68,7 +68,8 @@ public class InputState : BattleBaseState
                 if (direction.y == 0)
                     return;
 
-                int totalMoves = _battle.PlayerSide.ActivePokemon.ReferencePokemon.GetNumberOfMoves();
+                BattlePokemon pokemon = _battle.PlayerSide.ActivePokemon;
+                int totalMoves = pokemon.ReferencePokemon.GetNumberOfMoves();
                 int selectionChange;
                 position = _battle.MoveArrow.localPosition;
                 if (direction.y > 0)
@@ -79,7 +80,8 @@ public class InputState : BattleBaseState
                 _battle.MoveSelection += selectionChange;
                 position.y = _battle.MoveSelection * (-8) - 8;
                 _battle.MoveArrow.localPosition = position;
-                _battle.SetMoveInfo(_battle.PlayerSide.ActivePokemon.Moves[_battle.MoveSelection]);
+                bool disabledMove = pokemon.Disabled && _battle.MoveSelection == pokemon.DisableIndex;
+                _battle.SetMoveInfo(pokemon.Moves[_battle.MoveSelection], disabledMove);
                 break;
         }
     }
@@ -125,6 +127,16 @@ public class InputState : BattleBaseState
         switch (_selection)
         {
             case 0: // FIGHT
+                if(!_battle.PlayerSide.ActivePokemon.HasUsableMove())
+                {
+                    int StruggleIndex = 135;
+                    BaseMove struggle = MoveCreator.CreateMove(_battle, StruggleIndex);
+                    _battle.PlayerSide.SetMove(struggle);
+                    Debug.Log($"{_battle.PlayerSide.ActivePokemon.Name} will use {struggle.Name}");
+                    _battle.SwitchState(_battle.TurnOrderState);
+                    return;
+                }
+                
                 if (_battle.PlayerSide.LockedIntoMove)
                     _battle.SwitchState(_battle.TurnOrderState);
                 else
@@ -157,14 +169,21 @@ public class InputState : BattleBaseState
     {
         BattlePokemon pokemon = _battle.PlayerSide.ActivePokemon;
         int index = _battle.MoveSelection;
-        if (pokemon.Moves[index].CurrentPP <= 0)
+        BaseMove move = pokemon.Moves[index];
+        if (move.CurrentPP <= 0)
         {
             _battle.StartCoroutine(MoveHasNoPP());
             return;
         }
 
-        _battle.PlayerSide.SetMove(pokemon.Moves[index]);
-        Debug.Log($"{pokemon.Name} will use {pokemon.Moves[index].Name}");
+        if(pokemon.Disabled && index == pokemon.DisableIndex)
+        {
+            _battle.StartCoroutine(SelectedDisabledMove(move));
+            return;
+        }
+
+        _battle.PlayerSide.SetMove(move);
+        Debug.Log($"{pokemon.Name} will use {move.Name}");
         _battle.StartCoroutine(CloseMovesMenu());
         _battle.SwitchState(_battle.TurnOrderState);
     }
@@ -173,9 +192,10 @@ public class InputState : BattleBaseState
     {
         currentMenu = InputMenu.None;
         yield return new WaitForSeconds(2 / 60f);
-        BattlePokemon activePokemon = _battle.PlayerSide.ActivePokemon;
-        _battle.SetMoveNames(activePokemon);
-        _battle.SetMoveInfo(activePokemon.Moves[_battle.MoveSelection]);
+        BattlePokemon pokemon = _battle.PlayerSide.ActivePokemon;
+        _battle.SetMoveNames(pokemon);
+        bool disabledMove = pokemon.Disabled && _battle.MoveSelection == pokemon.DisableIndex;
+        _battle.SetMoveInfo(pokemon.Moves[_battle.MoveSelection], disabledMove);
         Vector3 position = _battle.MoveArrow.localPosition;
         position.y = _battle.MoveSelection * (-8) - 8;
         _battle.MoveArrow.localPosition = position;
@@ -245,6 +265,20 @@ public class InputState : BattleBaseState
         currentMenu = InputMenu.Moves;
     }
 
+    private IEnumerator SelectedDisabledMove(BaseMove move)
+    {
+        currentMenu = InputMenu.None;
+        yield return new WaitForSeconds(2 / 60f);
+        MessageBox.BringToFront();
+
+        yield return _battle.StartCoroutine(OnSelectedDisabledMove(move));
+
+        yield return new WaitForSeconds(2 / 60f);
+        MessageBox.Clear();
+        MessageBox.ResetSortOrder();
+        currentMenu = InputMenu.Moves;
+    }
+
     #region Messages
 
     private IEnumerator OnNoRunning()
@@ -255,6 +289,11 @@ public class InputState : BattleBaseState
     private IEnumerator OnMoveNoPP()
     {
         yield return _battle.StartCoroutine(BattleMessages.Display(BattleMessages.NO_PP));
+    }
+
+    private IEnumerator OnSelectedDisabledMove(BaseMove move)
+    {
+        yield return _battle.StartCoroutine(BattleMessages.Display(BattleMessages.MOVE_DISABLED, move: move));
     }
 
     #endregion

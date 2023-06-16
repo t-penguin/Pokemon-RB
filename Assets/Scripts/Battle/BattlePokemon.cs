@@ -225,6 +225,15 @@ public class BattlePokemon
         return indexes;
     }
 
+    public bool HasUsableMove()
+    {
+        List<int> indexesWithPP = GetMovesWithPP();
+        bool noMovesWithPP = indexesWithPP.Count == 0;
+        bool lastMoveIsDisabled = indexesWithPP.Count == 1 && Disabled && indexesWithPP[0] == DisableIndex;
+
+        return !noMovesWithPP && !lastMoveIsDisabled;
+    }
+
     public void SetReferencePP()
     {
         for (int i = 0; i < 4; i++)

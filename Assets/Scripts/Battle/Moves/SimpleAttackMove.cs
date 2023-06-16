@@ -162,32 +162,16 @@ public abstract class SimpleAttackMove : AttackMove
         {
             default: yield break;
             case SecondaryEffects.LowerAttack:
-                if (opponent.CanStatBeLowered(StatType.ATTACK))
-                {
-                    opponent.ModifyStatAsSecondary(StatType.ATTACK, -1);
-                    yield return Battle.StartCoroutine(OnLoweredStat(opponent, StatType.ATTACK));
-                }
+                yield return Battle.StartCoroutine(AttemptStatDecrease(opponent, StatType.ATTACK));
                 yield break;
             case SecondaryEffects.LowerDefense:
-                if (opponent.CanStatBeLowered(StatType.DEFENSE))
-                {
-                    opponent.ModifyStatAsSecondary(StatType.DEFENSE, -1);
-                    yield return Battle.StartCoroutine(OnLoweredStat(opponent, StatType.DEFENSE));
-                }
+                yield return Battle.StartCoroutine(AttemptStatDecrease(opponent, StatType.DEFENSE));
                 yield break;
             case SecondaryEffects.LowerSpecial:
-                if (opponent.CanStatBeLowered(StatType.SPECIAL))
-                {
-                    opponent.ModifyStatAsSecondary(StatType.SPECIAL, -1);
-                    yield return Battle.StartCoroutine(OnLoweredStat(opponent, StatType.SPECIAL));
-                }
+                yield return Battle.StartCoroutine(AttemptStatDecrease(opponent, StatType.SPECIAL));
                 yield break;
             case SecondaryEffects.LowerSpeed:
-                if (opponent.CanStatBeLowered(StatType.SPEED))
-                {
-                    opponent.ModifyStatAsSecondary(StatType.SPEED, -1);
-                    yield return Battle.StartCoroutine(OnLoweredStat(opponent, StatType.SPEED));
-                }
+                yield return Battle.StartCoroutine(AttemptStatDecrease(opponent, StatType.SPEED));
                 yield break;
             case SecondaryEffects.Flinch:
                 opponent.Flinch();
@@ -227,6 +211,15 @@ public abstract class SimpleAttackMove : AttackMove
                     opponent.Paralyze();
                 }
                 yield break;
+        }
+    }
+
+    private IEnumerator AttemptStatDecrease(BattlePokemon opponent, StatType stat)
+    {
+        if (opponent.CanStatBeLowered(stat))
+        {
+            opponent.ModifyStatAsSecondary(stat, -1);
+            yield return Battle.StartCoroutine(OnLoweredStat(opponent, stat));
         }
     }
 

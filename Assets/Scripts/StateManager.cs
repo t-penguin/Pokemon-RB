@@ -26,42 +26,16 @@ public abstract class StateManager : MonoBehaviour, IGameState
 
         TestInputManager.MoveAction.performed += OnNavigate;
         TestInputManager.MoveAction.canceled += OnNavigate;
-
         TestInputManager.ConfirmAction.started += OnConfirm;
         TestInputManager.CancelAction.started += OnCancel;
-
-        // Listen for navigation input
-        /*InputManager.current.MoveAction.started += OnNavigate;
-        InputManager.current.MoveAction.performed += OnNavigate;
-        InputManager.current.MoveAction.canceled += OnNavigate;
-
-        // Listen for confirmation input
-        InputManager.current.ConfirmAction.started += OnConfirm;
-        InputManager.current.ConfirmAction.canceled += OnConfirm;
-
-        // Listen for cancel input
-        InputManager.current.CancelAction.started += OnCancel;
-        InputManager.current.CancelAction.canceled += OnCancel;*/
     }
 
     public void StopListeningForInput()
     {
         TestInputManager.MoveAction.performed -= OnNavigate;
         TestInputManager.MoveAction.canceled -= OnNavigate;
-
         TestInputManager.ConfirmAction.started -= OnConfirm;
         TestInputManager.CancelAction.started -= OnCancel;
-
-        // Stop Listening for navigation input
-        /*InputManager.current.MoveAction.started -= OnNavigate;
-        InputManager.current.MoveAction.performed -= OnNavigate;
-        InputManager.current.MoveAction.canceled -= OnNavigate;
-        // Stop listening for confirmation input
-        InputManager.current.ConfirmAction.started -= OnConfirm;
-        InputManager.current.ConfirmAction.canceled -= OnConfirm;
-        // Stop listening for cancel input
-        InputManager.current.CancelAction.started -= OnCancel;
-        InputManager.current.CancelAction.canceled -= OnCancel;*/
     }
 
     public abstract void OnNavigate(InputAction.CallbackContext context);

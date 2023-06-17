@@ -20,9 +20,26 @@ public class InputState : BattleBaseState
         currentMenu = InputMenu.Selection;
         MessageBox.Clear();
         battle.SelectionBox.SetActive(true);
+
+        TestInputManager.MoveAction.performed += OnNavigate;
+        TestInputManager.MoveAction.canceled += OnNavigate;
+        TestInputManager.ConfirmAction.performed += OnConfirm;
+        TestInputManager.CancelAction.performed += OnCancel;
     }
 
-    public override void OnNavigate(InputAction.CallbackContext context)
+    public override void ExitState()
+    {
+        TestInputManager.MoveAction.performed -= OnNavigate;
+        TestInputManager.MoveAction.canceled -= OnNavigate;
+        TestInputManager.ConfirmAction.performed -= OnConfirm;
+        TestInputManager.CancelAction.performed -= OnCancel;
+    }
+
+    #endregion
+
+    #region Input Callbacks
+
+    public void OnNavigate(InputAction.CallbackContext context)
     {
         if (!context.performed)
             return;
@@ -86,7 +103,7 @@ public class InputState : BattleBaseState
         }
     }
 
-    public override void OnConfirm(InputAction.CallbackContext context)
+    public void OnConfirm(InputAction.CallbackContext context)
     {
         if (!context.started)
             return;
@@ -105,7 +122,7 @@ public class InputState : BattleBaseState
         }
     }
 
-    public override void OnCancel(InputAction.CallbackContext context) 
+    public void OnCancel(InputAction.CallbackContext context) 
     {
         if (!context.started)
             return;

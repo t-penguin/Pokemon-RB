@@ -17,11 +17,7 @@ public class TurnOrderState : BattleBaseState
         _battle.SwitchState(_battle.ExecutionState);
     }
 
-    public override void OnNavigate(InputAction.CallbackContext context) { }
-
-    public override void OnConfirm(InputAction.CallbackContext context) { }
-
-    public override void OnCancel(InputAction.CallbackContext context) { }
+    public override void ExitState() { }
 
     #endregion
 

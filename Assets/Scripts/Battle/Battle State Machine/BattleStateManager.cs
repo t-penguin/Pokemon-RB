@@ -125,8 +125,11 @@ public class BattleStateManager : StateManager, IGameState
 
     public void SwitchState(BattleBaseState state)
     {
+        if (_currentState != null)
+            _currentState.ExitState();
+
         _currentState = state;
-        state.EnterState(this);
+        _currentState.EnterState(this);
     }
 
     public void EndBattle()
@@ -436,11 +439,11 @@ public class BattleStateManager : StateManager, IGameState
 
     #region State Manager Callbacks
 
-    public override void OnNavigate(InputAction.CallbackContext context) => _currentState.OnNavigate(context);
+    public override void OnNavigate(InputAction.CallbackContext context) { }
 
-    public override void OnConfirm(InputAction.CallbackContext context) => _currentState.OnConfirm(context);
+    public override void OnConfirm(InputAction.CallbackContext context) { }
 
-    public override void OnCancel(InputAction.CallbackContext context) => _currentState.OnCancel(context);
+    public override void OnCancel(InputAction.CallbackContext context) { }
 
     #endregion
 

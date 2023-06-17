@@ -27,11 +27,7 @@ public class StartState : BattleBaseState
         _battle.StartCoroutine(StartBattle(position));
     }
 
-    public override void OnNavigate(InputAction.CallbackContext context) { }
-
-    public override void OnConfirm(InputAction.CallbackContext context) { }
-
-    public override void OnCancel(InputAction.CallbackContext context) { }
+    public override void ExitState() { }
 
     #endregion
 

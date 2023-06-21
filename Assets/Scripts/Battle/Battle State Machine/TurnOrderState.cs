@@ -17,7 +17,10 @@ public class TurnOrderState : BattleBaseState
         _battle.SwitchState(_battle.ExecutionState);
     }
 
-    public override void ExitState() { }
+    public override void ExitState() 
+    {
+        _battle.TurnOrderDecided = true;
+    }
 
     #endregion
 

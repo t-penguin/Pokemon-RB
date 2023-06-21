@@ -13,7 +13,7 @@ public static class BattleTransition
         BlackTile = Resources.Load<TileBase>("Tiles/Black Tile");
     }
 
-    public static IEnumerator StartBattleTransition(int transitionIndex, Tilemap tilemap, Vector2Int position, BattleStateManager battle)
+    public static IEnumerator StartBattleTransition(TransitionID transitionID, Tilemap tilemap, Vector2Int position, BattleStateManager battle)
     {
         TilemapRenderer renderer = tilemap.GetComponent<TilemapRenderer>();
         renderer.sortingOrder = -1;
@@ -24,45 +24,45 @@ public static class BattleTransition
         TilemapEditor.SetTilemapToView(tilemap, center);
 
         // Flash the screen several times if the battle is wild
-        if (battle.BattleType == BattleType.WILD_BATTLE)
+        if (battle.BattleType == BattleType.Wild)
             yield return battle.StartCoroutine(FlashScreen(battle.BattleFlash));
 
         // Start the animation depending on the animation type
 
         float waitTime;
 
-        switch (transitionIndex)
+        switch (transitionID)
         {
             default:
-            case 0:
+            case TransitionID.DoubleCircle:
                 yield return battle.StartCoroutine(DoubleCircle(tilemap, center));
                 waitTime = 84 / 60f;
                 break;
-            case 1:
+            case TransitionID.SingleCircle:
                 yield return battle.StartCoroutine(SingleCircle(tilemap, center));
                 waitTime = 84 / 60f;
                 break;
-            case 2:
+            case TransitionID.HorizontalStripes:
                 yield return battle.StartCoroutine(HorizontalStripes(tilemap, center));
                 waitTime = 82 / 60f;
                 break;
-            case 3:
+            case TransitionID.VerticalStripes:
                 yield return battle.StartCoroutine(VerticalStripes(tilemap, center));
                 waitTime = 82 / 60f;
                 break;
-            case 4:
+            case TransitionID.InwardSpiral:
                 yield return battle.StartCoroutine(InwardSpiral(tilemap, center));
                 waitTime = 94 / 60f;
                 break;
-            case 5:
+            case TransitionID.OutwardSpiral:
                 yield return battle.StartCoroutine(OutwardSpiral(tilemap, center));
                 waitTime = 94 / 60f;
                 break;
-            case 6:
+            case TransitionID.Shrink:
                 yield return battle.StartCoroutine(Shrink(tilemap, center));
                 waitTime = 108 / 60f;
                 break;
-            case 7:
+            case TransitionID.Split:
                 yield return battle.StartCoroutine(Split(tilemap, center));
                 waitTime = 108 / 60f;
                 break;
@@ -127,8 +127,8 @@ public static class BattleTransition
 
             tilePositions.AddRange(GetTilesAboveLine(tilemap, slope, xBound, yBound, center));
 
-            foreach (Vector3Int tp in tilePositions)
-                tilemap.SetTile(tp, BlackTile);
+            foreach (Vector3Int position in tilePositions)
+                tilemap.SetTile(position, BlackTile);
 
             yield return new WaitForSeconds(1 / 60f);
         }
@@ -553,4 +553,17 @@ public static class BattleTransition
 
         return tiles;
     }
+}
+
+[System.Serializable]
+public enum TransitionID
+{
+    DoubleCircle,
+    SingleCircle,
+    HorizontalStripes,
+    VerticalStripes,
+    InwardSpiral,
+    OutwardSpiral,
+    Shrink,
+    Split
 }

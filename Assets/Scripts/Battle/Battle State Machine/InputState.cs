@@ -21,18 +21,21 @@ public class InputState : BattleBaseState
         MessageBox.Clear();
         battle.SelectionBox.SetActive(true);
 
+        battle.PlayerSide.Action = BattleAction.None;
+        battle.OpponentSide.Action = BattleAction.None;
+
         TestInputManager.MoveAction.performed += OnNavigate;
         TestInputManager.MoveAction.canceled += OnNavigate;
-        TestInputManager.ConfirmAction.performed += OnConfirm;
-        TestInputManager.CancelAction.performed += OnCancel;
+        TestInputManager.ConfirmAction.started += OnConfirm;
+        TestInputManager.CancelAction.started += OnCancel;
     }
 
     public override void ExitState()
     {
         TestInputManager.MoveAction.performed -= OnNavigate;
         TestInputManager.MoveAction.canceled -= OnNavigate;
-        TestInputManager.ConfirmAction.performed -= OnConfirm;
-        TestInputManager.CancelAction.performed -= OnCancel;
+        TestInputManager.ConfirmAction.started -= OnConfirm;
+        TestInputManager.CancelAction.started -= OnCancel;
     }
 
     #endregion
@@ -105,9 +108,6 @@ public class InputState : BattleBaseState
 
     public void OnConfirm(InputAction.CallbackContext context)
     {
-        if (!context.started)
-            return;
-
         if (currentMenu == InputMenu.None)
             return;
 
@@ -124,9 +124,6 @@ public class InputState : BattleBaseState
 
     public void OnCancel(InputAction.CallbackContext context) 
     {
-        if (!context.started)
-            return;
-
         switch (currentMenu)
         {
             default:
@@ -171,7 +168,7 @@ public class InputState : BattleBaseState
 
                 break;
             case 3: // RUN
-                if (_battle.BattleType == BattleType.WILD_BATTLE)
+                if (_battle.BattleType == BattleType.Wild)
                 {
                     _battle.PlayerSide.Action = BattleAction.RunFromBattle;
                     _battle.SwitchState(_battle.TurnOrderState);
@@ -327,6 +324,7 @@ public enum InputMenu
 
 public enum BattleAction
 {
+    None,
     UseMove,
     SwitchPokemon,
     UseItem,

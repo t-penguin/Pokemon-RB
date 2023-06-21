@@ -192,7 +192,7 @@ public class TurnExecutionState : BattleBaseState
         if (_battle.PlayerSide.IsAbleToFight())
         {
             // WILD BATTLE
-            if (_battle.BattleType == BattleType.WILD_BATTLE)
+            if (_battle.BattleType == BattleType.Wild)
             {
                 yield return _battle.StartCoroutine(OnUseNext());
 
@@ -247,7 +247,7 @@ public class TurnExecutionState : BattleBaseState
         yield return _battle.StartCoroutine(_battle.ApplyExperience(opponentPokemon.ReferencePokemon));
         _battle.Participants.Clear();
         // WILD BATTLE
-        if (_battle.BattleType == BattleType.WILD_BATTLE)
+        if (_battle.BattleType == BattleType.Wild)
         {
             // battle.EndBattle();
             yield return _battle.StartCoroutine(_battle.CloseBattle());

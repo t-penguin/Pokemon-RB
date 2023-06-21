@@ -75,7 +75,7 @@ public abstract class TransitiveStatusMove : TransitiveMove
     private IEnumerator ExecuteBattleEndingMove(BattlePokemon user, BattlePokemon opponent)
     {
         // Battle ending moves can only succeed in wild battles
-        if(Battle.BattleType != BattleType.WILD_BATTLE)
+        if(Battle.BattleType != BattleType.Wild)
         {
             yield return Battle.StartCoroutine(OnFailed());
             SetLastMoveUsed(user);

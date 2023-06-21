@@ -16,6 +16,8 @@ public class StartState : BattleBaseState
         
         _battle.PlayerSide.SetTeam(_battle.Player.Team);
         _battle.PlayerSide.SetBag(_battle.Player.Bag);
+        _battle.PlayerSide.Action = BattleAction.None;
+        _battle.OpponentSide.Action = BattleAction.None;
         BattleStateManager.StartBattle();
 
         MessageBox.Blink = false;
@@ -52,7 +54,7 @@ public class StartState : BattleBaseState
         _battle.SetOpponentActivePokemon(opponent.GetFirstPokemon());
         BattlePokemon opponentPokemon = _battle.OpponentSide.ActivePokemon;
 
-        if(_battle.BattleType == BattleType.TRAINER_BATTLE)
+        if(_battle.BattleType == BattleType.Trainer)
         {
             _battle.SetIcons(_battle.OpponentTeamIcons, opponent.Team);
             //battle.OpponentIconsFrame.SetActive(true);
@@ -109,7 +111,7 @@ public class StartState : BattleBaseState
     private IEnumerator BattleStartTransition()
     {
         _battle.Background.SetActive(true);
-        if (_battle.BattleType == BattleType.OLD_MAN_BATTLE)
+        if (_battle.BattleType == BattleType.OldMan)
         {
 
         }
@@ -135,7 +137,7 @@ public class StartState : BattleBaseState
         int opponentTargetX = 68;
 
         // Offset for flipped sprite for wild Pokemon
-        if (_battle.BattleType == BattleType.WILD_BATTLE)
+        if (_battle.BattleType == BattleType.Wild)
         {
             opponentPosition.x += 56;
             opponentTargetX += 56;

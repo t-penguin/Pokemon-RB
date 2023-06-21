@@ -41,7 +41,7 @@ public abstract class ReflexiveStatusMove : BaseMove
     public IEnumerator Teleport(BattlePokemon user, BattlePokemon opponent)
     {
         // Battle ending moves can only succeed in wild battles
-        if (Battle.BattleType != BattleType.WILD_BATTLE)
+        if (Battle.BattleType != BattleType.Wild)
         {
             yield return Battle.StartCoroutine(OnFailed());
             SetLastMoveUsed(user);

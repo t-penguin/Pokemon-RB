@@ -17,8 +17,8 @@ public class Haze : ReflexiveStatusMove
         yield return Battle.StartCoroutine(OnUsed(user));
 
         // Resets the stat stages for both sides to 0
-        user.StatModifiers.ResetStages();
-        opponent.StatModifiers.ResetStages();
+        user.ResetStatModifiers();
+        opponent.ResetStatModifiers();
 
         /* Lifts the effects of Focus Energy/Dire Hit, Mist/Guard Spec., X Accuracy
          * Leech Seed, Disable, Reflect, and Light Screen from both sides */

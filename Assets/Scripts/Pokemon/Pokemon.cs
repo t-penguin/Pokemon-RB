@@ -317,8 +317,8 @@ public class Stats
 	public int HP;
 	public int Attack;
 	public int Defense;
-	public int Speed;
 	public int Special;
+	public int Speed;
 
 	public Stats()
     {

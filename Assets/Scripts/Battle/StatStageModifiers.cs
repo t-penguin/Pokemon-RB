@@ -2,14 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public sealed class StatStageModifiers
 {
-    public int Attack { get; private set; }
-    public int Defense { get; private set; }
-    public int Special { get; private set; }
-    public int Speed { get; private set; }
-    public int Accuracy { get; private set; }
-    public int Evasion { get; private set; }
+    [field: SerializeField] public int Attack { get; private set; }
+    [field: SerializeField] public int Defense { get; private set; }
+    [field: SerializeField] public int Special { get; private set; }
+    [field: SerializeField] public int Speed { get; private set; }
+    [field: SerializeField] public int Accuracy { get; private set; }
+    [field: SerializeField] public int Evasion { get; private set; }
+
+    /* -6, -5, -4, -3, -2, -1
+     * 0
+     * 1, 2, 3, 4, 5, 6 */
+    private float[] StageMultipliers = new float[]
+    {
+        25 / 100f, 28 / 100f, 33 / 100f, 40 / 100f, 50 / 100f, 66 / 100f,
+        100 / 100f,
+        150 / 100f, 200 / 100f, 250 / 100f, 300 / 100f, 350 / 100f, 400 / 100f
+    };
 
     public StatStageModifiers() { }
 
@@ -40,12 +51,12 @@ public sealed class StatStageModifiers
     // Returns the multiplier for a stat given its stage
     public float GetStageMultiplier(StatType type)
     {
-        float stage = GetStage(type);
+        int stage = GetStage(type);
 
         // Negate the evasion stage for intended effects
         if (type == StatType.EVASION) stage = -stage;
 
-        return (stage >= 0) ? (2 + stage) / 2 : 2 / (2 - stage);
+        return StageMultipliers[stage + 6];
     }
 
     // Resets all the stages to zero

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 [System.Serializable]
 public class BattlePokemon
@@ -9,39 +8,39 @@ public class BattlePokemon
     #region Properties
 
     // General Info
-    public bool TrainerIsPlayer;
-    public Pokemon ReferencePokemon { get; }
-    [field: SerializeField] public string Name { get; }
-    [field: SerializeField] public int PokedexNumber { get; }
+    [field: SerializeField] public bool TrainerIsPlayer { get; private set; }
+    [field: SerializeField] public string Name { get; private set; }
+    [field: SerializeField] public int PokedexNumber { get; private set; }
     [field: SerializeField] public Type Primary { get; set; }
     [field: SerializeField] public Type Secondary { get; set; }
     [field: SerializeField] public StatusEffect Status { get; private set; }
-    [field: SerializeField] public BaseMove[] Moves { get; private set; }
+    [field: SerializeReference] public BaseMove[] Moves { get; private set; }
+    public Pokemon ReferencePokemon { get; private set; }
 
     // Stat Info
-    [field: SerializeField] public int Level { get; }
-    [field: SerializeField] public Stats Stats { get; }
-    [field: SerializeField] public StatStageModifiers StatModifiers { get; }
+    [field: SerializeField] public int Level { get; private set; }
+    [field: SerializeField] public Stats Stats { get; private set; }
+    [field: SerializeField] public StatStageModifiers StatModifiers { get; private set; }
     [field: SerializeField] public Stats BattleStats { get; private set; }
     [field: SerializeField] public int CurrentHP { get; private set; }
     [field: SerializeField] public float Accuracy { get; private set; }
     [field: SerializeField] public float Evasion { get; private set; }
 
     // Battle Info
-    [field: SerializeField] public BaseMove LastMoveUsed { get; private set; }
-    [field: SerializeField] public TransitiveMove MirrorMove { get; private set; }
     [field: SerializeField] public bool IsBideActive { get; set; }
     [field: SerializeField] public int BideDamage { get; set; }
     [field: SerializeField] public int LastDamageRecieved { get; set; }
     [field: SerializeField] public bool HasSubstitute { get; private set; }
+    [field: SerializeField] public int SubstituteHP { get; private set; }
     [field: SerializeField] public bool IsMistActive { get; set; }
     [field: SerializeField] public bool IsReflectActive { get; set; }
     [field: SerializeField] public bool IsLightScreenActive { get; set; }
     [field: SerializeField] public bool IsSemiInvulnerable { get; set; }
     [field: SerializeField] public bool BadlyPoisoned { get; set; }
     [field: SerializeField] public int ToxicCounter { get; private set; }
-    [field: SerializeField] public bool Focused { get; set; }
     [field: SerializeField] public int SleepCounter { get; set; }
+    [field: SerializeReference] public BaseMove LastMoveUsed { get; private set; }
+    [field: SerializeReference] public TransitiveMove MirrorMove { get; private set; }
 
     // Non-Volatile Status Conditions
     public bool AfflictedByStatus { get { return Alive && Status != StatusEffect.OK; } }
@@ -54,6 +53,7 @@ public class BattlePokemon
 
 
     // Volatile Status Conditions
+    [field: SerializeField] public bool Focused { get; set; }
     [field: SerializeField] public bool Bound { get; set; }
     [field: SerializeField] public bool Confused { get; set; }
     [field: SerializeField] public int ConfusionTimer { get; private set; }

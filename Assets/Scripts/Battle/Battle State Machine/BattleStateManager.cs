@@ -40,16 +40,11 @@ public class BattleStateManager : StateManager, IGameState
 
     [field: SerializeField] public Player Player { get; private set; }
     [field: SerializeField] public Trainer Opponent { get; private set; }
-    public BattleType BattleType { get; private set; }
+    [field: SerializeField] public BattleType BattleType { get; private set; }
+    [field: SerializeField] public TransitionID TransitionID { get; set; }
 
     [field: SerializeField] public Tilemap Tilemap { get; private set; }
     [field: SerializeField] public Image BattleFlash { get; private set; }
-
-    
-
-    [Space(10)]
-    [Header("Battle Properties")]
-    public int TransitionID;
     [field: SerializeField] public GameObject BattleUI { get; private set; }
     [field: SerializeField] public GameObject Background { get; private set; }
     [field: SerializeField] public Image PlayerImage { get; private set; }
@@ -78,20 +73,20 @@ public class BattleStateManager : StateManager, IGameState
     [field: SerializeField] public GameObject MovesBox { get; private set; }
     [field: SerializeField] public RectTransform MoveArrow { get; private set; }
     [field: SerializeField] public TextMeshProUGUI[] MoveNames { get; private set; }
+    [field: Range(0, 3)]
     [field: SerializeField] public int MoveSelection { get; set; }
 
     [field: SerializeField] public BattleSide PlayerSide { get; private set; }
     [field: SerializeField] public BattleSide OpponentSide { get; private set; }
     [field: SerializeField] public List<Pokemon> Participants { get; private set; }
-    public BattleSide FirstSide { get; set; }
+    [field: SerializeField] public bool TurnOrderDecided { get; set; } // Used for Unity's Inspector
+    [field: SerializeField] public BattleSide FirstSide { get; set; }
     public BattleSide SecondSide { get; set; }
     public int RunCounter { get; set; }
     public bool SuccessfulRun { get; set; }
     public bool Swap { get; set; }
     public bool ForcedSwap { get; set; }
 
-    [Space(10)]
-    [Header("Pokeball Icons")]
     public Sprite EmptyPokeball;
     public Sprite NormalPokeball;
     public Sprite StatusPokeball;
@@ -128,6 +123,9 @@ public class BattleStateManager : StateManager, IGameState
         if (_currentState != null)
             _currentState.ExitState();
 
+        if (_currentState == ExecutionState)
+            TurnOrderDecided = false;
+
         _currentState = state;
         _currentState.EnterState(this);
     }
@@ -143,6 +141,9 @@ public class BattleStateManager : StateManager, IGameState
     public IEnumerator CloseBattle()
     {
         yield return new WaitForSeconds(2 / 60f);
+
+        BattleType = BattleType.None;
+        TurnOrderDecided = false;
 
         // Set move PP to persist after battle
         PlayerSide.ActivePokemon.SetReferencePP();
@@ -376,7 +377,7 @@ public class BattleStateManager : StateManager, IGameState
                 participants++;
         }
 
-        float trainerMultiplier = BattleType == BattleType.WILD_BATTLE ? 1 : 1.5f;
+        float trainerMultiplier = BattleType == BattleType.Wild ? 1 : 1.5f;
         int expGained = yield * level / 7;
         expGained = Mathf.FloorToInt(expGained / participants);
         expGained = Mathf.FloorToInt(expGained * trainerMultiplier);
@@ -397,7 +398,7 @@ public class BattleStateManager : StateManager, IGameState
     // Starts a wild battle against a pokemon from the provided area
     private void OnWildBattleStart(WildArea area)
     {
-        BattleType = BattleType.WILD_BATTLE;
+        BattleType = BattleType.Wild;
 
         // Generate another random number between 0 and 256
         int encounterCheck = UnityEngine.Random.Range(0, 256);
@@ -431,7 +432,7 @@ public class BattleStateManager : StateManager, IGameState
         OpponentImage.rectTransform.localScale = new Vector3(-1, 1, 1);
 
         // CHANGE HERE: Set transition ID based on criteria
-        TransitionID = UnityEngine.Random.Range(0, 4);
+        TransitionID = (TransitionID)UnityEngine.Random.Range(0, 4);
         // Start the battle
         SwitchState(StartState);
     }
@@ -467,14 +468,14 @@ public class BattleStateManager : StateManager, IGameState
     #endregion
 }
 
-[System.Serializable]
+[Serializable]
 public class BattleSide
 {
     public bool IsPlayerSide;
     public BattleAction Action;
     public BattlePokemon ActivePokemon;
     public Pokemon SwitchTarget;
-    public BaseMove Move;
+    [SerializeReference] public BaseMove Move;
     public Item Item;
     
     public List<Pokemon> Team;
@@ -521,10 +522,12 @@ public class BattleSide
     }
 }
 
+[Serializable]
 public enum BattleType
 {
-    WILD_BATTLE,
-    TRAINER_BATTLE,
-    LINK_BATTLE,
-    OLD_MAN_BATTLE
+    None,
+    Wild,
+    Trainer,
+    Link,
+    OldMan
 }

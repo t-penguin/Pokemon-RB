@@ -244,7 +244,7 @@ public class TurnExecutionState : BattleBaseState
         _battle.OpponentSide.LockedIntoMove = false;
         // ENEMY FAINTED
         yield return _battle.StartCoroutine(OnFainted(opponentPokemon));
-        yield return _battle.StartCoroutine(_battle.ApplyExperience(opponentPokemon.ReferencePokemon));
+        yield return _battle.StartCoroutine(_battle.DistributeExperience(opponentPokemon.ReferencePokemon));
         _battle.Participants.Clear();
         // WILD BATTLE
         if (_battle.BattleType == BattleType.Wild)

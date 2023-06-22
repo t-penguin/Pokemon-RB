@@ -10,8 +10,6 @@ public class BattleStateManagerEditor : Editor
 
     public override void OnInspectorGUI()
     {
-        //base.OnInspectorGUI();
-
         EditorGUILayout.PropertyField(serializedObject.FindProperty("<Player>k__BackingField"), new GUIContent("Player"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("<Opponent>k__BackingField"), new GUIContent("Opponent"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("<Tilemap>k__BackingField"), new GUIContent("Transition Tilemap"));

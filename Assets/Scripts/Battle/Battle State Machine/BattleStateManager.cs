@@ -353,7 +353,8 @@ public class BattleStateManager : StateManager, IGameState
             text.text = $" {status}";
     }
 
-    public IEnumerator ApplyExperience(Pokemon faintedPokemon)
+    // INCOMPLETE
+    public IEnumerator DistributeExperience(Pokemon faintedPokemon)
     {
         /* If only one Pokemon participates it recieves full exp
          * If multiple Pokemon participate, they recieve an even split
@@ -384,15 +385,27 @@ public class BattleStateManager : StateManager, IGameState
 
         foreach (Pokemon p in Participants)
         {
-            if(p.Status != StatusEffect.FNT)
-            {
-                float tradedMultiplier = PlayerData.ID == p.TrainerID ? 1 : 1.5f;
-                expGained = Mathf.FloorToInt(expGained * tradedMultiplier);
-
-                yield return StartCoroutine(OnGainedEXP(p, expGained));
-                p.GainExperience(expGained);
-            }
+            yield return ApplyExperience(p, expGained);
         }
+    }
+
+    // INCOMPLETE
+    private IEnumerator ApplyExperience(Pokemon pokemon, int expGained)
+    {
+        if (pokemon.Status == StatusEffect.FNT)
+            yield break;
+
+        float tradedMultiplier = PlayerData.ID == pokemon.TrainerID ? 1 : 1.5f;
+        expGained = Mathf.FloorToInt(expGained * tradedMultiplier);
+
+        int startLevel = pokemon.Level;
+        yield return StartCoroutine(OnGainedEXP(pokemon, expGained));
+        int levelsGained = pokemon.GainExperience(expGained);
+
+        if (levelsGained == 0)
+            yield break;
+
+        // DISPLAY LEVEL UP SCREEN AND LEARN NEW MOVES IF POSSIBLE
     }
 
     // Starts a wild battle against a pokemon from the provided area

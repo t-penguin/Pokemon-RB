@@ -107,6 +107,7 @@ public static class BattleMessages
     public const string POKEMON_FAINTED = "[POKEMON]\nfainted!";
     public const string OUT_OF_POKEMON = "[PLAYER] is out of\nuseable POKÈMON!";
     public const string BLACKED_OUT = "[PLAYER] blacked\nout!";
+    public const string POKEMON_LEVEL_UP = "[POKEMON] grew\nto level [VALUE]!";
 
     public static IEnumerator Display(string text, Trainer trainer = null, BattlePokemon bPokemon = null, Pokemon pokemon = null,
         BaseMove move = null, int value = 0, StatType stat = StatType.NONE, bool replaceName = true, bool waitForInput = true)

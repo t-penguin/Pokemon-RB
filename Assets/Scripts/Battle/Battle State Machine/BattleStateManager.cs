@@ -75,6 +75,8 @@ public class BattleStateManager : StateManager, IGameState
     [field: SerializeField] public TextMeshProUGUI[] MoveNames { get; private set; }
     [field: Range(0, 3)]
     [field: SerializeField] public int MoveSelection { get; set; }
+    [field: SerializeField] public GameObject LevelUpBox { get; private set; }
+    [field: SerializeField] public TextMeshProUGUI LevelUpText { get; private set; }
 
     [field: SerializeField] public BattleSide PlayerSide { get; private set; }
     [field: SerializeField] public BattleSide OpponentSide { get; private set; }
@@ -91,6 +93,8 @@ public class BattleStateManager : StateManager, IGameState
     public Sprite NormalPokeball;
     public Sprite StatusPokeball;
     public Sprite FaintedPokeball;
+
+    private bool waitingForCancelorConfirm;
 
     #region Monobehaviour Callbacks
 
@@ -385,12 +389,13 @@ public class BattleStateManager : StateManager, IGameState
 
         foreach (Pokemon p in Participants)
         {
-            yield return ApplyExperience(p, expGained);
+            bool isActivePokemon = p == PlayerSide.ActivePokemon.ReferencePokemon;
+            yield return ApplyExperience(p, expGained, isActivePokemon);
         }
     }
 
     // INCOMPLETE
-    private IEnumerator ApplyExperience(Pokemon pokemon, int expGained)
+    private IEnumerator ApplyExperience(Pokemon pokemon, int expGained, bool isActivePokemon)
     {
         if (pokemon.Status == StatusEffect.FNT)
             yield break;
@@ -398,14 +403,35 @@ public class BattleStateManager : StateManager, IGameState
         float tradedMultiplier = PlayerData.ID == pokemon.TrainerID ? 1 : 1.5f;
         expGained = Mathf.FloorToInt(expGained * tradedMultiplier);
 
-        int startLevel = pokemon.Level;
         yield return StartCoroutine(OnGainedEXP(pokemon, expGained));
-        int levelsGained = pokemon.GainExperience(expGained);
+        bool leveledUp = pokemon.GainExperience(expGained);
+        if(leveledUp)
+        {
+            yield return StartCoroutine(OnPokemonLevelUp(pokemon));
+            if (isActivePokemon)
+                SetPlayerInfo(PlayerSide.ActivePokemon);
+            yield return new WaitForSeconds(60 / 60f);
+            yield return StartCoroutine(DisplayLevelUpStats(pokemon));
 
-        if (levelsGained == 0)
-            yield break;
+            // LEARN NEW MOVES IF POSSIBLE
+        }
+    }
 
-        // DISPLAY LEVEL UP SCREEN AND LEARN NEW MOVES IF POSSIBLE
+    private IEnumerator DisplayLevelUpStats(Pokemon pokemon)
+    {
+        LevelUpText.text = $"ATTACK\n    {pokemon.Stats.Attack,3}\n" +
+                            $"DEFENSE\n    {pokemon.Stats.Defense,3}\n" +
+                            $"SPEED\n    {pokemon.Stats.Speed,3}\n" +
+                            $"SPECIAL\n    {pokemon.Stats.Special,3}";
+        LevelUpBox.SetActive(true);
+
+        waitingForCancelorConfirm = true;
+        yield return new WaitForSeconds(10 / 60f);
+        while (waitingForCancelorConfirm)
+            yield return null;
+
+        LevelUpBox.SetActive(false);
+        yield return new WaitForSeconds(20 / 60f);
     }
 
     // Starts a wild battle against a pokemon from the provided area
@@ -455,9 +481,17 @@ public class BattleStateManager : StateManager, IGameState
 
     public override void OnNavigate(InputAction.CallbackContext context) { }
 
-    public override void OnConfirm(InputAction.CallbackContext context) { }
+    public override void OnConfirm(InputAction.CallbackContext context) 
+    {
+        if (waitingForCancelorConfirm)
+            waitingForCancelorConfirm = false;
+    }
 
-    public override void OnCancel(InputAction.CallbackContext context) { }
+    public override void OnCancel(InputAction.CallbackContext context) 
+    {
+        if (waitingForCancelorConfirm)
+            waitingForCancelorConfirm = false;
+    }
 
     #endregion
 
@@ -476,6 +510,11 @@ public class BattleStateManager : StateManager, IGameState
     private IEnumerator OnGainedEXP(Pokemon pokemon, int exp)
     {
         yield return StartCoroutine(BattleMessages.Display(BattleMessages.GAINED_EXP, pokemon: pokemon, value: exp));
+    }
+
+    private IEnumerator OnPokemonLevelUp(Pokemon pokemon)
+    {
+        yield return StartCoroutine(BattleMessages.Display(BattleMessages.POKEMON_LEVEL_UP, pokemon: pokemon, value: pokemon.Level, waitForInput: false));
     }
 
     #endregion

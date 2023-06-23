@@ -281,7 +281,7 @@ public static class MoveData
         else
         {
             userAttack = isPhysicalMove ? user.BattleStats.Attack : user.BattleStats.Special;
-            targetDefense = isPhysicalMove ? user.BattleStats.Defense : user.BattleStats.Special;
+            targetDefense = isPhysicalMove ? target.BattleStats.Defense : target.BattleStats.Special;
 
             // Reflect doubles the target's defense when a physical move is used against it
             bool reflect = isPhysicalMove && target.IsReflectActive;
@@ -349,8 +349,8 @@ public static class MoveData
     /// <returns></returns>
     public static int DamageFormula(int level, int attack, int defense, int power, float stab, float typeMultiplier)
     {
-        int rawDamage = (2 * level / 5 + 2) * power * (attack / defense) / 50 + 2;
-        return Mathf.Min(1, (int)(rawDamage * stab * typeMultiplier * Random.Range(217, 256) / 255));
+		int rawDamage = (2 * level / 5 + 2) * power * attack / defense / 50 + 2;
+		return Mathf.Max(1, Mathf.FloorToInt(rawDamage * stab * typeMultiplier * Random.Range(217, 256) / 255));
     }
 }
 

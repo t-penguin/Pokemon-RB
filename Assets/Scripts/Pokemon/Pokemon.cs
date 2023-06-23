@@ -153,13 +153,16 @@ public class Pokemon
 	{
 		/* Stat points are determined by taking the square root of the stat experience (EV)
 		 * and dividing by 4. This should be between 0 and 255 */
-		int statPoint = Mathf.Clamp((int)Mathf.Sqrt(EV) / 4, 0, 255);
+		int statPoint = Mathf.Clamp(Mathf.FloorToInt(Mathf.Ceil(Mathf.Sqrt(EV)) / 4), 0, 255);
+
+		// This value is common to all stats
+		int value = Mathf.FloorToInt(((baseStat + IV) * 2 + statPoint) * level / 100);
 
 		// The HP stat is calculated slightly differently
 		if (isHPStat)
-			return ((baseStat + IV) * 2 + statPoint) * level / 100 + 5;
+			return value + level + 10;
 
-		return ((baseStat + IV) * 2 + statPoint) * level / 100 + level + 10;
+		return value + 5;
 	}
 
 	/// <summary>
@@ -211,24 +214,9 @@ public class Pokemon
 
 	/// <summary>
 	/// Adds the given amount of experience to this Pokemon's total experience.
-	/// Returns the amount of levels this Pokemon gained in the process.
 	/// </summary>
 	/// <param name="experience"> The amount of experience to gain. </param>
-	public int GainExperience(int experience)
-    {
-		TotalExperience += experience;
-		int expToNext = ExpToNextLevel();
-		int startingLevel = Level;
-
-		while (experience >= expToNext)
-		{
-			experience -= expToNext;
-			LevelUp();
-			expToNext = ExpToNextLevel();
-		}
-
-		return Level - startingLevel;
-    }
+	public void GainExperience(int experience) => TotalExperience += experience;
 
 	/// <summary>
 	/// Increases this Pokemon's level by one.

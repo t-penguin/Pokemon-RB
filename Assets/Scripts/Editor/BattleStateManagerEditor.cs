@@ -62,6 +62,8 @@ public class BattleStateManagerEditor : Editor
         EditorGUILayout.PropertyField(serializedObject.FindProperty("<MoveArrow>k__BackingField"), new GUIContent("Move Selection Arrow"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("<MoveSelection>k__BackingField"), new GUIContent("Move Selection Index"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("<MoveNames>k__BackingField"), new GUIContent("Move Name Textboxes"), true);
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("<LevelUpBox>k__BackingField"), new GUIContent("Level Up Box"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("<LevelUpText>k__BackingField"), new GUIContent("Level Up Textbox"));
 
         EditorGUILayout.Space();
         EditorStyles.label.fontStyle = FontStyle.Bold;

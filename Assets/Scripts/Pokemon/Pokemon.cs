@@ -183,6 +183,20 @@ public class Pokemon
     }
 
 	/// <summary>
+	/// Recalculates the out-of-battle stats of this Pokemon using it's IVs, EVs, base stats, and level.
+	/// </summary>
+	public void RecalculateStats()
+    {
+		Stats BaseStats = PokemonData.BaseStats[PokedexNumber];
+
+		Stats.HP = CalculateStat(BaseStats.HP, IVs.HP, EVs.HP, Level, true);
+		Stats.Attack = CalculateStat(BaseStats.Attack, IVs.Attack, EVs.Attack, Level);
+		Stats.Defense = CalculateStat(BaseStats.Defense, IVs.Defense, EVs.Defense, Level);
+		Stats.Speed = CalculateStat(BaseStats.Speed, IVs.Speed, EVs.Speed, Level);
+		Stats.Special = CalculateStat(BaseStats.Special, IVs.Special, EVs.Special, Level);
+	}
+
+	/// <summary>
 	/// Returns the total experience this Pokemon would have at the given level.
 	/// Total experience is dependent on the experience group of this Pokemon.
 	/// </summary>
@@ -214,14 +228,35 @@ public class Pokemon
 
 	/// <summary>
 	/// Adds the given amount of experience to this Pokemon's total experience.
+	/// Returns true if this Pokemon leveled up in the process.
 	/// </summary>
 	/// <param name="experience"> The amount of experience to gain. </param>
-	public void GainExperience(int experience) => TotalExperience += experience;
+	public bool GainExperience(int experience)
+	{
+		int expToNext = ExpToNextLevel();
+		bool leveledUp = false;
+
+		while (experience >= expToNext)
+        {
+			TotalExperience += expToNext;
+			experience -= expToNext;
+			LevelUp();
+			leveledUp = true;
+			expToNext = ExpToNextLevel();
+		}
+
+		TotalExperience += experience;
+		return leveledUp;
+	}
 
 	/// <summary>
-	/// Increases this Pokemon's level by one.
+	/// Increases this Pokemon's level by one and recalculates its stats.
 	/// </summary>
-	public void LevelUp() => Level++;
+	public void LevelUp()
+	{
+		Level++;
+		RecalculateStats();
+	}
 
     #endregion
 
